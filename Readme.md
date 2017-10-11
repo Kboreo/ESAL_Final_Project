@@ -1,14 +1,12 @@
-# A Mock up report
-
 ## Names 
-Initials if you dont want them to be public    
+Kodey Boreo and Phillip Tesolin 
    
 ## Design Overview
-This should be a general description.  It should make sense to your grandma / or a high school student.  It should explain what the project is, what it does, and how to set it up. Example:
+It should explain what the project is, what it does, and how to set it up. Example:
 <em> This device is a tool used in the machining industry to control rotational speed of the shaft of a lathe.  The device consists of a motor to rotate the lathe, a dial to control the speed manual, an input port to control the speed via a computer terminal, a screen to display the rotational speed, an encoder to measure the rotation, and two emergency stop switches for safety. 
     
 ## Hardware List
-Motor - 240VAC  - Fleebl V2.0 - Norsten Mortaincs...        
+Motor - Pololu 30:1 Metal Gearmotor 37Dx68L MM with a 64 CPR Encoder  
 Superphased Motor Encoder - 13 bit - Off-World encoders...    
 ...     
 ...    
