@@ -415,6 +415,16 @@
               <FileType>5</FileType>
               <FilePath>.\Encoder.h</FilePath>
             </File>
+            <File>
+              <FileName>Uart_helper.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>.\src\Uart_helper.c</FilePath>
+            </File>
+            <File>
+              <FileName>Uart_helper.h</FileName>
+              <FileType>5</FileType>
+              <FilePath>.\src\Uart_helper.h</FilePath>
+            </File>
           </Files>
         </Group>
         <Group>
