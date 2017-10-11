@@ -62988,21 +62988,7 @@ N
 N#endif // __TM4C123GH6PM_H__
 L 43 "project.h" 2
 N
-N#include "src/Uart_helper.h"
-L 1 "src/Uart_helper.h" 1
-N#include <stdbool.h>
-N#include <stdint.h>
-N#include "sysctl.h"
-N#include "hw_memmap.h"
-N#include "gpio.h"
-N#include "uart.h"
-N#include "tm4c123gh6pm.h"
-N
-N
-Nvoid UartSetup(void);		//sets up Uart for my configuration using library
-W "src/Uart_helper.h" 11 69 last line of file ends without a newline
-Nvoid UartSetup2(void);	//sets up Uart for my configuration registers
-L 45 "project.h" 2
+N//#include "src/Uart_helper.h"
 N
 N#include <stdbool.h>
 N#include <stdint.h>
@@ -63390,10 +63376,10 @@ N#endif
 N
 N#endif // __HW_TYPES_H__
 L 55 "project.h" 2
-N
-N
-N
-L 2 "project.c" 2
+N#include "myPWM.h"
+L 1 "myPWM.h" 1
+N#include "driverlib/pin_map.h"
+N#include <stdint.h>
 N#include <stdio.h>
 L 1 "C:\Keil_v5\ARM\ARMCC\Bin\..\include\stdio.h" 1
 N/* stdio.h: ANSI 'C' (X3J11 Oct 88) library header, section 4.9 */
@@ -64506,14 +64492,37 @@ N#endif /* ndef __stdio_h */
 N
 N/* end of stdio.h */
 N
-L 3 "project.c" 2
+L 4 "myPWM.h" 2
+N#include <stdbool.h>
+N#include "inc/hw_gpio.h"
+N#include "inc/hw_types.h"
+N#include "inc/hw_memmap.h"
+N#include "driverlib/sysctl.h"
+N#include "driverlib/pin_map.h"
+N#include "driverlib/gpio.h"
+N#include "driverlib/pwm.h"
+W "myPWM.h" 12 28 last line of file ends without a newline
+N#include "driverlib/uart.h"
+L 56 "project.h" 2
+N#include "Uart_helper.h"
+L 1 ".\src\Uart_helper.h" 1
+N#include <stdbool.h>
+N#include <stdint.h>
+N#include "sysctl.h"
+N#include "hw_memmap.h"
+N#include "gpio.h"
+N#include "uart.h"
+N#include "tm4c123gh6pm.h"
+N
+N
+W ".\src\Uart_helper.h" 10 73 last line of file ends without a newline
+Nvoid UartSetup(void);		//sets up Uart for my configuration using library
+L 57 "project.h" 2
+N
+L 2 "project.c" 2
+N#include <stdio.h>
 N#include <stdint.h>
 N
-N//*****************************************************************************
-N//
-N// The error routine that is called if the driver library encounters an error.
-N//
-N//*****************************************************************************
 N
 N#ifdef DEBUG
 Svoid
@@ -64526,91 +64535,15 @@ N
 Nvoid SetupHardware()
 N{
 N	UartSetup();
-N//	UartSetup2();
 N}
 N
-Nvoid UnlockPins()
-N{
-N	//Need to Unlock PF4
-N	HWREG(GPIO_PORTF_BASE + GPIO_O_LOCK) = GPIO_LOCK_KEY;
-X	(*((volatile uint32_t *)(0x40025000 + 0x00000520))) = 0x4C4F434B;
-N	HWREG(GPIO_PORTF_BASE + GPIO_O_CR) = 0xFF;
-X	(*((volatile uint32_t *)(0x40025000 + 0x00000524))) = 0xFF;
-N	HWREG(GPIO_PORTF_BASE + GPIO_O_LOCK) = 0; 
-X	(*((volatile uint32_t *)(0x40025000 + 0x00000520))) = 0; 
-N	
-N}
 N
 Nint  main(void)
-N{
-N		
-N		uint8_t temp;
-N    volatile uint32_t ui32Loop;
-N	
-N	
-N	
-N    // Enable the GPIO port that is used for the on-board LED.
-N		SysCtlPeripheralEnable(SYSCTL_PERIPH_GPIOF);
-X		SysCtlPeripheralEnable(0xf0000805);
-N    SetupHardware();
-N
-N		
-N		// Check if the peripheral access is enabled.
-N    while(!SysCtlPeripheralReady(SYSCTL_PERIPH_GPIOF))
-X    while(!SysCtlPeripheralReady(0xf0000805))
-N    {
-N    
-N		}
-N		
-N		UnlockPins();
-N    
-N		// Enable the GPIO pin for the LED (PF3).  Set the direction as output, and
-N    // enable the GPIO pin for digital function.
-N    GPIOPinTypeGPIOOutput(GPIO_PORTF_BASE, GPIO_PIN_3); // set pin 3 as output
-X    GPIOPinTypeGPIOOutput(0x40025000, 0x00000008); 
-N		GPIOPinTypeGPIOInput(GPIO_PORTF_BASE, GPIO_PIN_4|GPIO_PIN_0); // set pin 4 as input
-X		GPIOPinTypeGPIOInput(0x40025000, 0x00000010|0x00000001); 
-N		//these two switchs need an internal pull up on pins
-N		GPIOPadConfigSet(GPIO_PORTF_BASE,GPIO_PIN_0|GPIO_PIN_4,GPIO_STRENGTH_2MA,GPIO_PIN_TYPE_STD_WPU);//set internal pullup R for pin 0 and 4
-X		GPIOPadConfigSet(0x40025000,0x00000001|0x00000010,0x00000001,0x0000000A);
-N		
-N		int x;
-N		
-N		x = GPIOPinRead(GPIO_PORTF_BASE, GPIO_PIN_0);
-X		x = GPIOPinRead(0x40025000, 0x00000001);
-N		
-N		while(x == 1)
-N		{
-N			x = GPIOPinRead(GPIO_PORTF_BASE, GPIO_PIN_0);	
-X			x = GPIOPinRead(0x40025000, 0x00000001);	
-N		}
-N			
-N		
-N    while(1)
-N    {
-N				UARTCharPut(UART0_BASE, temp);
-X				UARTCharPut(0x4000C000, temp);
-N			  temp++;
-N				//UARTCharPut(UART0_BASE, '\n');
-N				//UARTCharPut(UART0_BASE, '\r');
-N        // Turn on the LED.
-N        GPIOPinWrite(GPIO_PORTF_BASE, GPIO_PIN_3, 0xF);
-X        GPIOPinWrite(0x40025000, 0x00000008, 0xF);
-N
-N        // Delay for a bit.
-N        for(ui32Loop = 0; ui32Loop < 200000; ui32Loop++)
-N        {
-N        }
-N
-N        // Turn off the LED.
-N        GPIOPinWrite(GPIO_PORTF_BASE, GPIO_PIN_3, 0x0);
-X        GPIOPinWrite(0x40025000, 0x00000008, 0x0);
-N
-N        // Delay for a bit.
-N        for(ui32Loop = 0; ui32Loop < 200000; ui32Loop++)
-N        {
-N        }
-N    }
+N{		
+W "project.c" 22 3 function "setupPWM" declared implicitly
+N		setupPWM();
+W "project.c" 23 3 function "pwmTest" declared implicitly
+N		pwmTest();
 N}
 N
 N

@@ -8,4 +8,3 @@
 
 
 void UartSetup(void);		//sets up Uart for my configuration using library
-void UartSetup2(void);	//sets up Uart for my configuration registers

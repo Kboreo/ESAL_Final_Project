@@ -14751,9 +14751,8 @@ N#endif // __TM4C123GH6PM_H__
 L 8 "src\Uart_helper.h" 2
 N
 N
+W "src\Uart_helper.h" 10 73 last line of file ends without a newline
 Nvoid UartSetup(void);		//sets up Uart for my configuration using library
-W "src\Uart_helper.h" 11 69 last line of file ends without a newline
-Nvoid UartSetup2(void);	//sets up Uart for my configuration registers
 L 2 "src\Uart_helper.c" 2
 N
 N//Writing this code involved 3 things 
@@ -14789,33 +14788,5 @@ N		UARTConfigSetExpClk(UART0_BASE, SysCtlClockGet(), 38400,(UART_CONFIG_WLEN_8 |
 X		UARTConfigSetExpClk(0x4000C000, SysCtlClockGet(), 38400,(0x00000060 | 0x00000000 |0x00000000));
 N		//
 N		// Check for characters. Spin here until a character is placed
-N}
-N
-N
-N// this function does the same thing as UartSetup(), but uses direct register access method
-N
-N// This function involved 2 things
-N// 1 - Reading the appropriate chapters in the data sheet
-N// 2 - Looking at the 
-Nvoid UartSetup2()
-N{
-N	SYSCTL_RCGC1_R |= SYSCTL_RCGC1_UART0; // activate UART0
-X	(*((volatile uint32_t *)0x400FE104)) |= 0x00000001; 
-N  SYSCTL_RCGC2_R |= SYSCTL_RCGC2_GPIOA; // activate port A
-X  (*((volatile uint32_t *)0x400FE108)) |= 0x00000001; 
-N  UART0_CTL_R &= ~UART_CTL_UARTEN;      // disable UART
-X  (*((volatile uint32_t *)0x4000C030)) &= ~0x00000001;      
-N  UART0_IBRD_R = 27;                    // IBRD = int(50,000,000 / (16 * 115,200)) = int(27.1267)
-X  (*((volatile uint32_t *)0x4000C024)) = 27;                    
-N  UART0_FBRD_R = 8;                     // FBRD = int(0.1267 * 64 + 0.5) = 8
-X  (*((volatile uint32_t *)0x4000C028)) = 8;                     
-N                                        // 8 bit word length (no parity bits, one stop bit, FIFOs)
-N  UART0_LCRH_R = (UART_LCRH_WLEN_8|UART_LCRH_FEN);
-X  (*((volatile uint32_t *)0x4000C02C)) = (0x00000060|0x00000010);
-N  UART0_CTL_R |= UART_CTL_UARTEN;       // enable UART
-X  (*((volatile uint32_t *)0x4000C030)) |= 0x00000001;       
-N  GPIO_PORTA_AFSEL_R |= 0x03;           // enable alt funct on PA1-0
-X  (*((volatile uint32_t *)0x40004420)) |= 0x03;           
-N  GPIO_PORTA_DEN_R |= 0x03;             // enable digital I/O on PA1-0
-X  (*((volatile uint32_t *)0x4000451C)) |= 0x03;             
+W "src\Uart_helper.c" 31 2 last line of file ends without a newline
 N}

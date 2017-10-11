@@ -16902,19 +16902,7 @@ extern void WatchdogStallDisable(uint32_t ui32Base);
 
 #line 43 "project.h"
 
-#line 1 "src/Uart_helper.h"
-#line 2 "src/Uart_helper.h"
-#line 3 "src/Uart_helper.h"
-#line 4 "src/Uart_helper.h"
-#line 5 "src/Uart_helper.h"
-#line 6 "src/Uart_helper.h"
-#line 7 "src/Uart_helper.h"
-#line 8 "src/Uart_helper.h"
 
-
-void UartSetup(void);		
-void UartSetup2(void);	
-#line 45 "project.h"
 
 #line 47 "project.h"
 #line 48 "project.h"
@@ -17227,10 +17215,9 @@ void UartSetup2(void);
 
 
 #line 55 "project.h"
-
-
-
-#line 2 "project.c"
+#line 1 "myPWM.h"
+#line 2 "myPWM.h"
+#line 3 "myPWM.h"
 #line 1 "C:\\Keil_v5\\ARM\\ARMCC\\Bin\\..\\include\\stdio.h"
  
  
@@ -18130,93 +18117,48 @@ extern __declspec(__nothrow) void __use_no_semihosting(void);
 
  
 
+#line 4 "myPWM.h"
+#line 5 "myPWM.h"
+#line 6 "myPWM.h"
+#line 7 "myPWM.h"
+#line 8 "myPWM.h"
+#line 9 "myPWM.h"
+#line 10 "myPWM.h"
+#line 11 "myPWM.h"
+#line 12 "myPWM.h"
+#line 13 "myPWM.h"
+#line 56 "project.h"
+#line 1 ".\\src\\Uart_helper.h"
+#line 2 ".\\src\\Uart_helper.h"
+#line 3 ".\\src\\Uart_helper.h"
+#line 4 ".\\src\\Uart_helper.h"
+#line 5 ".\\src\\Uart_helper.h"
+#line 6 ".\\src\\Uart_helper.h"
+#line 7 ".\\src\\Uart_helper.h"
+#line 8 ".\\src\\Uart_helper.h"
+
+
+void UartSetup(void);		
+#line 57 "project.h"
+
+#line 2 "project.c"
 #line 3 "project.c"
 #line 4 "project.c"
 
 
-
-
-
-
-
-#line 17 "project.c"
+#line 12 "project.c"
 
 
 void SetupHardware()
 {
 	UartSetup();
-
 }
 
-void UnlockPins()
-{
-	
-	(*((volatile uint32_t *)(0x40025000 + 0x00000520))) = 0x4C4F434B;
-	(*((volatile uint32_t *)(0x40025000 + 0x00000524))) = 0xFF;
-	(*((volatile uint32_t *)(0x40025000 + 0x00000520))) = 0; 
-	
-}
 
 int  main(void)
-{
-		
-		uint8_t temp;
-    volatile uint32_t ui32Loop;
-	
-	
-	
-    
-		SysCtlPeripheralEnable(0xf0000805);
-    SetupHardware();
-
-		
-		
-    while(!SysCtlPeripheralReady(0xf0000805))
-    {
-    
-		}
-		
-		UnlockPins();
-    
-		
-    
-    GPIOPinTypeGPIOOutput(0x40025000, 0x00000008); 
-		GPIOPinTypeGPIOInput(0x40025000, 0x00000010|0x00000001); 
-		
-		GPIOPadConfigSet(0x40025000,0x00000001|0x00000010,0x00000001,0x0000000A);
-		
-		int x;
-		
-		x = GPIOPinRead(0x40025000, 0x00000001);
-		
-		while(x == 1)
-		{
-			x = GPIOPinRead(0x40025000, 0x00000001);	
-		}
-			
-		
-    while(1)
-    {
-				UARTCharPut(0x4000C000, temp);
-			  temp++;
-				
-				
-        
-        GPIOPinWrite(0x40025000, 0x00000008, 0xF);
-
-        
-        for(ui32Loop = 0; ui32Loop < 200000; ui32Loop++)
-        {
-        }
-
-        
-        GPIOPinWrite(0x40025000, 0x00000008, 0x0);
-
-        
-        for(ui32Loop = 0; ui32Loop < 200000; ui32Loop++)
-        {
-        }
-    }
+{		
+		setupPWM();
+		pwmTest();
 }
 
 

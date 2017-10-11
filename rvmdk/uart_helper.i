@@ -9099,7 +9099,6 @@ extern void UARTLoopbackEnable(uint32_t ui32Base);
 
 
 void UartSetup(void);		
-void UartSetup2(void);	
 #line 2 "src\\Uart_helper.c"
 
 
@@ -9130,24 +9129,4 @@ void UartSetup()
 		UARTConfigSetExpClk(0x4000C000, SysCtlClockGet(), 38400,(0x00000060 | 0x00000000 |0x00000000));
 		
 		
-}
-
-
-
-
-
-
-
-void UartSetup2()
-{
-	(*((volatile uint32_t *)0x400FE104)) |= 0x00000001; 
-  (*((volatile uint32_t *)0x400FE108)) |= 0x00000001; 
-  (*((volatile uint32_t *)0x4000C030)) &= ~0x00000001;      
-  (*((volatile uint32_t *)0x4000C024)) = 27;                    
-  (*((volatile uint32_t *)0x4000C028)) = 8;                     
-                                        
-  (*((volatile uint32_t *)0x4000C02C)) = (0x00000060|0x00000010);
-  (*((volatile uint32_t *)0x4000C030)) |= 0x00000001;       
-  (*((volatile uint32_t *)0x40004420)) |= 0x03;           
-  (*((volatile uint32_t *)0x4000451C)) |= 0x03;             
 }
