@@ -14,7 +14,6 @@ __error__(char *pcFilename, uint32_t ui32Line)
 void SetupHardware()
 {
 	UartSetup();
-//	UartSetup2();
 }
 
 
