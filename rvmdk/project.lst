@@ -64501,8 +64501,9 @@ N#include "driverlib/sysctl.h"
 N#include "driverlib/pin_map.h"
 N#include "driverlib/gpio.h"
 N#include "driverlib/pwm.h"
-W "myPWM.h" 12 28 last line of file ends without a newline
 N#include "driverlib/uart.h"
+N
+N
 L 56 "project.h" 2
 N#include "Uart_helper.h"
 L 1 ".\src\Uart_helper.h" 1
@@ -64544,6 +64545,8 @@ W "project.c" 22 3 function "setupPWM" declared implicitly
 N		setupPWM();
 W "project.c" 23 3 function "pwmTest" declared implicitly
 N		pwmTest();
+W "project.c" 24 3 function "setupENCODER" declared implicitly
+N		setupENCODER();
 N}
 N
 N

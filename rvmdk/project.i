@@ -18127,6 +18127,8 @@ extern __declspec(__nothrow) void __use_no_semihosting(void);
 #line 11 "myPWM.h"
 #line 12 "myPWM.h"
 #line 13 "myPWM.h"
+
+
 #line 56 "project.h"
 #line 1 ".\\src\\Uart_helper.h"
 #line 2 ".\\src\\Uart_helper.h"
@@ -18159,6 +18161,7 @@ int  main(void)
 {		
 		setupPWM();
 		pwmTest();
+		setupENCODER();
 }
 
 

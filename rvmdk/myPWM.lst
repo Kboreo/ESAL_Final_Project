@@ -24206,7 +24206,6 @@ N#endif
 N
 N#endif // __DRIVERLIB_PWM_H__
 L 12 "myPWM.h" 2
-W "myPWM.h" 12 28 last line of file ends without a newline
 N#include "driverlib/uart.h"
 L 1 "driverlib/uart.h" 1
 N//*****************************************************************************
@@ -24473,6 +24472,8 @@ N#endif
 N
 N#endif // __DRIVERLIB_UART_H__
 L 13 "myPWM.h" 2
+N
+N
 L 15 "myPWM.c" 2
 N
 N//Function that sets up the PWM
