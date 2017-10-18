@@ -47,15 +47,17 @@ myPWM.c(71): warning:  #177-D: variable "y"  was declared but never referenced
 myPWM.c(75): warning:  #1-D: last line of file ends without a newline
   	
 myPWM.c: 7 warnings, 0 errors
-creating preprocessor file for Uart_helper.c...
 compiling Encoder.c...
 Encoder.h(16): warning:  #1-D: last line of file ends without a newline
   void QEIConfigure(uint32_t ui32Base, uint32_t ui32Config, uint32_t ui32MaxPosition);
-Encoder.c(45): warning:  #177-D: variable "noop"  was declared but never referenced
+Encoder.c(32): error:  #20: identifier "GPIO_PD6_PhA0" is undefined
+    GPIOPinConfigure(GPIO_PD6_PhA0);
+Encoder.c(59): warning:  #177-D: variable "noop"  was declared but never referenced
   		int noop;
-Encoder.c(52): warning:  #1-D: last line of file ends without a newline
+Encoder.c(75): warning:  #1-D: last line of file ends without a newline
   	
-Encoder.c: 3 warnings, 0 errors
+Encoder.c: 3 warnings, 1 error
+creating preprocessor file for Uart_helper.c...
 creating preprocessor file for Uart_helper.c...
 compiling Uart_helper.c...
 "no source": Error:  #219: error while deleting file ".\rvmdk\uart_helper_1.d": Permission denied
@@ -84,13 +86,7 @@ project.c(23): warning:  #223-D: function "pwmTest" declared implicitly
 project.c(24): warning:  #223-D: function "setupENCODER" declared implicitly
   		setupENCODER();
 project.c: 8 warnings, 0 errors
-linking...
-.\rvmdk\project.axf: Warning: L6304W: Duplicate input file .\rvmdk\uart_helper_1.o ignored.
-Program Size: Code=1944 RO-data=568 RW-data=0 ZI-data=256  
-Finished: 0 information, 1 warning and 0 error messages.
-FromELF: creating hex file...
-After Build - User command #1: fromelf --bin --output .\rvmdk\project.bin .\rvmdk\project.axf
-".\rvmdk\project.axf" - 0 Error(s), 21 Warning(s).
+".\rvmdk\project.axf" - 1 Error(s), 20 Warning(s).
 
 <h2>Software Packages used:</h2>
 
@@ -113,6 +109,7 @@ Package Vendor: Keil
 <h2>Collection of Component Files used:</h2>
 
    * Component: ARM::CMSIS:CORE:5.0.1
+Target not created.
 Build Time Elapsed:  00:00:02
 </pre>
 </body>

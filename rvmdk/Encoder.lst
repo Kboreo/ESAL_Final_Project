@@ -24653,30 +24653,59 @@ N	{
 N		
 N	}
 N	
+N		//Configure PD6 as QEI model 0 phase A 
+N		//and PD7 as QEI model 0 phase B
+E "Encoder.c" 32 20 identifier "GPIO_PD6_PhA0" is undefined
+N  GPIOPinConfigure(GPIO_PD6_PhA0);
+N	GPIOPinTypeQEI(GPIO_PORTF_BASE, GPIO_PIN_2);
+X	GPIOPinTypeQEI(0x40025000, 0x00000004);
+N	
 N	//
 N// Configure the quadrature encoder to capture edges on both signals and
 N// maintain an absolute position by resetting on index pulses. Using a
-N// 1000 line encoder at four edges per line, there are 4000 pulses per
-N// revolution; therefore set the maximum position to 3999 as the count
+N// 1000 line encoder at four edges per line, there are 1920 pulses per
+N// revolution; therefore set the maximum position to 1919 as the count
 N// is zero based.
 N//
-N	QEIConfigure(QEI0_BASE, (QEI_CONFIG_CAPTURE_A_B | QEI_CONFIG_RESET_IDX | QEI_CONFIG_QUADRATURE | QEI_CONFIG_NO_SWAP), 3999);
-X	QEIConfigure(0x4002C000, (0x00000008 | 0x00000010 | 0x00000000 | 0x00000000), 3999);
+N	QEIConfigure(QEI0_BASE, (QEI_CONFIG_CAPTURE_A_B | QEI_CONFIG_RESET_IDX | QEI_CONFIG_QUADRATURE | QEI_CONFIG_NO_SWAP), 1919);
+X	QEIConfigure(0x4002C000, (0x00000008 | 0x00000010 | 0x00000000 | 0x00000000), 1919);
 N//
 N// Enable the quadrature encoder.
 N//
 N	QEIEnable(QEI0_BASE);
 X	QEIEnable(0x4002C000);
+N
+N//Enables velocity capture
+N	QEIVelocityEnable(QEI0_BASE);	
+X	QEIVelocityEnable(0x4002C000);	
+N	
+N	// Configures velocity capture
+N	QEIVelocityConfigure(QEI0_BASE, QEI_VELDIV_1, 4);
+X	QEIVelocityConfigure(0x4002C000, 0x00000000, 4);
+N	
+N
+N	
 N	
 N	for (int i = 0; i<10; i++)
 N	{
 N		int noop;
-W "Encoder.c" 45 7 variable "noop"  was declared but never referenced
+W "Encoder.c" 59 7 variable "noop"  was declared but never referenced
 N	}
+N	
+N	//
+N// Read the encoder position.
+N//
+N	QEIPositionGet(QEI0_BASE);
+X	QEIPositionGet(0x4002C000);
+N	
+N	
+N//Read encoder speed
+N	QEIVelocityGet(QEI0_BASE);
+X	QEIVelocityGet(0x4002C000);
 N	
 N	
 N	
 N
 N	}
-W "Encoder.c" 52 2 last line of file ends without a newline
+W "Encoder.c" 75 2 last line of file ends without a newline
 N	

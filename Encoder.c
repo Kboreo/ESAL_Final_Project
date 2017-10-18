@@ -27,6 +27,11 @@ void setupENCODER(void)
 		
 	}
 	
+		//Configure PD6 as QEI model 0 phase A 
+		//and PD7 as QEI model 0 phase B
+  GPIOPinConfigure(GPIO_PD6_PhA0);
+	GPIOPinTypeQEI(GPIO_PORTF_BASE, GPIO_PIN_2);
+	
 	//
 // Configure the quadrature encoder to capture edges on both signals and
 // maintain an absolute position by resetting on index pulses. Using a
@@ -39,6 +44,15 @@ void setupENCODER(void)
 // Enable the quadrature encoder.
 //
 	QEIEnable(QEI0_BASE);
+
+//Enables velocity capture
+	QEIVelocityEnable(QEI0_BASE);	
+	
+	// Configures velocity capture
+	QEIVelocityConfigure(QEI0_BASE, QEI_VELDIV_1, 4);
+	
+
+	
 	
 	for (int i = 0; i<10; i++)
 	{
@@ -49,6 +63,11 @@ void setupENCODER(void)
 // Read the encoder position.
 //
 	QEIPositionGet(QEI0_BASE);
+	
+	
+//Read encoder speed
+	QEIVelocityGet(QEI0_BASE);
+	
 	
 	
 

@@ -3340,6 +3340,11 @@ void setupENCODER(void)
 		
 	}
 	
+		
+		
+  GPIOPinConfigure(GPIO_PD6_PhA0);
+	GPIOPinTypeQEI(0x40025000, 0x00000004);
+	
 	
 
 
@@ -3347,16 +3352,34 @@ void setupENCODER(void)
 
 
 
-	QEIConfigure(0x4002C000, (0x00000008 | 0x00000010 | 0x00000000 | 0x00000000), 3999);
+	QEIConfigure(0x4002C000, (0x00000008 | 0x00000010 | 0x00000000 | 0x00000000), 1919);
 
 
 
 	QEIEnable(0x4002C000);
+
+
+	QEIVelocityEnable(0x4002C000);	
+	
+	
+	QEIVelocityConfigure(0x4002C000, 0x00000000, 4);
+	
+
+	
 	
 	for (int i = 0; i<10; i++)
 	{
 		int noop;
 	}
+	
+	
+
+
+	QEIPositionGet(0x4002C000);
+	
+	
+
+	QEIVelocityGet(0x4002C000);
 	
 	
 	
