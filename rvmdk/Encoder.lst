@@ -24653,13 +24653,29 @@ N	{
 N		
 N	}
 N	
+N	//GPIO_PORTF_LOCK_R = 0x4C4F434B;   // 2) unlock PortF PF0
+N	
+N		//Need to Unlock PD7
+N	HWREG(GPIO_PORTD_BASE + GPIO_O_LOCK) = GPIO_LOCK_KEY;
+X	(*((volatile uint32_t *)(0x40007000 + 0x00000520))) = 0x4C4F434B;
+N	HWREG(GPIO_PORTD_BASE + GPIO_O_CR) = 0xFF;
+X	(*((volatile uint32_t *)(0x40007000 + 0x00000524))) = 0xFF;
+N	HWREG(GPIO_PORTD_BASE + GPIO_O_LOCK) = 0;
+X	(*((volatile uint32_t *)(0x40007000 + 0x00000520))) = 0;
+N	
 N		//Configure PD6 as QEI model 0 phase A 
 N		//and PD7 as QEI model 0 phase B
-E "Encoder.c" 32 20 identifier "GPIO_PD6_PhA0" is undefined
-N  GPIOPinConfigure(GPIO_PD6_PhA0);
-N	GPIOPinTypeQEI(GPIO_PORTF_BASE, GPIO_PIN_2);
-X	GPIOPinTypeQEI(0x40025000, 0x00000004);
-N	
+N  GPIOPinConfigure(GPIO_PD6_PHA0);
+X  GPIOPinConfigure(0x00031806);
+N	GPIOPinConfigure(GPIO_PD7_PHB0);
+X	GPIOPinConfigure(0x00031C06);
+N	GPIOPinTypeQEI(GPIO_PORTD_BASE, GPIO_PIN_6 | GPIO_PIN_7);
+X	GPIOPinTypeQEI(0x40007000, 0x00000040 | 0x00000080);
+N
+N//		//Configure PF2 Pin as PWM
+N//  GPIOPinConfigure(GPIO_PF2_M1PWM6);
+N//	GPIOPinTypePWM(GPIO_PORTF_BASE, GPIO_PIN_2);
+N//	
 N	//
 N// Configure the quadrature encoder to capture edges on both signals and
 N// maintain an absolute position by resetting on index pulses. Using a
@@ -24689,7 +24705,7 @@ N
 N	for (int i = 0; i<10; i++)
 N	{
 N		int noop;
-W "Encoder.c" 59 7 variable "noop"  was declared but never referenced
+W "Encoder.c" 71 7 variable "noop"  was declared but never referenced
 N	}
 N	
 N	//
@@ -24707,5 +24723,5 @@ N
 N	
 N
 N	}
-W "Encoder.c" 75 2 last line of file ends without a newline
+W "Encoder.c" 87 2 last line of file ends without a newline
 N	

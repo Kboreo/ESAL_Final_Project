@@ -3340,11 +3340,23 @@ void setupENCODER(void)
 		
 	}
 	
-		
-		
-  GPIOPinConfigure(GPIO_PD6_PhA0);
-	GPIOPinTypeQEI(0x40025000, 0x00000004);
 	
+	
+		
+	(*((volatile uint32_t *)(0x40007000 + 0x00000520))) = 0x4C4F434B;
+	(*((volatile uint32_t *)(0x40007000 + 0x00000524))) = 0xFF;
+	(*((volatile uint32_t *)(0x40007000 + 0x00000520))) = 0;
+	
+		
+		
+  GPIOPinConfigure(0x00031806);
+	GPIOPinConfigure(0x00031C06);
+	GPIOPinTypeQEI(0x40007000, 0x00000040 | 0x00000080);
+
+
+
+
+
 	
 
 
