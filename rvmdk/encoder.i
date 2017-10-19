@@ -11387,24 +11387,33 @@ void QEIConfigure(uint32_t ui32Base, uint32_t ui32Config, uint32_t ui32MaxPositi
 #line 16 "Encoder.c"
 
 
-#line 28 "Encoder.c"
+#line 29 "Encoder.c"
 
 
 void setupENCODER(void)
 {
 	
+	
+	
 
-  volatile unsigned long delay;
+
+ 
+    
+	
+
+ volatile unsigned long delay;
+	(*((volatile unsigned long *)0x400FE644)) |= 0X01; 				
   (*((volatile unsigned long *)0x400FE108)) |= 0x00000008;     
   delay = (*((volatile unsigned long *)0x400FE108));           
   (*((volatile unsigned long *)0x40007520)) = 0x4C4F434B;   
-  (*((volatile unsigned long *)0x40007524)) = 0x1F;           
-  (*((volatile unsigned long *)0x40007528)) = 0x00;        
-  (*((volatile unsigned long *)0x4000752C)) = 0x00000000;   
-  (*((volatile unsigned long *)0x40007400)) = 0x0E;          
-  (*((volatile unsigned long *)0x40007420)) = 0x00;        
+  (*((volatile unsigned long *)0x40007524)) = 0xFF;           
+  (*((volatile unsigned long *)0x40007528)) &= 0x00;        
+  (*((volatile unsigned long *)0x40007420)) = 0xC0;        
+	(*((volatile unsigned long *)0x4000752C)) = ((*((volatile unsigned long *)0x4000752C))&0x00FF0FFF)+0x66006000;    
+  (*((volatile unsigned long *)0x40007400)) &=  ~0xC0;          
   
-  (*((volatile unsigned long *)0x4000751C)) = 0x1F;          
+  
+  (*((volatile unsigned long *)0x4000751C)) = 0xFF;          
 	
 	
   SysCtlPeripheralEnable(0xf0004400);
@@ -11436,7 +11445,7 @@ void setupENCODER(void)
 	
 	
 	
-	QEIVelocityConfigure(0x4002C000, 0x00000040, 5000);
+	QEIVelocityConfigure(0x4002C000, 0x00000040, 500);
 	
 	
 	
@@ -11444,9 +11453,9 @@ void setupENCODER(void)
 
 
 
-  GPIOPinConfigure(0x00031806);
-	GPIOPinConfigure(0x00031C06);
-	GPIOPinTypeQEI(0x40007000, 0x00000040 | 0x00000080);
+ 
+	
+
 	
 	
 	for (int i = 0; i<1000; i++)
@@ -11467,7 +11476,11 @@ void setupENCODER(void)
 
 	double speed = QEIVelocityGet(0x4002C000);
 	
-	printf("Speed = %f\n\n", speed);
+	printf("Speed = %d\n\n", speed);
+		
+	int ticks = QEIVelocityGet(0x4002C000);
+		
+		printf("Speed = %d\n\n", ticks);
 	
 	}
 	

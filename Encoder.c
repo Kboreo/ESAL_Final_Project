@@ -25,23 +25,33 @@
 #define GPIO_PORTF_AMSEL_R      (*((volatile unsigned long *)0x40007528))
 #define GPIO_PORTF_PCTL_R       (*((volatile unsigned long *)0x4000752C))
 #define SYSCTL_RCGC2_R          (*((volatile unsigned long *)0x400FE108))
+#define SYSCTL_RCGCGPIO_R				(*((volatile unsigned long *)0x400FE644))
 
 //Function that sets up the Encoder
 void setupENCODER(void)
 {
 	
-
-  volatile unsigned long delay;
+	//Enable the GPIO port that is used for the Encoder
+	
+//	SysCtlPeripheralEnable(SYSCTL_PERIPH_GPIOD);
+//	  while(!SysCtlPeripheralReady(SYSCTL_PERIPH_GPIOD))
+ // {
+    
+	//}
+//QEI on PDS PD6 PD7	
+ volatile unsigned long delay;
+	SYSCTL_RCGCGPIO_R |= 0X01; 				//QEI run mode clock gating control
   SYSCTL_RCGC2_R |= 0x00000008;     // 1) General purpose I/O Peripheral Ready
   delay = SYSCTL_RCGC2_R;           // reading register adds a delay   
   GPIO_PORTF_LOCK_R = 0x4C4F434B;   // 2) unlock PortF PF0  
-  GPIO_PORTF_CR_R = 0x1F;           // allow changes to PF4-0       
-  GPIO_PORTF_AMSEL_R = 0x00;        // 3) disable analog function
-  GPIO_PORTF_PCTL_R = 0x00000000;   // 4) GPIO clear bit PCTL  
-  GPIO_PORTF_DIR_R = 0x0E;          // 5) PF4,PF0 input, PF3,PF2,PF1 output   
-  GPIO_PORTF_AFSEL_R = 0x00;        // 6) no alternate function
+  GPIO_PORTF_CR_R = 0xFF;           // allow changes to PD      
+  GPIO_PORTF_AMSEL_R &= 0x00;        // 3) disable analog function
+  GPIO_PORTF_AFSEL_R = 0xC0;        // 6) alternate function selected 
+	GPIO_PORTF_PCTL_R = (GPIO_PORTF_PCTL_R&0x00FF0FFF)+0x66006000;    // 4) select peripheral for encoder 
+  GPIO_PORTF_DIR_R &=  ~0xC0;          // 5) sets port D as input  
+  
   //GPIO_PORTF_PUR_R = 0x11;          // enable pullup resistors on PF4,PF0       
-  GPIO_PORTF_DEN_R = 0x1F;          // 7) enable digital pins PF4-PF0  
+  GPIO_PORTF_DEN_R = 0xFF;          // 7) enable digital pins PF4-PF0  
 	
 	// Enable the peripherals used by this program.
   SysCtlPeripheralEnable(SYSCTL_PERIPH_QEI0);
@@ -73,7 +83,7 @@ void setupENCODER(void)
 	
 	
 	// Configures velocity capture
-	QEIVelocityConfigure(QEI0_BASE, QEI_VELDIV_2, 5000);
+	QEIVelocityConfigure(QEI0_BASE, QEI_VELDIV_2, 500);
 	
 	
 	
@@ -81,9 +91,9 @@ void setupENCODER(void)
 
 //Configure PD6 as QEI model 0 phase A 
 //and PD7 as QEI model 0 phase B
-  GPIOPinConfigure(GPIO_PD6_PHA0);
-	GPIOPinConfigure(GPIO_PD7_PHB0);
-	GPIOPinTypeQEI(GPIO_PORTD_BASE, GPIO_PIN_6 | GPIO_PIN_7);
+ // GPIOPinConfigure(GPIO_PD6_PHA0);
+	//GPIOPinConfigure(GPIO_PD7_PHB0);
+//	GPIOPinTypeQEI(GPIO_PORTD_BASE, GPIO_PIN_6 | GPIO_PIN_7);
 	
 	
 	for (int i = 0; i<1000; i++)
@@ -104,7 +114,11 @@ void setupENCODER(void)
 //Read encoder speed
 	double speed = QEIVelocityGet(QEI0_BASE);
 	
-	printf("Speed = %f\n\n", speed);
+	printf("Speed = %d\n\n", speed);
+		
+	int ticks = QEIVelocityGet(QEI0_BASE);
+		
+		printf("Speed = %d\n\n", ticks);
 	
 	}
 	
