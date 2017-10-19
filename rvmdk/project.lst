@@ -62988,397 +62988,9 @@ N
 N#endif // __TM4C123GH6PM_H__
 L 43 "project.h" 2
 N
-N//#include "src/Uart_helper.h"
-N
+N#include "src/Uart_helper.h"
+L 1 "src/Uart_helper.h" 1
 N#include <stdbool.h>
-N#include <stdint.h>
-N#include "sysctl.h"
-N#include "hw_memmap.h"
-N#include "gpio.h"
-N#include "uart.h"
-N#include "../inc/tm4c123gh6pm.h"
-N#include "hw_gpio.h"
-L 1 ".\inc\hw_gpio.h" 1
-N//*****************************************************************************
-N//
-N// hw_gpio.h - Defines and Macros for GPIO hardware.
-N//
-N// Copyright (c) 2005-2017 Texas Instruments Incorporated.  All rights reserved.
-N// Software License Agreement
-N// 
-N//   Redistribution and use in source and binary forms, with or without
-N//   modification, are permitted provided that the following conditions
-N//   are met:
-N// 
-N//   Redistributions of source code must retain the above copyright
-N//   notice, this list of conditions and the following disclaimer.
-N// 
-N//   Redistributions in binary form must reproduce the above copyright
-N//   notice, this list of conditions and the following disclaimer in the
-N//   documentation and/or other materials provided with the  
-N//   distribution.
-N// 
-N//   Neither the name of Texas Instruments Incorporated nor the names of
-N//   its contributors may be used to endorse or promote products derived
-N//   from this software without specific prior written permission.
-N// 
-N// THIS SOFTWARE IS PROVIDED BY THE COPYRIGHT HOLDERS AND CONTRIBUTORS
-N// "AS IS" AND ANY EXPRESS OR IMPLIED WARRANTIES, INCLUDING, BUT NOT
-N// LIMITED TO, THE IMPLIED WARRANTIES OF MERCHANTABILITY AND FITNESS FOR
-N// A PARTICULAR PURPOSE ARE DISCLAIMED. IN NO EVENT SHALL THE COPYRIGHT
-N// OWNER OR CONTRIBUTORS BE LIABLE FOR ANY DIRECT, INDIRECT, INCIDENTAL,
-N// SPECIAL, EXEMPLARY, OR CONSEQUENTIAL DAMAGES (INCLUDING, BUT NOT
-N// LIMITED TO, PROCUREMENT OF SUBSTITUTE GOODS OR SERVICES; LOSS OF USE,
-N// DATA, OR PROFITS; OR BUSINESS INTERRUPTION) HOWEVER CAUSED AND ON ANY
-N// THEORY OF LIABILITY, WHETHER IN CONTRACT, STRICT LIABILITY, OR TORT
-N// (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE
-N// OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
-N// 
-N// This is part of revision 2.1.4.178 of the Tiva Firmware Development Package.
-N//
-N//*****************************************************************************
-N
-N#ifndef __HW_GPIO_H__
-N#define __HW_GPIO_H__
-N
-N//*****************************************************************************
-N//
-N// The following are defines for the GPIO register offsets.
-N//
-N//*****************************************************************************
-N#define GPIO_O_DATA             0x00000000  // GPIO Data
-N#define GPIO_O_DIR              0x00000400  // GPIO Direction
-N#define GPIO_O_IS               0x00000404  // GPIO Interrupt Sense
-N#define GPIO_O_IBE              0x00000408  // GPIO Interrupt Both Edges
-N#define GPIO_O_IEV              0x0000040C  // GPIO Interrupt Event
-N#define GPIO_O_IM               0x00000410  // GPIO Interrupt Mask
-N#define GPIO_O_RIS              0x00000414  // GPIO Raw Interrupt Status
-N#define GPIO_O_MIS              0x00000418  // GPIO Masked Interrupt Status
-N#define GPIO_O_ICR              0x0000041C  // GPIO Interrupt Clear
-N#define GPIO_O_AFSEL            0x00000420  // GPIO Alternate Function Select
-N#define GPIO_O_DR2R             0x00000500  // GPIO 2-mA Drive Select
-N#define GPIO_O_DR4R             0x00000504  // GPIO 4-mA Drive Select
-N#define GPIO_O_DR8R             0x00000508  // GPIO 8-mA Drive Select
-N#define GPIO_O_ODR              0x0000050C  // GPIO Open Drain Select
-N#define GPIO_O_PUR              0x00000510  // GPIO Pull-Up Select
-N#define GPIO_O_PDR              0x00000514  // GPIO Pull-Down Select
-N#define GPIO_O_SLR              0x00000518  // GPIO Slew Rate Control Select
-N#define GPIO_O_DEN              0x0000051C  // GPIO Digital Enable
-N#define GPIO_O_LOCK             0x00000520  // GPIO Lock
-N#define GPIO_O_CR               0x00000524  // GPIO Commit
-N#define GPIO_O_AMSEL            0x00000528  // GPIO Analog Mode Select
-N#define GPIO_O_PCTL             0x0000052C  // GPIO Port Control
-N#define GPIO_O_ADCCTL           0x00000530  // GPIO ADC Control
-N#define GPIO_O_DMACTL           0x00000534  // GPIO DMA Control
-N#define GPIO_O_SI               0x00000538  // GPIO Select Interrupt
-N#define GPIO_O_DR12R            0x0000053C  // GPIO 12-mA Drive Select
-N#define GPIO_O_WAKEPEN          0x00000540  // GPIO Wake Pin Enable
-N#define GPIO_O_WAKELVL          0x00000544  // GPIO Wake Level
-N#define GPIO_O_WAKESTAT         0x00000548  // GPIO Wake Status
-N#define GPIO_O_PP               0x00000FC0  // GPIO Peripheral Property
-N#define GPIO_O_PC               0x00000FC4  // GPIO Peripheral Configuration
-N
-N//*****************************************************************************
-N//
-N// The following are defines for the bit fields in the GPIO_O_IM register.
-N//
-N//*****************************************************************************
-N#define GPIO_IM_DMAIME          0x00000100  // GPIO uDMA Done Interrupt Mask
-N                                            // Enable
-N#define GPIO_IM_GPIO_M          0x000000FF  // GPIO Interrupt Mask Enable
-N#define GPIO_IM_GPIO_S          0
-N
-N//*****************************************************************************
-N//
-N// The following are defines for the bit fields in the GPIO_O_RIS register.
-N//
-N//*****************************************************************************
-N#define GPIO_RIS_DMARIS         0x00000100  // GPIO uDMA Done Interrupt Raw
-N                                            // Status
-N#define GPIO_RIS_GPIO_M         0x000000FF  // GPIO Interrupt Raw Status
-N#define GPIO_RIS_GPIO_S         0
-N
-N//*****************************************************************************
-N//
-N// The following are defines for the bit fields in the GPIO_O_MIS register.
-N//
-N//*****************************************************************************
-N#define GPIO_MIS_DMAMIS         0x00000100  // GPIO uDMA Done Masked Interrupt
-N                                            // Status
-N#define GPIO_MIS_GPIO_M         0x000000FF  // GPIO Masked Interrupt Status
-N#define GPIO_MIS_GPIO_S         0
-N
-N//*****************************************************************************
-N//
-N// The following are defines for the bit fields in the GPIO_O_ICR register.
-N//
-N//*****************************************************************************
-N#define GPIO_ICR_DMAIC          0x00000100  // GPIO uDMA Interrupt Clear
-N#define GPIO_ICR_GPIO_M         0x000000FF  // GPIO Interrupt Clear
-N#define GPIO_ICR_GPIO_S         0
-N
-N//*****************************************************************************
-N//
-N// The following are defines for the bit fields in the GPIO_O_LOCK register.
-N//
-N//*****************************************************************************
-N#define GPIO_LOCK_M             0xFFFFFFFF  // GPIO Lock
-N#define GPIO_LOCK_UNLOCKED      0x00000000  // The GPIOCR register is unlocked
-N                                            // and may be modified
-N#define GPIO_LOCK_LOCKED        0x00000001  // The GPIOCR register is locked
-N                                            // and may not be modified
-N#define GPIO_LOCK_KEY           0x4C4F434B  // Unlocks the GPIO_CR register
-N
-N//*****************************************************************************
-N//
-N// The following are defines for the bit fields in the GPIO_O_SI register.
-N//
-N//*****************************************************************************
-N#define GPIO_SI_SUM             0x00000001  // Summary Interrupt
-N
-N//*****************************************************************************
-N//
-N// The following are defines for the bit fields in the GPIO_O_DR12R register.
-N//
-N//*****************************************************************************
-N#define GPIO_DR12R_DRV12_M      0x000000FF  // Output Pad 12-mA Drive Enable
-N#define GPIO_DR12R_DRV12_12MA   0x00000001  // The corresponding GPIO pin has
-N                                            // 12-mA drive. This encoding is
-N                                            // only valid if the GPIOPP EDE bit
-N                                            // is set and the appropriate
-N                                            // GPIOPC EDM bit field is
-N                                            // programmed to 0x3
-N
-N//*****************************************************************************
-N//
-N// The following are defines for the bit fields in the GPIO_O_WAKEPEN register.
-N//
-N//*****************************************************************************
-N#define GPIO_WAKEPEN_WAKEP4     0x00000010  // P[4] Wake Enable
-N
-N//*****************************************************************************
-N//
-N// The following are defines for the bit fields in the GPIO_O_WAKELVL register.
-N//
-N//*****************************************************************************
-N#define GPIO_WAKELVL_WAKELVL4   0x00000010  // P[4] Wake Level
-N
-N//*****************************************************************************
-N//
-N// The following are defines for the bit fields in the GPIO_O_WAKESTAT
-N// register.
-N//
-N//*****************************************************************************
-N#define GPIO_WAKESTAT_STAT4     0x00000010  // P[4] Wake Status
-N
-N//*****************************************************************************
-N//
-N// The following are defines for the bit fields in the GPIO_O_PP register.
-N//
-N//*****************************************************************************
-N#define GPIO_PP_EDE             0x00000001  // Extended Drive Enable
-N
-N//*****************************************************************************
-N//
-N// The following are defines for the bit fields in the GPIO_O_PC register.
-N//
-N//*****************************************************************************
-N#define GPIO_PC_EDM7_M          0x0000C000  // Extended Drive Mode Bit 7
-N#define GPIO_PC_EDM6_M          0x00003000  // Extended Drive Mode Bit 6
-N#define GPIO_PC_EDM5_M          0x00000C00  // Extended Drive Mode Bit 5
-N#define GPIO_PC_EDM4_M          0x00000300  // Extended Drive Mode Bit 4
-N#define GPIO_PC_EDM3_M          0x000000C0  // Extended Drive Mode Bit 3
-N#define GPIO_PC_EDM2_M          0x00000030  // Extended Drive Mode Bit 2
-N#define GPIO_PC_EDM1_M          0x0000000C  // Extended Drive Mode Bit 1
-N#define GPIO_PC_EDM0_M          0x00000003  // Extended Drive Mode Bit 0
-N#define GPIO_PC_EDM0_DISABLE    0x00000000  // Drive values of 2, 4 and 8 mA
-N                                            // are maintained. GPIO n Drive
-N                                            // Select (GPIODRnR) registers
-N                                            // function as normal
-N#define GPIO_PC_EDM0_6MA        0x00000001  // An additional 6 mA option is
-N                                            // provided
-N#define GPIO_PC_EDM0_PLUS2MA    0x00000003  // A 2 mA driver is always enabled;
-N                                            // setting the corresponding
-N                                            // GPIODR4R register bit adds 2 mA
-N                                            // and setting the corresponding
-N                                            // GPIODR8R of GPIODR12R register
-N                                            // bit adds an additional 4 mA
-N#define GPIO_PC_EDM7_S          14
-N#define GPIO_PC_EDM6_S          12
-N#define GPIO_PC_EDM5_S          10
-N#define GPIO_PC_EDM4_S          8
-N#define GPIO_PC_EDM3_S          6
-N#define GPIO_PC_EDM2_S          4
-N#define GPIO_PC_EDM1_S          2
-N
-N#endif // __HW_GPIO_H__
-L 54 "project.h" 2
-N#include "hw_types.h"
-L 1 ".\inc\hw_types.h" 1
-N//*****************************************************************************
-N//
-N// hw_types.h - Common types and macros.
-N//
-N// Copyright (c) 2005-2017 Texas Instruments Incorporated.  All rights reserved.
-N// Software License Agreement
-N// 
-N//   Redistribution and use in source and binary forms, with or without
-N//   modification, are permitted provided that the following conditions
-N//   are met:
-N// 
-N//   Redistributions of source code must retain the above copyright
-N//   notice, this list of conditions and the following disclaimer.
-N// 
-N//   Redistributions in binary form must reproduce the above copyright
-N//   notice, this list of conditions and the following disclaimer in the
-N//   documentation and/or other materials provided with the  
-N//   distribution.
-N// 
-N//   Neither the name of Texas Instruments Incorporated nor the names of
-N//   its contributors may be used to endorse or promote products derived
-N//   from this software without specific prior written permission.
-N// 
-N// THIS SOFTWARE IS PROVIDED BY THE COPYRIGHT HOLDERS AND CONTRIBUTORS
-N// "AS IS" AND ANY EXPRESS OR IMPLIED WARRANTIES, INCLUDING, BUT NOT
-N// LIMITED TO, THE IMPLIED WARRANTIES OF MERCHANTABILITY AND FITNESS FOR
-N// A PARTICULAR PURPOSE ARE DISCLAIMED. IN NO EVENT SHALL THE COPYRIGHT
-N// OWNER OR CONTRIBUTORS BE LIABLE FOR ANY DIRECT, INDIRECT, INCIDENTAL,
-N// SPECIAL, EXEMPLARY, OR CONSEQUENTIAL DAMAGES (INCLUDING, BUT NOT
-N// LIMITED TO, PROCUREMENT OF SUBSTITUTE GOODS OR SERVICES; LOSS OF USE,
-N// DATA, OR PROFITS; OR BUSINESS INTERRUPTION) HOWEVER CAUSED AND ON ANY
-N// THEORY OF LIABILITY, WHETHER IN CONTRACT, STRICT LIABILITY, OR TORT
-N// (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE
-N// OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
-N// 
-N// This is part of revision 2.1.4.178 of the Tiva Firmware Development Package.
-N//
-N//*****************************************************************************
-N
-N#ifndef __HW_TYPES_H__
-N#define __HW_TYPES_H__
-N
-N//*****************************************************************************
-N//
-N// Macros for hardware access, both direct and via the bit-band region.
-N//
-N//*****************************************************************************
-N#define HWREG(x)                                                              \
-N        (*((volatile uint32_t *)(x)))
-X#define HWREG(x)                                                                      (*((volatile uint32_t *)(x)))
-N#define HWREGH(x)                                                             \
-N        (*((volatile uint16_t *)(x)))
-X#define HWREGH(x)                                                                     (*((volatile uint16_t *)(x)))
-N#define HWREGB(x)                                                             \
-N        (*((volatile uint8_t *)(x)))
-X#define HWREGB(x)                                                                     (*((volatile uint8_t *)(x)))
-N#define HWREGBITW(x, b)                                                       \
-N        HWREG(((uint32_t)(x) & 0xF0000000) | 0x02000000 |                     \
-N              (((uint32_t)(x) & 0x000FFFFF) << 5) | ((b) << 2))
-X#define HWREGBITW(x, b)                                                               HWREG(((uint32_t)(x) & 0xF0000000) | 0x02000000 |                                   (((uint32_t)(x) & 0x000FFFFF) << 5) | ((b) << 2))
-N#define HWREGBITH(x, b)                                                       \
-N        HWREGH(((uint32_t)(x) & 0xF0000000) | 0x02000000 |                    \
-N               (((uint32_t)(x) & 0x000FFFFF) << 5) | ((b) << 2))
-X#define HWREGBITH(x, b)                                                               HWREGH(((uint32_t)(x) & 0xF0000000) | 0x02000000 |                                   (((uint32_t)(x) & 0x000FFFFF) << 5) | ((b) << 2))
-N#define HWREGBITB(x, b)                                                       \
-N        HWREGB(((uint32_t)(x) & 0xF0000000) | 0x02000000 |                    \
-N               (((uint32_t)(x) & 0x000FFFFF) << 5) | ((b) << 2))
-X#define HWREGBITB(x, b)                                                               HWREGB(((uint32_t)(x) & 0xF0000000) | 0x02000000 |                                   (((uint32_t)(x) & 0x000FFFFF) << 5) | ((b) << 2))
-N
-N//*****************************************************************************
-N//
-N// Helper Macros for determining silicon revisions, etc.
-N//
-N// These macros will be used by Driverlib at "run-time" to create necessary
-N// conditional code blocks that will allow a single version of the Driverlib
-N// "binary" code to support multiple(all) Tiva silicon revisions.
-N//
-N// It is expected that these macros will be used inside of a standard 'C'
-N// conditional block of code, e.g.
-N//
-N//     if(CLASS_IS_TM4C123)
-N//     {
-N//         do some TM4C123-class specific code here.
-N//     }
-N//
-N// By default, these macros will be defined as run-time checks of the
-N// appropriate register(s) to allow creation of run-time conditional code
-N// blocks for a common DriverLib across the entire Tiva family.
-N//
-N// However, if code-space optimization is required, these macros can be "hard-
-N// coded" for a specific version of Tiva silicon.  Many compilers will then
-N// detect the "hard-coded" conditionals, and appropriately optimize the code
-N// blocks, eliminating any "unreachable" code.  This would result in a smaller
-N// Driverlib, thus producing a smaller final application size, but at the cost
-N// of limiting the Driverlib binary to a specific Tiva silicon revision.
-N//
-N//*****************************************************************************
-N#ifndef CLASS_IS_TM4C123
-N#define CLASS_IS_TM4C123                                                     \
-N        ((HWREG(SYSCTL_DID0) & (SYSCTL_DID0_VER_M | SYSCTL_DID0_CLASS_M)) == \
-N         (SYSCTL_DID0_VER_1 | SYSCTL_DID0_CLASS_TM4C123))
-X#define CLASS_IS_TM4C123                                                             ((HWREG(SYSCTL_DID0) & (SYSCTL_DID0_VER_M | SYSCTL_DID0_CLASS_M)) ==          (SYSCTL_DID0_VER_1 | SYSCTL_DID0_CLASS_TM4C123))
-N#endif
-N
-N#ifndef CLASS_IS_TM4C129
-N#define CLASS_IS_TM4C129                                                     \
-N        ((HWREG(SYSCTL_DID0) & (SYSCTL_DID0_VER_M | SYSCTL_DID0_CLASS_M)) == \
-N         (SYSCTL_DID0_VER_1 | SYSCTL_DID0_CLASS_TM4C129))
-X#define CLASS_IS_TM4C129                                                             ((HWREG(SYSCTL_DID0) & (SYSCTL_DID0_VER_M | SYSCTL_DID0_CLASS_M)) ==          (SYSCTL_DID0_VER_1 | SYSCTL_DID0_CLASS_TM4C129))
-N#endif
-N
-N#ifndef REVISION_IS_A0
-N#define REVISION_IS_A0                                                     \
-N        ((HWREG(SYSCTL_DID0) & (SYSCTL_DID0_MAJ_M | SYSCTL_DID0_MIN_M)) == \
-N         (SYSCTL_DID0_MAJ_REVA | SYSCTL_DID0_MIN_0))
-X#define REVISION_IS_A0                                                             ((HWREG(SYSCTL_DID0) & (SYSCTL_DID0_MAJ_M | SYSCTL_DID0_MIN_M)) ==          (SYSCTL_DID0_MAJ_REVA | SYSCTL_DID0_MIN_0))
-N#endif
-N
-N#ifndef REVISION_IS_A1
-N#define REVISION_IS_A1                                                     \
-N        ((HWREG(SYSCTL_DID0) & (SYSCTL_DID0_MAJ_M | SYSCTL_DID0_MIN_M)) == \
-N         (SYSCTL_DID0_MAJ_REVA | SYSCTL_DID0_MIN_0))
-X#define REVISION_IS_A1                                                             ((HWREG(SYSCTL_DID0) & (SYSCTL_DID0_MAJ_M | SYSCTL_DID0_MIN_M)) ==          (SYSCTL_DID0_MAJ_REVA | SYSCTL_DID0_MIN_0))
-N#endif
-N
-N#ifndef REVISION_IS_A2
-N#define REVISION_IS_A2                                                     \
-N        ((HWREG(SYSCTL_DID0) & (SYSCTL_DID0_MAJ_M | SYSCTL_DID0_MIN_M)) == \
-N         (SYSCTL_DID0_MAJ_REVA | SYSCTL_DID0_MIN_2))
-X#define REVISION_IS_A2                                                             ((HWREG(SYSCTL_DID0) & (SYSCTL_DID0_MAJ_M | SYSCTL_DID0_MIN_M)) ==          (SYSCTL_DID0_MAJ_REVA | SYSCTL_DID0_MIN_2))
-N#endif
-N
-N#ifndef REVISION_IS_B0
-N#define REVISION_IS_B0                                                     \
-N        ((HWREG(SYSCTL_DID0) & (SYSCTL_DID0_MAJ_M | SYSCTL_DID0_MIN_M)) == \
-N         (SYSCTL_DID0_MAJ_REVB | SYSCTL_DID0_MIN_0))
-X#define REVISION_IS_B0                                                             ((HWREG(SYSCTL_DID0) & (SYSCTL_DID0_MAJ_M | SYSCTL_DID0_MIN_M)) ==          (SYSCTL_DID0_MAJ_REVB | SYSCTL_DID0_MIN_0))
-N#endif
-N
-N#ifndef REVISION_IS_B1
-N#define REVISION_IS_B1                                                     \
-N        ((HWREG(SYSCTL_DID0) & (SYSCTL_DID0_MAJ_M | SYSCTL_DID0_MIN_M)) == \
-N         (SYSCTL_DID0_MAJ_REVB | SYSCTL_DID0_MIN_1))
-X#define REVISION_IS_B1                                                             ((HWREG(SYSCTL_DID0) & (SYSCTL_DID0_MAJ_M | SYSCTL_DID0_MIN_M)) ==          (SYSCTL_DID0_MAJ_REVB | SYSCTL_DID0_MIN_1))
-N#endif
-N
-N//*****************************************************************************
-N//
-N// For TivaWare 2.1, we removed all references to Tiva IC codenames from the
-N// source.  To ensure that existing customer code doesn't break as a result
-N// of this change, make sure that the old definitions are still available at
-N// least for the time being.
-N//
-N//*****************************************************************************
-N#ifndef DEPRECATED
-N#define CLASS_IS_BLIZZARD CLASS_IS_TM4C123
-N#define CLASS_IS_SNOWFLAKE CLASS_IS_TM4C123
-N#endif
-N
-N#endif // __HW_TYPES_H__
-L 55 "project.h" 2
-N#include "myPWM.h"
-L 1 "myPWM.h" 1
-N#include "driverlib/pin_map.h"
 N#include <stdint.h>
 N#include <stdio.h>
 L 1 "C:\Keil_v5\ARM\ARMCC\Bin\..\include\stdio.h" 1
@@ -64492,7 +64104,478 @@ N#endif /* ndef __stdio_h */
 N
 N/* end of stdio.h */
 N
-L 4 "myPWM.h" 2
+L 4 "src/Uart_helper.h" 2
+N#include "sysctl.h"
+N#include "hw_memmap.h"
+N#include "gpio.h"
+N#include "uart.h"
+N#include "../inc/tm4c123gh6pm.h"
+N#include "pin_map.h"
+N
+N
+Nvoid UartSetup(void);		//sets up Uart for my configuration using library
+N
+N//redirect for printf.
+Nint fputc(int ch, FILE *f);
+N
+N//redirect input from serial port
+N//read info edit by: Sir Hutson
+Nint fgetc(FILE *f);
+N
+N
+N//MMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMM
+N//MMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMM
+N//MMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMM
+N//MMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMNNNNNNNMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMM
+N//MMMMMMMMMMMMMMMMMMMMMMMMMMMMMMM8O+++?7IIII7ZNMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMM
+N//MMMMMMMMMMMMMMMMMMMMMMMMMMMMMD+++II7IIIIIII7IIODMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMM
+N//MMMMMMMMMMMMMMMMMMMMMMMMMMMMN+?IIIIIIIIIIIIIIIIINMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMM
+N//MMMMMMMMMMMMMMMMMMMMMMMMMMN7IIIIIIIIIDIIIIIIIIII77NMMMMMMMMMMMMMMMMMMMMMMMMMMMMM
+N//MMMMMMMMMMMMMMMMMMMMDNZI7IIIIIIIIIIIID,.NZ7IIIIIIIZMMMMMMMMMMMMMMMMMMMMMMMMMMMMM
+N//MMMMMMMMMMMMMMMMMD77IIIIIIIIIIIIIIIDN.,DNNIIIIIIIIIDMMMMMMMMMMMMMMMMMMMMMMMMMMMM
+N//MMMMMMMMMMMMMMMMNOZOIIIIIIIIIIIIIIONNNNNNNOIIIIIIIIZMMMMMMMMMMMMMMMMMMMMMMMMMMMM
+N//MMMMMMMMMMMMMMMMDZZOZIIIIIIIIIIII7NNNNNNNDOIIIIIIIIINMMMMMMMMMMMMMMMMMMMMMMMMMMM
+N//MMMMMMMMMMMMMMMMN8888ZND7IIIIIIIINZNNNNDD,7IIIIIIIIIDMMMMMMMMMMMMMMMMMMMMMMMMMMM
+N//MMMMMMMMMMMMMMMMN88888888N$IIIIII7DOZZZZ+N7IIIIIIIIIMMMMMMMMMMMMMMMMMMMMMMMMMMMM
+N//MMMMMMMMMMMMMMMMMND88888888DZIIIIIII7ODN$77IIIIIIIINMMMMMMMMMMMMMMMMMMMMMMMMMMMM
+N//MMMMMMMMMMMMMMMMMMDD88888888O88IIIIIIIIIIIIIIIIIIIINMMMMMMMMMMMMMMM8MMO=MMMMMMMM
+N//MMMMMMMMMMMMMMMMMMMMMN888888D$$8IIIIIIIIIIIIIIIIII7MMMMMMMMMMMMMMMM7+++++MMMMMMM
+N//MMMMMMMMMMMMMMMMMMMMMMDN8O8O??$$$D8OIIIIIIIIIIIIIIOMMMMMMMMMMMMMMM$=+++=+7MMMMMM
+N//MMMMMMMMMMMMMNMMMMMMMMM88N?+???7$$8IIIIIIIIIIIIIIIDMMMMMMMMMMMMMMM=++++++=MMMMMM
+N//MMMMMMMMMMMMDIINMMMMMNN8D+?++??$NIIIIIIIIIIIIIIII7MMMMMMMMMMMMMMMM=+++++++=MMMMM
+N//MMMMMMMMMM8IIIIII?OMDD88O??O?IN7IIIIIIIIIIIIIIIIIDMMMMMMMMMMMMMN=+=+++777++OMMMM
+N//MMMMMMMMMMD7IIIIIII+NN887??D8IIIIIIIIIIIIIIIIIIIINM8DZ7IIIIIDMM=+++++?777777ZMMM
+N//MMMMMMMMM8$7IIIIIII7DZNND7IIIIIIIII77IIIIIII77NZ=+++IIIIIII$MMM++++++7777777MMMM
+N//MMMMMMMMMMMD7IIIIIIIIINN$III$ONNNO777IIII7ID=++++IIIIIIIIIIIIM$=+++++?77777ZMMMM
+N//MMMMMMMMMMMMM7IIIIIIIIIII77?N777777IIIIIID7I77IIIIIIIIIIIIIIDMM8=+???7777777MMMM
+N//MMMMMMMMMMMMMNIIIIIIIIIIII78NNNO77IIIIIIIIIIIIIIIIIIIIIIIIIZNMMM+=777777777ZMMMM
+N//MMMMMMMMMMMMMMM87IIIIIIIII$~~~~~=NIIIIIIIIIIIIIIIIIIIIIIIZNMMMMM?7$777I777$MMMMM
+N//MMMMMMMMMMMMMMMMD77IIIII$+~~~~~~~~I7IIIIIIIIIIIIIIIII77DMMMMMMMMMMMMN7ID7DMMMMMM
+N//MMMMMMMMMMMMMMMMMD$7III7=~~~~~~~~~~I7IIIIIIIIIIIII7788MMMMMMMMMMMMMMM7I$MMMMMMMM
+N//MMMMMMMMMMMMMMMMMMMN77IN~~~~~~~~~~~~87IIIIIIII777ONMMMMMMMMMMMMMMMMMM7IIMMMMMMMM
+N//MMMMMMMMMMMMMMMMMMMMMND~~~~~~~~~~~~~~ZIIIIIII8NO7I7MMMMMMMMMMMMMMMMMM7IINMMMMMMM
+N//MMMMMMMMMMMMMMMMMMMMMM:~~~~~~~~~~~~~~87IIIIIIIIIIIINMMMMMMMMMMMMMMMMN7I$NMMMMMMM
+N//MMMMMMMMMMMMMMMMMMMMMN~~~~~~~~~~~~~~~+IIIIIIIIIIIIINMMMMMMMMMMMMMMMMNII8NMMMMMMM
+N//MMMMMMMMMMMMMMMMMMMMM+~~~~~~~~~~~~~~~~Z7IIIIIIIIIIIOMMMMMMMMMMMMMMM87I7NNMMMMMMM
+N//MMMMMMMMMMMMMMMMMMMMD~~~~~~~~~~~~~~~~~NIIIIIIIIIIIIIDMMMMMMMMMMMMMNIII$~DMMMMMMM
+N//MMMMMMMMMMMMMMMMMMMMN~~~~~~~~~~~~~~~~~NIIIIIIIIIIIIINMMMMMMMMMMMMD$IIIN~MMMMMMMM
+N//MMMMMMMMMMMMMMMMMMMMN~~~~~~~~~~~~~~~~~NIIIIIIIIIIIIINMMMMMMMMMMMNIIII8~NMMMMMMMM
+N//MMMMMMMMMMMMMMMMMMMMN~~~~~~~~~~~~~~~~~Z7IIIIIIIIIIIIDMMMMMMMMMD$7III7?~DMMMMMMMM
+N//MMMMMMMMMMMMMN=+?IIIN~~~~~~~~~~~~~~~~=IIIIIIIIIIIIIIZMMMMMM8NIIIIIIID~NMMMMMMMMM
+N//MMMMMMMMMMMN7++IIIII7~~~~~~~~~~~~~~~~Z77IIIIIIIIIIII$NNN87IIIIIIII78~OMMMMMMMMMM
+N//MMMMMMMMMMM?++IIIIII7D~~~~~~~~~~~~~~~NIIIIIIIIIIIIII$7I7IIIIIIII7Z?+8MMMMMMMMMMM
+N//MMMMMMMMMMM+?IIIIII777~~~~~~~~~~~~~ZZIIIIIIIIIIIIIII87IIIIIIIII7D++NMMMMMMMMMMMM
+N//MMMMMMMMMM8IIIII777777D=~~~~~~~~~~D7IIIIIIIIIIIIIII7N777IIIIIID7+?DMMMMMMMMMMMMM
+N//NNNN777ONNNIII777777777O+~~~~~~~~NIIIIIIIIIIIIIIIII$Z7777778D+++ZDMMMMMMMMMMMMMM
+N//MD~,.7III7IZII7777777777O+++=~~~N7IIIIIIIIIIIIIIII7N7777ND++++=NMMMMMMMMMMMMMMMM
+N//MMMNNIIIIIIIII77777777777$D+++++Z777IIIIIIIIIIII777O$?++++++IDMMMMMMMMMMMMMMMMMM
+N//MMMMMNZ777777I777777777777Z8DI?+$777I7IIIIIIIII777O++++++?OMMMMMMMMMMMMMMMMMMMMM
+N//MMMMMMM877777777777777DNMMMMMMM8N777777IIIII777777O++?$NMMMMMMMMMMMMMMMMMMMMMMMM
+N//MMMMMMMMMN$77777777$NMMMMMMMMMMMM$777777777777777NNDMMMMMMMMMMMMMMMMMMMMMMMMMMMM
+N//MMMMMMMMMMMN$777777DMMMMMMMMMMMMMMD7777777777777DMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMM
+N//MMMMMMMMMMMMMN7777NMMMMMMMMMMMMMMMMN7777777777ODMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMM
+N//MMMMMMMMMMMMMMMMNDMMMMMMMMMMMMMMMMMMO$7777777DZMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMM
+N//MMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMD77777777777DMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMM
+N//MMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMM7NDN7DN87NND8MMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMM
+N//MMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMNN=O7?~I7?~NMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMM
+N//MMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMOMMM~DNN8MMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMM
+N//MMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMM
+N//MMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMM
+N//MMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMM
+N
+L 45 "project.h" 2
+N
+N#include <stdbool.h>
+N#include <stdint.h>
+N#include "sysctl.h"
+N#include "hw_memmap.h"
+N#include "gpio.h"
+N#include "uart.h"
+N#include "../inc/tm4c123gh6pm.h"
+N#include "hw_gpio.h"
+L 1 ".\inc\hw_gpio.h" 1
+N//*****************************************************************************
+N//
+N// hw_gpio.h - Defines and Macros for GPIO hardware.
+N//
+N// Copyright (c) 2005-2017 Texas Instruments Incorporated.  All rights reserved.
+N// Software License Agreement
+N// 
+N//   Redistribution and use in source and binary forms, with or without
+N//   modification, are permitted provided that the following conditions
+N//   are met:
+N// 
+N//   Redistributions of source code must retain the above copyright
+N//   notice, this list of conditions and the following disclaimer.
+N// 
+N//   Redistributions in binary form must reproduce the above copyright
+N//   notice, this list of conditions and the following disclaimer in the
+N//   documentation and/or other materials provided with the  
+N//   distribution.
+N// 
+N//   Neither the name of Texas Instruments Incorporated nor the names of
+N//   its contributors may be used to endorse or promote products derived
+N//   from this software without specific prior written permission.
+N// 
+N// THIS SOFTWARE IS PROVIDED BY THE COPYRIGHT HOLDERS AND CONTRIBUTORS
+N// "AS IS" AND ANY EXPRESS OR IMPLIED WARRANTIES, INCLUDING, BUT NOT
+N// LIMITED TO, THE IMPLIED WARRANTIES OF MERCHANTABILITY AND FITNESS FOR
+N// A PARTICULAR PURPOSE ARE DISCLAIMED. IN NO EVENT SHALL THE COPYRIGHT
+N// OWNER OR CONTRIBUTORS BE LIABLE FOR ANY DIRECT, INDIRECT, INCIDENTAL,
+N// SPECIAL, EXEMPLARY, OR CONSEQUENTIAL DAMAGES (INCLUDING, BUT NOT
+N// LIMITED TO, PROCUREMENT OF SUBSTITUTE GOODS OR SERVICES; LOSS OF USE,
+N// DATA, OR PROFITS; OR BUSINESS INTERRUPTION) HOWEVER CAUSED AND ON ANY
+N// THEORY OF LIABILITY, WHETHER IN CONTRACT, STRICT LIABILITY, OR TORT
+N// (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE
+N// OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
+N// 
+N// This is part of revision 2.1.4.178 of the Tiva Firmware Development Package.
+N//
+N//*****************************************************************************
+N
+N#ifndef __HW_GPIO_H__
+N#define __HW_GPIO_H__
+N
+N//*****************************************************************************
+N//
+N// The following are defines for the GPIO register offsets.
+N//
+N//*****************************************************************************
+N#define GPIO_O_DATA             0x00000000  // GPIO Data
+N#define GPIO_O_DIR              0x00000400  // GPIO Direction
+N#define GPIO_O_IS               0x00000404  // GPIO Interrupt Sense
+N#define GPIO_O_IBE              0x00000408  // GPIO Interrupt Both Edges
+N#define GPIO_O_IEV              0x0000040C  // GPIO Interrupt Event
+N#define GPIO_O_IM               0x00000410  // GPIO Interrupt Mask
+N#define GPIO_O_RIS              0x00000414  // GPIO Raw Interrupt Status
+N#define GPIO_O_MIS              0x00000418  // GPIO Masked Interrupt Status
+N#define GPIO_O_ICR              0x0000041C  // GPIO Interrupt Clear
+N#define GPIO_O_AFSEL            0x00000420  // GPIO Alternate Function Select
+N#define GPIO_O_DR2R             0x00000500  // GPIO 2-mA Drive Select
+N#define GPIO_O_DR4R             0x00000504  // GPIO 4-mA Drive Select
+N#define GPIO_O_DR8R             0x00000508  // GPIO 8-mA Drive Select
+N#define GPIO_O_ODR              0x0000050C  // GPIO Open Drain Select
+N#define GPIO_O_PUR              0x00000510  // GPIO Pull-Up Select
+N#define GPIO_O_PDR              0x00000514  // GPIO Pull-Down Select
+N#define GPIO_O_SLR              0x00000518  // GPIO Slew Rate Control Select
+N#define GPIO_O_DEN              0x0000051C  // GPIO Digital Enable
+N#define GPIO_O_LOCK             0x00000520  // GPIO Lock
+N#define GPIO_O_CR               0x00000524  // GPIO Commit
+N#define GPIO_O_AMSEL            0x00000528  // GPIO Analog Mode Select
+N#define GPIO_O_PCTL             0x0000052C  // GPIO Port Control
+N#define GPIO_O_ADCCTL           0x00000530  // GPIO ADC Control
+N#define GPIO_O_DMACTL           0x00000534  // GPIO DMA Control
+N#define GPIO_O_SI               0x00000538  // GPIO Select Interrupt
+N#define GPIO_O_DR12R            0x0000053C  // GPIO 12-mA Drive Select
+N#define GPIO_O_WAKEPEN          0x00000540  // GPIO Wake Pin Enable
+N#define GPIO_O_WAKELVL          0x00000544  // GPIO Wake Level
+N#define GPIO_O_WAKESTAT         0x00000548  // GPIO Wake Status
+N#define GPIO_O_PP               0x00000FC0  // GPIO Peripheral Property
+N#define GPIO_O_PC               0x00000FC4  // GPIO Peripheral Configuration
+N
+N//*****************************************************************************
+N//
+N// The following are defines for the bit fields in the GPIO_O_IM register.
+N//
+N//*****************************************************************************
+N#define GPIO_IM_DMAIME          0x00000100  // GPIO uDMA Done Interrupt Mask
+N                                            // Enable
+N#define GPIO_IM_GPIO_M          0x000000FF  // GPIO Interrupt Mask Enable
+N#define GPIO_IM_GPIO_S          0
+N
+N//*****************************************************************************
+N//
+N// The following are defines for the bit fields in the GPIO_O_RIS register.
+N//
+N//*****************************************************************************
+N#define GPIO_RIS_DMARIS         0x00000100  // GPIO uDMA Done Interrupt Raw
+N                                            // Status
+N#define GPIO_RIS_GPIO_M         0x000000FF  // GPIO Interrupt Raw Status
+N#define GPIO_RIS_GPIO_S         0
+N
+N//*****************************************************************************
+N//
+N// The following are defines for the bit fields in the GPIO_O_MIS register.
+N//
+N//*****************************************************************************
+N#define GPIO_MIS_DMAMIS         0x00000100  // GPIO uDMA Done Masked Interrupt
+N                                            // Status
+N#define GPIO_MIS_GPIO_M         0x000000FF  // GPIO Masked Interrupt Status
+N#define GPIO_MIS_GPIO_S         0
+N
+N//*****************************************************************************
+N//
+N// The following are defines for the bit fields in the GPIO_O_ICR register.
+N//
+N//*****************************************************************************
+N#define GPIO_ICR_DMAIC          0x00000100  // GPIO uDMA Interrupt Clear
+N#define GPIO_ICR_GPIO_M         0x000000FF  // GPIO Interrupt Clear
+N#define GPIO_ICR_GPIO_S         0
+N
+N//*****************************************************************************
+N//
+N// The following are defines for the bit fields in the GPIO_O_LOCK register.
+N//
+N//*****************************************************************************
+N#define GPIO_LOCK_M             0xFFFFFFFF  // GPIO Lock
+N#define GPIO_LOCK_UNLOCKED      0x00000000  // The GPIOCR register is unlocked
+N                                            // and may be modified
+N#define GPIO_LOCK_LOCKED        0x00000001  // The GPIOCR register is locked
+N                                            // and may not be modified
+N#define GPIO_LOCK_KEY           0x4C4F434B  // Unlocks the GPIO_CR register
+N
+N//*****************************************************************************
+N//
+N// The following are defines for the bit fields in the GPIO_O_SI register.
+N//
+N//*****************************************************************************
+N#define GPIO_SI_SUM             0x00000001  // Summary Interrupt
+N
+N//*****************************************************************************
+N//
+N// The following are defines for the bit fields in the GPIO_O_DR12R register.
+N//
+N//*****************************************************************************
+N#define GPIO_DR12R_DRV12_M      0x000000FF  // Output Pad 12-mA Drive Enable
+N#define GPIO_DR12R_DRV12_12MA   0x00000001  // The corresponding GPIO pin has
+N                                            // 12-mA drive. This encoding is
+N                                            // only valid if the GPIOPP EDE bit
+N                                            // is set and the appropriate
+N                                            // GPIOPC EDM bit field is
+N                                            // programmed to 0x3
+N
+N//*****************************************************************************
+N//
+N// The following are defines for the bit fields in the GPIO_O_WAKEPEN register.
+N//
+N//*****************************************************************************
+N#define GPIO_WAKEPEN_WAKEP4     0x00000010  // P[4] Wake Enable
+N
+N//*****************************************************************************
+N//
+N// The following are defines for the bit fields in the GPIO_O_WAKELVL register.
+N//
+N//*****************************************************************************
+N#define GPIO_WAKELVL_WAKELVL4   0x00000010  // P[4] Wake Level
+N
+N//*****************************************************************************
+N//
+N// The following are defines for the bit fields in the GPIO_O_WAKESTAT
+N// register.
+N//
+N//*****************************************************************************
+N#define GPIO_WAKESTAT_STAT4     0x00000010  // P[4] Wake Status
+N
+N//*****************************************************************************
+N//
+N// The following are defines for the bit fields in the GPIO_O_PP register.
+N//
+N//*****************************************************************************
+N#define GPIO_PP_EDE             0x00000001  // Extended Drive Enable
+N
+N//*****************************************************************************
+N//
+N// The following are defines for the bit fields in the GPIO_O_PC register.
+N//
+N//*****************************************************************************
+N#define GPIO_PC_EDM7_M          0x0000C000  // Extended Drive Mode Bit 7
+N#define GPIO_PC_EDM6_M          0x00003000  // Extended Drive Mode Bit 6
+N#define GPIO_PC_EDM5_M          0x00000C00  // Extended Drive Mode Bit 5
+N#define GPIO_PC_EDM4_M          0x00000300  // Extended Drive Mode Bit 4
+N#define GPIO_PC_EDM3_M          0x000000C0  // Extended Drive Mode Bit 3
+N#define GPIO_PC_EDM2_M          0x00000030  // Extended Drive Mode Bit 2
+N#define GPIO_PC_EDM1_M          0x0000000C  // Extended Drive Mode Bit 1
+N#define GPIO_PC_EDM0_M          0x00000003  // Extended Drive Mode Bit 0
+N#define GPIO_PC_EDM0_DISABLE    0x00000000  // Drive values of 2, 4 and 8 mA
+N                                            // are maintained. GPIO n Drive
+N                                            // Select (GPIODRnR) registers
+N                                            // function as normal
+N#define GPIO_PC_EDM0_6MA        0x00000001  // An additional 6 mA option is
+N                                            // provided
+N#define GPIO_PC_EDM0_PLUS2MA    0x00000003  // A 2 mA driver is always enabled;
+N                                            // setting the corresponding
+N                                            // GPIODR4R register bit adds 2 mA
+N                                            // and setting the corresponding
+N                                            // GPIODR8R of GPIODR12R register
+N                                            // bit adds an additional 4 mA
+N#define GPIO_PC_EDM7_S          14
+N#define GPIO_PC_EDM6_S          12
+N#define GPIO_PC_EDM5_S          10
+N#define GPIO_PC_EDM4_S          8
+N#define GPIO_PC_EDM3_S          6
+N#define GPIO_PC_EDM2_S          4
+N#define GPIO_PC_EDM1_S          2
+N
+N#endif // __HW_GPIO_H__
+L 54 "project.h" 2
+N#include "hw_types.h"
+L 1 ".\inc\hw_types.h" 1
+N//*****************************************************************************
+N//
+N// hw_types.h - Common types and macros.
+N//
+N// Copyright (c) 2005-2017 Texas Instruments Incorporated.  All rights reserved.
+N// Software License Agreement
+N// 
+N//   Redistribution and use in source and binary forms, with or without
+N//   modification, are permitted provided that the following conditions
+N//   are met:
+N// 
+N//   Redistributions of source code must retain the above copyright
+N//   notice, this list of conditions and the following disclaimer.
+N// 
+N//   Redistributions in binary form must reproduce the above copyright
+N//   notice, this list of conditions and the following disclaimer in the
+N//   documentation and/or other materials provided with the  
+N//   distribution.
+N// 
+N//   Neither the name of Texas Instruments Incorporated nor the names of
+N//   its contributors may be used to endorse or promote products derived
+N//   from this software without specific prior written permission.
+N// 
+N// THIS SOFTWARE IS PROVIDED BY THE COPYRIGHT HOLDERS AND CONTRIBUTORS
+N// "AS IS" AND ANY EXPRESS OR IMPLIED WARRANTIES, INCLUDING, BUT NOT
+N// LIMITED TO, THE IMPLIED WARRANTIES OF MERCHANTABILITY AND FITNESS FOR
+N// A PARTICULAR PURPOSE ARE DISCLAIMED. IN NO EVENT SHALL THE COPYRIGHT
+N// OWNER OR CONTRIBUTORS BE LIABLE FOR ANY DIRECT, INDIRECT, INCIDENTAL,
+N// SPECIAL, EXEMPLARY, OR CONSEQUENTIAL DAMAGES (INCLUDING, BUT NOT
+N// LIMITED TO, PROCUREMENT OF SUBSTITUTE GOODS OR SERVICES; LOSS OF USE,
+N// DATA, OR PROFITS; OR BUSINESS INTERRUPTION) HOWEVER CAUSED AND ON ANY
+N// THEORY OF LIABILITY, WHETHER IN CONTRACT, STRICT LIABILITY, OR TORT
+N// (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE
+N// OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
+N// 
+N// This is part of revision 2.1.4.178 of the Tiva Firmware Development Package.
+N//
+N//*****************************************************************************
+N
+N#ifndef __HW_TYPES_H__
+N#define __HW_TYPES_H__
+N
+N//*****************************************************************************
+N//
+N// Macros for hardware access, both direct and via the bit-band region.
+N//
+N//*****************************************************************************
+N#define HWREG(x)                                                              \
+N        (*((volatile uint32_t *)(x)))
+X#define HWREG(x)                                                                      (*((volatile uint32_t *)(x)))
+N#define HWREGH(x)                                                             \
+N        (*((volatile uint16_t *)(x)))
+X#define HWREGH(x)                                                                     (*((volatile uint16_t *)(x)))
+N#define HWREGB(x)                                                             \
+N        (*((volatile uint8_t *)(x)))
+X#define HWREGB(x)                                                                     (*((volatile uint8_t *)(x)))
+N#define HWREGBITW(x, b)                                                       \
+N        HWREG(((uint32_t)(x) & 0xF0000000) | 0x02000000 |                     \
+N              (((uint32_t)(x) & 0x000FFFFF) << 5) | ((b) << 2))
+X#define HWREGBITW(x, b)                                                               HWREG(((uint32_t)(x) & 0xF0000000) | 0x02000000 |                                   (((uint32_t)(x) & 0x000FFFFF) << 5) | ((b) << 2))
+N#define HWREGBITH(x, b)                                                       \
+N        HWREGH(((uint32_t)(x) & 0xF0000000) | 0x02000000 |                    \
+N               (((uint32_t)(x) & 0x000FFFFF) << 5) | ((b) << 2))
+X#define HWREGBITH(x, b)                                                               HWREGH(((uint32_t)(x) & 0xF0000000) | 0x02000000 |                                   (((uint32_t)(x) & 0x000FFFFF) << 5) | ((b) << 2))
+N#define HWREGBITB(x, b)                                                       \
+N        HWREGB(((uint32_t)(x) & 0xF0000000) | 0x02000000 |                    \
+N               (((uint32_t)(x) & 0x000FFFFF) << 5) | ((b) << 2))
+X#define HWREGBITB(x, b)                                                               HWREGB(((uint32_t)(x) & 0xF0000000) | 0x02000000 |                                   (((uint32_t)(x) & 0x000FFFFF) << 5) | ((b) << 2))
+N
+N//*****************************************************************************
+N//
+N// Helper Macros for determining silicon revisions, etc.
+N//
+N// These macros will be used by Driverlib at "run-time" to create necessary
+N// conditional code blocks that will allow a single version of the Driverlib
+N// "binary" code to support multiple(all) Tiva silicon revisions.
+N//
+N// It is expected that these macros will be used inside of a standard 'C'
+N// conditional block of code, e.g.
+N//
+N//     if(CLASS_IS_TM4C123)
+N//     {
+N//         do some TM4C123-class specific code here.
+N//     }
+N//
+N// By default, these macros will be defined as run-time checks of the
+N// appropriate register(s) to allow creation of run-time conditional code
+N// blocks for a common DriverLib across the entire Tiva family.
+N//
+N// However, if code-space optimization is required, these macros can be "hard-
+N// coded" for a specific version of Tiva silicon.  Many compilers will then
+N// detect the "hard-coded" conditionals, and appropriately optimize the code
+N// blocks, eliminating any "unreachable" code.  This would result in a smaller
+N// Driverlib, thus producing a smaller final application size, but at the cost
+N// of limiting the Driverlib binary to a specific Tiva silicon revision.
+N//
+N//*****************************************************************************
+N#ifndef CLASS_IS_TM4C123
+N#define CLASS_IS_TM4C123                                                     \
+N        ((HWREG(SYSCTL_DID0) & (SYSCTL_DID0_VER_M | SYSCTL_DID0_CLASS_M)) == \
+N         (SYSCTL_DID0_VER_1 | SYSCTL_DID0_CLASS_TM4C123))
+X#define CLASS_IS_TM4C123                                                             ((HWREG(SYSCTL_DID0) & (SYSCTL_DID0_VER_M | SYSCTL_DID0_CLASS_M)) ==          (SYSCTL_DID0_VER_1 | SYSCTL_DID0_CLASS_TM4C123))
+N#endif
+N
+N#ifndef CLASS_IS_TM4C129
+N#define CLASS_IS_TM4C129                                                     \
+N        ((HWREG(SYSCTL_DID0) & (SYSCTL_DID0_VER_M | SYSCTL_DID0_CLASS_M)) == \
+N         (SYSCTL_DID0_VER_1 | SYSCTL_DID0_CLASS_TM4C129))
+X#define CLASS_IS_TM4C129                                                             ((HWREG(SYSCTL_DID0) & (SYSCTL_DID0_VER_M | SYSCTL_DID0_CLASS_M)) ==          (SYSCTL_DID0_VER_1 | SYSCTL_DID0_CLASS_TM4C129))
+N#endif
+N
+N#ifndef REVISION_IS_A0
+N#define REVISION_IS_A0                                                     \
+N        ((HWREG(SYSCTL_DID0) & (SYSCTL_DID0_MAJ_M | SYSCTL_DID0_MIN_M)) == \
+N         (SYSCTL_DID0_MAJ_REVA | SYSCTL_DID0_MIN_0))
+X#define REVISION_IS_A0                                                             ((HWREG(SYSCTL_DID0) & (SYSCTL_DID0_MAJ_M | SYSCTL_DID0_MIN_M)) ==          (SYSCTL_DID0_MAJ_REVA | SYSCTL_DID0_MIN_0))
+N#endif
+N
+N#ifndef REVISION_IS_A1
+N#define REVISION_IS_A1                                                     \
+N        ((HWREG(SYSCTL_DID0) & (SYSCTL_DID0_MAJ_M | SYSCTL_DID0_MIN_M)) == \
+N         (SYSCTL_DID0_MAJ_REVA | SYSCTL_DID0_MIN_0))
+X#define REVISION_IS_A1                                                             ((HWREG(SYSCTL_DID0) & (SYSCTL_DID0_MAJ_M | SYSCTL_DID0_MIN_M)) ==          (SYSCTL_DID0_MAJ_REVA | SYSCTL_DID0_MIN_0))
+N#endif
+N
+N#ifndef REVISION_IS_A2
+N#define REVISION_IS_A2                                                     \
+N        ((HWREG(SYSCTL_DID0) & (SYSCTL_DID0_MAJ_M | SYSCTL_DID0_MIN_M)) == \
+N         (SYSCTL_DID0_MAJ_REVA | SYSCTL_DID0_MIN_2))
+X#define REVISION_IS_A2                                                             ((HWREG(SYSCTL_DID0) & (SYSCTL_DID0_MAJ_M | SYSCTL_DID0_MIN_M)) ==          (SYSCTL_DID0_MAJ_REVA | SYSCTL_DID0_MIN_2))
+N#endif
+N
+N#ifndef REVISION_IS_B0
+N#define REVISION_IS_B0                                                     \
+N        ((HWREG(SYSCTL_DID0) & (SYSCTL_DID0_MAJ_M | SYSCTL_DID0_MIN_M)) == \
+N         (SYSCTL_DID0_MAJ_REVB | SYSCTL_DID0_MIN_0))
+X#define REVISION_IS_B0                                                             ((HWREG(SYSCTL_DID0) & (SYSCTL_DID0_MAJ_M | SYSCTL_DID0_MIN_M)) ==          (SYSCTL_DID0_MAJ_REVB | SYSCTL_DID0_MIN_0))
+N#endif
+N
+N#ifndef REVISION_IS_B1
+N#define REVISION_IS_B1                                                     \
+N        ((HWREG(SYSCTL_DID0) & (SYSCTL_DID0_MAJ_M | SYSCTL_DID0_MIN_M)) == \
+N         (SYSCTL_DID0_MAJ_REVB | SYSCTL_DID0_MIN_1))
+X#define REVISION_IS_B1                                                             ((HWREG(SYSCTL_DID0) & (SYSCTL_DID0_MAJ_M | SYSCTL_DID0_MIN_M)) ==          (SYSCTL_DID0_MAJ_REVB | SYSCTL_DID0_MIN_1))
+N#endif
+N
+N//*****************************************************************************
+N//
+N// For TivaWare 2.1, we removed all references to Tiva IC codenames from the
+N// source.  To ensure that existing customer code doesn't break as a result
+N// of this change, make sure that the old definitions are still available at
+N// least for the time being.
+N//
+N//*****************************************************************************
+N#ifndef DEPRECATED
+N#define CLASS_IS_BLIZZARD CLASS_IS_TM4C123
+N#define CLASS_IS_SNOWFLAKE CLASS_IS_TM4C123
+N#endif
+N
+N#endif // __HW_TYPES_H__
+L 55 "project.h" 2
+N#include "myPWM.h"
+L 1 "myPWM.h" 1
+N#include "driverlib/pin_map.h"
+N#include <stdint.h>
+N#include <stdio.h>
 N#include <stdbool.h>
 N#include "inc/hw_gpio.h"
 N#include "inc/hw_types.h"
@@ -64509,15 +64592,85 @@ N#include "Uart_helper.h"
 L 1 ".\src\Uart_helper.h" 1
 N#include <stdbool.h>
 N#include <stdint.h>
+N#include <stdio.h>
 N#include "sysctl.h"
 N#include "hw_memmap.h"
 N#include "gpio.h"
 N#include "uart.h"
-N#include "tm4c123gh6pm.h"
+N#include "../inc/tm4c123gh6pm.h"
+N#include "pin_map.h"
 N
 N
-W ".\src\Uart_helper.h" 10 73 last line of file ends without a newline
 Nvoid UartSetup(void);		//sets up Uart for my configuration using library
+N
+N//redirect for printf.
+Nint fputc(int ch, FILE *f);
+N
+N//redirect input from serial port
+N//read info edit by: Sir Hutson
+Nint fgetc(FILE *f);
+N
+N
+N//MMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMM
+N//MMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMM
+N//MMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMM
+N//MMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMNNNNNNNMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMM
+N//MMMMMMMMMMMMMMMMMMMMMMMMMMMMMMM8O+++?7IIII7ZNMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMM
+N//MMMMMMMMMMMMMMMMMMMMMMMMMMMMMD+++II7IIIIIII7IIODMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMM
+N//MMMMMMMMMMMMMMMMMMMMMMMMMMMMN+?IIIIIIIIIIIIIIIIINMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMM
+N//MMMMMMMMMMMMMMMMMMMMMMMMMMN7IIIIIIIIIDIIIIIIIIII77NMMMMMMMMMMMMMMMMMMMMMMMMMMMMM
+N//MMMMMMMMMMMMMMMMMMMMDNZI7IIIIIIIIIIIID,.NZ7IIIIIIIZMMMMMMMMMMMMMMMMMMMMMMMMMMMMM
+N//MMMMMMMMMMMMMMMMMD77IIIIIIIIIIIIIIIDN.,DNNIIIIIIIIIDMMMMMMMMMMMMMMMMMMMMMMMMMMMM
+N//MMMMMMMMMMMMMMMMNOZOIIIIIIIIIIIIIIONNNNNNNOIIIIIIIIZMMMMMMMMMMMMMMMMMMMMMMMMMMMM
+N//MMMMMMMMMMMMMMMMDZZOZIIIIIIIIIIII7NNNNNNNDOIIIIIIIIINMMMMMMMMMMMMMMMMMMMMMMMMMMM
+N//MMMMMMMMMMMMMMMMN8888ZND7IIIIIIIINZNNNNDD,7IIIIIIIIIDMMMMMMMMMMMMMMMMMMMMMMMMMMM
+N//MMMMMMMMMMMMMMMMN88888888N$IIIIII7DOZZZZ+N7IIIIIIIIIMMMMMMMMMMMMMMMMMMMMMMMMMMMM
+N//MMMMMMMMMMMMMMMMMND88888888DZIIIIIII7ODN$77IIIIIIIINMMMMMMMMMMMMMMMMMMMMMMMMMMMM
+N//MMMMMMMMMMMMMMMMMMDD88888888O88IIIIIIIIIIIIIIIIIIIINMMMMMMMMMMMMMMM8MMO=MMMMMMMM
+N//MMMMMMMMMMMMMMMMMMMMMN888888D$$8IIIIIIIIIIIIIIIIII7MMMMMMMMMMMMMMMM7+++++MMMMMMM
+N//MMMMMMMMMMMMMMMMMMMMMMDN8O8O??$$$D8OIIIIIIIIIIIIIIOMMMMMMMMMMMMMMM$=+++=+7MMMMMM
+N//MMMMMMMMMMMMMNMMMMMMMMM88N?+???7$$8IIIIIIIIIIIIIIIDMMMMMMMMMMMMMMM=++++++=MMMMMM
+N//MMMMMMMMMMMMDIINMMMMMNN8D+?++??$NIIIIIIIIIIIIIIII7MMMMMMMMMMMMMMMM=+++++++=MMMMM
+N//MMMMMMMMMM8IIIIII?OMDD88O??O?IN7IIIIIIIIIIIIIIIIIDMMMMMMMMMMMMMN=+=+++777++OMMMM
+N//MMMMMMMMMMD7IIIIIII+NN887??D8IIIIIIIIIIIIIIIIIIIINM8DZ7IIIIIDMM=+++++?777777ZMMM
+N//MMMMMMMMM8$7IIIIIII7DZNND7IIIIIIIII77IIIIIII77NZ=+++IIIIIII$MMM++++++7777777MMMM
+N//MMMMMMMMMMMD7IIIIIIIIINN$III$ONNNO777IIII7ID=++++IIIIIIIIIIIIM$=+++++?77777ZMMMM
+N//MMMMMMMMMMMMM7IIIIIIIIIII77?N777777IIIIIID7I77IIIIIIIIIIIIIIDMM8=+???7777777MMMM
+N//MMMMMMMMMMMMMNIIIIIIIIIIII78NNNO77IIIIIIIIIIIIIIIIIIIIIIIIIZNMMM+=777777777ZMMMM
+N//MMMMMMMMMMMMMMM87IIIIIIIII$~~~~~=NIIIIIIIIIIIIIIIIIIIIIIIZNMMMMM?7$777I777$MMMMM
+N//MMMMMMMMMMMMMMMMD77IIIII$+~~~~~~~~I7IIIIIIIIIIIIIIIII77DMMMMMMMMMMMMN7ID7DMMMMMM
+N//MMMMMMMMMMMMMMMMMD$7III7=~~~~~~~~~~I7IIIIIIIIIIIII7788MMMMMMMMMMMMMMM7I$MMMMMMMM
+N//MMMMMMMMMMMMMMMMMMMN77IN~~~~~~~~~~~~87IIIIIIII777ONMMMMMMMMMMMMMMMMMM7IIMMMMMMMM
+N//MMMMMMMMMMMMMMMMMMMMMND~~~~~~~~~~~~~~ZIIIIIII8NO7I7MMMMMMMMMMMMMMMMMM7IINMMMMMMM
+N//MMMMMMMMMMMMMMMMMMMMMM:~~~~~~~~~~~~~~87IIIIIIIIIIIINMMMMMMMMMMMMMMMMN7I$NMMMMMMM
+N//MMMMMMMMMMMMMMMMMMMMMN~~~~~~~~~~~~~~~+IIIIIIIIIIIIINMMMMMMMMMMMMMMMMNII8NMMMMMMM
+N//MMMMMMMMMMMMMMMMMMMMM+~~~~~~~~~~~~~~~~Z7IIIIIIIIIIIOMMMMMMMMMMMMMMM87I7NNMMMMMMM
+N//MMMMMMMMMMMMMMMMMMMMD~~~~~~~~~~~~~~~~~NIIIIIIIIIIIIIDMMMMMMMMMMMMMNIII$~DMMMMMMM
+N//MMMMMMMMMMMMMMMMMMMMN~~~~~~~~~~~~~~~~~NIIIIIIIIIIIIINMMMMMMMMMMMMD$IIIN~MMMMMMMM
+N//MMMMMMMMMMMMMMMMMMMMN~~~~~~~~~~~~~~~~~NIIIIIIIIIIIIINMMMMMMMMMMMNIIII8~NMMMMMMMM
+N//MMMMMMMMMMMMMMMMMMMMN~~~~~~~~~~~~~~~~~Z7IIIIIIIIIIIIDMMMMMMMMMD$7III7?~DMMMMMMMM
+N//MMMMMMMMMMMMMN=+?IIIN~~~~~~~~~~~~~~~~=IIIIIIIIIIIIIIZMMMMMM8NIIIIIIID~NMMMMMMMMM
+N//MMMMMMMMMMMN7++IIIII7~~~~~~~~~~~~~~~~Z77IIIIIIIIIIII$NNN87IIIIIIII78~OMMMMMMMMMM
+N//MMMMMMMMMMM?++IIIIII7D~~~~~~~~~~~~~~~NIIIIIIIIIIIIII$7I7IIIIIIII7Z?+8MMMMMMMMMMM
+N//MMMMMMMMMMM+?IIIIII777~~~~~~~~~~~~~ZZIIIIIIIIIIIIIII87IIIIIIIII7D++NMMMMMMMMMMMM
+N//MMMMMMMMMM8IIIII777777D=~~~~~~~~~~D7IIIIIIIIIIIIIII7N777IIIIIID7+?DMMMMMMMMMMMMM
+N//NNNN777ONNNIII777777777O+~~~~~~~~NIIIIIIIIIIIIIIIII$Z7777778D+++ZDMMMMMMMMMMMMMM
+N//MD~,.7III7IZII7777777777O+++=~~~N7IIIIIIIIIIIIIIII7N7777ND++++=NMMMMMMMMMMMMMMMM
+N//MMMNNIIIIIIIII77777777777$D+++++Z777IIIIIIIIIIII777O$?++++++IDMMMMMMMMMMMMMMMMMM
+N//MMMMMNZ777777I777777777777Z8DI?+$777I7IIIIIIIII777O++++++?OMMMMMMMMMMMMMMMMMMMMM
+N//MMMMMMM877777777777777DNMMMMMMM8N777777IIIII777777O++?$NMMMMMMMMMMMMMMMMMMMMMMMM
+N//MMMMMMMMMN$77777777$NMMMMMMMMMMMM$777777777777777NNDMMMMMMMMMMMMMMMMMMMMMMMMMMMM
+N//MMMMMMMMMMMN$777777DMMMMMMMMMMMMMMD7777777777777DMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMM
+N//MMMMMMMMMMMMMN7777NMMMMMMMMMMMMMMMMN7777777777ODMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMM
+N//MMMMMMMMMMMMMMMMNDMMMMMMMMMMMMMMMMMMO$7777777DZMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMM
+N//MMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMD77777777777DMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMM
+N//MMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMM7NDN7DN87NND8MMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMM
+N//MMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMNN=O7?~I7?~NMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMM
+N//MMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMOMMM~DNN8MMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMM
+N//MMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMM
+N//MMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMM
+N//MMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMM
+N
 L 57 "project.h" 2
 N
 L 2 "project.c" 2
@@ -64541,11 +64694,13 @@ N
 N
 Nint  main(void)
 N{		
-W "project.c" 22 3 function "setupPWM" declared implicitly
+N		SetupHardware();
+N		printf("Hardware setup complete\n\n");
+W "project.c" 24 3 function "setupPWM" declared implicitly
 N		setupPWM();
-W "project.c" 23 3 function "pwmTest" declared implicitly
-N		pwmTest();
-W "project.c" 24 3 function "setupENCODER" declared implicitly
+N		printf("PWM setup complete \n\n");
+N		//pwmTest();
+W "project.c" 27 3 function "setupENCODER" declared implicitly
 N		setupENCODER();
 N}
 N

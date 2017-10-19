@@ -47,25 +47,40 @@ myPWM.c(71): warning:  #177-D: variable "y"  was declared but never referenced
 myPWM.c(75): warning:  #1-D: last line of file ends without a newline
   	
 myPWM.c: 7 warnings, 0 errors
+creating preprocessor file for Uart_helper.c...
 compiling Encoder.c...
 Encoder.h(16): warning:  #1-D: last line of file ends without a newline
   void QEIConfigure(uint32_t ui32Base, uint32_t ui32Config, uint32_t ui32MaxPosition);
-Encoder.c(71): warning:  #177-D: variable "noop"  was declared but never referenced
+Encoder.c(18): warning:  #47-D: incompatible redefinition of macro "GPIO_PORTF_DATA_R"  (declared at line 701 of ".\inc\tm4c123gh6pm.h")
+  #define GPIO_PORTF_DATA_R       (*((volatile unsigned long *)0x400073FC))
+Encoder.c(19): warning:  #47-D: incompatible redefinition of macro "GPIO_PORTF_DIR_R"  (declared at line 702 of ".\inc\tm4c123gh6pm.h")
+  #define GPIO_PORTF_DIR_R        (*((volatile unsigned long *)0x40007400))
+Encoder.c(20): warning:  #47-D: incompatible redefinition of macro "GPIO_PORTF_AFSEL_R"  (declared at line 710 of ".\inc\tm4c123gh6pm.h")
+  #define GPIO_PORTF_AFSEL_R      (*((volatile unsigned long *)0x40007420))
+Encoder.c(21): warning:  #47-D: incompatible redefinition of macro "GPIO_PORTF_PUR_R"  (declared at line 715 of ".\inc\tm4c123gh6pm.h")
+  #define GPIO_PORTF_PUR_R        (*((volatile unsigned long *)0x40007510))
+Encoder.c(22): warning:  #47-D: incompatible redefinition of macro "GPIO_PORTF_DEN_R"  (declared at line 718 of ".\inc\tm4c123gh6pm.h")
+  #define GPIO_PORTF_DEN_R        (*((volatile unsigned long *)0x4000751C))
+Encoder.c(23): warning:  #47-D: incompatible redefinition of macro "GPIO_PORTF_LOCK_R"  (declared at line 719 of ".\inc\tm4c123gh6pm.h")
+  #define GPIO_PORTF_LOCK_R       (*((volatile unsigned long *)0x40007520))
+Encoder.c(24): warning:  #47-D: incompatible redefinition of macro "GPIO_PORTF_CR_R"  (declared at line 720 of ".\inc\tm4c123gh6pm.h")
+  #define GPIO_PORTF_CR_R         (*((volatile unsigned long *)0x40007524))
+Encoder.c(25): warning:  #47-D: incompatible redefinition of macro "GPIO_PORTF_AMSEL_R"  (declared at line 721 of ".\inc\tm4c123gh6pm.h")
+  #define GPIO_PORTF_AMSEL_R      (*((volatile unsigned long *)0x40007528))
+Encoder.c(26): warning:  #47-D: incompatible redefinition of macro "GPIO_PORTF_PCTL_R"  (declared at line 722 of ".\inc\tm4c123gh6pm.h")
+  #define GPIO_PORTF_PCTL_R       (*((volatile unsigned long *)0x4000752C))
+Encoder.c(27): warning:  #47-D: incompatible redefinition of macro "SYSCTL_RCGC2_R"  (declared at line 2059 of ".\inc\tm4c123gh6pm.h")
+  #define SYSCTL_RCGC2_R          (*((volatile unsigned long *)0x400FE108))
+Encoder.c(91): warning:  #177-D: variable "noop"  was declared but never referenced
   		int noop;
-Encoder.c(87): warning:  #1-D: last line of file ends without a newline
+Encoder.c(115): warning:  #1-D: last line of file ends without a newline
   	
-Encoder.c: 3 warnings, 0 errors
-creating preprocessor file for Uart_helper.c...
-creating preprocessor file for Uart_helper.c...
+Encoder.c: 13 warnings, 0 errors
 compiling Uart_helper.c...
-"no source": Error:  #219: error while deleting file ".\rvmdk\uart_helper_1.d": Permission denied
-src\Uart_helper.c: 0 warnings, 1 error
-compiling Uart_helper.c...
-src\Uart_helper.h(10): warning:  #1-D: last line of file ends without a newline
-  void UartSetup(void);		//sets up Uart for my configuration using library
-src\Uart_helper.c(31): warning:  #1-D: last line of file ends without a newline
+src\Uart_helper.c(72): warning:  #1-D: last line of file ends without a newline
   }
-src\Uart_helper.c: 2 warnings, 0 errors
+src\Uart_helper.c: 1 warning, 0 errors
+creating preprocessor file for Uart_helper.c...
 compiling project.c...
 driverlib/hibernate.h(229): warning:  #231-D: declaration is not visible outside of function
   extern void HibernateCalendarSet(struct tm *psTime);
@@ -75,22 +90,22 @@ driverlib/hibernate.h(231): warning:  #231-D: declaration is not visible outside
   extern void HibernateCalendarMatchSet(uint32_t ui32Index, struct tm *psTime);
 driverlib/hibernate.h(232): warning:  #231-D: declaration is not visible outside of function
   extern void HibernateCalendarMatchGet(uint32_t ui32Index, struct tm *psTime);
-.\src\Uart_helper.h(10): warning:  #1-D: last line of file ends without a newline
-  void UartSetup(void);		//sets up Uart for my configuration using library
-project.c(22): warning:  #223-D: function "setupPWM" declared implicitly
+project.c(24): warning:  #223-D: function "setupPWM" declared implicitly
   		setupPWM();
-project.c(23): warning:  #223-D: function "pwmTest" declared implicitly
-  		pwmTest();
-project.c(24): warning:  #223-D: function "setupENCODER" declared implicitly
+project.c(27): warning:  #223-D: function "setupENCODER" declared implicitly
   		setupENCODER();
-project.c: 8 warnings, 0 errors
+project.c: 6 warnings, 0 errors
+compiling Uart_helper.c...
+src\Uart_helper.c(72): warning:  #1-D: last line of file ends without a newline
+  }
+src\Uart_helper.c: 1 warning, 0 errors
 linking...
 .\rvmdk\project.axf: Warning: L6304W: Duplicate input file .\rvmdk\uart_helper_1.o ignored.
-Program Size: Code=2088 RO-data=568 RW-data=0 ZI-data=256  
+Program Size: Code=6488 RO-data=1180 RW-data=4 ZI-data=260  
 Finished: 0 information, 1 warning and 0 error messages.
 FromELF: creating hex file...
 After Build - User command #1: fromelf --bin --output .\rvmdk\project.bin .\rvmdk\project.axf
-".\rvmdk\project.axf" - 0 Error(s), 21 Warning(s).
+".\rvmdk\project.axf" - 0 Error(s), 29 Warning(s).
 
 <h2>Software Packages used:</h2>
 
@@ -113,7 +128,7 @@ Package Vendor: Keil
 <h2>Collection of Component Files used:</h2>
 
    * Component: ARM::CMSIS:CORE:5.0.1
-Build Time Elapsed:  00:00:03
+Build Time Elapsed:  00:00:07
 </pre>
 </body>
 </html>

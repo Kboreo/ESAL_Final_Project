@@ -19,8 +19,11 @@ void SetupHardware()
 
 int  main(void)
 {		
+		SetupHardware();
+		printf("Hardware setup complete\n\n");
 		setupPWM();
-		pwmTest();
+		printf("PWM setup complete \n\n");
+		//pwmTest();
 		setupENCODER();
 }
 
