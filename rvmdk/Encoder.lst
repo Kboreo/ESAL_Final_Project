@@ -37750,99 +37750,78 @@ N
 N//Function that sets up the Encoder
 Nvoid setupENCODER(void)
 N{
+N	//SysCtlClockSet(SYSCTL_SYSDIV_5 | SYSCTL_USE_PLL | SYSCTL_OSC_MAIN | SYSCTL_XTAL_16MHZ); //40MHz
+N	 //habilita perfierico QEI
+N    SysCtlPeripheralEnable(SYSCTL_PERIPH_GPIOD);
+X    SysCtlPeripheralEnable(0xf0000803);
+N    SysCtlPeripheralEnable(SYSCTL_PERIPH_QEI0);
+X    SysCtlPeripheralEnable(0xf0004400);
+N
+N
+N	//Unlock GPIOD7 - Like PF0 its used for NMI - Without this step it doesn't work
+N	HWREG(GPIO_PORTD_BASE + GPIO_O_LOCK) = GPIO_LOCK_KEY; //In Tiva include this is the same as "_DD" in older versions (0x4C4F434B)
+X	(*((volatile uint32_t *)(0x40007000 + 0x00000520))) = 0x4C4F434B; 
+N	HWREG(GPIO_PORTD_BASE + GPIO_O_CR) |= 0x80;
+X	(*((volatile uint32_t *)(0x40007000 + 0x00000524))) |= 0x80;
+N	HWREG(GPIO_PORTD_BASE + GPIO_O_LOCK) = 0;
+X	(*((volatile uint32_t *)(0x40007000 + 0x00000520))) = 0;
+N
+N
+N	//Set Pins to be PHA0 and PHB0
+N	GPIOPinConfigure(GPIO_PD6_PHA0);
+X	GPIOPinConfigure(0x00031806);
+N	GPIOPinConfigure(GPIO_PD7_PHB0);
+X	GPIOPinConfigure(0x00031C06);
+N
+N	//Set GPIO pins for QEI. PhA0 -> PD6, PhB0 ->PD7.
+N	GPIOPinTypeQEI(GPIO_PORTD_BASE, GPIO_PIN_6 |  GPIO_PIN_7);
+X	GPIOPinTypeQEI(0x40007000, 0x00000040 |  0x00000080);
+N	GPIOPadConfigSet(GPIO_PORTD_BASE, GPIO_PIN_6 |  GPIO_PIN_7, GPIO_STRENGTH_2MA, GPIO_PIN_TYPE_STD); // change push pull gpio
+X	GPIOPadConfigSet(0x40007000, 0x00000040 |  0x00000080, 0x00000001, 0x00000008); 
+N
+N	//Disable peripheral and int before configuration
+N	//QEIDisable(QEI0_BASE);
+N	QEIIntDisable(QEI0_BASE,QEI_INTERROR | QEI_INTDIR | QEI_INTTIMER | QEI_INTINDEX); //desabilita todas las interrupciones
+X	QEIIntDisable(0x4002C000,0x00000008 | 0x00000004 | 0x00000002 | 0x00000001); 
+N
+N	// Configure quadrature encoder, use an arbitrary top limit of 1000
+N	// 4 pulsos por linea
+N	// encoder de 2048 PPR max 7500 RPM
+N	QEIConfigure(QEI0_BASE, (QEI_CONFIG_CAPTURE_A_B  | QEI_CONFIG_NO_RESET 	| QEI_CONFIG_QUADRATURE | QEI_CONFIG_NO_SWAP), 1919);  //maxima posicion
+X	QEIConfigure(0x4002C000, (0x00000008  | 0x00000000 	| 0x00000000 | 0x00000000), 1919);  
+N
+N
 N	
-N	//Enable the GPIO port that is used for the Encoder
-N	
-N//	SysCtlPeripheralEnable(SYSCTL_PERIPH_GPIOD);
-N//	  while(!SysCtlPeripheralReady(SYSCTL_PERIPH_GPIOD))
-N // {
-N    
-N	//}
-N//QEI on PDS PD6 PD7	
-N volatile unsigned long delay;
-N	SYSCTL_RCGCGPIO_R |= 0X01; 				//QEI run mode clock gating control
-X	(*((volatile unsigned long *)0x400FE644)) |= 0X01; 				
-N  SYSCTL_RCGC2_R |= 0x00000008;     // 1) General purpose I/O Peripheral Ready
-X  (*((volatile unsigned long *)0x400FE108)) |= 0x00000008;     
-N  delay = SYSCTL_RCGC2_R;           // reading register adds a delay   
-X  delay = (*((volatile unsigned long *)0x400FE108));           
-N  GPIO_PORTF_LOCK_R = 0x4C4F434B;   // 2) unlock PortF PF0  
-X  (*((volatile unsigned long *)0x40007520)) = 0x4C4F434B;   
-N  GPIO_PORTF_CR_R = 0xFF;           // allow changes to PD      
-X  (*((volatile unsigned long *)0x40007524)) = 0xFF;           
-N  GPIO_PORTF_AMSEL_R &= 0x00;        // 3) disable analog function
-X  (*((volatile unsigned long *)0x40007528)) &= 0x00;        
-N  GPIO_PORTF_AFSEL_R = 0xC0;        // 6) alternate function selected 
-X  (*((volatile unsigned long *)0x40007420)) = 0xC0;        
-N	GPIO_PORTF_PCTL_R = (GPIO_PORTF_PCTL_R&0x00FF0FFF)+0x66006000;    // 4) select peripheral for encoder 
-X	(*((volatile unsigned long *)0x4000752C)) = ((*((volatile unsigned long *)0x4000752C))&0x00FF0FFF)+0x66006000;    
-N  GPIO_PORTF_DIR_R &=  ~0xC0;          // 5) sets port D as input  
-X  (*((volatile unsigned long *)0x40007400)) &=  ~0xC0;          
-N  
-N  //GPIO_PORTF_PUR_R = 0x11;          // enable pullup resistors on PF4,PF0       
-N  GPIO_PORTF_DEN_R = 0xFF;          // 7) enable digital pins PF4-PF0  
-X  (*((volatile unsigned long *)0x4000751C)) = 0xFF;          
-N	
-N	// Enable the peripherals used by this program.
-N  SysCtlPeripheralEnable(SYSCTL_PERIPH_QEI0);
-X  SysCtlPeripheralEnable(0xf0004400);
-N	
-N	//GPIOPinTypeGPIOInput(GPIO_PORTD_BASE, GPIO_PIN_6 | GPIO_PIN_7); //SET PD6 & 7 as input
-N  //GPIOPadConfigSet(GPIO_PORTD_BASE,GPIO_PIN_6|GPIO_PIN_7,GPIO_STRENGTH_2MA,GPIO_PIN_TYPE_STD_WPU);//set internal pullup R
-N	//Wait for the QEIO module to be ready.
-N	//
-N	while(!SysCtlPeripheralReady(SYSCTL_PERIPH_QEI0))
-X	while(!SysCtlPeripheralReady(0xf0004400))
-N	{
-N		
-N	}
-N	
-N// Enable the quadrature encoder.
+N	// Enable the quadrature encoder.
 N	QEIEnable(QEI0_BASE);
 X	QEIEnable(0x4002C000);
-N	
-N//Enables velocity capture
 N	QEIVelocityEnable(QEI0_BASE);
 X	QEIVelocityEnable(0x4002C000);
+N	QEIVelocityConfigure(QEI0_BASE, QEI_VELDIV_2, 0xffffff);
+X	QEIVelocityConfigure(0x4002C000, 0x00000040, 0xffffff);
+N  QEIFilterConfigure(QEI0_BASE, 3);
+X  QEIFilterConfigure(0x4002C000, 3);
 N
-N// Configure the quadrature encoder to capture edges on both signals and
-N// maintain an absolute position by resetting on index pulses. Using a
-N// 1000 line encoder at four edges per line, there are 1920 pulses per
-N// revolution; therefore set the maximum position to 1919 as the count
-N// is zero based.
-N	QEIConfigure(QEI0_BASE, (QEI_CONFIG_CAPTURE_A_B | QEI_CONFIG_NO_RESET | QEI_CONFIG_QUADRATURE | QEI_CONFIG_NO_SWAP), 1919);
-X	QEIConfigure(0x4002C000, (0x00000008 | 0x00000000 | 0x00000000 | 0x00000000), 1919);
+N//Set position to a middle value so we can see if things are working
+NQEIPositionSet(QEI0_BASE, 0);
+XQEIPositionSet(0x4002C000, 0);
 N
-N
-N
-N	
-N	
-N	// Configures velocity capture
-N	QEIVelocityConfigure(QEI0_BASE, QEI_VELDIV_2, 500);
-X	QEIVelocityConfigure(0x4002C000, 0x00000040, 500);
-N	
-N	
-N	
-N	
-N
-N//Configure PD6 as QEI model 0 phase A 
-N//and PD7 as QEI model 0 phase B
-N // GPIOPinConfigure(GPIO_PD6_PHA0);
-N	//GPIOPinConfigure(GPIO_PD7_PHB0);
-N//	GPIOPinTypeQEI(GPIO_PORTD_BASE, GPIO_PIN_6 | GPIO_PIN_7);
-N	
-N	
-N	for (int i = 0; i<1000; i++)
+N	while(1)
+N	{	
+N	for (int i = 0; i<999; i++)
 N	{
-N		int noop;
-W "Encoder.c" 101 7 variable "noop"  was declared but never referenced
+N		for (int i = 0; i<999; i++)
+N	{
+N		
+N
+N	}	
+N
 N	}
 N	
 N	//
 N// Read the encoder position.
 N	
-N	while(1)
-N	{
+N
 N//
 N	QEIPositionGet(QEI0_BASE);
 X	QEIPositionGet(0x4002C000);
@@ -37854,19 +37833,116 @@ N//Read encoder speed
 N	double speed = QEIVelocityGet(QEI0_BASE);
 X	double speed = QEIVelocityGet(0x4002C000);
 N	
-W "Encoder.c" 117 27 argument is incompatible with corresponding format string conversion
+W "Encoder.c" 97 27 argument is incompatible with corresponding format string conversion
 N	printf("Speed = %d\n\n", speed);
+N	//printf("float = %f\n\n", speed);
 N		
 N	int ticks = QEIVelocityGet(QEI0_BASE);
 X	int ticks = QEIVelocityGet(0x4002C000);
 N		
-N		printf("Speed = %d\n\n", ticks);
+N		printf("ticks = %d\n\n", ticks);
 N	
 N	}
 N	
+N	
+N//	
+N//	//Enable the GPIO port that is used for the Encoder
+N//	
+N////	SysCtlPeripheralEnable(SYSCTL_PERIPH_GPIOD);
+N////	  while(!SysCtlPeripheralReady(SYSCTL_PERIPH_GPIOD))
+N// // {
+N//    
+N//	//}
+N////QEI on PDS PD6 PD7	
+N// volatile unsigned long delay;
+N//	SYSCTL_RCGCGPIO_R |= 0X01; 				//QEI run mode clock gating control
+N//  SYSCTL_RCGC2_R |= 0x00000008;     // 1) General purpose I/O Peripheral Ready
+N//  delay = SYSCTL_RCGC2_R;           // reading register adds a delay   
+N//  GPIO_PORTF_LOCK_R = 0x4C4F434B;   // 2) unlock PortF PF0  
+N//  GPIO_PORTF_CR_R = 0xFF;           // allow changes to PD      
+N//  GPIO_PORTF_AMSEL_R &= 0x00;        // 3) disable analog function
+N//  GPIO_PORTF_AFSEL_R = 0xC0;        // 6) alternate function selected 
+N//	GPIO_PORTF_PCTL_R = (GPIO_PORTF_PCTL_R&0x00FF0FFF)+0x66006000;    // 4) select peripheral for encoder 
+N//  GPIO_PORTF_DIR_R &=  ~0xC0;          // 5) sets port D as input  
+N//  
+N//  //GPIO_PORTF_PUR_R = 0x11;          // enable pullup resistors on PF4,PF0       
+N//  GPIO_PORTF_DEN_R = 0xFF;          // 7) enable digital pins PF4-PF0  
+N//	
+N//	// Enable the peripherals used by this program.
+N// SysCtlPeripheralEnable(SYSCTL_PERIPH_QEI0);
+N//	
+N//	//GPIOPinTypeGPIOInput(GPIO_PORTD_BASE, GPIO_PIN_6 | GPIO_PIN_7); //SET PD6 & 7 as input
+N//  //GPIOPadConfigSet(GPIO_PORTD_BASE,GPIO_PIN_6|GPIO_PIN_7,GPIO_STRENGTH_2MA,GPIO_PIN_TYPE_STD_WPU);//set internal pullup R
+N//	//Wait for the QEIO module to be ready.
+N//	//
+N//	while(!SysCtlPeripheralReady(SYSCTL_PERIPH_QEI0))
+N//	{
+N//		
+N//	}
+N//	
+N//// Enable the quadrature encoder.
+N//	QEIEnable(QEI0_BASE);
+N//	
+N////Enables velocity capture
+N//	QEIVelocityEnable(QEI0_BASE);
+N
+N//// Configure the quadrature encoder to capture edges on both signals and
+N//// maintain an absolute position by resetting on index pulses. Using a
+N//// 1000 line encoder at four edges per line, there are 1920 pulses per
+N//// revolution; therefore set the maximum position to 1919 as the count
+N//// is zero based.
+N//	QEIConfigure(QEI0_BASE, (QEI_CONFIG_CAPTURE_A_B | QEI_CONFIG_NO_RESET | QEI_CONFIG_QUADRATURE | QEI_CONFIG_NO_SWAP), 1919);
+N
+N
+N
+N//	
+N//	
+N//	// Configures velocity capture
+N//	QEIVelocityConfigure(QEI0_BASE, QEI_VELDIV_2, 500);
+N//	
+N//	
+N//	
+N//	
+N
+N////Configure PD6 as QEI model 0 phase A 
+N////and PD7 as QEI model 0 phase B
+N//  GPIOPinConfigure(GPIO_PD6_PHA0);
+N//	GPIOPinConfigure(GPIO_PD7_PHB0);
+N//	GPIOPinTypeQEI(GPIO_PORTD_BASE, GPIO_PIN_6 | GPIO_PIN_7);
+N//	
+N//	while(1)
+N//	{	
+N//	for (int i = 0; i<999; i++)
+N//	{
+N//		for (int t = 0; t<999; t++)
+N//		{
+N//			int g = g + 1; 
+N//		}
+N//	}
+N//	
+N//	//
+N//// Read the encoder position.
+N//	
+N
+N////
+N//	QEIPositionGet(QEI0_BASE);
+N//	QEIDirectionGet(QEI0_BASE);
+N//	
+N//	
+N////Read encoder speed
+N//	double speed = QEIVelocityGet(QEI0_BASE);
+N//	
+N//	printf("Speed = %d\n\n", speed);
+N//		
+N//	int ticks = QEIVelocityGet(QEI0_BASE);
+N//		
+N//		printf("Speed = %d\n\n", ticks);
+N//	
+N//	}
+N//	
 N
 N	}
 N
 N
-W "Encoder.c" 129 2 last line of file ends without a newline
+W "Encoder.c" 206 2 last line of file ends without a newline
 N	

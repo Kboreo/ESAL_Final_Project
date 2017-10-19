@@ -34,7 +34,7 @@ creating preprocessor file for Encoder.c...
 compiling myPWM.c...
 myPWM.c(66): warning:  #177-D: variable "fadeUp"  was declared but never referenced
     bool fadeUp = true;
-myPWM.c: 7 warnings, 0 errors
+myPWM.c(67): warning:  #177-D: variable "increment"  was declared but never referenced
     unsigned long increment = 10; //Long increment
 myPWM.c(68): warning:  #177-D: variable "pwmNow"  was declared but never referenced
     unsigned long pwmNow = 100;	//new PWM value
@@ -46,6 +46,7 @@ myPWM.c(71): warning:  #177-D: variable "y"  was declared but never referenced
   	int y;  //Int that contains the output of the button SW1
 myPWM.c(75): warning:  #1-D: last line of file ends without a newline
   	
+myPWM.c: 7 warnings, 0 errors
 creating preprocessor file for Uart_helper.c...
 compiling Encoder.c...
 Encoder.h(16): warning:  #1-D: last line of file ends without a newline
@@ -72,18 +73,16 @@ Encoder.c(27): warning:  #47-D: incompatible redefinition of macro "SYSCTL_RCGC2
   #define SYSCTL_RCGC2_R          (*((volatile unsigned long *)0x400FE108))
 Encoder.c(28): warning:  #47-D: incompatible redefinition of macro "SYSCTL_RCGCGPIO_R"  (declared at line 2113 of ".\inc\tm4c123gh6pm.h")
   #define SYSCTL_RCGCGPIO_R				(*((volatile unsigned long *)0x400FE644))
-Encoder.c(101): warning:  #177-D: variable "noop"  was declared but never referenced
-  		int noop;
-Encoder.c(117): warning:  #181-D: argument is incompatible with corresponding format string conversion
+Encoder.c(97): warning:  #181-D: argument is incompatible with corresponding format string conversion
   	printf("Speed = %d\n\n", speed);
-Encoder.c(129): warning:  #1-D: last line of file ends without a newline
+Encoder.c(206): warning:  #1-D: last line of file ends without a newline
   	
-Encoder.c: 15 warnings, 0 errors
+Encoder.c: 14 warnings, 0 errors
+creating preprocessor file for Uart_helper.c...
 compiling Uart_helper.c...
 src\Uart_helper.c(72): warning:  #1-D: last line of file ends without a newline
   }
 src\Uart_helper.c: 1 warning, 0 errors
-creating preprocessor file for Uart_helper.c...
 compiling project.c...
 driverlib/hibernate.h(229): warning:  #231-D: declaration is not visible outside of function
   extern void HibernateCalendarSet(struct tm *psTime);
@@ -104,7 +103,7 @@ src\Uart_helper.c(72): warning:  #1-D: last line of file ends without a newline
 src\Uart_helper.c: 1 warning, 0 errors
 linking...
 .\rvmdk\project.axf: Warning: L6304W: Duplicate input file .\rvmdk\uart_helper_1.o ignored.
-Program Size: Code=3584 RO-data=1180 RW-data=4 ZI-data=260  
+Program Size: Code=3640 RO-data=1180 RW-data=4 ZI-data=260  
 Finished: 0 information, 1 warning and 0 error messages.
 FromELF: creating hex file...
 After Build - User command #1: fromelf --bin --output .\rvmdk\project.bin .\rvmdk\project.axf
