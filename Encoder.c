@@ -31,12 +31,12 @@
 void setupENCODER(void)
 {
 	//SysCtlClockSet(SYSCTL_SYSDIV_5 | SYSCTL_USE_PLL | SYSCTL_OSC_MAIN | SYSCTL_XTAL_16MHZ); //40MHz
-	 //habilita perfierico QEI
+	 //enables peripheral QEI
     SysCtlPeripheralEnable(SYSCTL_PERIPH_GPIOD);
     SysCtlPeripheralEnable(SYSCTL_PERIPH_QEI0);
 
 
-	//Unlock GPIOD7 - Like PF0 its used for NMI - Without this step it doesn't work
+	//Unlock GPIOD7 
 	HWREG(GPIO_PORTD_BASE + GPIO_O_LOCK) = GPIO_LOCK_KEY; //In Tiva include this is the same as "_DD" in older versions (0x4C4F434B)
 	HWREG(GPIO_PORTD_BASE + GPIO_O_CR) |= 0x80;
 	HWREG(GPIO_PORTD_BASE + GPIO_O_LOCK) = 0;
@@ -51,7 +51,6 @@ void setupENCODER(void)
 	GPIOPadConfigSet(GPIO_PORTD_BASE, GPIO_PIN_6 |  GPIO_PIN_7, GPIO_STRENGTH_2MA, GPIO_PIN_TYPE_STD); // change push pull gpio
 
 	//Disable peripheral and int before configuration
-	//QEIDisable(QEI0_BASE);
 	QEIIntDisable(QEI0_BASE,QEI_INTERROR | QEI_INTDIR | QEI_INTTIMER | QEI_INTINDEX); //desabilita todas las interrupciones
 
 	// Configure quadrature encoder, use an arbitrary top limit of 1000
@@ -63,43 +62,50 @@ void setupENCODER(void)
 	
 	// Enable the quadrature encoder.
 	QEIEnable(QEI0_BASE);
+	QEIFilterEnable(QEI0_BASE);
 	QEIVelocityEnable(QEI0_BASE);
 	QEIVelocityConfigure(QEI0_BASE, QEI_VELDIV_2, 0xffffff);
-  QEIFilterConfigure(QEI0_BASE, 3);
+  //QEIFilterConfigure(QEI0_BASE, QEI_FILTCNT_2);
 
-//Set position to a middle value so we can see if things are working
-QEIPositionSet(QEI0_BASE, 0);
+
 
 	while(1)
 	{	
 	for (int i = 0; i<999; i++)
 	{
-		for (int i = 0; i<999; i++)
-	{
-		
-
-	}	
-
 	}
+	
+
 	
 	//
 // Read the encoder position.
 	
 
 //
-	QEIPositionGet(QEI0_BASE);
-	QEIDirectionGet(QEI0_BASE);
+	int  posistion = QEIPositionGet(QEI0_BASE);
+	int direction = QEIDirectionGet(QEI0_BASE);
 	
+		printf("Direction = %d\n\n", direction);
+	printf("Posistion = %d\n\n", posistion);	
 	
 //Read encoder speed
-	double speed = QEIVelocityGet(QEI0_BASE);
+	unsigned long speed = QEIVelocityGet(QEI0_BASE);
+	int ticks = QEIVelocityGet(QEI0_BASE);
+	
+		for (int i = 0; i<0x1fffff; i++)
+	{
+	}
 	
 	printf("Speed = %d\n\n", speed);
 	//printf("float = %f\n\n", speed);
 		
-	int ticks = QEIVelocityGet(QEI0_BASE);
+	
 		
 		printf("ticks = %d\n\n", ticks);
+	
+//	uint32_t period = 1/ticks*100;
+	
+	//printf("period = %d\n\n", period);
 	
 	}
 	

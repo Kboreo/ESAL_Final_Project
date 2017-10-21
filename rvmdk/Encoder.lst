@@ -37751,14 +37751,14 @@ N//Function that sets up the Encoder
 Nvoid setupENCODER(void)
 N{
 N	//SysCtlClockSet(SYSCTL_SYSDIV_5 | SYSCTL_USE_PLL | SYSCTL_OSC_MAIN | SYSCTL_XTAL_16MHZ); //40MHz
-N	 //habilita perfierico QEI
+N	 //enables peripheral QEI
 N    SysCtlPeripheralEnable(SYSCTL_PERIPH_GPIOD);
 X    SysCtlPeripheralEnable(0xf0000803);
 N    SysCtlPeripheralEnable(SYSCTL_PERIPH_QEI0);
 X    SysCtlPeripheralEnable(0xf0004400);
 N
 N
-N	//Unlock GPIOD7 - Like PF0 its used for NMI - Without this step it doesn't work
+N	//Unlock GPIOD7 
 N	HWREG(GPIO_PORTD_BASE + GPIO_O_LOCK) = GPIO_LOCK_KEY; //In Tiva include this is the same as "_DD" in older versions (0x4C4F434B)
 X	(*((volatile uint32_t *)(0x40007000 + 0x00000520))) = 0x4C4F434B; 
 N	HWREG(GPIO_PORTD_BASE + GPIO_O_CR) |= 0x80;
@@ -37780,7 +37780,6 @@ N	GPIOPadConfigSet(GPIO_PORTD_BASE, GPIO_PIN_6 |  GPIO_PIN_7, GPIO_STRENGTH_2MA,
 X	GPIOPadConfigSet(0x40007000, 0x00000040 |  0x00000080, 0x00000001, 0x00000008); 
 N
 N	//Disable peripheral and int before configuration
-N	//QEIDisable(QEI0_BASE);
 N	QEIIntDisable(QEI0_BASE,QEI_INTERROR | QEI_INTDIR | QEI_INTTIMER | QEI_INTINDEX); //desabilita todas las interrupciones
 X	QEIIntDisable(0x4002C000,0x00000008 | 0x00000004 | 0x00000002 | 0x00000001); 
 N
@@ -37795,52 +37794,57 @@ N
 N	// Enable the quadrature encoder.
 N	QEIEnable(QEI0_BASE);
 X	QEIEnable(0x4002C000);
+N	QEIFilterEnable(QEI0_BASE);
+X	QEIFilterEnable(0x4002C000);
 N	QEIVelocityEnable(QEI0_BASE);
 X	QEIVelocityEnable(0x4002C000);
 N	QEIVelocityConfigure(QEI0_BASE, QEI_VELDIV_2, 0xffffff);
 X	QEIVelocityConfigure(0x4002C000, 0x00000040, 0xffffff);
-N  QEIFilterConfigure(QEI0_BASE, 3);
-X  QEIFilterConfigure(0x4002C000, 3);
+N  //QEIFilterConfigure(QEI0_BASE, QEI_FILTCNT_2);
 N
-N//Set position to a middle value so we can see if things are working
-NQEIPositionSet(QEI0_BASE, 0);
-XQEIPositionSet(0x4002C000, 0);
+N
 N
 N	while(1)
 N	{	
 N	for (int i = 0; i<999; i++)
 N	{
-N		for (int i = 0; i<999; i++)
-N	{
-N		
-N
-N	}	
-N
 N	}
+N	
+N
 N	
 N	//
 N// Read the encoder position.
 N	
 N
 N//
-N	QEIPositionGet(QEI0_BASE);
-X	QEIPositionGet(0x4002C000);
-N	QEIDirectionGet(QEI0_BASE);
-X	QEIDirectionGet(0x4002C000);
+N	int  posistion = QEIPositionGet(QEI0_BASE);
+X	int  posistion = QEIPositionGet(0x4002C000);
+N	int direction = QEIDirectionGet(QEI0_BASE);
+X	int direction = QEIDirectionGet(0x4002C000);
 N	
+N		printf("Direction = %d\n\n", direction);
+N	printf("Posistion = %d\n\n", posistion);	
 N	
 N//Read encoder speed
-N	double speed = QEIVelocityGet(QEI0_BASE);
-X	double speed = QEIVelocityGet(0x4002C000);
+N	unsigned long speed = QEIVelocityGet(QEI0_BASE);
+X	unsigned long speed = QEIVelocityGet(0x4002C000);
+N	int ticks = QEIVelocityGet(QEI0_BASE);
+X	int ticks = QEIVelocityGet(0x4002C000);
 N	
-W "Encoder.c" 97 27 argument is incompatible with corresponding format string conversion
+N		for (int i = 0; i<0x1fffff; i++)
+N	{
+N	}
+N	
 N	printf("Speed = %d\n\n", speed);
 N	//printf("float = %f\n\n", speed);
 N		
-N	int ticks = QEIVelocityGet(QEI0_BASE);
-X	int ticks = QEIVelocityGet(0x4002C000);
+N	
 N		
 N		printf("ticks = %d\n\n", ticks);
+N	
+N//	uint32_t period = 1/ticks*100;
+N	
+N	//printf("period = %d\n\n", period);
 N	
 N	}
 N	
@@ -37944,5 +37948,5 @@ N
 N	}
 N
 N
-W "Encoder.c" 206 2 last line of file ends without a newline
+W "Encoder.c" 212 2 last line of file ends without a newline
 N	

@@ -11413,7 +11413,6 @@ void setupENCODER(void)
 	GPIOPadConfigSet(0x40007000, 0x00000040 |  0x00000080, 0x00000001, 0x00000008); 
 
 	
-	
 	QEIIntDisable(0x4002C000,0x00000008 | 0x00000004 | 0x00000002 | 0x00000001); 
 
 	
@@ -11425,43 +11424,50 @@ void setupENCODER(void)
 	
 	
 	QEIEnable(0x4002C000);
+	QEIFilterEnable(0x4002C000);
 	QEIVelocityEnable(0x4002C000);
 	QEIVelocityConfigure(0x4002C000, 0x00000040, 0xffffff);
-  QEIFilterConfigure(0x4002C000, 3);
+  
 
 
-QEIPositionSet(0x4002C000, 0);
 
 	while(1)
 	{	
 	for (int i = 0; i<999; i++)
 	{
-		for (int i = 0; i<999; i++)
-	{
-		
-
-	}	
-
 	}
 	
+
+	
 	
 
 	
 
 
-	QEIPositionGet(0x4002C000);
-	QEIDirectionGet(0x4002C000);
+	int  posistion = QEIPositionGet(0x4002C000);
+	int direction = QEIDirectionGet(0x4002C000);
 	
+		printf("Direction = %d\n\n", direction);
+	printf("Posistion = %d\n\n", posistion);	
 	
 
-	double speed = QEIVelocityGet(0x4002C000);
+	unsigned long speed = QEIVelocityGet(0x4002C000);
+	int ticks = QEIVelocityGet(0x4002C000);
+	
+		for (int i = 0; i<0x1fffff; i++)
+	{
+	}
 	
 	printf("Speed = %d\n\n", speed);
 	
 		
-	int ticks = QEIVelocityGet(0x4002C000);
+	
 		
 		printf("ticks = %d\n\n", ticks);
+	
+
+	
+	
 	
 	}
 	

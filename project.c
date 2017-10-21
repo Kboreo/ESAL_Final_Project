@@ -18,7 +18,7 @@ void SetupHardware()
 
 
 int  main(void)
-{		
+       {		
 		SetupHardware();
 		printf("Hardware setup complete\n\n");
 		setupPWM();

@@ -64693,7 +64693,7 @@ N}
 N
 N
 Nint  main(void)
-N{		
+N       {		
 N		SetupHardware();
 N		printf("Hardware setup complete\n\n");
 W "project.c" 24 3 function "setupPWM" declared implicitly
