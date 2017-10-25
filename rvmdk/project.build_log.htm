@@ -30,7 +30,6 @@ Rebuild target 'project'
 creating preprocessor file for project.c...
 assembling startup_rvmdk.S...
 creating preprocessor file for myPWM.c...
-creating preprocessor file for Encoder.c...
 compiling myPWM.c...
 myPWM.c(66): warning:  #177-D: variable "fadeUp"  was declared but never referenced
     bool fadeUp = true;
@@ -47,9 +46,10 @@ myPWM.c(71): warning:  #177-D: variable "y"  was declared but never referenced
 myPWM.c(75): warning:  #1-D: last line of file ends without a newline
   	
 myPWM.c: 7 warnings, 0 errors
+creating preprocessor file for Encoder.c...
 creating preprocessor file for Uart_helper.c...
 compiling Encoder.c...
-Encoder.h(16): warning:  #1-D: last line of file ends without a newline
+Encoder.h(26): warning:  #1-D: last line of file ends without a newline
   void QEIConfigure(uint32_t ui32Base, uint32_t ui32Config, uint32_t ui32MaxPosition);
 Encoder.c(18): warning:  #47-D: incompatible redefinition of macro "GPIO_PORTF_DATA_R"  (declared at line 701 of ".\inc\tm4c123gh6pm.h")
   #define GPIO_PORTF_DATA_R       (*((volatile unsigned long *)0x400073FC))
@@ -73,7 +73,7 @@ Encoder.c(27): warning:  #47-D: incompatible redefinition of macro "SYSCTL_RCGC2
   #define SYSCTL_RCGC2_R          (*((volatile unsigned long *)0x400FE108))
 Encoder.c(28): warning:  #47-D: incompatible redefinition of macro "SYSCTL_RCGCGPIO_R"  (declared at line 2113 of ".\inc\tm4c123gh6pm.h")
   #define SYSCTL_RCGCGPIO_R				(*((volatile unsigned long *)0x400FE644))
-Encoder.c(212): warning:  #1-D: last line of file ends without a newline
+Encoder.c(100): warning:  #1-D: last line of file ends without a newline
   	
 Encoder.c: 13 warnings, 0 errors
 compiling Uart_helper.c...
@@ -101,7 +101,7 @@ src\Uart_helper.c(72): warning:  #1-D: last line of file ends without a newline
 src\Uart_helper.c: 1 warning, 0 errors
 linking...
 .\rvmdk\project.axf: Warning: L6304W: Duplicate input file .\rvmdk\uart_helper_1.o ignored.
-Program Size: Code=3404 RO-data=1180 RW-data=4 ZI-data=260  
+Program Size: Code=3984 RO-data=1180 RW-data=4 ZI-data=260  
 Finished: 0 information, 1 warning and 0 error messages.
 FromELF: creating hex file...
 After Build - User command #1: fromelf --bin --output .\rvmdk\project.bin .\rvmdk\project.axf
@@ -128,7 +128,7 @@ Package Vendor: Keil
 <h2>Collection of Component Files used:</h2>
 
    * Component: ARM::CMSIS:CORE:5.0.1
-Build Time Elapsed:  00:00:04
+Build Time Elapsed:  00:00:03
 </pre>
 </body>
 </html>

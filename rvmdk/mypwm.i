@@ -3231,7 +3231,7 @@ void setupPWM(void)
 	PWMGenPeriodSet(0x40029000, 0x00000100, 320);
 	
 	
-	PWMPulseWidthSet(0x40029000, 0x00000106, 10);
+	PWMPulseWidthSet(0x40029000, 0x00000106, 300);
 	
 	
 	PWMGenEnable(0x40029000, 0x00000100);

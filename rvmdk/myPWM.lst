@@ -24517,8 +24517,8 @@ N	PWMGenPeriodSet(PWM1_BASE, PWM_GEN_3, 320);
 X	PWMGenPeriodSet(0x40029000, 0x00000100, 320);
 N	
 N	//Set PWM duty-50% (Period/2)
-N	PWMPulseWidthSet(PWM1_BASE, PWM_OUT_6, 10);
-X	PWMPulseWidthSet(0x40029000, 0x00000106, 10);
+N	PWMPulseWidthSet(PWM1_BASE, PWM_OUT_6, 300);
+X	PWMPulseWidthSet(0x40029000, 0x00000106, 300);
 N	
 N	// Enable the PWM generator
 N	PWMGenEnable(PWM1_BASE, PWM_GEN_3);
