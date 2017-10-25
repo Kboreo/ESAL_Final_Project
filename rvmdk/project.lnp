@@ -3,7 +3,6 @@
 ".\rvmdk\startup_rvmdk.o"
 ".\rvmdk\mypwm.o"
 ".\rvmdk\encoder.o"
-".\rvmdk\uart_helper_1.o"
 ".\inc\driverlib.lib"
 ".\rvmdk\uart_helper_1.o"
 --library_type=microlib --strict --scatter "project.sct"

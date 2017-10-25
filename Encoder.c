@@ -30,6 +30,8 @@
 //Function that sets up the Encoder
 void setupENCODER(void)
 {
+	uint32_t i,ticks;
+	double w,speed;
 	//enables peripheral QEI
   SysCtlPeripheralEnable(SYSCTL_PERIPH_GPIOD);
   SysCtlPeripheralEnable(SYSCTL_PERIPH_QEI0);
@@ -64,34 +66,33 @@ void setupENCODER(void)
 	QEIVelocityConfigure(QEI0_BASE, QEI_VELDIV_2, 1600000);//capture velocity after .1 seconds
   QEIFilterConfigure(QEI0_BASE, QEI_FILTCNT_2);
 
-// Enable the Floating-point overflow exception.
-FPUEnable();
-FPULazyStackingEnable();
 
 	while(1)
 	{	
-	for (int i = 0; i<999; i++)
+	for (int i = 0; i<2000; i++)
 	{
-			for (int i = 0; i<999; i++)
-	{
-				for (int i = 0; i<1; i++)
-	{
-	}
-	}
+		__nop();
 	}
 	//for later use
 	//int  posistion = QEIPositionGet(QEI0_BASE);
 	//int direction = QEIDirectionGet(QEI0_BASE);
 	
 //Read encoder speed
-	int ticks = QEIVelocityGet(QEI0_BASE);
+	ticks = QEIVelocityGet(QEI0_BASE);
 	ticks = ticks * 100;
 	
 	//using a 2.5cm wheel, speed in cm per second
 	//double speed = 0x000000000000;
-	int speed = ticks / 192 * 3.141 * 2.5;
- 
-	printf("Speed = %i cm/s \n\n", speed);
+	//speed = ticks / 192 * 3.141 * 2.5;
+//	speed = 1.23 ; 
+//	printf("Speed = %.2f cm/s \n\n", (uint32_t)speed);
+float x;	
+//	x = 1.29;		
+//	x = x * .000807;  //Multiple the x value with the "offset" to get it to the correct value	
+	x = 1.29112;
+	
+	printf("Voltage on PE3 is, %.8fV \n\n", x);  //Displays voltage to the End user		 
+
 
 	
 	}

@@ -45,7 +45,7 @@ void setupPWM(void)
 	PWMGenPeriodSet(PWM1_BASE, PWM_GEN_3, 320);
 	
 	//Set PWM duty-50% (Period/2)
-	PWMPulseWidthSet(PWM1_BASE, PWM_OUT_6, 300);
+	PWMPulseWidthSet(PWM1_BASE, PWM_OUT_6, 100);
 	
 	// Enable the PWM generator
 	PWMGenEnable(PWM1_BASE, PWM_GEN_3);

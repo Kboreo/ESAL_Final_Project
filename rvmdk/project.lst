@@ -64185,13 +64185,7 @@ N//MMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMM
 N
 L 45 "project.h" 2
 N
-N#include <stdbool.h>
-N#include <stdint.h>
-N#include "sysctl.h"
-N#include "hw_memmap.h"
-N#include "gpio.h"
-N#include "uart.h"
-N#include "../inc/tm4c123gh6pm.h"
+N
 N#include "hw_gpio.h"
 L 1 ".\inc\hw_gpio.h" 1
 N//*****************************************************************************
@@ -64407,7 +64401,7 @@ N#define GPIO_PC_EDM2_S          4
 N#define GPIO_PC_EDM1_S          2
 N
 N#endif // __HW_GPIO_H__
-L 54 "project.h" 2
+L 48 "project.h" 2
 N#include "hw_types.h"
 L 1 ".\inc\hw_types.h" 1
 N//*****************************************************************************
@@ -64570,7 +64564,7 @@ N#define CLASS_IS_SNOWFLAKE CLASS_IS_TM4C123
 N#endif
 N
 N#endif // __HW_TYPES_H__
-L 55 "project.h" 2
+L 49 "project.h" 2
 N#include "myPWM.h"
 L 1 "myPWM.h" 1
 N#include "driverlib/pin_map.h"
@@ -64587,9 +64581,9 @@ N#include "driverlib/pwm.h"
 N#include "driverlib/uart.h"
 N
 N
-L 56 "project.h" 2
-N#include "Uart_helper.h"
-L 1 ".\src\Uart_helper.h" 1
+L 50 "project.h" 2
+N#include "./src/Uart_helper.h"
+L 1 "./src/Uart_helper.h" 1
 N#include <stdbool.h>
 N#include <stdint.h>
 N#include <stdio.h>
@@ -64671,7 +64665,7 @@ N//MMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMM
 N//MMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMM
 N//MMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMM
 N
-L 57 "project.h" 2
+L 51 "project.h" 2
 N
 L 2 "project.c" 2
 N#include <stdio.h>
@@ -64688,19 +64682,22 @@ N
 N
 Nvoid SetupHardware()
 N{
+N	// Enable the Floating-point overflow exception.
+N	FPULazyStackingEnable();
+N	FPUEnable();
 N	UartSetup();
 N}
 N
 N
 Nint  main(void)
-N       {		
+N{		
 N		SetupHardware();
 N		printf("Hardware setup complete\n\n");
-W "project.c" 24 3 function "setupPWM" declared implicitly
+W "project.c" 27 3 function "setupPWM" declared implicitly
 N		setupPWM();
 N		printf("PWM setup complete \n\n");
 N		//pwmTest();
-W "project.c" 27 3 function "setupENCODER" declared implicitly
+W "project.c" 30 3 function "setupENCODER" declared implicitly
 N		setupENCODER();
 N}
 N

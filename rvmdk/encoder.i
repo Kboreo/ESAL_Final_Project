@@ -12340,6 +12340,8 @@ void QEIConfigure(uint32_t ui32Base, uint32_t ui32Config, uint32_t ui32MaxPositi
 
 void setupENCODER(void)
 {
+	uint32_t i,ticks;
+	double w,speed;
 	
   SysCtlPeripheralEnable(0xf0000803);
   SysCtlPeripheralEnable(0xf0004400);
@@ -12375,33 +12377,32 @@ void setupENCODER(void)
   QEIFilterConfigure(0x4002C000, 0x00000000);
 
 
-FPUEnable();
-FPULazyStackingEnable();
-
 	while(1)
 	{	
-	for (int i = 0; i<999; i++)
+	for (int i = 0; i<2000; i++)
 	{
-			for (int i = 0; i<999; i++)
-	{
-				for (int i = 0; i<1; i++)
-	{
-	}
-	}
+		__nop();
 	}
 	
 	
 	
 	
 
-	int ticks = QEIVelocityGet(0x4002C000);
+	ticks = QEIVelocityGet(0x4002C000);
 	ticks = ticks * 100;
 	
 	
 	
-	int speed = ticks / 192 * 3.141 * 2.5;
- 
-	printf("Speed = %i cm/s \n\n", speed);
+	
+
+
+float x;	
+
+
+	x = 1.29112;
+	
+	printf("Voltage on PE3 is, %.8fV \n\n", x);  
+
 
 	
 	}

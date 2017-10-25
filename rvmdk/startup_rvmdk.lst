@@ -490,127 +490,130 @@ ARM Macro Assembler    Page 8
   275 00000274 6801            LDR              R1, [R0]
   276 00000276 F441 0170       ORR              R1, #0x00F00000
   277 0000027A 6001            STR              R1, [R0]
-  278 0000027C         
-  279 0000027C         ;
-  280 0000027C         ; Call the C library enty point that handles startup.  T
+  278 0000027C F3BF 8F4F       DSB
+  279 00000280         ;reset pipeline now the FPU is enabled
+  280 00000280 F3BF 8F6F       ISB
+  281 00000284         
+  282 00000284         ;
+  283 00000284         ; Call the C library enty point that handles startup.  T
                        his will copy
-  281 0000027C         ; the .data section initializers from flash to SRAM and 
+  284 00000284         ; the .data section initializers from flash to SRAM and 
                        zero fill the
-  282 0000027C         ; .bss section.
-  283 0000027C         ;
-  284 0000027C                 IMPORT           __main
-  285 0000027C F7FF BFFE       B                __main
-  286 00000280         
-  287 00000280         ;*******************************************************
+  285 00000284         ; .bss section.
+  286 00000284         ;
+  287 00000284                 IMPORT           __main
+  288 00000284 F7FF BFFE       B                __main
+  289 00000288         
+  290 00000288         ;*******************************************************
                        ***********************
-  288 00000280         ;
-  289 00000280         ; This is the code that gets called when the processor r
+  291 00000288         ;
+  292 00000288         ; This is the code that gets called when the processor r
                        eceives a NMI.  This
-  290 00000280         ; simply enters an infinite loop, preserving the system 
+  293 00000288         ; simply enters an infinite loop, preserving the system 
                        state for examination
-  291 00000280         ; by a debugger.
-  292 00000280         ;
-  293 00000280         ;*******************************************************
+  294 00000288         ; by a debugger.
+  295 00000288         ;
+  296 00000288         ;*******************************************************
                        ***********************
-  294 00000280         NmiSR
-  295 00000280 E7FE            B                NmiSR
-  296 00000282         
-  297 00000282         ;*******************************************************
-                       ***********************
-  298 00000282         ;
+  297 00000288         NmiSR
+  298 00000288 E7FE            B                NmiSR
+  299 0000028A         
 
 
 
 ARM Macro Assembler    Page 9 
 
 
-  299 00000282         ; This is the code that gets called when the processor r
+  300 0000028A         ;*******************************************************
+                       ***********************
+  301 0000028A         ;
+  302 0000028A         ; This is the code that gets called when the processor r
                        eceives a fault
-  300 00000282         ; interrupt.  This simply enters an infinite loop, prese
+  303 0000028A         ; interrupt.  This simply enters an infinite loop, prese
                        rving the system state
-  301 00000282         ; for examination by a debugger.
-  302 00000282         ;
-  303 00000282         ;*******************************************************
+  304 0000028A         ; for examination by a debugger.
+  305 0000028A         ;
+  306 0000028A         ;*******************************************************
                        ***********************
-  304 00000282         FaultISR
-  305 00000282 E7FE            B                FaultISR
-  306 00000284         
-  307 00000284         ;*******************************************************
+  307 0000028A         FaultISR
+  308 0000028A E7FE            B                FaultISR
+  309 0000028C         
+  310 0000028C         ;*******************************************************
                        ***********************
-  308 00000284         ;
-  309 00000284         ; This is the code that gets called when the processor r
+  311 0000028C         ;
+  312 0000028C         ; This is the code that gets called when the processor r
                        eceives an unexpected
-  310 00000284         ; interrupt.  This simply enters an infinite loop, prese
+  313 0000028C         ; interrupt.  This simply enters an infinite loop, prese
                        rving the system state
-  311 00000284         ; for examination by a debugger.
-  312 00000284         ;
-  313 00000284         ;*******************************************************
+  314 0000028C         ; for examination by a debugger.
+  315 0000028C         ;
+  316 0000028C         ;*******************************************************
                        ***********************
-  314 00000284         IntDefaultHandler
-  315 00000284 E7FE            B                IntDefaultHandler
-  316 00000286         
-  317 00000286         ;*******************************************************
+  317 0000028C         IntDefaultHandler
+  318 0000028C E7FE            B                IntDefaultHandler
+  319 0000028E         
+  320 0000028E         ;*******************************************************
                        ***********************
-  318 00000286         ;
-  319 00000286         ; Make sure the end of this section is aligned.
-  320 00000286         ;
-  321 00000286         ;*******************************************************
+  321 0000028E         ;
+  322 0000028E         ; Make sure the end of this section is aligned.
+  323 0000028E         ;
+  324 0000028E         ;*******************************************************
                        ***********************
-  322 00000286 00 00           ALIGN
-  323 00000288         
-  324 00000288         ;*******************************************************
+  325 0000028E 00 00           ALIGN
+  326 00000290         
+  327 00000290         ;*******************************************************
                        ***********************
-  325 00000288         ;
-  326 00000288         ; Some code in the normal code section for initializing 
+  328 00000290         ;
+  329 00000290         ; Some code in the normal code section for initializing 
                        the heap and stack.
-  327 00000288         ;
-  328 00000288         ;*******************************************************
+  330 00000290         ;
+  331 00000290         ;*******************************************************
                        ***********************
-  329 00000288                 AREA             |.text|, CODE, READONLY
-  330 00000000         
-  331 00000000         ;*******************************************************
+  332 00000290                 AREA             |.text|, CODE, READONLY
+  333 00000000         
+  334 00000000         ;*******************************************************
                        ***********************
-  332 00000000         ;
-  333 00000000         ; The function expected of the C library startup code fo
+  335 00000000         ;
+  336 00000000         ; The function expected of the C library startup code fo
                        r defining the stack
-  334 00000000         ; and heap memory locations.  For the C library version 
+  337 00000000         ; and heap memory locations.  For the C library version 
                        of the startup code,
-  335 00000000         ; provide this function so that the C library initializa
+  338 00000000         ; provide this function so that the C library initializa
                        tion code can find out
-  336 00000000         ; the location of the stack and heap.
-  337 00000000         ;
-  338 00000000         ;*******************************************************
-                       ***********************
-  339 00000000                 IF               :DEF: __MICROLIB
-  340 00000000                 EXPORT           __initial_sp
+  339 00000000         ; the location of the stack and heap.
+  340 00000000         ;
+  341 00000000         ;*******************************************************
 
 
 
 ARM Macro Assembler    Page 10 
 
 
-  341 00000000                 EXPORT           __heap_base
-  342 00000000                 EXPORT           __heap_limit
-  343 00000000                 ELSE
-  352                          ENDIF
-  353 00000000         
-  354 00000000         ;*******************************************************
                        ***********************
-  355 00000000         ;
-  356 00000000         ; Make sure the end of this section is aligned.
-  357 00000000         ;
-  358 00000000         ;*******************************************************
+  342 00000000                 IF               :DEF: __MICROLIB
+  343 00000000                 EXPORT           __initial_sp
+  344 00000000                 EXPORT           __heap_base
+  345 00000000                 EXPORT           __heap_limit
+  346 00000000                 ELSE
+  355                          ENDIF
+  356 00000000         
+  357 00000000         ;*******************************************************
                        ***********************
-  359 00000000                 ALIGN
-  360 00000000         
+  358 00000000         ;
+  359 00000000         ; Make sure the end of this section is aligned.
+  360 00000000         ;
   361 00000000         ;*******************************************************
                        ***********************
-  362 00000000         ;
-  363 00000000         ; Tell the assembler that we're done.
-  364 00000000         ;
-  365 00000000         ;*******************************************************
+  362 00000000                 ALIGN
+  363 00000000         
+  364 00000000         ;*******************************************************
                        ***********************
-  366 00000000                 END
+  365 00000000         ;
+  366 00000000         ; Tell the assembler that we're done.
+  367 00000000         ;
+  368 00000000         ;*******************************************************
+                       ***********************
+  369 00000000                 END
 Command Line: --debug --diag_suppress=9931 --cpu=Cortex-M4.fp --apcs=interwork 
 --depend=.\rvmdk\startup_rvmdk.d -o.\rvmdk\startup_rvmdk.o -I.\RTE\_project -IC
 :\Keil_v5\ARM\PACK\ARM\CMSIS\5.0.1\CMSIS\Include -IC:\Keil_v5\ARM\PACK\Keil\TM4

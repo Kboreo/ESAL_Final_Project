@@ -39436,6 +39436,8 @@ N
 N//Function that sets up the Encoder
 Nvoid setupENCODER(void)
 N{
+N	uint32_t i,ticks;
+N	double w,speed;
 N	//enables peripheral QEI
 N  SysCtlPeripheralEnable(SYSCTL_PERIPH_GPIOD);
 X  SysCtlPeripheralEnable(0xf0000803);
@@ -39486,39 +39488,41 @@ X	QEIVelocityConfigure(0x4002C000, 0x00000040, 1600000);
 N  QEIFilterConfigure(QEI0_BASE, QEI_FILTCNT_2);
 X  QEIFilterConfigure(0x4002C000, 0x00000000);
 N
-N// Enable the Floating-point overflow exception.
-NFPUEnable();
-NFPULazyStackingEnable();
 N
 N	while(1)
 N	{	
-N	for (int i = 0; i<999; i++)
+N	for (int i = 0; i<2000; i++)
 N	{
-N			for (int i = 0; i<999; i++)
-N	{
-N				for (int i = 0; i<1; i++)
-N	{
-N	}
-N	}
+N		__nop();
 N	}
 N	//for later use
 N	//int  posistion = QEIPositionGet(QEI0_BASE);
 N	//int direction = QEIDirectionGet(QEI0_BASE);
 N	
 N//Read encoder speed
-N	int ticks = QEIVelocityGet(QEI0_BASE);
-X	int ticks = QEIVelocityGet(0x4002C000);
+N	ticks = QEIVelocityGet(QEI0_BASE);
+X	ticks = QEIVelocityGet(0x4002C000);
 N	ticks = ticks * 100;
 N	
 N	//using a 2.5cm wheel, speed in cm per second
 N	//double speed = 0x000000000000;
-N	int speed = ticks / 192 * 3.141 * 2.5;
-N 
-N	printf("Speed = %i cm/s \n\n", speed);
+N	//speed = ticks / 192 * 3.141 * 2.5;
+N//	speed = 1.23 ; 
+N//	printf("Speed = %.2f cm/s \n\n", (uint32_t)speed);
+Nfloat x;	
+N//	x = 1.29;		
+N//	x = x * .000807;  //Multiple the x value with the "offset" to get it to the correct value	
+N	x = 1.29112;
+N	
+N	printf("Voltage on PE3 is, %.8fV \n\n", x);  //Displays voltage to the End user		 
+N
 N
 N	
 N	}
 N
+W "Encoder.c" 33 11 variable "i"  was declared but never referenced
+W "Encoder.c" 34 9 variable "w"  was declared but never referenced
+W "Encoder.c" 34 11 variable "speed"  was declared but never referenced
 N}
-W "Encoder.c" 100 2 last line of file ends without a newline
+W "Encoder.c" 101 2 last line of file ends without a newline
 N	

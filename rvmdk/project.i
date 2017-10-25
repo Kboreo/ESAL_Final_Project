@@ -17885,13 +17885,7 @@ int fgetc(FILE *f);
 
 #line 45 "project.h"
 
-#line 47 "project.h"
-#line 48 "project.h"
-#line 49 "project.h"
-#line 50 "project.h"
-#line 51 "project.h"
-#line 52 "project.h"
-#line 53 "project.h"
+
 #line 1 ".\\inc\\hw_gpio.h"
 
 
@@ -18061,7 +18055,7 @@ int fgetc(FILE *f);
                                             
 #line 212 ".\\inc\\hw_gpio.h"
 
-#line 54 "project.h"
+#line 48 "project.h"
 #line 1 ".\\inc\\hw_types.h"
 
 
@@ -18195,7 +18189,7 @@ int fgetc(FILE *f);
 
 
 
-#line 55 "project.h"
+#line 49 "project.h"
 #line 1 "myPWM.h"
 #line 2 "myPWM.h"
 #line 3 "myPWM.h"
@@ -18211,17 +18205,17 @@ int fgetc(FILE *f);
 #line 13 "myPWM.h"
 
 
-#line 56 "project.h"
-#line 1 ".\\src\\Uart_helper.h"
-#line 2 ".\\src\\Uart_helper.h"
-#line 3 ".\\src\\Uart_helper.h"
-#line 4 ".\\src\\Uart_helper.h"
-#line 5 ".\\src\\Uart_helper.h"
-#line 6 ".\\src\\Uart_helper.h"
-#line 7 ".\\src\\Uart_helper.h"
-#line 8 ".\\src\\Uart_helper.h"
-#line 9 ".\\src\\Uart_helper.h"
-#line 10 ".\\src\\Uart_helper.h"
+#line 50 "project.h"
+#line 1 "./src/Uart_helper.h"
+#line 2 "./src/Uart_helper.h"
+#line 3 "./src/Uart_helper.h"
+#line 4 "./src/Uart_helper.h"
+#line 5 "./src/Uart_helper.h"
+#line 6 "./src/Uart_helper.h"
+#line 7 "./src/Uart_helper.h"
+#line 8 "./src/Uart_helper.h"
+#line 9 "./src/Uart_helper.h"
+#line 10 "./src/Uart_helper.h"
 
 
 void UartSetup(void);		
@@ -18294,7 +18288,7 @@ int fgetc(FILE *f);
 
 
 
-#line 57 "project.h"
+#line 51 "project.h"
 
 #line 2 "project.c"
 #line 3 "project.c"
@@ -18306,12 +18300,15 @@ int fgetc(FILE *f);
 
 void SetupHardware()
 {
+	
+	FPULazyStackingEnable();
+	FPUEnable();
 	UartSetup();
 }
 
 
 int  main(void)
-       {		
+{		
 		SetupHardware();
 		printf("Hardware setup complete\n\n");
 		setupPWM();

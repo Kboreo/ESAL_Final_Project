@@ -13,12 +13,15 @@ __error__(char *pcFilename, uint32_t ui32Line)
 
 void SetupHardware()
 {
+	// Enable the Floating-point overflow exception.
+	FPULazyStackingEnable();
+	FPUEnable();
 	UartSetup();
 }
 
 
 int  main(void)
-       {		
+{		
 		SetupHardware();
 		printf("Hardware setup complete\n\n");
 		setupPWM();
