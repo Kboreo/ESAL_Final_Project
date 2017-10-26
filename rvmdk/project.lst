@@ -64682,10 +64682,9 @@ N
 N
 Nvoid SetupHardware()
 N{
-N	// Enable the Floating-point overflow exception.
-N	FPULazyStackingEnable();
-N	FPUEnable();
 N	UartSetup();
+W "project.c" 17 2 function "FloatSetup" declared implicitly
+N	FloatSetup();	
 N}
 N
 N
@@ -64693,12 +64692,14 @@ Nint  main(void)
 N{		
 N		SetupHardware();
 N		printf("Hardware setup complete\n\n");
-W "project.c" 27 3 function "setupPWM" declared implicitly
+W "project.c" 25 3 function "setupPWM" declared implicitly
 N		setupPWM();
 N		printf("PWM setup complete \n\n");
 N		//pwmTest();
-W "project.c" 30 3 function "setupENCODER" declared implicitly
+W "project.c" 28 3 function "setupENCODER" declared implicitly
 N		setupENCODER();
+N	
+N		
 N}
 N
 N

@@ -27,6 +27,9 @@
 #define SYSCTL_RCGC2_R          (*((volatile unsigned long *)0x400FE108))
 #define SYSCTL_RCGCGPIO_R				(*((volatile unsigned long *)0x400FE644))
 
+
+
+
 //Function that sets up the Encoder
 void setupENCODER(void)
 {
@@ -91,11 +94,13 @@ float x;
 //	x = x * .000807;  //Multiple the x value with the "offset" to get it to the correct value	
 	x = 1.29112;
 	
-	printf("Voltage on PE3 is, %.8fV \n\n", x);  //Displays voltage to the End user		 
+	printf("Voltage on PE3 is, %.2fV \n\n", x);  //Displays voltage to the End user		 
 
 
 	
 	}
 
 }
+
+
 	

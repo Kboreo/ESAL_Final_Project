@@ -22,7 +22,7 @@ Dialog DLL:      TCM.DLL V1.32.0.0
  
 <h2>Project:</h2>
 C:\Users\ptesolin\Documents\GitHub\ADC\ESAL_Final_Project\project.uvprojx
-Project File Date:  10/25/2017
+Project File Date:  10/26/2017
 
 <h2>Output:</h2>
 *** Using Compiler 'V5.06 update 5 (build 528)', folder: 'C:\Keil_v5\ARM\ARMCC\Bin'
@@ -47,9 +47,9 @@ myPWM.c(75): warning:  #1-D: last line of file ends without a newline
   	
 myPWM.c: 7 warnings, 0 errors
 creating preprocessor file for Encoder.c...
-creating preprocessor file for Uart_helper.c...
+creating preprocessor file for Float_Setup.c...
 compiling Encoder.c...
-Encoder.h(26): warning:  #1-D: last line of file ends without a newline
+Encoder.h(27): warning:  #1-D: last line of file ends without a newline
   void QEIConfigure(uint32_t ui32Base, uint32_t ui32Config, uint32_t ui32MaxPosition);
 Encoder.c(18): warning:  #47-D: incompatible redefinition of macro "GPIO_PORTF_DATA_R"  (declared at line 701 of ".\inc\tm4c123gh6pm.h")
   #define GPIO_PORTF_DATA_R       (*((volatile unsigned long *)0x400073FC))
@@ -73,19 +73,24 @@ Encoder.c(27): warning:  #47-D: incompatible redefinition of macro "SYSCTL_RCGC2
   #define SYSCTL_RCGC2_R          (*((volatile unsigned long *)0x400FE108))
 Encoder.c(28): warning:  #47-D: incompatible redefinition of macro "SYSCTL_RCGCGPIO_R"  (declared at line 2113 of ".\inc\tm4c123gh6pm.h")
   #define SYSCTL_RCGCGPIO_R				(*((volatile unsigned long *)0x400FE644))
-Encoder.c(33): warning:  #177-D: variable "i"  was declared but never referenced
+Encoder.c(36): warning:  #177-D: variable "i"  was declared but never referenced
   	uint32_t i,ticks;
-Encoder.c(34): warning:  #177-D: variable "w"  was declared but never referenced
+Encoder.c(37): warning:  #177-D: variable "w"  was declared but never referenced
   	double w,speed;
-Encoder.c(34): warning:  #177-D: variable "speed"  was declared but never referenced
+Encoder.c(37): warning:  #177-D: variable "speed"  was declared but never referenced
   	double w,speed;
-Encoder.c(101): warning:  #1-D: last line of file ends without a newline
+Encoder.c(106): warning:  #1-D: last line of file ends without a newline
   	
 Encoder.c: 16 warnings, 0 errors
-compiling Uart_helper.c...
-src\Uart_helper.c(72): warning:  #1-D: last line of file ends without a newline
-  }
-src\Uart_helper.c: 1 warning, 0 errors
+creating preprocessor file for Uart_helper.c...
+compiling Float_Setup.c...
+Float_Setup.h(22): warning:  #1-D: last line of file ends without a newline
+  #include "Uart_helper.h"
+Encoder.h(27): warning:  #1-D: last line of file ends without a newline
+  void QEIConfigure(uint32_t ui32Base, uint32_t ui32Config, uint32_t ui32MaxPosition);
+Float_Setup.c(18): warning:  #1-D: last line of file ends without a newline
+   
+Float_Setup.c: 3 warnings, 0 errors
 compiling project.c...
 driverlib/hibernate.h(229): warning:  #231-D: declaration is not visible outside of function
   extern void HibernateCalendarSet(struct tm *psTime);
@@ -95,16 +100,22 @@ driverlib/hibernate.h(231): warning:  #231-D: declaration is not visible outside
   extern void HibernateCalendarMatchSet(uint32_t ui32Index, struct tm *psTime);
 driverlib/hibernate.h(232): warning:  #231-D: declaration is not visible outside of function
   extern void HibernateCalendarMatchGet(uint32_t ui32Index, struct tm *psTime);
-project.c(27): warning:  #223-D: function "setupPWM" declared implicitly
+project.c(17): warning:  #223-D: function "FloatSetup" declared implicitly
+  	FloatSetup();	
+project.c(25): warning:  #223-D: function "setupPWM" declared implicitly
   		setupPWM();
-project.c(30): warning:  #223-D: function "setupENCODER" declared implicitly
+project.c(28): warning:  #223-D: function "setupENCODER" declared implicitly
   		setupENCODER();
-project.c: 6 warnings, 0 errors
+project.c: 7 warnings, 0 errors
+compiling Uart_helper.c...
+src\Uart_helper.c(72): warning:  #1-D: last line of file ends without a newline
+  }
+src\Uart_helper.c: 1 warning, 0 errors
 linking...
-Program Size: Code=6596 RO-data=1180 RW-data=4 ZI-data=260  
+Program Size: Code=6580 RO-data=1180 RW-data=4 ZI-data=364  
 FromELF: creating hex file...
 After Build - User command #1: fromelf --bin --output .\rvmdk\project.bin .\rvmdk\project.axf
-".\rvmdk\project.axf" - 0 Error(s), 30 Warning(s).
+".\rvmdk\project.axf" - 0 Error(s), 34 Warning(s).
 
 <h2>Software Packages used:</h2>
 

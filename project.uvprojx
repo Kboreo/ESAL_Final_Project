@@ -386,14 +386,14 @@
               <FilePath>.\project.c</FilePath>
             </File>
             <File>
-              <FileName>startup_rvmdk.S</FileName>
-              <FileType>2</FileType>
-              <FilePath>.\startup_rvmdk.S</FilePath>
-            </File>
-            <File>
               <FileName>project.h</FileName>
               <FileType>5</FileType>
               <FilePath>.\project.h</FilePath>
+            </File>
+            <File>
+              <FileName>startup_rvmdk.S</FileName>
+              <FileType>2</FileType>
+              <FilePath>.\startup_rvmdk.S</FilePath>
             </File>
             <File>
               <FileName>myPWM.c</FileName>
@@ -440,6 +440,16 @@
         <Group>
           <GroupName>src</GroupName>
           <Files>
+            <File>
+              <FileName>Float_Setup.h</FileName>
+              <FileType>5</FileType>
+              <FilePath>.\Float_Setup.h</FilePath>
+            </File>
+            <File>
+              <FileName>Float_Setup.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>.\Float_Setup.c</FilePath>
+            </File>
             <File>
               <FileName>Uart_helper.c</FileName>
               <FileType>1</FileType>

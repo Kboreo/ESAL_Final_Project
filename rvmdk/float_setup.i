@@ -1,18 +1,5 @@
-#line 1 "Encoder.c"
-
-
-
-
-
-
-
-
-
-
- 
-
-
-#line 1 "Encoder.h"
+#line 1 "Float_Setup.c"
+#line 1 "Float_Setup.h"
 #line 1 "driverlib/pin_map.h"
 
 
@@ -702,7 +689,7 @@
 
 #line 20952 "driverlib/pin_map.h"
 
-#line 2 "Encoder.h"
+#line 2 "Float_Setup.h"
 #line 1 "C:\\Keil_v5\\ARM\\ARMCC\\Bin\\..\\include\\stdint.h"
  
  
@@ -959,7 +946,7 @@ typedef unsigned     long long uintmax_t;
 
 
  
-#line 3 "Encoder.h"
+#line 3 "Float_Setup.h"
 #line 1 "C:\\Keil_v5\\ARM\\ARMCC\\Bin\\..\\include\\stdio.h"
  
  
@@ -1859,7 +1846,7 @@ extern __declspec(__nothrow) void __use_no_semihosting(void);
 
  
 
-#line 4 "Encoder.h"
+#line 4 "Float_Setup.h"
 #line 1 "C:\\Keil_v5\\ARM\\ARMCC\\Bin\\..\\include\\stdbool.h"
  
 
@@ -1878,7 +1865,7 @@ extern __declspec(__nothrow) void __use_no_semihosting(void);
 
 
 
-#line 5 "Encoder.h"
+#line 5 "Float_Setup.h"
 #line 1 "C:\\Keil_v5\\ARM\\ARMCC\\Bin\\..\\include\\math.h"
 
 
@@ -2704,7 +2691,7 @@ __declspec(__nothrow) long double truncl(long double );
 
 
  
-#line 6 "Encoder.h"
+#line 6 "Float_Setup.h"
 #line 1 "inc/hw_gpio.h"
 
 
@@ -2874,7 +2861,7 @@ __declspec(__nothrow) long double truncl(long double );
                                             
 #line 212 "inc/hw_gpio.h"
 
-#line 7 "Encoder.h"
+#line 7 "Float_Setup.h"
 #line 1 "inc/hw_types.h"
 
 
@@ -3008,7 +2995,7 @@ __declspec(__nothrow) long double truncl(long double );
 
 
 
-#line 8 "Encoder.h"
+#line 8 "Float_Setup.h"
 #line 1 "inc/hw_memmap.h"
 
 
@@ -3070,7 +3057,7 @@ __declspec(__nothrow) long double truncl(long double );
                                             
 #line 150 "inc/hw_memmap.h"
 
-#line 9 "Encoder.h"
+#line 9 "Float_Setup.h"
 #line 1 "driverlib/sysctl.h"
 
 
@@ -3364,8 +3351,8 @@ extern _Bool SysCtlVCOGet(uint32_t ui32Crystal, uint32_t *pui32VCOFrequency);
 
 
 
-#line 10 "Encoder.h"
-#line 11 "Encoder.h"
+#line 10 "Float_Setup.h"
+#line 11 "Float_Setup.h"
 #line 1 "driverlib/gpio.h"
 
 
@@ -3538,7 +3525,7 @@ extern void GPIOADCTriggerDisable(uint32_t ui32Port, uint8_t ui8Pins);
 
 
 
-#line 12 "Encoder.h"
+#line 12 "Float_Setup.h"
 #line 1 "driverlib/pwm.h"
 
 
@@ -3789,7 +3776,7 @@ extern void PWMOutputUpdateMode(uint32_t ui32Base,
 
 
 
-#line 13 "Encoder.h"
+#line 13 "Float_Setup.h"
 #line 1 "driverlib/uart.h"
 
 
@@ -4020,7 +4007,7 @@ extern void UARTLoopbackEnable(uint32_t ui32Base);
 
 
 
-#line 14 "Encoder.h"
+#line 14 "Float_Setup.h"
 #line 1 "driverlib/qei.h"
 
 
@@ -4146,9 +4133,9 @@ extern void QEIIntClear(uint32_t ui32Base, uint32_t ui32IntFlags);
 
 
 
-#line 15 "Encoder.h"
-#line 16 "Encoder.h"
-#line 17 "Encoder.h"
+#line 15 "Float_Setup.h"
+#line 16 "Float_Setup.h"
+#line 17 "Float_Setup.h"
 #line 1 "driverlib/fpu.h"
 
 
@@ -4262,9 +4249,9 @@ extern void FPURoundingModeSet(uint32_t ui32Mode);
 
 
 
-#line 18 "Encoder.h"
-#line 19 "Encoder.h"
-#line 20 "Encoder.h"
+#line 18 "Float_Setup.h"
+#line 19 "Float_Setup.h"
+#line 20 "Float_Setup.h"
 #line 1 ".\\inc\\tm4c123gh6pm.h"
 
 
@@ -12324,6 +12311,112 @@ extern void FPURoundingModeSet(uint32_t ui32Mode);
 
 
 
+#line 21 "Float_Setup.h"
+#line 22 "Float_Setup.h"
+#line 1 ".\\src\\Uart_helper.h"
+#line 2 ".\\src\\Uart_helper.h"
+#line 3 ".\\src\\Uart_helper.h"
+#line 4 ".\\src\\Uart_helper.h"
+#line 5 ".\\src\\Uart_helper.h"
+#line 6 ".\\src\\Uart_helper.h"
+#line 7 ".\\src\\Uart_helper.h"
+#line 8 ".\\src\\Uart_helper.h"
+#line 9 ".\\src\\Uart_helper.h"
+#line 10 ".\\src\\Uart_helper.h"
+
+
+void UartSetup(void);		
+
+
+int fputc(int ch, FILE *f);
+
+
+
+int fgetc(FILE *f);
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+#line 23 "Float_Setup.h"
+#line 2 "Float_Setup.c"
+#line 1 "Encoder.h"
+#line 2 "Encoder.h"
+#line 3 "Encoder.h"
+#line 4 "Encoder.h"
+#line 5 "Encoder.h"
+#line 6 "Encoder.h"
+#line 7 "Encoder.h"
+#line 8 "Encoder.h"
+#line 9 "Encoder.h"
+#line 10 "Encoder.h"
+#line 11 "Encoder.h"
+#line 12 "Encoder.h"
+#line 13 "Encoder.h"
+#line 14 "Encoder.h"
+#line 15 "Encoder.h"
+#line 16 "Encoder.h"
+#line 17 "Encoder.h"
+#line 18 "Encoder.h"
+#line 19 "Encoder.h"
+#line 20 "Encoder.h"
 #line 21 "Encoder.h"
 #line 22 "Encoder.h"
 #line 1 ".\\src\\Uart_helper.h"
@@ -12414,86 +12507,20 @@ int fgetc(FILE *f);
 
 
 void QEIConfigure(uint32_t ui32Base, uint32_t ui32Config, uint32_t ui32MaxPosition);
-#line 15 "Encoder.c"
-#line 16 "Encoder.c"
-
-
-#line 29 "Encoder.c"
+#line 3 "Float_Setup.c"
+#line 4 "Float_Setup.c"
 
 
 
+uint32_t first_Test[13];
+uint32_t test[13];
+ 
+ void FloatSetup()
+ {
 
 
-void setupENCODER(void)
-{
-	uint32_t i,ticks;
-	double w,speed;
-	
-  SysCtlPeripheralEnable(0xf0000803);
-  SysCtlPeripheralEnable(0xf0004400);
-
-	
-	(*((volatile uint32_t *)(0x40007000 + 0x00000520))) = 0x4C4F434B; 
-	(*((volatile uint32_t *)(0x40007000 + 0x00000524))) |= 0x80;
-	(*((volatile uint32_t *)(0x40007000 + 0x00000520))) = 0;
-
-	
-	GPIOPinConfigure(0x00031806);
-	GPIOPinConfigure(0x00031C06);
-
-	
-	GPIOPinTypeQEI(0x40007000, 0x00000040 | 0x00000080);
-	GPIOPadConfigSet(0x40007000, 0x00000040 |  0x00000080, 0x00000001, 0x00000008); 
-
-	
-	QEIIntDisable(0x4002C000,0x00000008 | 0x00000004 | 0x00000002 | 0x00000001); 
-
-	
-	
-	QEIConfigure(0x4002C000, (0x00000008  | 0x00000000 	| 0x00000000 | 0x00000000), 1919);  
-
-
-	
-	
-	
-	QEIEnable(0x4002C000);
-	QEIFilterEnable(0x4002C000);
-	QEIVelocityEnable(0x4002C000);
-	QEIVelocityConfigure(0x4002C000, 0x00000040, 1600000);
-  QEIFilterConfigure(0x4002C000, 0x00000000);
-
-
-	while(1)
-	{	
-	for (int i = 0; i<2000; i++)
-	{
-		__nop();
-	}
-	
-	
-	
-	
-
-	ticks = QEIVelocityGet(0x4002C000);
-	ticks = ticks * 100;
-	
-	
-	
-	
-
-
-float x;	
-
-
-	x = 1.29112;
-	
-	printf("Voltage on PE3 is, %.2fV \n\n", x);  
-
-
-	
-	}
-
-}
-
-
-	
+	 first_Test[12] = 1;
+	 test[2] = 2;
+ 
+ }
+ 

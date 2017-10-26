@@ -13,10 +13,8 @@ __error__(char *pcFilename, uint32_t ui32Line)
 
 void SetupHardware()
 {
-	// Enable the Floating-point overflow exception.
-	FPULazyStackingEnable();
-	FPUEnable();
 	UartSetup();
+	FloatSetup();	
 }
 
 
@@ -28,6 +26,8 @@ int  main(void)
 		printf("PWM setup complete \n\n");
 		//pwmTest();
 		setupENCODER();
+	
+		
 }
 
 

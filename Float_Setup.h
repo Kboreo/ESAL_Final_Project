@@ -20,8 +20,3 @@
 #include "tm4c123gh6pm.h"
 #include "hw_types.h"
 #include "Uart_helper.h"
-
-
-
-
-void QEIConfigure(uint32_t ui32Base, uint32_t ui32Config, uint32_t ui32MaxPosition);
