@@ -12515,8 +12515,8 @@ int fgetc(FILE *f);
 
 #line 23 "Read_Encoder.h"
 
-double ReadEncoder(void);
 
+void ReadEncoder(void);
 
 #line 24 "Encoder.h"
 
@@ -12569,7 +12569,7 @@ void setupENCODER(void)
 	QEIEnable(0x4002C000);
 	QEIFilterEnable(0x4002C000);
 	QEIVelocityEnable(0x4002C000);
-	QEIVelocityConfigure(0x4002C000, 0x00000040, 1600000);
+	QEIVelocityConfigure(0x4002C000, 0x00000040, 160000);
   QEIFilterConfigure(0x4002C000, 0x00000000);
 
 

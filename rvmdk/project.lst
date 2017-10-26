@@ -64696,7 +64696,7 @@ N	FPULazyStackingEnable();
 N}
 N
 N
-N double speed; 
+Nextern double speed; 
 N
 Nint  main(void)
 N{		

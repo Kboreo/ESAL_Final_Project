@@ -39688,8 +39688,8 @@ N//MMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMM
 N
 L 23 "Read_Encoder.h" 2
 N
-Ndouble ReadEncoder(void);
-N
+N//double ReadEncoder(void);
+Nvoid ReadEncoder(void);
 N
 L 24 "Encoder.h" 2
 N

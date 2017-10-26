@@ -39592,8 +39592,8 @@ N//MMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMM
 N
 L 23 "Read_Encoder.h" 2
 N
-Ndouble ReadEncoder(void);
-N
+N//double ReadEncoder(void);
+Nvoid ReadEncoder(void);
 N
 L 24 "Encoder.h" 2
 N
@@ -39682,8 +39682,8 @@ N	QEIFilterEnable(QEI0_BASE);
 X	QEIFilterEnable(0x4002C000);
 N	QEIVelocityEnable(QEI0_BASE);
 X	QEIVelocityEnable(0x4002C000);
-N	QEIVelocityConfigure(QEI0_BASE, QEI_VELDIV_2, 1600000);//capture velocity after .1 seconds
-X	QEIVelocityConfigure(0x4002C000, 0x00000040, 1600000);
+N	QEIVelocityConfigure(QEI0_BASE, QEI_VELDIV_2, 160000);//capture velocity after .01 seconds
+X	QEIVelocityConfigure(0x4002C000, 0x00000040, 160000);
 N  QEIFilterConfigure(QEI0_BASE, QEI_FILTCNT_2);
 X  QEIFilterConfigure(0x4002C000, 0x00000000);
 N

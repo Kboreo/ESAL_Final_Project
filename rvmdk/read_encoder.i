@@ -12397,8 +12397,8 @@ int fgetc(FILE *f);
 
 #line 23 "Read_Encoder.h"
 
-double ReadEncoder(void);
 
+void ReadEncoder(void);
 
 #line 2 "Read_Encoder.c"
 #line 1 "Encoder.h"
@@ -12612,8 +12612,8 @@ int fgetc(FILE *f);
 
 #line 23 "Read_Encoder.h"
 
-double ReadEncoder(void);
 
+void ReadEncoder(void);
 
 #line 24 "Encoder.h"
 
@@ -19451,17 +19451,20 @@ int fgetc(FILE *f);
 #line 4 "Read_Encoder.c"
 #line 5 "Read_Encoder.c"
 
-	uint32_t i,ticks;
+	double i,ticks;
 	double speed;
+	int x = 0;
 
-	double ReadEncoder(void)
-	{
 	
-	
-	for (int i = 0; i<2000; i++)
+	void ReadEncoder(void)
+	{	
+	for (int y = 0; y<180; y++)
+		{
+		for (int i = 0; i<2000; i++)
 	{
 		__nop();
 	}
+	
 	
 	
 	
@@ -19470,10 +19473,10 @@ int fgetc(FILE *f);
 	ticks = QEIVelocityGet(0x4002C000);
 	
 	
-	speed = ticks * 3.141* 2.5 / 192;
-	
-	printf("Speed = %.2f cm/s \n\n", speed);
+	speed = ticks *1000 / 19.2;
+	x++;
+	printf(" %i %.2f -", x, speed);
 
-return speed;	
 
+}
 	}

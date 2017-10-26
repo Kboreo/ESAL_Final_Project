@@ -30,6 +30,7 @@ Rebuild target 'project'
 creating preprocessor file for project.c...
 assembling startup_rvmdk.S...
 creating preprocessor file for myPWM.c...
+creating preprocessor file for Encoder.c...
 compiling myPWM.c...
 myPWM.c(66): warning:  #177-D: variable "fadeUp"  was declared but never referenced
     bool fadeUp = true;
@@ -46,7 +47,6 @@ myPWM.c(71): warning:  #177-D: variable "y"  was declared but never referenced
 myPWM.c(75): warning:  #1-D: last line of file ends without a newline
   	
 myPWM.c: 7 warnings, 0 errors
-creating preprocessor file for Encoder.c...
 creating preprocessor file for Float_Setup.c...
 compiling Encoder.c...
 Encoder.h(28): warning:  #1-D: last line of file ends without a newline
@@ -119,15 +119,14 @@ driverlib/hibernate.h(231): warning:  #231-D: declaration is not visible outside
   extern void HibernateCalendarMatchSet(uint32_t ui32Index, struct tm *psTime);
 driverlib/hibernate.h(232): warning:  #231-D: declaration is not visible outside of function
   extern void HibernateCalendarMatchGet(uint32_t ui32Index, struct tm *psTime);
-Read_Encoder.c(31): warning:  #1-D: last line of file ends without a newline
+Read_Encoder.c(34): warning:  #1-D: last line of file ends without a newline
   	}
 Read_Encoder.c: 6 warnings, 0 errors
 linking...
-.\rvmdk\project.axf: Error: L6200E: Symbol speed multiply defined (by read_encoder.o and project.o).
-Not enough information to list image symbols.
-Not enough information to list load addresses in the image map.
-Finished: 2 information, 0 warning and 1 error messages.
-".\rvmdk\project.axf" - 1 Error(s), 38 Warning(s).
+Program Size: Code=6740 RO-data=1180 RW-data=32 ZI-data=360  
+FromELF: creating hex file...
+After Build - User command #1: fromelf --bin --output .\rvmdk\project.bin .\rvmdk\project.axf
+".\rvmdk\project.axf" - 0 Error(s), 38 Warning(s).
 
 <h2>Software Packages used:</h2>
 
@@ -150,7 +149,6 @@ Package Vendor: Keil
 <h2>Collection of Component Files used:</h2>
 
    * Component: ARM::CMSIS:CORE:5.0.1
-Target not created.
 Build Time Elapsed:  00:00:06
 </pre>
 </body>

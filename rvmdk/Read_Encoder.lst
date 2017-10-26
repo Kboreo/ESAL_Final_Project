@@ -39472,8 +39472,8 @@ N//MMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMM
 N
 L 23 "Read_Encoder.h" 2
 N
-Ndouble ReadEncoder(void);
-N
+N//double ReadEncoder(void);
+Nvoid ReadEncoder(void);
 N
 L 2 "Read_Encoder.c" 2
 N#include "Encoder.h"
@@ -39691,8 +39691,8 @@ N//MMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMM
 N
 L 23 "Read_Encoder.h" 2
 N
-Ndouble ReadEncoder(void);
-N
+N//double ReadEncoder(void);
+Nvoid ReadEncoder(void);
 N
 L 24 "Encoder.h" 2
 N
@@ -66571,17 +66571,20 @@ N
 L 4 "Read_Encoder.c" 2
 N#include "tm4c123gh6pm.h"	//Header file accesses registers in TMC123 microcontroller
 N
-N	uint32_t i,ticks;
+N	double i,ticks;
 N	double speed;
+N	int x = 0;
 N
-N	double ReadEncoder(void)
-N	{
-N	
-N	
-N	for (int i = 0; i<2000; i++)
+N	//double ReadEncoder(void)
+N	void ReadEncoder(void)
+N	{	
+N	for (int y = 0; y<180; y++)
+N		{
+N		for (int i = 0; i<2000; i++)
 N	{
 N		__nop();
 N	}
+N	
 N	//for later use
 N	//int  posistion = QEIPositionGet(QEI0_BASE);
 N	//int direction = QEIDirectionGet(QEI0_BASE);
@@ -66591,11 +66594,11 @@ N	ticks = QEIVelocityGet(QEI0_BASE);
 X	ticks = QEIVelocityGet(0x4002C000);
 N	
 N	//using a 2.5cm wheel, speed in cm per second
-N	speed = ticks * 3.141* 2.5 / 192;
-N	
-N	printf("Speed = %.2f cm/s \n\n", speed);
+N	speed = ticks *1000 / 19.2;
+N	x++;
+N	printf(" %i %.2f -", x, speed);
 N
-Nreturn speed;	
-N
-W "Read_Encoder.c" 31 3 last line of file ends without a newline
+N//return speed;	
+N}
+W "Read_Encoder.c" 34 3 last line of file ends without a newline
 N	}

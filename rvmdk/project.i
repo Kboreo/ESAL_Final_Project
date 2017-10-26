@@ -18311,7 +18311,7 @@ void SetupHardware()
 }
 
 
- double speed; 
+extern double speed; 
 
 int  main(void)
 {		
