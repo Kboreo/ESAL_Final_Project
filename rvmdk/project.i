@@ -18290,6 +18290,8 @@ int fgetc(FILE *f);
 
 #line 51 "project.h"
 
+
+
 #line 2 "project.c"
 #line 3 "project.c"
 #line 4 "project.c"
@@ -18301,20 +18303,29 @@ int fgetc(FILE *f);
 void SetupHardware()
 {
 	UartSetup();
-	FloatSetup();	
+	FloatSetup();
+	setupENCODER();	
+	setupPWM();
+	FPUEnable();
+	FPULazyStackingEnable();
 }
 
+
+ double speed; 
 
 int  main(void)
 {		
 		SetupHardware();
 		printf("Hardware setup complete\n\n");
-		setupPWM();
+		
 		printf("PWM setup complete \n\n");
 		
-		setupENCODER();
-	
-		
+
+while(1)
+{	
+	 ReadEncoder();
+		printf("current speed = %.2f cm/s \n\n", speed);	
+}
 }
 
 

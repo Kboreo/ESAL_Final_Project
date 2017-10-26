@@ -460,6 +460,16 @@
               <FileType>5</FileType>
               <FilePath>.\src\Uart_helper.h</FilePath>
             </File>
+            <File>
+              <FileName>Read_Encoder.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>.\Read_Encoder.c</FilePath>
+            </File>
+            <File>
+              <FileName>Read_Encoder.h</FileName>
+              <FileType>5</FileType>
+              <FilePath>.\Read_Encoder.h</FilePath>
+            </File>
           </Files>
         </Group>
         <Group>

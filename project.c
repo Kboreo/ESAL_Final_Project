@@ -14,20 +14,29 @@ __error__(char *pcFilename, uint32_t ui32Line)
 void SetupHardware()
 {
 	UartSetup();
-	FloatSetup();	
+	FloatSetup();
+	setupENCODER();	
+	setupPWM();
+	FPUEnable();
+	FPULazyStackingEnable();
 }
 
+
+extern double speed; 
 
 int  main(void)
 {		
 		SetupHardware();
 		printf("Hardware setup complete\n\n");
-		setupPWM();
+		
 		printf("PWM setup complete \n\n");
 		//pwmTest();
-		setupENCODER();
-	
-		
+
+while(1)
+{	
+	 ReadEncoder();
+		printf("current speed = %.2f cm/s \n\n", speed);	
+}
 }
 
 

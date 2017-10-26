@@ -20,9 +20,7 @@
 #include "tm4c123gh6pm.h"
 #include "hw_types.h"
 #include "Uart_helper.h"
-#include "Read_Encoder.h"
+
+double ReadEncoder(void);
 
 
-
-
-void QEIConfigure(uint32_t ui32Base, uint32_t ui32Config, uint32_t ui32MaxPosition);

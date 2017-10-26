@@ -12409,6 +12409,116 @@ int fgetc(FILE *f);
 
 
 #line 23 "Encoder.h"
+#line 1 "Read_Encoder.h"
+#line 2 "Read_Encoder.h"
+#line 3 "Read_Encoder.h"
+#line 4 "Read_Encoder.h"
+#line 5 "Read_Encoder.h"
+#line 6 "Read_Encoder.h"
+#line 7 "Read_Encoder.h"
+#line 8 "Read_Encoder.h"
+#line 9 "Read_Encoder.h"
+#line 10 "Read_Encoder.h"
+#line 11 "Read_Encoder.h"
+#line 12 "Read_Encoder.h"
+#line 13 "Read_Encoder.h"
+#line 14 "Read_Encoder.h"
+#line 15 "Read_Encoder.h"
+#line 16 "Read_Encoder.h"
+#line 17 "Read_Encoder.h"
+#line 18 "Read_Encoder.h"
+#line 19 "Read_Encoder.h"
+#line 20 "Read_Encoder.h"
+#line 21 "Read_Encoder.h"
+#line 22 "Read_Encoder.h"
+#line 1 ".\\src\\Uart_helper.h"
+#line 2 ".\\src\\Uart_helper.h"
+#line 3 ".\\src\\Uart_helper.h"
+#line 4 ".\\src\\Uart_helper.h"
+#line 5 ".\\src\\Uart_helper.h"
+#line 6 ".\\src\\Uart_helper.h"
+#line 7 ".\\src\\Uart_helper.h"
+#line 8 ".\\src\\Uart_helper.h"
+#line 9 ".\\src\\Uart_helper.h"
+#line 10 ".\\src\\Uart_helper.h"
+
+
+void UartSetup(void);		
+
+
+int fputc(int ch, FILE *f);
+
+
+
+int fgetc(FILE *f);
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+#line 23 "Read_Encoder.h"
+
+double ReadEncoder(void);
+
+
+#line 24 "Encoder.h"
 
 
 
@@ -12426,8 +12536,8 @@ void QEIConfigure(uint32_t ui32Base, uint32_t ui32Config, uint32_t ui32MaxPositi
 
 void setupENCODER(void)
 {
-	uint32_t i,ticks;
-	double w,speed;
+
+
 	
   SysCtlPeripheralEnable(0xf0000803);
   SysCtlPeripheralEnable(0xf0004400);
@@ -12462,36 +12572,6 @@ void setupENCODER(void)
 	QEIVelocityConfigure(0x4002C000, 0x00000040, 1600000);
   QEIFilterConfigure(0x4002C000, 0x00000000);
 
-
-	while(1)
-	{	
-	for (int i = 0; i<2000; i++)
-	{
-		__nop();
-	}
-	
-	
-	
-	
-
-	ticks = QEIVelocityGet(0x4002C000);
-	ticks = ticks * 100;
-	
-	
-	
-	
-
-
-float x;	
-
-
-	x = 1.29112;
-	
-	printf("Voltage on PE3 is, %.2fV \n\n", x);  
-
-
-	
-	}
 
 }
 

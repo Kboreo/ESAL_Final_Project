@@ -64667,6 +64667,8 @@ N//MMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMM
 N
 L 51 "project.h" 2
 N
+N
+N
 L 2 "project.c" 2
 N#include <stdio.h>
 N#include <stdint.h>
@@ -64684,22 +64686,32 @@ Nvoid SetupHardware()
 N{
 N	UartSetup();
 W "project.c" 17 2 function "FloatSetup" declared implicitly
-N	FloatSetup();	
+N	FloatSetup();
+W "project.c" 18 2 function "setupENCODER" declared implicitly
+N	setupENCODER();	
+W "project.c" 19 2 function "setupPWM" declared implicitly
+N	setupPWM();
+N	FPUEnable();
+N	FPULazyStackingEnable();
 N}
 N
+N
+N double speed; 
 N
 Nint  main(void)
 N{		
 N		SetupHardware();
 N		printf("Hardware setup complete\n\n");
-W "project.c" 25 3 function "setupPWM" declared implicitly
-N		setupPWM();
+N		
 N		printf("PWM setup complete \n\n");
 N		//pwmTest();
-W "project.c" 28 3 function "setupENCODER" declared implicitly
-N		setupENCODER();
-N	
-N		
+N
+Nwhile(1)
+N{	
+W "project.c" 37 3 function "ReadEncoder" declared implicitly
+N	 ReadEncoder();
+N		printf("current speed = %.2f cm/s \n\n", speed);	
+N}
 N}
 N
 N
