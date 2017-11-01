@@ -12516,8 +12516,9 @@ int fgetc(FILE *f);
 #line 23 "Read_Encoder.h"
 
 
-void ReadEncoder(void);
 
+
+double ReadEncoder(void);
 #line 24 "Encoder.h"
 
 

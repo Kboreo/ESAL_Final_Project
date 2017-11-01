@@ -22,7 +22,7 @@ Dialog DLL:      TCM.DLL V1.32.0.0
  
 <h2>Project:</h2>
 C:\Users\ptesolin\Documents\GitHub\ADC\ESAL_Final_Project\project.uvprojx
-Project File Date:  10/26/2017
+Project File Date:  11/01/2017
 
 <h2>Output:</h2>
 *** Using Compiler 'V5.06 update 5 (build 528)', folder: 'C:\Keil_v5\ARM\ARMCC\Bin'
@@ -30,24 +30,15 @@ Rebuild target 'project'
 creating preprocessor file for project.c...
 assembling startup_rvmdk.S...
 creating preprocessor file for myPWM.c...
-creating preprocessor file for Encoder.c...
 compiling myPWM.c...
-myPWM.c(66): warning:  #177-D: variable "fadeUp"  was declared but never referenced
-    bool fadeUp = true;
-myPWM.c: 7 warnings, 0 errors
-    unsigned long increment = 10; //Long increment
-myPWM.c(68): warning:  #177-D: variable "pwmNow"  was declared but never referenced
-    unsigned long pwmNow = 100;	//new PWM value
-myPWM.c(69): warning:  #177-D: variable "i"  was declared but never referenced
-  	int i = 1; //Int used in while loop
-myPWM.c(70): warning:  #177-D: variable "x"  was declared but never referenced
-  	int x;  //Int that contains the output of the button SW2
-myPWM.c(71): warning:  #177-D: variable "y"  was declared but never referenced
-  	int y;  //Int that contains the output of the button SW1
 myPWM.c(75): warning:  #1-D: last line of file ends without a newline
   	
+myPWM.c: 1 warning, 0 errors
+creating preprocessor file for Encoder.c...
 creating preprocessor file for Float_Setup.c...
 compiling Encoder.c...
+Read_Encoder.h(27): warning:  #1-D: last line of file ends without a newline
+  double ReadEncoder(void);
 Encoder.h(28): warning:  #1-D: last line of file ends without a newline
   void QEIConfigure(uint32_t ui32Base, uint32_t ui32Config, uint32_t ui32MaxPosition);
 Encoder.c(18): warning:  #47-D: incompatible redefinition of macro "GPIO_PORTF_DATA_R"  (declared at line 701 of ".\inc\tm4c123gh6pm.h")
@@ -74,16 +65,18 @@ Encoder.c(28): warning:  #47-D: incompatible redefinition of macro "SYSCTL_RCGCG
   #define SYSCTL_RCGCGPIO_R				(*((volatile unsigned long *)0x400FE644))
 Encoder.c(75): warning:  #1-D: last line of file ends without a newline
   	
-Encoder.c: 13 warnings, 0 errors
+Encoder.c: 14 warnings, 0 errors
 creating preprocessor file for Uart_helper.c...
 compiling Float_Setup.c...
 Float_Setup.h(22): warning:  #1-D: last line of file ends without a newline
   #include "Uart_helper.h"
+Read_Encoder.h(27): warning:  #1-D: last line of file ends without a newline
+  double ReadEncoder(void);
 Encoder.h(28): warning:  #1-D: last line of file ends without a newline
   void QEIConfigure(uint32_t ui32Base, uint32_t ui32Config, uint32_t ui32MaxPosition);
 Float_Setup.c(18): warning:  #1-D: last line of file ends without a newline
    
-Float_Setup.c: 3 warnings, 0 errors
+Float_Setup.c: 4 warnings, 0 errors
 compiling project.c...
 driverlib/hibernate.h(229): warning:  #231-D: declaration is not visible outside of function
   extern void HibernateCalendarSet(struct tm *psTime);
@@ -93,21 +86,32 @@ driverlib/hibernate.h(231): warning:  #231-D: declaration is not visible outside
   extern void HibernateCalendarMatchSet(uint32_t ui32Index, struct tm *psTime);
 driverlib/hibernate.h(232): warning:  #231-D: declaration is not visible outside of function
   extern void HibernateCalendarMatchGet(uint32_t ui32Index, struct tm *psTime);
+Read_Encoder.h(27): warning:  #1-D: last line of file ends without a newline
+  double ReadEncoder(void);
+Get_Speed.h(1): warning:  #1-D: last line of file ends without a newline
+   double GetUserSpeed(void);
 project.c(17): warning:  #223-D: function "FloatSetup" declared implicitly
   	FloatSetup();
 project.c(18): warning:  #223-D: function "setupENCODER" declared implicitly
   	setupENCODER();	
 project.c(19): warning:  #223-D: function "setupPWM" declared implicitly
   	setupPWM();
-project.c(37): warning:  #223-D: function "ReadEncoder" declared implicitly
-  	 ReadEncoder();
-project.c: 8 warnings, 0 errors
+project.c(41): warning:  #223-D: function "Speed_Control" declared implicitly
+  		Speed_Control(speed, uSpeed); 
+project.c: 10 warnings, 0 errors
 creating preprocessor file for Read_Encoder.c...
 compiling Uart_helper.c...
 src\Uart_helper.c(72): warning:  #1-D: last line of file ends without a newline
   }
 src\Uart_helper.c: 1 warning, 0 errors
+creating preprocessor file for Speed_Control.c...
+creating preprocessor file for Get_Speed.c...
+compiling Get_Speed.c...
 compiling Read_Encoder.c...
+Read_Encoder.h(27): warning:  #1-D: last line of file ends without a newline
+  double ReadEncoder(void);
+Read_Encoder.h(27): warning:  #1-D: last line of file ends without a newline
+  double ReadEncoder(void);
 Encoder.h(28): warning:  #1-D: last line of file ends without a newline
   void QEIConfigure(uint32_t ui32Base, uint32_t ui32Config, uint32_t ui32MaxPosition);
 driverlib/hibernate.h(229): warning:  #231-D: declaration is not visible outside of function
@@ -118,14 +122,45 @@ driverlib/hibernate.h(231): warning:  #231-D: declaration is not visible outside
   extern void HibernateCalendarMatchSet(uint32_t ui32Index, struct tm *psTime);
 driverlib/hibernate.h(232): warning:  #231-D: declaration is not visible outside of function
   extern void HibernateCalendarMatchGet(uint32_t ui32Index, struct tm *psTime);
-Read_Encoder.c(34): warning:  #1-D: last line of file ends without a newline
+Read_Encoder.h(27): warning:  #1-D: last line of file ends without a newline
+  double ReadEncoder(void);
+Get_Speed.h(1): warning:  #1-D: last line of file ends without a newline
+   double GetUserSpeed(void);
+Read_Encoder.c(35): warning:  #1-D: last line of file ends without a newline
   	}
-Read_Encoder.c: 6 warnings, 0 errors
+Read_Encoder.c(35): warning:  #940-D: missing return statement at end of non-void function "ReadEncoder" 
+  	}
+Read_Encoder.c: 11 warnings, 0 errors
+compiling Speed_Control.c...
+Read_Encoder.h(27): warning:  #1-D: last line of file ends without a newline
+  double ReadEncoder(void);
+Read_Encoder.h(27): warning:  #1-D: last line of file ends without a newline
+  double ReadEncoder(void);
+Encoder.h(28): warning:  #1-D: last line of file ends without a newline
+  void QEIConfigure(uint32_t ui32Base, uint32_t ui32Config, uint32_t ui32MaxPosition);
+driverlib/hibernate.h(229): warning:  #231-D: declaration is not visible outside of function
+  extern void HibernateCalendarSet(struct tm *psTime);
+driverlib/hibernate.h(230): warning:  #231-D: declaration is not visible outside of function
+  extern int HibernateCalendarGet(struct tm *psTime);
+driverlib/hibernate.h(231): warning:  #231-D: declaration is not visible outside of function
+  extern void HibernateCalendarMatchSet(uint32_t ui32Index, struct tm *psTime);
+driverlib/hibernate.h(232): warning:  #231-D: declaration is not visible outside of function
+  extern void HibernateCalendarMatchGet(uint32_t ui32Index, struct tm *psTime);
+Read_Encoder.h(27): warning:  #1-D: last line of file ends without a newline
+  double ReadEncoder(void);
+Get_Speed.h(1): warning:  #1-D: last line of file ends without a newline
+   double GetUserSpeed(void);
+Read_Encoder.h(27): warning:  #1-D: last line of file ends without a newline
+  double ReadEncoder(void);
+Speed_Control.h(25): warning:  #1-D: last line of file ends without a newline
+  void Speed_Control(double Speed, double uSpeed);
+Speed_Control.c: 11 warnings, 0 errors
 linking...
-Program Size: Code=6740 RO-data=1180 RW-data=32 ZI-data=360  
-FromELF: creating hex file...
-After Build - User command #1: fromelf --bin --output .\rvmdk\project.bin .\rvmdk\project.axf
-".\rvmdk\project.axf" - 0 Error(s), 37 Warning(s).
+.\rvmdk\project.axf: Error: L6218E: Undefined symbol GetUserSpeed (referred from project.o).
+Not enough information to list image symbols.
+Not enough information to list load addresses in the image map.
+Finished: 2 information, 0 warning and 1 error messages.
+".\rvmdk\project.axf" - 1 Error(s), 52 Warning(s).
 
 <h2>Software Packages used:</h2>
 
@@ -148,7 +183,8 @@ Package Vendor: Keil
 <h2>Collection of Component Files used:</h2>
 
    * Component: ARM::CMSIS:CORE:5.0.1
-Build Time Elapsed:  00:00:06
+Target not created.
+Build Time Elapsed:  00:00:07
 </pre>
 </body>
 </html>

@@ -9,11 +9,11 @@
 	uint32_t Speed;
 	uint32_t Error;
 	uint32_t DutyC;
-void Speed_Control(void)
+void Speed_Control(double Speed, double uSpeed)
 {	
-	Speed = Input_Speed;
 	
-	Error = Target_Speed - Speed;
+	
+	Error = uSpeed - Speed;
 	DutyC = DutyC + (.238 * Error) / 64; 
 	
 	

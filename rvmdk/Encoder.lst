@@ -39593,8 +39593,10 @@ N
 L 23 "Read_Encoder.h" 2
 N
 N//double ReadEncoder(void);
-Nvoid ReadEncoder(void);
+N//void ReadEncoder(void);
 N
+W "Read_Encoder.h" 27 26 last line of file ends without a newline
+Ndouble ReadEncoder(void);
 L 24 "Encoder.h" 2
 N
 N

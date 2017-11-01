@@ -22,7 +22,9 @@ void SetupHardware()
 }
 
 
-extern double speed; 
+double speed; 
+double uSpeed;
+
 
 int  main(void)
 {		
@@ -34,9 +36,9 @@ int  main(void)
 
 while(1)
 {	
-	 GetUserSpped();
-	 ReadEncoder();
-	 Speed_Control(); 
+		uSpeed = GetUserSpeed();
+		speed = ReadEncoder();
+		Speed_Control(speed, uSpeed); 
 }
 }
 

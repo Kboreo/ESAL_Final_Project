@@ -22,5 +22,6 @@
 #include "Uart_helper.h"
 
 //double ReadEncoder(void);
-void ReadEncoder(void);
+//void ReadEncoder(void);
 
+double ReadEncoder(void);
