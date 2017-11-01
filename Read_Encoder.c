@@ -28,7 +28,8 @@
 	speed = ticks / 19.2;
 	
 	printf("Speed is %.2f rps", speed);
-
+///This is only a test
+	
 //return speed;	
 }
 	}
