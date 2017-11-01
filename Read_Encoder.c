@@ -4,11 +4,11 @@
 #include "tm4c123gh6pm.h"	//Header file accesses registers in TMC123 microcontroller
 
 	double i,ticks;
-	double speed;
+	double Espeed;
 	int x = 0;
 
 	//double ReadEncoder(void)
-	void ReadEncoder(void)
+	double ReadEncoder(void)
 	{	
 	for (int y = 0; y<180; y++)
 		{
@@ -25,11 +25,11 @@
 	ticks = QEIVelocityGet(QEI0_BASE);
 	
 	//using a 2.5cm wheel, speed in cm per second
-	speed = ticks / 19.2;
+	Espeed = ticks / 19.2;
 	
-	printf("Speed is %.2f rps", speed);
+	printf("Speed is %.2f rps", Espeed);
 ///This is only a test
 	
-//return speed;	
+return Espeed;	
 }
 	}

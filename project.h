@@ -49,5 +49,6 @@
 #include "myPWM.h"
 #include "./src/Uart_helper.h"
 
-
+#include "Read_Encoder.h"
+#include "Get_Speed.h" 
 

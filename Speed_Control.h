@@ -21,3 +21,5 @@
 #include "hw_types.h"
 #include "Uart_helper.h"
 #include "Read_Encoder.h"
+
+void Speed_Control(double Speed, double uSpeed);

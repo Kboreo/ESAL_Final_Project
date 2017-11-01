@@ -3246,16 +3246,16 @@ void delayMS(int ms)
     SysCtlDelay((SysCtlClockGet()/(3*1000))*ms);
 }
 
-void pwmTest(void)
-{	
-	
-  _Bool fadeUp = 1;
-  unsigned long increment = 10; 
-  unsigned long pwmNow = 100;	
-	int i = 1; 
-	int x;  
-	int y;  
-	volatile int flashTime = 10; 
-	
-}
+
+
+
+
+
+
+
+
+
+
+
+
 	
