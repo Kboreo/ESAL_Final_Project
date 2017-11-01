@@ -25,9 +25,9 @@
 	ticks = QEIVelocityGet(QEI0_BASE);
 	
 	//using a 2.5cm wheel, speed in cm per second
-	speed = ticks *1000 / 19.2;
-	x++;
-	printf(" %i %.2f -", x, speed);
+	speed = ticks / 19.2;
+	
+	printf("Speed is %.2f rps", speed);
 
 //return speed;	
 }

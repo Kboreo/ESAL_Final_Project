@@ -65,7 +65,7 @@ void setupENCODER(void)
 	QEIEnable(QEI0_BASE);
 	QEIFilterEnable(QEI0_BASE);
 	QEIVelocityEnable(QEI0_BASE);
-	QEIVelocityConfigure(QEI0_BASE, QEI_VELDIV_2, 160000);//capture velocity after .01 seconds
+	QEIVelocityConfigure(QEI0_BASE, QEI_VELDIV_2, 16000);//capture velocity after .01 seconds
   QEIFilterConfigure(QEI0_BASE, QEI_FILTCNT_2);
 
 

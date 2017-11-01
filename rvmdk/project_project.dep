@@ -64,7 +64,7 @@ I (driverlib/gpio.h)(0x59E68EC1)
 I (driverlib/pwm.h)(0x59E68EC1)
 I (driverlib/uart.h)(0x59E68EC1)
 F (.\myPWM.h)(0x59E749F2)()
-F (.\Encoder.c)(0x59F23904)(-c --cpu Cortex-M4.fp -D__EVAL -D__MICROLIB -g -O0 --apcs=interwork --split_sections -I ..\.. -I .\driverlib -I .\src -I .\inc --c99-I.\RTE\_project-IC:\Keil_v5\ARM\PACK\ARM\CMSIS\5.0.1\CMSIS\Include-IC:\Keil_v5\ARM\PACK\Keil\TM4C_DFP\1.1.0\Device\Include\TM4C123-D__UVISION_VERSION="524" -D_RTE_ -DTM4C123GH6PM -Drvmdk -DPART_TM4C123GH6PM -DTARGET_IS_TM4C123_RB1-o .\rvmdk\encoder.o --list_dir ".\\rvmdk\\" --list --omf_browse .\rvmdk\encoder.crf --depend .\rvmdk\encoder.d)
+F (.\Encoder.c)(0x59F9C999)(-c --cpu Cortex-M4.fp -D__EVAL -D__MICROLIB -g -O0 --apcs=interwork --split_sections -I ..\.. -I .\driverlib -I .\src -I .\inc --c99-I.\RTE\_project-IC:\Keil_v5\ARM\PACK\ARM\CMSIS\5.0.1\CMSIS\Include-IC:\Keil_v5\ARM\PACK\Keil\TM4C_DFP\1.1.0\Device\Include\TM4C123-D__UVISION_VERSION="524" -D_RTE_ -DTM4C123GH6PM -Drvmdk -DPART_TM4C123GH6PM -DTARGET_IS_TM4C123_RB1-o .\rvmdk\encoder.o --list_dir ".\\rvmdk\\" --list --omf_browse .\rvmdk\encoder.crf --depend .\rvmdk\encoder.d)
 I (Encoder.h)(0x59F20693)
 I (driverlib/pin_map.h)(0x59E68EC1)
 I (C:\Keil_v5\ARM\ARMCC\include\stdint.h)(0x588C2C04)
@@ -82,7 +82,7 @@ I (driverlib/qei.h)(0x59E68EC1)
 I (driverlib/fpu.h)(0x59E68EC1)
 I (.\inc\tm4c123gh6pm.h)(0x59E68EC2)
 I (.\src\Uart_helper.h)(0x59E8A7CF)
-I (Read_Encoder.h)(0x59F23542)
+I (Read_Encoder.h)(0x59F9C960)
 F (.\Encoder.h)(0x59F20693)()
 F (.\inc\driverlib.lib)(0x59D4FF62)()
 F (.\README.txt)(0x59E68EC1)()
@@ -106,7 +106,7 @@ I (driverlib/fpu.h)(0x59E68EC1)
 I (.\inc\tm4c123gh6pm.h)(0x59E68EC2)
 I (.\src\Uart_helper.h)(0x59E8A7CF)
 I (Encoder.h)(0x59F20693)
-I (Read_Encoder.h)(0x59F23542)
+I (Read_Encoder.h)(0x59F9C960)
 F (.\src\Uart_helper.c)(0x59E8A7EC)(-c --cpu Cortex-M4.fp -D__EVAL -D__MICROLIB -g -O0 --apcs=interwork --split_sections -I ..\.. -I .\driverlib -I .\src -I .\inc --c99-I.\RTE\_project-IC:\Keil_v5\ARM\PACK\ARM\CMSIS\5.0.1\CMSIS\Include-IC:\Keil_v5\ARM\PACK\Keil\TM4C_DFP\1.1.0\Device\Include\TM4C123-D__UVISION_VERSION="524" -D_RTE_ -DTM4C123GH6PM -Drvmdk -DPART_TM4C123GH6PM -DTARGET_IS_TM4C123_RB1-o .\rvmdk\uart_helper_1.o --list_dir ".\\rvmdk\\" --list --omf_browse .\rvmdk\uart_helper_1.crf --depend .\rvmdk\uart_helper_1.d)
 I (src\Uart_helper.h)(0x59E8A7CF)
 I (C:\Keil_v5\ARM\ARMCC\include\stdbool.h)(0x588C2C04)
@@ -119,8 +119,8 @@ I (.\driverlib\uart.h)(0x59E68EC1)
 I (src\../inc/tm4c123gh6pm.h)(0x59E68EC2)
 I (.\driverlib\pin_map.h)(0x59E68EC1)
 F (.\src\Uart_helper.h)(0x59E8A7CF)()
-F (.\Read_Encoder.c)(0x59F23AA2)(-c --cpu Cortex-M4.fp -D__EVAL -D__MICROLIB -g -O0 --apcs=interwork --split_sections -I ..\.. -I .\driverlib -I .\src -I .\inc --c99-I.\RTE\_project-IC:\Keil_v5\ARM\PACK\ARM\CMSIS\5.0.1\CMSIS\Include-IC:\Keil_v5\ARM\PACK\Keil\TM4C_DFP\1.1.0\Device\Include\TM4C123-D__UVISION_VERSION="524" -D_RTE_ -DTM4C123GH6PM -Drvmdk -DPART_TM4C123GH6PM -DTARGET_IS_TM4C123_RB1-o .\rvmdk\read_encoder.o --list_dir ".\\rvmdk\\" --list --omf_browse .\rvmdk\read_encoder.crf --depend .\rvmdk\read_encoder.d)
-I (Read_Encoder.h)(0x59F23542)
+F (.\Read_Encoder.c)(0x59F9C960)(-c --cpu Cortex-M4.fp -D__EVAL -D__MICROLIB -g -O0 --apcs=interwork --split_sections -I ..\.. -I .\driverlib -I .\src -I .\inc --c99-I.\RTE\_project-IC:\Keil_v5\ARM\PACK\ARM\CMSIS\5.0.1\CMSIS\Include-IC:\Keil_v5\ARM\PACK\Keil\TM4C_DFP\1.1.0\Device\Include\TM4C123-D__UVISION_VERSION="524" -D_RTE_ -DTM4C123GH6PM -Drvmdk -DPART_TM4C123GH6PM -DTARGET_IS_TM4C123_RB1-o .\rvmdk\read_encoder.o --list_dir ".\\rvmdk\\" --list --omf_browse .\rvmdk\read_encoder.crf --depend .\rvmdk\read_encoder.d)
+I (Read_Encoder.h)(0x59F9C960)
 I (driverlib/pin_map.h)(0x59E68EC1)
 I (C:\Keil_v5\ARM\ARMCC\include\stdint.h)(0x588C2C04)
 I (C:\Keil_v5\ARM\ARMCC\include\stdio.h)(0x588C2C04)
@@ -172,4 +172,4 @@ I (driverlib/watchdog.h)(0x59E68EC1)
 I (src/Uart_helper.h)(0x59E8A7CF)
 I (myPWM.h)(0x59E749F2)
 I (./src/Uart_helper.h)(0x59E8A7CF)
-F (.\Read_Encoder.h)(0x59F23542)()
+F (.\Read_Encoder.h)(0x59F9C960)()

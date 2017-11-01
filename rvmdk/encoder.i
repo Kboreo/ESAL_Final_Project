@@ -12559,7 +12559,6 @@ void setupENCODER(void)
 	QEIIntDisable(0x4002C000,0x00000008 | 0x00000004 | 0x00000002 | 0x00000001); 
 
 	
-	
 	QEIConfigure(0x4002C000, (0x00000008  | 0x00000000 	| 0x00000000 | 0x00000000), 1919);  
 
 
@@ -12569,7 +12568,7 @@ void setupENCODER(void)
 	QEIEnable(0x4002C000);
 	QEIFilterEnable(0x4002C000);
 	QEIVelocityEnable(0x4002C000);
-	QEIVelocityConfigure(0x4002C000, 0x00000040, 160000);
+	QEIVelocityConfigure(0x4002C000, 0x00000040, 16000);
   QEIFilterConfigure(0x4002C000, 0x00000000);
 
 

@@ -470,6 +470,26 @@
               <FileType>5</FileType>
               <FilePath>.\Read_Encoder.h</FilePath>
             </File>
+            <File>
+              <FileName>Speed_Control.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>.\Speed_Control.c</FilePath>
+            </File>
+            <File>
+              <FileName>Speed_Control.h</FileName>
+              <FileType>5</FileType>
+              <FilePath>.\Speed_Control.h</FilePath>
+            </File>
+            <File>
+              <FileName>Get_Speed.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>.\Get_Speed.c</FilePath>
+            </File>
+            <File>
+              <FileName>Get_Speed.h</FileName>
+              <FileType>5</FileType>
+              <FilePath>.\Get_Speed.h</FilePath>
+            </File>
           </Files>
         </Group>
         <Group>

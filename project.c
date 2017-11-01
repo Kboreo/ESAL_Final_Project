@@ -34,8 +34,9 @@ int  main(void)
 
 while(1)
 {	
+	 GetUserSpped();
 	 ReadEncoder();
-		printf("current speed = %.2f cm/s \n\n", speed);	
+	 Speed_Control(); 
 }
 }
 
