@@ -19260,12 +19260,15 @@ int  main(void)
 		
 		printf("PWM setup complete \n\n");
 		
-
-while(1)
+while (1)
 {	
-		
+	uSpeed = GetUserSpeed();
+	for (int i=0; i<1000; i++)
+{	
+
 		speed = ReadEncoder();
 		Speed_Control(speed, uSpeed); 
+}
 }
 }
 

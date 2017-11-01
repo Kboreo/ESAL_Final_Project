@@ -66,6 +66,17 @@ Encoder.c(28): warning:  #47-D: incompatible redefinition of macro "SYSCTL_RCGCG
 Encoder.c(75): warning:  #1-D: last line of file ends without a newline
   	
 Encoder.c: 14 warnings, 0 errors
+creating preprocessor file for Uart_helper.c...
+compiling Float_Setup.c...
+Float_Setup.h(22): warning:  #1-D: last line of file ends without a newline
+  #include "Uart_helper.h"
+Read_Encoder.h(27): warning:  #1-D: last line of file ends without a newline
+  double ReadEncoder(void);
+Encoder.h(28): warning:  #1-D: last line of file ends without a newline
+  void QEIConfigure(uint32_t ui32Base, uint32_t ui32Config, uint32_t ui32MaxPosition);
+Float_Setup.c(18): warning:  #1-D: last line of file ends without a newline
+   
+Float_Setup.c: 4 warnings, 0 errors
 compiling project.c...
 driverlib/hibernate.h(229): warning:  #231-D: declaration is not visible outside of function
   extern void HibernateCalendarSet(struct tm *psTime);
@@ -85,28 +96,24 @@ project.c(18): warning:  #223-D: function "setupENCODER" declared implicitly
   	setupENCODER();	
 project.c(19): warning:  #223-D: function "setupPWM" declared implicitly
   	setupPWM();
-project.c(41): warning:  #223-D: function "Speed_Control" declared implicitly
+project.c(43): warning:  #223-D: function "Speed_Control" declared implicitly
   		Speed_Control(speed, uSpeed); 
 project.c: 10 warnings, 0 errors
-creating preprocessor file for Uart_helper.c...
-compiling Float_Setup.c...
-Float_Setup.h(22): warning:  #1-D: last line of file ends without a newline
-  #include "Uart_helper.h"
-Read_Encoder.h(27): warning:  #1-D: last line of file ends without a newline
-  double ReadEncoder(void);
-Encoder.h(28): warning:  #1-D: last line of file ends without a newline
-  void QEIConfigure(uint32_t ui32Base, uint32_t ui32Config, uint32_t ui32MaxPosition);
-Float_Setup.c(18): warning:  #1-D: last line of file ends without a newline
-   
-Float_Setup.c: 4 warnings, 0 errors
 creating preprocessor file for Read_Encoder.c...
-creating preprocessor file for Speed_Control.c...
 compiling Uart_helper.c...
 src\Uart_helper.c(72): warning:  #1-D: last line of file ends without a newline
   }
 src\Uart_helper.c: 1 warning, 0 errors
+creating preprocessor file for Speed_Control.c...
 creating preprocessor file for Get_Speed.c...
 compiling Get_Speed.c...
+Get_Speed.h(1): warning:  #1-D: last line of file ends without a newline
+   double GetUserSpeed(void);
+Get_Speed.c(23): warning:  #1-D: last line of file ends without a newline
+  }
+Get_Speed.c(11): warning:  #177-D: variable "userSpeed"  was declared but never referenced
+  	double userSpeed;
+Get_Speed.c: 3 warnings, 0 errors
 compiling Read_Encoder.c...
 Read_Encoder.h(27): warning:  #1-D: last line of file ends without a newline
   double ReadEncoder(void);
@@ -148,18 +155,18 @@ driverlib/hibernate.h(232): warning:  #231-D: declaration is not visible outside
   extern void HibernateCalendarMatchGet(uint32_t ui32Index, struct tm *psTime);
 Read_Encoder.h(27): warning:  #1-D: last line of file ends without a newline
   double ReadEncoder(void);
-Get_Speed.h(1): warning:  #1-D: last line of file ends without a newline
+Speed_Control.c: 11 warnings, 0 errors
+ast line of file ends without a newline
    double GetUserSpeed(void);
 Read_Encoder.h(27): warning:  #1-D: last line of file ends without a newline
   double ReadEncoder(void);
 Speed_Control.h(25): warning:  #1-D: last line of file ends without a newline
   void Speed_Control(double Speed, double uSpeed);
-Speed_Control.c: 11 warnings, 0 errors
 linking...
-Program Size: Code=6964 RO-data=1180 RW-data=76 ZI-data=364  
+Program Size: Code=7072 RO-data=1180 RW-data=80 ZI-data=360  
 FromELF: creating hex file...
 After Build - User command #1: fromelf --bin --output .\rvmdk\project.bin .\rvmdk\project.axf
-".\rvmdk\project.axf" - 0 Error(s), 52 Warning(s).
+".\rvmdk\project.axf" - 0 Error(s), 54 Warning(s).
 
 <h2>Software Packages used:</h2>
 
@@ -182,7 +189,7 @@ Package Vendor: Keil
 <h2>Collection of Component Files used:</h2>
 
    * Component: ARM::CMSIS:CORE:5.0.1
-Build Time Elapsed:  00:00:09
+Build Time Elapsed:  00:00:08
 </pre>
 </body>
 </html>

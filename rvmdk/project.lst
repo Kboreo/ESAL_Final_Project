@@ -66386,13 +66386,16 @@ N		printf("Hardware setup complete\n\n");
 N		
 N		printf("PWM setup complete \n\n");
 N		//pwmTest();
-N
-Nwhile(1)
+Nwhile (1)
 N{	
-N		//uSpeed = GetUserSpeed();
+N	uSpeed = GetUserSpeed();
+N	for (int i=0; i<1000; i++)
+N{	
+N
 N		speed = ReadEncoder();
-W "project.c" 41 3 function "Speed_Control" declared implicitly
+W "project.c" 43 3 function "Speed_Control" declared implicitly
 N		Speed_Control(speed, uSpeed); 
+N}
 N}
 N}
 N

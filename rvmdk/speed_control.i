@@ -19797,7 +19797,7 @@ void Speed_Control(double Speed, double uSpeed)
 	printf ("PWM duty cycle is %i\n\n", DutyC);
 	
 	Error = uSpeed - Speed;
-	DutyC = DutyC + (.238 * Error); 
+	DutyC = DutyC + (3 * Error); 
 	if (DutyC < 16) DutyC = 16;
 	if (DutyC > 310) DutyC = 100;
 	

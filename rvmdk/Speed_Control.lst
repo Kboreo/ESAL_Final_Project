@@ -66931,7 +66931,7 @@ X	DutyC = ((uint32_t (*)(uint32_t ui32Base, uint32_t ui32PWMOut))((uint32_t *)((
 N	printf ("PWM duty cycle is %i\n\n", DutyC);
 N	
 N	Error = uSpeed - Speed;
-N	DutyC = DutyC + (.238 * Error); 
+N	DutyC = DutyC + (3 * Error); 
 N	if (DutyC < 16) DutyC = 16;
 N	if (DutyC > 310) DutyC = 100;
 N	
