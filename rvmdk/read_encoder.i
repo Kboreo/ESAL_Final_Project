@@ -19590,7 +19590,7 @@ double ReadEncoder(void);
 	
 	Espeed = ticks / 19.2;
 	
-	printf("Speed is %.2f rps", Espeed);
+	printf("Speed is %.2f rps\n\n", Espeed);
 
 	
 return Espeed;	

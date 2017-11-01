@@ -66389,7 +66389,7 @@ N		//pwmTest();
 N
 Nwhile(1)
 N{	
-N		uSpeed = GetUserSpeed();
+N		//uSpeed = GetUserSpeed();
 N		speed = ReadEncoder();
 W "project.c" 41 3 function "Speed_Control" declared implicitly
 N		Speed_Control(speed, uSpeed); 

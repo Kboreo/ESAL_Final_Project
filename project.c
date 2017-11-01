@@ -36,7 +36,7 @@ int  main(void)
 
 while(1)
 {	
-		uSpeed = GetUserSpeed();
+		//uSpeed = GetUserSpeed();
 		speed = ReadEncoder();
 		Speed_Control(speed, uSpeed); 
 }

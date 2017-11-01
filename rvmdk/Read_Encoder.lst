@@ -66718,7 +66718,7 @@ N
 N	//using a 2.5cm wheel, speed in cm per second
 N	Espeed = ticks / 19.2;
 N	
-N	printf("Speed is %.2f rps", Espeed);
+N	printf("Speed is %.2f rps\n\n", Espeed);
 N///This is only a test
 N	
 Nreturn Espeed;	

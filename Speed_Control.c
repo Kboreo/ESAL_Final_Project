@@ -12,9 +12,15 @@
 void Speed_Control(double Speed, double uSpeed)
 {	
 	
+	DutyC = ROM_PWMPulseWidthGet(PWM1_BASE, PWM_OUT_6);
+	printf ("PWM duty cycle is %i\n\n", DutyC);
 	
 	Error = uSpeed - Speed;
-	DutyC = DutyC + (.238 * Error) / 64; 
+	DutyC = DutyC + (.238 * Error); 
+	if (DutyC < 16) DutyC = 16;
+	if (DutyC > 310) DutyC = 100;
+	
+	//DutyC = 310; 
 	
 	
 

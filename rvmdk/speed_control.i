@@ -19793,9 +19793,15 @@ void Speed_Control(double Speed, double uSpeed);
 void Speed_Control(double Speed, double uSpeed)
 {	
 	
+	DutyC = ((uint32_t (*)(uint32_t ui32Base, uint32_t ui32PWMOut))((uint32_t *)(((uint32_t *)0x01000010)[8]))[6])(0x40029000, 0x00000106);
+	printf ("PWM duty cycle is %i\n\n", DutyC);
 	
 	Error = uSpeed - Speed;
-	DutyC = DutyC + (.238 * Error) / 64; 
+	DutyC = DutyC + (.238 * Error); 
+	if (DutyC < 16) DutyC = 16;
+	if (DutyC > 310) DutyC = 100;
+	
+	
 	
 	
 
