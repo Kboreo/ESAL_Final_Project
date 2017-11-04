@@ -19234,8 +19234,9 @@ double ReadEncoder(void);
 #line 3 "project.c"
 #line 4 "project.c"
 
+_Bool TESTING = 1;  
 
-#line 12 "project.c"
+#line 13 "project.c"
 
 
 void SetupHardware()
@@ -19249,24 +19250,22 @@ void SetupHardware()
 }
 
 
-double speed; 
-double uSpeed;
+double speed; 	
+double uSpeed;	
 
 
 int  main(void)
-{		
-		SetupHardware();
-		printf("Hardware setup complete\n\n");
-		
-		printf("PWM setup complete \n\n");
-		
-
-while(1)
 {	
+	SetupHardware();  
+	printf("Hardware setup complete\n\n");		
+	printf("PWM setup complete \n\n");
+	
+	while(1)
+	{	
 		uSpeed = GetUserSpeed();
 		speed = ReadEncoder();
 		Speed_Control(speed, uSpeed); 
-}
+	}
 }
 
 

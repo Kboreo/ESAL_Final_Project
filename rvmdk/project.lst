@@ -66352,6 +66352,8 @@ L 2 "project.c" 2
 N#include <stdio.h>
 N#include <stdint.h>
 N
+Nbool TESTING = 1;  //bool used for debugging and testing features.
+X_Bool TESTING = 1;  
 N
 N#ifdef DEBUG
 Svoid
@@ -66364,36 +66366,34 @@ N
 Nvoid SetupHardware()
 N{
 N	UartSetup();
-W "project.c" 17 2 function "FloatSetup" declared implicitly
+W "project.c" 18 2 function "FloatSetup" declared implicitly
 N	FloatSetup();
-W "project.c" 18 2 function "setupENCODER" declared implicitly
+W "project.c" 19 2 function "setupENCODER" declared implicitly
 N	setupENCODER();	
-W "project.c" 19 2 function "setupPWM" declared implicitly
+W "project.c" 20 2 function "setupPWM" declared implicitly
 N	setupPWM();
 N	FPUEnable();
 N	FPULazyStackingEnable();
 N}
 N
 N
-Ndouble speed; 
-Ndouble uSpeed;
+Ndouble speed; 	//Speed read from encoder
+Ndouble uSpeed;	//Requested speed from the user
 N
 N
 Nint  main(void)
-N{		
-N		SetupHardware();
-N		printf("Hardware setup complete\n\n");
-N		
-N		printf("PWM setup complete \n\n");
-N		//pwmTest();
-N
-Nwhile(1)
 N{	
+N	SetupHardware();  //Initializes all of the required HardWare for the project.			
+N	printf("Hardware setup complete\n\n");		
+N	printf("PWM setup complete \n\n");
+N	
+N	while(1)
+N	{	
 N		uSpeed = GetUserSpeed();
 N		speed = ReadEncoder();
-W "project.c" 41 3 function "Speed_Control" declared implicitly
+W "project.c" 40 3 function "Speed_Control" declared implicitly
 N		Speed_Control(speed, uSpeed); 
-N}
+N	}
 N}
 N
 N

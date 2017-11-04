@@ -2,6 +2,7 @@
 #include <stdio.h>
 #include <stdint.h>
 
+bool TESTING = 1;  //bool used for debugging and testing features.
 
 #ifdef DEBUG
 void
@@ -22,24 +23,22 @@ void SetupHardware()
 }
 
 
-double speed; 
-double uSpeed;
+double speed; 	//Speed read from encoder
+double uSpeed;	//Requested speed from the user
 
 
 int  main(void)
-{		
-		SetupHardware();
-		printf("Hardware setup complete\n\n");
-		
-		printf("PWM setup complete \n\n");
-		//pwmTest();
-
-while(1)
 {	
+	SetupHardware();  //Initializes all of the required HardWare for the project.			
+	printf("Hardware setup complete\n\n");		
+	printf("PWM setup complete \n\n");
+	
+	while(1)
+	{	
 		uSpeed = GetUserSpeed();
 		speed = ReadEncoder();
 		Speed_Control(speed, uSpeed); 
-}
+	}
 }
 
 
