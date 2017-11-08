@@ -66390,8 +66390,10 @@ N
 N	while(1)
 N	{	
 N		uSpeed = GetUserSpeed();
+N		printf("User input, IN MAIN %.3f\n\n",uSpeed);
 N		speed = ReadEncoder();
-W "project.c" 40 3 function "Speed_Control" declared implicitly
+N		printf("Speed is, IN MAIN %.2f rps \n\n", speed);
+W "project.c" 42 3 function "Speed_Control" declared implicitly
 N		Speed_Control(speed, uSpeed); 
 N	}
 N}

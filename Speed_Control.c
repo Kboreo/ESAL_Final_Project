@@ -7,13 +7,16 @@
 	double Target_Speed;
 	uint32_t Period;
 	uint32_t Speed;
-	uint32_t Error;
+	double Error;
 	uint32_t DutyC;
 void Speed_Control(double Speed, double uSpeed)
 {	
-	
+		printf("User input, IN CONTROL %.3f\n\n",uSpeed);
+		
+		printf("Speed is, IN CONTROL %.2f rps \n\n", Speed);
 	
 	Error = uSpeed - Speed;
+	
 	DutyC = DutyC + (.238 * Error) / 64; 
 	
 	

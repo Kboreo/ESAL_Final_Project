@@ -19573,13 +19573,13 @@ double ReadEncoder(void);
 	
 	double ReadEncoder(void)
 	{	
-	for (int y = 0; y<180; y++)
-		{
-		for (int i = 0; i<2000; i++)
-	{
-		__nop();
-	}
 	
+		
+	
+	
+		
+	
+
 	
 	
 	
@@ -19590,9 +19590,9 @@ double ReadEncoder(void);
 	
 	Espeed = ticks / 19.2;
 	
-	printf("Speed is %.2f rps", Espeed);
+	printf("Speed is %.2f rps \n\n", Espeed);
 
 	
 return Espeed;	
-}
+
 	}

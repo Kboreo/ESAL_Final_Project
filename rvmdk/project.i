@@ -19263,7 +19263,9 @@ int  main(void)
 	while(1)
 	{	
 		uSpeed = GetUserSpeed();
+		printf("User input, IN MAIN %.3f\n\n",uSpeed);
 		speed = ReadEncoder();
+		printf("Speed is, IN MAIN %.2f rps \n\n", speed);
 		Speed_Control(speed, uSpeed); 
 	}
 }

@@ -5,10 +5,10 @@
 <h2>Tool Versions:</h2>
 IDE-Version: µVision V5.24.2.0
 Copyright (C) 2017 ARM Ltd and ARM Germany GmbH. All rights reserved.
-License Information: Kodey Boreo Lawrence Technological University Flex license: MDK-ARM Professional (mdk_pro) Borrow: 30 Nov 2017
+License Information: Phillip Tesolin, LTU, LIC=----
  
 Tool Versions:
-Toolchain:       MDK-ARM Professional  Version: 5.24.1
+Toolchain:       MDK-Lite  Version: 5.24.1
 Toolchain Path:  C:\Keil_v5\ARM\ARMCC\Bin
 C Compiler:      Armcc.exe V5.06 update 5 (build 528)
 Assembler:       Armasm.exe V5.06 update 5 (build 528)
@@ -21,22 +21,21 @@ Target DLL:      lmidk-agdi.dll V???
 Dialog DLL:      TCM.DLL V1.32.0.0
  
 <h2>Project:</h2>
-D:\OneDrive\Classes\2016-2017\Spring 2017\Projects\Micro_Projects\Test\Senior Project\Senior Project.X\ESAL_Final_Project\project.uvprojx
-Project File Date:  11/04/2017
+C:\Users\ptesolin\Documents\GitHub\ADC\ESAL_Final_Project\project.uvprojx
+Project File Date:  11/01/2017
 
 <h2>Output:</h2>
 *** Using Compiler 'V5.06 update 5 (build 528)', folder: 'C:\Keil_v5\ARM\ARMCC\Bin'
 Rebuild target 'project'
 creating preprocessor file for project.c...
-creating preprocessor file for myPWM.c...
 assembling startup_rvmdk.S...
-creating preprocessor file for Encoder.c...
+creating preprocessor file for myPWM.c...
 compiling myPWM.c...
 myPWM.c(75): warning:  #1-D: last line of file ends without a newline
   	
 myPWM.c: 1 warning, 0 errors
+creating preprocessor file for Encoder.c...
 creating preprocessor file for Float_Setup.c...
-creating preprocessor file for Uart_helper.c...
 compiling Encoder.c...
 Read_Encoder.h(27): warning:  #1-D: last line of file ends without a newline
   double ReadEncoder(void);
@@ -67,6 +66,7 @@ Encoder.c(28): warning:  #47-D: incompatible redefinition of macro "SYSCTL_RCGCG
 Encoder.c(75): warning:  #1-D: last line of file ends without a newline
   	
 Encoder.c: 14 warnings, 0 errors
+creating preprocessor file for Uart_helper.c...
 compiling project.c...
 driverlib/hibernate.h(229): warning:  #231-D: declaration is not visible outside of function
   extern void HibernateCalendarSet(struct tm *psTime);
@@ -86,10 +86,9 @@ project.c(19): warning:  #223-D: function "setupENCODER" declared implicitly
   	setupENCODER();	
 project.c(20): warning:  #223-D: function "setupPWM" declared implicitly
   	setupPWM();
-project.c(40): warning:  #223-D: function "Speed_Control" declared implicitly
+project.c(42): warning:  #223-D: function "Speed_Control" declared implicitly
   		Speed_Control(speed, uSpeed); 
 project.c: 10 warnings, 0 errors
-creating preprocessor file for Read_Encoder.c...
 compiling Float_Setup.c...
 Float_Setup.h(22): warning:  #1-D: last line of file ends without a newline
   #include "Uart_helper.h"
@@ -100,6 +99,7 @@ Encoder.h(28): warning:  #1-D: last line of file ends without a newline
 Float_Setup.c(18): warning:  #1-D: last line of file ends without a newline
    
 Float_Setup.c: 4 warnings, 0 errors
+creating preprocessor file for Read_Encoder.c...
 compiling Uart_helper.c...
 src\Uart_helper.c(72): warning:  #1-D: last line of file ends without a newline
   }
@@ -133,9 +133,7 @@ Get_Speed.h(1): warning:  #1-D: last line of file ends without a newline
    double GetUserSpeed(void);
 Read_Encoder.c(35): warning:  #1-D: last line of file ends without a newline
   	}
-Read_Encoder.c(35): warning:  #940-D: missing return statement at end of non-void function "ReadEncoder" 
-  	}
-Read_Encoder.c: 11 warnings, 0 errors
+Read_Encoder.c: 10 warnings, 0 errors
 compiling Speed_Control.c...
 Read_Encoder.h(27): warning:  #1-D: last line of file ends without a newline
   double ReadEncoder(void);
@@ -161,10 +159,10 @@ Speed_Control.h(25): warning:  #1-D: last line of file ends without a newline
   void Speed_Control(double Speed, double uSpeed);
 Speed_Control.c: 11 warnings, 0 errors
 linking...
-Program Size: Code=9124 RO-data=1244 RW-data=92 ZI-data=364  
+Program Size: Code=9264 RO-data=1244 RW-data=96 ZI-data=360  
 FromELF: creating hex file...
 After Build - User command #1: fromelf --bin --output .\rvmdk\project.bin .\rvmdk\project.axf
-".\rvmdk\project.axf" - 0 Error(s), 54 Warning(s).
+".\rvmdk\project.axf" - 0 Error(s), 53 Warning(s).
 
 <h2>Software Packages used:</h2>
 
@@ -187,7 +185,7 @@ Package Vendor: Keil
 <h2>Collection of Component Files used:</h2>
 
    * Component: ARM::CMSIS:CORE:5.0.1
-Build Time Elapsed:  00:00:03
+Build Time Elapsed:  00:00:06
 </pre>
 </body>
 </html>

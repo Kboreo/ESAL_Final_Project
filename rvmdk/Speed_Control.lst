@@ -66921,13 +66921,16 @@ N
 N	double Target_Speed;
 N	uint32_t Period;
 N	uint32_t Speed;
-N	uint32_t Error;
+N	double Error;
 N	uint32_t DutyC;
 Nvoid Speed_Control(double Speed, double uSpeed)
 N{	
-N	
+N		printf("User input, IN CONTROL %.3f\n\n",uSpeed);
+N		
+N		printf("Speed is, IN CONTROL %.2f rps \n\n", Speed);
 N	
 N	Error = uSpeed - Speed;
+N	
 N	DutyC = DutyC + (.238 * Error) / 64; 
 N	
 N	

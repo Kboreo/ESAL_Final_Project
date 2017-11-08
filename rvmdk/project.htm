@@ -3,7 +3,7 @@
 <title>Static Call Graph - [.\rvmdk\project.axf]</title></head>
 <body><HR>
 <H1>Static Call Graph for image .\rvmdk\project.axf</H1><HR>
-<BR><P>#&#060CALLGRAPH&#062# ARM Linker, 5060528: Last Updated: Sat Nov 04 17:02:18 2017
+<BR><P>#&#060CALLGRAPH&#062# ARM Linker, 5060528: Last Updated: Wed Nov 08 10:02:41 2017
 <BR><P>
 <H3>Maximum Stack Usage =        264 bytes + Unknown(Functions without stacksize, Cycles, Untraceable Function Pointers)</H3><H3>
 Call chain for Maximum Stack Depth:</H3>
@@ -427,8 +427,8 @@ Global Symbols
 <BR><BR>[Called By]<UL><LI><a href="#[31]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;ReadEncoder
 </UL>
 
-<P><STRONG><a name="[31]"></a>ReadEncoder</STRONG> (Thumb, 94 bytes, Stack size 16 bytes, read_encoder.o(i.ReadEncoder))
-<BR><BR>[Stack]<UL><LI>Max Depth = 72<LI>Call Chain = ReadEncoder &rArr; __aeabi_ui2d &rArr; _double_epilogue &rArr; _double_round
+<P><STRONG><a name="[31]"></a>ReadEncoder</STRONG> (Thumb, 68 bytes, Stack size 8 bytes, read_encoder.o(i.ReadEncoder))
+<BR><BR>[Stack]<UL><LI>Max Depth = 64<LI>Call Chain = ReadEncoder &rArr; __aeabi_ui2d &rArr; _double_epilogue &rArr; _double_round
 </UL>
 <BR>[Calls]<UL><LI><a href="#[1f]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;__aeabi_ui2d
 <LI><a href="#[14]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;__aeabi_ddiv
@@ -451,8 +451,8 @@ Global Symbols
 <BR>[Called By]<UL><LI><a href="#[4]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;main
 </UL>
 
-<P><STRONG><a name="[3a]"></a>Speed_Control</STRONG> (Thumb, 142 bytes, Stack size 64 bytes, speed_control.o(i.Speed_Control))
-<BR><BR>[Stack]<UL><LI>Max Depth = 152<LI>Call Chain = Speed_Control &rArr; __aeabi_drsub &rArr; __aeabi_dadd &rArr; _double_epilogue &rArr; _double_round
+<P><STRONG><a name="[3a]"></a>Speed_Control</STRONG> (Thumb, 152 bytes, Stack size 56 bytes, speed_control.o(i.Speed_Control))
+<BR><BR>[Stack]<UL><LI>Max Depth = 144<LI>Call Chain = Speed_Control &rArr; __aeabi_drsub &rArr; __aeabi_dadd &rArr; _double_epilogue &rArr; _double_round
 </UL>
 <BR>[Calls]<UL><LI><a href="#[1e]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;__aeabi_drsub
 <LI><a href="#[13]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;__aeabi_dmul
@@ -461,6 +461,7 @@ Global Symbols
 <LI><a href="#[1f]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;__aeabi_ui2d
 <LI><a href="#[14]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;__aeabi_ddiv
 <LI><a href="#[3b]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;PWMPulseWidthSet
+<LI><a href="#[30]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;__2printf
 </UL>
 <BR>[Called By]<UL><LI><a href="#[4]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;main
 </UL>
@@ -533,7 +534,8 @@ Global Symbols
 <P><STRONG><a name="[30]"></a>__2printf</STRONG> (Thumb, 0 bytes, Stack size 24 bytes, printfa.o(i.__0printf))
 <BR><BR>[Stack]<UL><LI>Max Depth = 24<LI>Call Chain = __2printf
 </UL>
-<BR>[Called By]<UL><LI><a href="#[31]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;ReadEncoder
+<BR>[Called By]<UL><LI><a href="#[3a]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;Speed_Control
+<LI><a href="#[31]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;ReadEncoder
 <LI><a href="#[2f]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;GetUserSpeed
 <LI><a href="#[4]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;main
 </UL>
@@ -566,7 +568,7 @@ Global Symbols
 </UL>
 <BR>[Address Reference Count : 1]<UL><LI> printfa.o(i.__0printf)
 </UL>
-<P><STRONG><a name="[4]"></a>main</STRONG> (Thumb, 56 bytes, Stack size 0 bytes, project.o(i.main))
+<P><STRONG><a name="[4]"></a>main</STRONG> (Thumb, 84 bytes, Stack size 0 bytes, project.o(i.main))
 <BR><BR>[Stack]<UL><LI>Max Depth = 264<LI>Call Chain = main &rArr; GetUserSpeed &rArr; __0scanf &rArr; __vfscanf_char_file &rArr; __vfscanf_char &rArr; __vfscanf &rArr; _scanf_real
 </UL>
 <BR>[Calls]<UL><LI><a href="#[3a]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;Speed_Control
