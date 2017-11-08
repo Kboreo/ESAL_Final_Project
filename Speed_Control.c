@@ -11,18 +11,25 @@
 	uint32_t DutyC;
 void Speed_Control(double Speed, double uSpeed)
 {	
-		printf("User input, IN CONTROL %.3f\n\n",uSpeed);
+
 		
-		printf("Speed is, IN CONTROL %.2f rps \n\n", Speed);
+		DutyC = ROM_PWMPulseWidthGet(PWM1_BASE, PWM_OUT_6);
 	
-	Error = uSpeed - Speed;
-	
-	DutyC = DutyC + (.238 * Error) / 64; 
-	
-	
+	for (int i = 0; i<100;i++)
+	{
+		Speed = ReadEncoder();
+		Error = uSpeed - Speed;
+		DutyC = DutyC + (9 * Error); 
+		if (DutyC < 16) DutyC = 16;
+		if (DutyC > 310) DutyC = 100;
+		
 
 		//Set new PWM 
 	PWMPulseWidthSet(PWM1_BASE, PWM_OUT_6, DutyC);
 	
-	
+	}
+	Speed = ReadEncoder();
+	printf("User input, IN CONTROL %.3f\n\n",uSpeed);		
+	printf("Speed is, IN CONTROL %.2f rps \n\n", Speed);
+	//printf ("PWM duty cycle is %i\n\n", DutyC);
 }

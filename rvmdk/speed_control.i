@@ -19792,18 +19792,25 @@ void Speed_Control(double Speed, double uSpeed);
 	uint32_t DutyC;
 void Speed_Control(double Speed, double uSpeed)
 {	
-		printf("User input, IN CONTROL %.3f\n\n",uSpeed);
+
 		
-		printf("Speed is, IN CONTROL %.2f rps \n\n", Speed);
+		DutyC = ((uint32_t (*)(uint32_t ui32Base, uint32_t ui32PWMOut))((uint32_t *)(((uint32_t *)0x01000010)[8]))[6])(0x40029000, 0x00000106);
 	
-	Error = uSpeed - Speed;
-	
-	DutyC = DutyC + (.238 * Error) / 64; 
-	
-	
+	for (int i = 0; i<100;i++)
+	{
+		Speed = ReadEncoder();
+		Error = uSpeed - Speed;
+		DutyC = DutyC + (9 * Error); 
+		if (DutyC < 16) DutyC = 16;
+		if (DutyC > 310) DutyC = 100;
+		
 
 		
 	PWMPulseWidthSet(0x40029000, 0x00000106, DutyC);
 	
+	}
+	Speed = ReadEncoder();
+	printf("User input, IN CONTROL %.3f\n\n",uSpeed);		
+	printf("Speed is, IN CONTROL %.2f rps \n\n", Speed);
 	
 }

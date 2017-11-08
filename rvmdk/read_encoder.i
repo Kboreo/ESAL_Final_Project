@@ -19566,20 +19566,20 @@ double ReadEncoder(void);
 #line 4 "Read_Encoder.c"
 #line 5 "Read_Encoder.c"
 
-	double i,ticks;
+	uint32_t ticks;
 	double Espeed;
 	int x = 0;
 
 	
 	double ReadEncoder(void)
 	{	
-	
-		
-	
-	
-		
-	
-
+	for (int y = 0; y<400; y++)
+		{
+		for (int i = 0; i<100; i++)
+	{
+		__nop();
+	}
+}	
 	
 	
 	
@@ -19587,10 +19587,11 @@ double ReadEncoder(void);
 
 	ticks = QEIVelocityGet(0x4002C000);
 	
+
 	
 	Espeed = ticks / 19.2;
 	
-	printf("Speed is %.2f rps \n\n", Espeed);
+	
 
 	
 return Espeed;	

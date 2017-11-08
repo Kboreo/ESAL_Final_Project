@@ -66693,20 +66693,20 @@ N
 L 4 "Read_Encoder.c" 2
 N#include "tm4c123gh6pm.h"	//Header file accesses registers in TMC123 microcontroller
 N
-N	double i,ticks;
+N	uint32_t ticks;
 N	double Espeed;
 N	int x = 0;
 N
 N	//double ReadEncoder(void)
 N	double ReadEncoder(void)
 N	{	
-N	//for (int y = 0; y<180; y++)
-N		//{
-N	//	for (int i = 0; i<2000; i++)
-N	//{
-N		//__nop();
-N	//}
-N//}	
+N	for (int y = 0; y<400; y++)
+N		{
+N		for (int i = 0; i<100; i++)
+N	{
+N		__nop();
+N	}
+N}	
 N	//for later use
 N	//int  posistion = QEIPositionGet(QEI0_BASE);
 N	//int direction = QEIDirectionGet(QEI0_BASE);
@@ -66714,14 +66714,15 @@ N
 N//Read encoder speed
 N	ticks = QEIVelocityGet(QEI0_BASE);
 X	ticks = QEIVelocityGet(0x4002C000);
-N	
+N	//printf("Tick count is, %d\n\n", ticks);
+N
 N	//using a 2.5cm wheel, speed in cm per second
 N	Espeed = ticks / 19.2;
 N	
-N	printf("Speed is %.2f rps \n\n", Espeed);
+N	//printf("Speed is %.2f rps \n\n", Espeed);
 N///This is only a test
 N	
 Nreturn Espeed;	
 N
-W "Read_Encoder.c" 35 3 last line of file ends without a newline
+W "Read_Encoder.c" 36 3 last line of file ends without a newline
 N	}

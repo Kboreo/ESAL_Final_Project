@@ -39683,8 +39683,8 @@ N	QEIFilterEnable(QEI0_BASE);
 X	QEIFilterEnable(0x4002C000);
 N	QEIVelocityEnable(QEI0_BASE);
 X	QEIVelocityEnable(0x4002C000);
-N	QEIVelocityConfigure(QEI0_BASE, QEI_VELDIV_2, 16000);//capture velocity after .01 seconds
-X	QEIVelocityConfigure(0x4002C000, 0x00000040, 16000);
+N	QEIVelocityConfigure(QEI0_BASE, QEI_VELDIV_2, 1600000);//capture velocity after .01 seconds
+X	QEIVelocityConfigure(0x4002C000, 0x00000040, 1600000);
 N  QEIFilterConfigure(QEI0_BASE, QEI_FILTCNT_2);
 X  QEIFilterConfigure(0x4002C000, 0x00000000);
 N

@@ -66925,19 +66925,27 @@ N	double Error;
 N	uint32_t DutyC;
 Nvoid Speed_Control(double Speed, double uSpeed)
 N{	
-N		printf("User input, IN CONTROL %.3f\n\n",uSpeed);
+N
 N		
-N		printf("Speed is, IN CONTROL %.2f rps \n\n", Speed);
+N		DutyC = ROM_PWMPulseWidthGet(PWM1_BASE, PWM_OUT_6);
+X		DutyC = ((uint32_t (*)(uint32_t ui32Base, uint32_t ui32PWMOut))((uint32_t *)(((uint32_t *)0x01000010)[8]))[6])(0x40029000, 0x00000106);
 N	
-N	Error = uSpeed - Speed;
-N	
-N	DutyC = DutyC + (.238 * Error) / 64; 
-N	
-N	
+N	for (int i = 0; i<100;i++)
+N	{
+N		Speed = ReadEncoder();
+N		Error = uSpeed - Speed;
+N		DutyC = DutyC + (9 * Error); 
+N		if (DutyC < 16) DutyC = 16;
+N		if (DutyC > 310) DutyC = 100;
+N		
 N
 N		//Set new PWM 
 N	PWMPulseWidthSet(PWM1_BASE, PWM_OUT_6, DutyC);
 X	PWMPulseWidthSet(0x40029000, 0x00000106, DutyC);
 N	
-N	
+N	}
+N	Speed = ReadEncoder();
+N	printf("User input, IN CONTROL %.3f\n\n",uSpeed);		
+N	printf("Speed is, IN CONTROL %.2f rps \n\n", Speed);
+N	//printf ("PWM duty cycle is %i\n\n", DutyC);
 N}
