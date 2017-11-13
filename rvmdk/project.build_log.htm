@@ -30,11 +30,11 @@ Rebuild target 'project'
 creating preprocessor file for project.c...
 assembling startup_rvmdk.S...
 creating preprocessor file for myPWM.c...
+creating preprocessor file for Encoder.c...
 compiling myPWM.c...
 myPWM.c(75): warning:  #1-D: last line of file ends without a newline
   	
 myPWM.c: 1 warning, 0 errors
-creating preprocessor file for Encoder.c...
 creating preprocessor file for Float_Setup.c...
 compiling Encoder.c...
 Read_Encoder.h(27): warning:  #1-D: last line of file ends without a newline
@@ -67,6 +67,16 @@ Encoder.c(75): warning:  #1-D: last line of file ends without a newline
   	
 Encoder.c: 14 warnings, 0 errors
 creating preprocessor file for Uart_helper.c...
+compiling Float_Setup.c...
+Float_Setup.h(22): warning:  #1-D: last line of file ends without a newline
+  #include "Uart_helper.h"
+Read_Encoder.h(27): warning:  #1-D: last line of file ends without a newline
+  double ReadEncoder(void);
+Encoder.h(28): warning:  #1-D: last line of file ends without a newline
+  void QEIConfigure(uint32_t ui32Base, uint32_t ui32Config, uint32_t ui32MaxPosition);
+Float_Setup.c(18): warning:  #1-D: last line of file ends without a newline
+   
+Float_Setup.c: 4 warnings, 0 errors
 compiling project.c...
 driverlib/hibernate.h(229): warning:  #231-D: declaration is not visible outside of function
   extern void HibernateCalendarSet(struct tm *psTime);
@@ -89,14 +99,6 @@ project.c(20): warning:  #223-D: function "setupPWM" declared implicitly
 project.c(42): warning:  #223-D: function "Speed_Control" declared implicitly
   		Speed_Control(speed, uSpeed); 
 project.c: 10 warnings, 0 errors
-compiling Float_Setup.c...
-Float_Setup.h(22): warning:  #1-D: last line of file ends without a newline
-  #include "Uart_helper.h"
-Float_Setup.c(18): warning:  #1-D: last line of file ends without a newline
-   
-Float_Setup.c: 4 warnings, 0 errors
-Encoder.h(28): warning:  #1-D: last line of file ends without a newline
-  void QEIConfigure(uint32_t ui32Base, uint32_t ui32Config, uint32_t ui32MaxPosition);
 creating preprocessor file for Read_Encoder.c...
 compiling Uart_helper.c...
 src\Uart_helper.c(72): warning:  #1-D: last line of file ends without a newline
@@ -160,7 +162,7 @@ linking...
 Program Size: Code=9212 RO-data=1244 RW-data=88 ZI-data=360  
 FromELF: creating hex file...
 After Build - User command #1: fromelf --bin --output .\rvmdk\project.bin .\rvmdk\project.axf
-".\rvmdk\project.axf" - 0 Error(s), 52 Warning(s).
+".\rvmdk\project.axf" - 0 Error(s), 53 Warning(s).
 
 <h2>Software Packages used:</h2>
 
@@ -183,7 +185,7 @@ Package Vendor: Keil
 <h2>Collection of Component Files used:</h2>
 
    * Component: ARM::CMSIS:CORE:5.0.1
-Build Time Elapsed:  00:00:07
+Build Time Elapsed:  00:00:06
 </pre>
 </body>
 </html>
