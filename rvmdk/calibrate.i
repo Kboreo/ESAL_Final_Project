@@ -1,4 +1,4 @@
-#line 1 "Speed_Control.c"
+#line 1 "Calibrate.c"
 #line 1 "Read_Encoder.h"
 #line 1 "driverlib/pin_map.h"
 
@@ -12401,7 +12401,7 @@ int fgetc(FILE *f);
 
 
 double ReadEncoder(void);
-#line 2 "Speed_Control.c"
+#line 2 "Calibrate.c"
 #line 1 "Encoder.h"
 #line 2 "Encoder.h"
 #line 3 "Encoder.h"
@@ -12623,7 +12623,7 @@ double ReadEncoder(void);
 
 
 void QEIConfigure(uint32_t ui32Base, uint32_t ui32Config, uint32_t ui32MaxPosition);
-#line 3 "Speed_Control.c"
+#line 3 "Calibrate.c"
 #line 1 "project.h"
 #line 2 "project.h"
 #line 3 "project.h"
@@ -19787,8 +19787,8 @@ double ReadEncoder(void);
 #line 31 "Calibrate.h"
 #line 55 "project.h"
 
-#line 4 "Speed_Control.c"
-#line 5 "Speed_Control.c"
+#line 4 "Calibrate.c"
+#line 5 "Calibrate.c"
 #line 1 "Speed_Control.h"
 #line 2 "Speed_Control.h"
 #line 3 "Speed_Control.h"
@@ -20007,34 +20007,258 @@ double ReadEncoder(void);
 #line 24 "Speed_Control.h"
 
 void Speed_Control(double Speed, double uSpeed);
-#line 6 "Speed_Control.c"
+#line 6 "Calibrate.c"
+#line 1 "Calibrate.h"
+#line 2 "Calibrate.h"
+#line 3 "Calibrate.h"
+#line 4 "Calibrate.h"
+#line 5 "Calibrate.h"
+#line 6 "Calibrate.h"
+#line 7 "Calibrate.h"
+#line 8 "Calibrate.h"
+#line 9 "Calibrate.h"
+#line 10 "Calibrate.h"
+#line 11 "Calibrate.h"
+#line 12 "Calibrate.h"
+#line 13 "Calibrate.h"
+#line 14 "Calibrate.h"
+#line 15 "Calibrate.h"
+#line 16 "Calibrate.h"
+#line 17 "Calibrate.h"
+#line 18 "Calibrate.h"
+#line 19 "Calibrate.h"
+#line 20 "Calibrate.h"
+#line 21 "Calibrate.h"
+#line 22 "Calibrate.h"
+#line 1 ".\\src\\Uart_helper.h"
+#line 2 ".\\src\\Uart_helper.h"
+#line 3 ".\\src\\Uart_helper.h"
+#line 4 ".\\src\\Uart_helper.h"
+#line 5 ".\\src\\Uart_helper.h"
+#line 6 ".\\src\\Uart_helper.h"
+#line 7 ".\\src\\Uart_helper.h"
+#line 8 ".\\src\\Uart_helper.h"
+#line 9 ".\\src\\Uart_helper.h"
+#line 10 ".\\src\\Uart_helper.h"
 
-	double Target_Speed;
-	uint32_t Period;
-	uint32_t Speed;
-	double Error;
-	uint32_t DutyC;
-void Speed_Control(double Speed, double uSpeed)
-{	
 
-		
-		DutyC = ((uint32_t (*)(uint32_t ui32Base, uint32_t ui32PWMOut))((uint32_t *)(((uint32_t *)0x01000010)[8]))[6])(0x40029000, 0x00000106);
-	
-	for (int i = 0; i<100;i++)
-	{
-		Speed = ReadEncoder();
-		Error = uSpeed - Speed;
-		DutyC = DutyC + (9 * Error); 
-		if (DutyC < 16) DutyC = 16;
-		if (DutyC > 310) DutyC = 100;
-		
+void UartSetup(void);		
 
-		
-	PWMPulseWidthSet(0x40029000, 0x00000106, DutyC);
+
+int fputc(int ch, FILE *f);
+
+
+
+int fgetc(FILE *f);
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+#line 23 "Calibrate.h"
+#line 1 "Read_Encoder.h"
+#line 2 "Read_Encoder.h"
+#line 3 "Read_Encoder.h"
+#line 4 "Read_Encoder.h"
+#line 5 "Read_Encoder.h"
+#line 6 "Read_Encoder.h"
+#line 7 "Read_Encoder.h"
+#line 8 "Read_Encoder.h"
+#line 9 "Read_Encoder.h"
+#line 10 "Read_Encoder.h"
+#line 11 "Read_Encoder.h"
+#line 12 "Read_Encoder.h"
+#line 13 "Read_Encoder.h"
+#line 14 "Read_Encoder.h"
+#line 15 "Read_Encoder.h"
+#line 16 "Read_Encoder.h"
+#line 17 "Read_Encoder.h"
+#line 18 "Read_Encoder.h"
+#line 19 "Read_Encoder.h"
+#line 20 "Read_Encoder.h"
+#line 21 "Read_Encoder.h"
+#line 22 "Read_Encoder.h"
+#line 1 ".\\src\\Uart_helper.h"
+#line 2 ".\\src\\Uart_helper.h"
+#line 3 ".\\src\\Uart_helper.h"
+#line 4 ".\\src\\Uart_helper.h"
+#line 5 ".\\src\\Uart_helper.h"
+#line 6 ".\\src\\Uart_helper.h"
+#line 7 ".\\src\\Uart_helper.h"
+#line 8 ".\\src\\Uart_helper.h"
+#line 9 ".\\src\\Uart_helper.h"
+#line 10 ".\\src\\Uart_helper.h"
+
+
+void UartSetup(void);		
+
+
+int fputc(int ch, FILE *f);
+
+
+
+int fgetc(FILE *f);
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+#line 23 "Read_Encoder.h"
+
+
+
+
+double ReadEncoder(void);
+#line 24 "Calibrate.h"
+
+
+
+#line 28 "Calibrate.h"
+#line 29 "Calibrate.h"
+#line 30 "Calibrate.h"
+#line 31 "Calibrate.h"
+#line 7 "Calibrate.c"
+
+#line 9 "Calibrate.c"
+#line 10 "Calibrate.c"
+
+
+#line 13 "Calibrate.c"
+
+
+
+
+void Calibrate (void)
+{
+	PWMPulseWidthSet(0x40029000, 0x00000106, 0);
+	int i = 0;
+	int t = 1;
+	int A = 1;
+	double calspeed;
 	
-	}
-	Speed = ReadEncoder();
-	printf("User input, IN CONTROL %.3f\n\n",uSpeed);		
-	printf("Speed is, IN CONTROL %.2f rps \n\n", Speed);
+PWMPulseWidthSet(0x40029000, 0x00000106, 320);
 	
+ calspeed = ReadEncoder();
+
+	printf("cal speed = %.2f\n\n", calspeed);
+	
+	
+	
+	
+
 }
+	

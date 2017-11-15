@@ -19562,6 +19562,230 @@ double ReadEncoder(void);
 #line 1 "Get_Speed.h"
  double GetUserSpeed(void);
 #line 54 "project.h"
+#line 1 "Calibrate.h"
+#line 2 "Calibrate.h"
+#line 3 "Calibrate.h"
+#line 4 "Calibrate.h"
+#line 5 "Calibrate.h"
+#line 6 "Calibrate.h"
+#line 7 "Calibrate.h"
+#line 8 "Calibrate.h"
+#line 9 "Calibrate.h"
+#line 10 "Calibrate.h"
+#line 11 "Calibrate.h"
+#line 12 "Calibrate.h"
+#line 13 "Calibrate.h"
+#line 14 "Calibrate.h"
+#line 15 "Calibrate.h"
+#line 16 "Calibrate.h"
+#line 17 "Calibrate.h"
+#line 18 "Calibrate.h"
+#line 19 "Calibrate.h"
+#line 20 "Calibrate.h"
+#line 21 "Calibrate.h"
+#line 22 "Calibrate.h"
+#line 1 ".\\src\\Uart_helper.h"
+#line 2 ".\\src\\Uart_helper.h"
+#line 3 ".\\src\\Uart_helper.h"
+#line 4 ".\\src\\Uart_helper.h"
+#line 5 ".\\src\\Uart_helper.h"
+#line 6 ".\\src\\Uart_helper.h"
+#line 7 ".\\src\\Uart_helper.h"
+#line 8 ".\\src\\Uart_helper.h"
+#line 9 ".\\src\\Uart_helper.h"
+#line 10 ".\\src\\Uart_helper.h"
+
+
+void UartSetup(void);		
+
+
+int fputc(int ch, FILE *f);
+
+
+
+int fgetc(FILE *f);
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+#line 23 "Calibrate.h"
+#line 1 "Read_Encoder.h"
+#line 2 "Read_Encoder.h"
+#line 3 "Read_Encoder.h"
+#line 4 "Read_Encoder.h"
+#line 5 "Read_Encoder.h"
+#line 6 "Read_Encoder.h"
+#line 7 "Read_Encoder.h"
+#line 8 "Read_Encoder.h"
+#line 9 "Read_Encoder.h"
+#line 10 "Read_Encoder.h"
+#line 11 "Read_Encoder.h"
+#line 12 "Read_Encoder.h"
+#line 13 "Read_Encoder.h"
+#line 14 "Read_Encoder.h"
+#line 15 "Read_Encoder.h"
+#line 16 "Read_Encoder.h"
+#line 17 "Read_Encoder.h"
+#line 18 "Read_Encoder.h"
+#line 19 "Read_Encoder.h"
+#line 20 "Read_Encoder.h"
+#line 21 "Read_Encoder.h"
+#line 22 "Read_Encoder.h"
+#line 1 ".\\src\\Uart_helper.h"
+#line 2 ".\\src\\Uart_helper.h"
+#line 3 ".\\src\\Uart_helper.h"
+#line 4 ".\\src\\Uart_helper.h"
+#line 5 ".\\src\\Uart_helper.h"
+#line 6 ".\\src\\Uart_helper.h"
+#line 7 ".\\src\\Uart_helper.h"
+#line 8 ".\\src\\Uart_helper.h"
+#line 9 ".\\src\\Uart_helper.h"
+#line 10 ".\\src\\Uart_helper.h"
+
+
+void UartSetup(void);		
+
+
+int fputc(int ch, FILE *f);
+
+
+
+int fgetc(FILE *f);
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+#line 23 "Read_Encoder.h"
+
+
+
+
+double ReadEncoder(void);
+#line 24 "Calibrate.h"
+
+
+
+#line 28 "Calibrate.h"
+#line 29 "Calibrate.h"
+#line 30 "Calibrate.h"
+#line 31 "Calibrate.h"
+#line 55 "project.h"
 
 #line 4 "Read_Encoder.c"
 #line 5 "Read_Encoder.c"
@@ -19573,13 +19797,15 @@ double ReadEncoder(void);
 	
 	double ReadEncoder(void)
 	{	
-	for (int y = 0; y<400; y++)
-		{
-		for (int i = 0; i<100; i++)
-	{
-		__nop();
-	}
-}	
+
+	
+	
+	
+	
+	
+	
+	
+
 	
 	
 	
@@ -19587,10 +19813,11 @@ double ReadEncoder(void);
 
 	ticks = QEIVelocityGet(0x4002C000);
 	
+	
+	
+Espeed = ticks * 12.56637 / 192;
 
-	
-	Espeed = ticks / 19.2;
-	
+
 	
 
 	

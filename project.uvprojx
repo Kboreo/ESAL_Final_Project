@@ -490,6 +490,16 @@
               <FileType>5</FileType>
               <FilePath>.\Get_Speed.h</FilePath>
             </File>
+            <File>
+              <FileName>Calibrate.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>.\Calibrate.c</FilePath>
+            </File>
+            <File>
+              <FileName>Calibrate.h</FileName>
+              <FileType>5</FileType>
+              <FilePath>.\Calibrate.h</FilePath>
+            </File>
           </Files>
         </Group>
         <Group>
