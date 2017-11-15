@@ -24517,8 +24517,8 @@ N	PWMGenPeriodSet(PWM1_BASE, PWM_GEN_3, 320);
 X	PWMGenPeriodSet(0x40029000, 0x00000100, 320);
 N	
 N	//Set PWM duty-50% (Period/2)
-N	PWMPulseWidthSet(PWM1_BASE, PWM_OUT_6, 100);
-X	PWMPulseWidthSet(0x40029000, 0x00000106, 100);
+N	PWMPulseWidthSet(PWM1_BASE, PWM_OUT_6, 10);
+X	PWMPulseWidthSet(0x40029000, 0x00000106, 10);
 N	
 N	// Enable the PWM generator
 N	PWMGenEnable(PWM1_BASE, PWM_GEN_3);
@@ -24528,6 +24528,13 @@ N	// Turn on the Output pins
 N	PWMOutputState(PWM1_BASE, PWM_OUT_6_BIT, true);
 X	PWMOutputState(0x40029000, 0x00000040, 1);
 N}
+N
+Nvoid stopmotor(void)
+N{
+N	PWMPulseWidthSet(PWM1_BASE, PWM_OUT_6, 10);
+X	PWMPulseWidthSet(0x40029000, 0x00000106, 10);
+N}
+N	
 N
 N//Simple delay function.
 Nvoid delayMS(int ms) 
@@ -24547,5 +24554,5 @@ N//	int y;  //Int that contains the output of the button SW1
 N//	volatile int flashTime = 10; //Long that controls the speed of the flashing
 N//	
 N//}
-W "myPWM.c" 75 2 last line of file ends without a newline
+W "myPWM.c" 81 2 last line of file ends without a newline
 N	

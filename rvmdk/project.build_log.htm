@@ -32,7 +32,7 @@ assembling startup_rvmdk.S...
 creating preprocessor file for myPWM.c...
 creating preprocessor file for Encoder.c...
 compiling myPWM.c...
-myPWM.c(75): warning:  #1-D: last line of file ends without a newline
+myPWM.c(81): warning:  #1-D: last line of file ends without a newline
   	
 myPWM.c: 1 warning, 0 errors
 creating preprocessor file for Float_Setup.c...
@@ -142,8 +142,8 @@ Read_Encoder.h(27): warning:  #1-D: last line of file ends without a newline
   double ReadEncoder(void);
 Calibrate.h(30): warning:  #1-D: last line of file ends without a newline
   #include "pin_map.h"
-Read_Encoder.c(39): warning:  #1-D: last line of file ends without a newline
-  	}
+Read_Encoder.c(29): warning:  #1-D: last line of file ends without a newline
+  	//int direction = QEIDirectionGet(QEI0_BASE);
 Read_Encoder.c: 12 warnings, 0 errors
 compiling Speed_Control.c...
 Read_Encoder.h(27): warning:  #1-D: last line of file ends without a newline
@@ -204,18 +204,14 @@ Read_Encoder.h(27): warning:  #1-D: last line of file ends without a newline
   double ReadEncoder(void);
 Calibrate.h(30): warning:  #1-D: last line of file ends without a newline
   #include "pin_map.h"
-Calibrate.c(20): warning:  #177-D: variable "i"  was declared but never referenced
-  	int i = 0;
-Calibrate.c(21): warning:  #177-D: variable "t"  was declared but never referenced
-  	int t = 1;
-Calibrate.c(22): warning:  #177-D: variable "A"  was declared but never referenced
-  	int A = 1;
-Calibrate.c: 18 warnings, 0 errors
+Calibrate.c(29): warning:  #223-D: function "stopmotor" declared implicitly
+  		stopmotor();
+Calibrate.c: 16 warnings, 0 errors
 linking...
-Program Size: Code=9472 RO-data=1316 RW-data=88 ZI-data=360  
+Program Size: Code=12660 RO-data=1316 RW-data=292 ZI-data=364  
 FromELF: creating hex file...
 After Build - User command #1: fromelf --bin --output .\rvmdk\project.bin .\rvmdk\project.axf
-".\rvmdk\project.axf" - 0 Error(s), 78 Warning(s).
+".\rvmdk\project.axf" - 0 Error(s), 76 Warning(s).
 
 <h2>Software Packages used:</h2>
 
@@ -238,7 +234,7 @@ Package Vendor: Keil
 <h2>Collection of Component Files used:</h2>
 
    * Component: ARM::CMSIS:CORE:5.0.1
-Build Time Elapsed:  00:00:07
+Build Time Elapsed:  00:00:08
 </pre>
 </body>
 </html>

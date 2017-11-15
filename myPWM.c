@@ -45,7 +45,7 @@ void setupPWM(void)
 	PWMGenPeriodSet(PWM1_BASE, PWM_GEN_3, 320);
 	
 	//Set PWM duty-50% (Period/2)
-	PWMPulseWidthSet(PWM1_BASE, PWM_OUT_6, 100);
+	PWMPulseWidthSet(PWM1_BASE, PWM_OUT_6, 10);
 	
 	// Enable the PWM generator
 	PWMGenEnable(PWM1_BASE, PWM_GEN_3);
@@ -53,6 +53,12 @@ void setupPWM(void)
 	// Turn on the Output pins
 	PWMOutputState(PWM1_BASE, PWM_OUT_6_BIT, true);
 }
+
+void stopmotor(void)
+{
+	PWMPulseWidthSet(PWM1_BASE, PWM_OUT_6, 10);
+}
+	
 
 //Simple delay function.
 void delayMS(int ms) 
