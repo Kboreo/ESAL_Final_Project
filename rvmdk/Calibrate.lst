@@ -67407,7 +67407,7 @@ N	//int t = 1;
 N	int A = 1;
 N	double calspeed, tempspeed;
 N	double calspeed0, calspeed1,calspeed2,calspeed3,calspeed4,calspeed5,calspeed6,calspeed7,calspeed8,calspeed9,calspeed10,calspeed11,calspeed12,calspeed13,calspeed14,calspeed15, calspeed16;
-N	double calspeed17; // ,calspeed18,calspeed19,calspeed20,calspeed21,calspeed22,calspeed23,calspeed24,calspeed25;
+N	double calspeed17,calspeed18,calspeed19,calspeed20,calspeed21,calspeed22,calspeed23,calspeed24,calspeed25;
 N	double k, t, AvK;
 N
 Nvoid Calibrate (void)
@@ -67419,7 +67419,7 @@ W "Calibrate.c" 29 3 function "stopmotor" declared implicitly
 N		stopmotor();
 N		
 N		
-N		printf("Press any key to calibrate"); //lets the user know to get ready
+N		printf("Press any key to calibrate\n motor will turn on "); //lets the user know to get ready
 N		ct = getc(stdin); //Gets a char from the terminal from the user.
 X		ct = getc((& __stdin)); 
 N		printf("You entered %c\n\n",ct); //Lets the user know what they have selected
@@ -67603,80 +67603,117 @@ N			break;
 N		}
 N	}
 N	i=0;	
-N//	calspeed18 = tempspeed;
-N//	
-N//	while(tempspeed <= calspeed18){
-N//	tempspeed = ReadEncoder();
-N//		i++;
-N//		if (i > 9999){
-N//			break;
-N//		}
-N//	}	
-N//	i=0;
-N//	calspeed19 = tempspeed;
-N//	
-N//	while(tempspeed <= calspeed19){
-N//	tempspeed = ReadEncoder();
-N//		i++;
-N//		if (i > 9999){
-N//			break;
-N//		}
-N//	}
-N//	i=0;	
-N//	calspeed20 = tempspeed;
-N//	
-N//	while(tempspeed <= calspeed20){
-N//	tempspeed = ReadEncoder();
-N//		i++;
-N//		if (i > 9999){
-N//			break;
-N//		}
-N//	}
-N//	i=0;	
-N//	calspeed21 = tempspeed;
-N//	
-N//	while(tempspeed <= calspeed21){
-N//	tempspeed = ReadEncoder();
-N//		i++;
-N//		if (i > 9999){
-N//			break;
-N//		}
-N//	}	
-N//	i=0;
-N//	calspeed22 = tempspeed;
-N//	
-N//	while(tempspeed <= calspeed22){
-N//	tempspeed = ReadEncoder();
-N//		i++;
-N//		if (i > 9999)
-N//		{
-N//			break;
-N//		}
-N//	}	
+N	calspeed18 = tempspeed;
 N	
-N	printf("Speed 0 = %.2f ", calspeed0);		
-N	printf("Speed 1 = %.2f\n", calspeed1);
-N	printf("Speed 2 = %.2f ", calspeed2);
-N	printf("Speed 3 = %.2f\n", calspeed3);
-N	printf("Speed 4 = %.2f ", calspeed4);
-N	printf("Speed 5 = %.2f\n", calspeed5);
-N	printf("Speed 6 = %.2f ", calspeed6);
-N	printf("Speed 7 = %.2f\n", calspeed7);
-N	printf("Speed 8 = %.2f ", calspeed8);
-N	printf("Speed 9 = %.2f\n", calspeed9);
+N	while(tempspeed <= calspeed18){
+N	tempspeed = ReadEncoder();
+N		i++;
+N		if (i > 9999){
+N			break;
+N		}
+N	}	
+N	i=0;
+N	calspeed19 = tempspeed;
+N	
+N	while(tempspeed <= calspeed19){
+N	tempspeed = ReadEncoder();
+N		i++;
+N		if (i > 9999){
+N			break;
+N		}
+N	}
+N	i=0;	
+N	calspeed20 = tempspeed;
+N	
+N	while(tempspeed <= calspeed20){
+N	tempspeed = ReadEncoder();
+N		i++;
+N		if (i > 9999){
+N			break;
+N		}
+N	}
+N	i=0;	
+N	calspeed21 = tempspeed;
+N	
+N	while(tempspeed <= calspeed21){
+N	tempspeed = ReadEncoder();
+N		i++;
+N		if (i > 9999){
+N			break;
+N		}
+N	}	
+N	i=0;
+N	calspeed22 = tempspeed;
+N	
+N	while(tempspeed <= calspeed22){
+N	tempspeed = ReadEncoder();
+N		i++;
+N		if (i > 9999)
+N		{
+N			break;
+N		}
+N	}	
+N		i=0;
+N	calspeed23 = tempspeed;
+N	
+N	while(tempspeed <= calspeed23){
+N	tempspeed = ReadEncoder();
+N		i++;
+N		if (i > 9999)
+N		{
+N			break;
+N		}
+N	}	
+N		i=0;
+N	calspeed24 = tempspeed;
+N	
+N	while(tempspeed <= calspeed24){
+N	tempspeed = ReadEncoder();
+N		i++;
+N		if (i > 9999)
+N		{
+N			break;
+N		}
+N	}	
+N		i=0;
+N	calspeed25 = tempspeed;
+N	
+N	while(tempspeed <= calspeed25){
+N	tempspeed = ReadEncoder();
+N		i++;
+N		if (i > 9999)
+N		{
+N			break;
+N		}
+N	}	
+N	
+N	
+N	printf("Speed 0  = %.2f  ", calspeed0);		
+N	printf("Speed 1  = %.2f  ", calspeed1);
+N	printf("Speed 2  = %.2f  ", calspeed2);
+N	printf("Speed 3  = %.2f\n", calspeed3);
+N	printf("Speed 4  = %.2f ", calspeed4);
+N	printf("Speed 5  = %.2f ", calspeed5);
+N	printf("Speed 6  = %.2f ", calspeed6);
+N	printf("Speed 7  = %.2f\n", calspeed7);
+N	printf("Speed 8  = %.2f ", calspeed8);
+N	printf("Speed 9  = %.2f ", calspeed9);
 N	printf("Speed 10 = %.2f ", calspeed10);
 N	printf("Speed 11 = %.2f\n", calspeed11);
 N	printf("Speed 12 = %.2f ", calspeed12);
-N	printf("Speed 13 = %.2f\n", calspeed13);
+N	printf("Speed 13 = %.2f ", calspeed13);
 N	printf("Speed 14 = %.2f ", calspeed14);
 N	printf("Speed 15 = %.2f\n", calspeed15);
 N	printf("Speed 16 = %.2f ", calspeed16);
-N	printf("Speed 17 = %.2f\n", calspeed17);
-N//	printf("Speed 4 = %.2f\n", calspeed18);
-N//	printf("Speed 1 = %.2f\n", calspeed19);
-N//	printf("Speed 2 = %.2f\n", calspeed20);
-N//	printf("Speed 3 = %.2f\n", calspeed21);
-N//	printf("Speed 4 = %.2f\n", calspeed22);
+N	printf("Speed 17 = %.2f ", calspeed17);
+N	printf("Speed 18 = %.2f ", calspeed18);
+N	printf("Speed 19 = %.2f\n", calspeed19);
+N	printf("Speed 20 = %.2f ", calspeed20);
+N	printf("Speed 21 = %.2f ", calspeed21);
+N	printf("Speed 22 = %.2f ", calspeed22);
+N	printf("Speed 23 = %.2f\n", calspeed20);
+N	printf("Speed 24 = %.2f ", calspeed21);
+N	printf("Speed 25 = %.2f\n ", calspeed22);
 N	
 N	PWMPulseWidthSet(PWM1_BASE, PWM_OUT_6, 0);
 X	PWMPulseWidthSet(0x40029000, 0x00000106, 0);
@@ -67709,7 +67746,7 @@ Nelse if (AvK < calspeed9){
 N	t = .09;
 N}
 Nelse if (AvK < calspeed10){
-N	t = .1;
+N	t = .10;
 N}
 Nelse if (AvK < calspeed11){
 N	t = .11;

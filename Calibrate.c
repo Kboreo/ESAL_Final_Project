@@ -18,7 +18,7 @@
 	int A = 1;
 	double calspeed, tempspeed;
 	double calspeed0, calspeed1,calspeed2,calspeed3,calspeed4,calspeed5,calspeed6,calspeed7,calspeed8,calspeed9,calspeed10,calspeed11,calspeed12,calspeed13,calspeed14,calspeed15, calspeed16;
-	double calspeed17; // ,calspeed18,calspeed19,calspeed20,calspeed21,calspeed22,calspeed23,calspeed24,calspeed25;
+	double calspeed17,calspeed18,calspeed19,calspeed20,calspeed21,calspeed22,calspeed23,calspeed24,calspeed25;
 	double k, t, AvK;
 
 void Calibrate (void)
@@ -29,7 +29,7 @@ void Calibrate (void)
 		stopmotor();
 		
 		
-		printf("Press any key to calibrate"); //lets the user know to get ready
+		printf("Press any key to calibrate\n motor will turn on "); //lets the user know to get ready
 		ct = getc(stdin); //Gets a char from the terminal from the user.
 		printf("You entered %c\n\n",ct); //Lets the user know what they have selected
 		
@@ -211,80 +211,117 @@ void Calibrate (void)
 		}
 	}
 	i=0;	
-//	calspeed18 = tempspeed;
-//	
-//	while(tempspeed <= calspeed18){
-//	tempspeed = ReadEncoder();
-//		i++;
-//		if (i > 9999){
-//			break;
-//		}
-//	}	
-//	i=0;
-//	calspeed19 = tempspeed;
-//	
-//	while(tempspeed <= calspeed19){
-//	tempspeed = ReadEncoder();
-//		i++;
-//		if (i > 9999){
-//			break;
-//		}
-//	}
-//	i=0;	
-//	calspeed20 = tempspeed;
-//	
-//	while(tempspeed <= calspeed20){
-//	tempspeed = ReadEncoder();
-//		i++;
-//		if (i > 9999){
-//			break;
-//		}
-//	}
-//	i=0;	
-//	calspeed21 = tempspeed;
-//	
-//	while(tempspeed <= calspeed21){
-//	tempspeed = ReadEncoder();
-//		i++;
-//		if (i > 9999){
-//			break;
-//		}
-//	}	
-//	i=0;
-//	calspeed22 = tempspeed;
-//	
-//	while(tempspeed <= calspeed22){
-//	tempspeed = ReadEncoder();
-//		i++;
-//		if (i > 9999)
-//		{
-//			break;
-//		}
-//	}	
+	calspeed18 = tempspeed;
 	
-	printf("Speed 0 = %.2f ", calspeed0);		
-	printf("Speed 1 = %.2f\n", calspeed1);
-	printf("Speed 2 = %.2f ", calspeed2);
-	printf("Speed 3 = %.2f\n", calspeed3);
-	printf("Speed 4 = %.2f ", calspeed4);
-	printf("Speed 5 = %.2f\n", calspeed5);
-	printf("Speed 6 = %.2f ", calspeed6);
-	printf("Speed 7 = %.2f\n", calspeed7);
-	printf("Speed 8 = %.2f ", calspeed8);
-	printf("Speed 9 = %.2f\n", calspeed9);
+	while(tempspeed <= calspeed18){
+	tempspeed = ReadEncoder();
+		i++;
+		if (i > 9999){
+			break;
+		}
+	}	
+	i=0;
+	calspeed19 = tempspeed;
+	
+	while(tempspeed <= calspeed19){
+	tempspeed = ReadEncoder();
+		i++;
+		if (i > 9999){
+			break;
+		}
+	}
+	i=0;	
+	calspeed20 = tempspeed;
+	
+	while(tempspeed <= calspeed20){
+	tempspeed = ReadEncoder();
+		i++;
+		if (i > 9999){
+			break;
+		}
+	}
+	i=0;	
+	calspeed21 = tempspeed;
+	
+	while(tempspeed <= calspeed21){
+	tempspeed = ReadEncoder();
+		i++;
+		if (i > 9999){
+			break;
+		}
+	}	
+	i=0;
+	calspeed22 = tempspeed;
+	
+	while(tempspeed <= calspeed22){
+	tempspeed = ReadEncoder();
+		i++;
+		if (i > 9999)
+		{
+			break;
+		}
+	}	
+		i=0;
+	calspeed23 = tempspeed;
+	
+	while(tempspeed <= calspeed23){
+	tempspeed = ReadEncoder();
+		i++;
+		if (i > 9999)
+		{
+			break;
+		}
+	}	
+		i=0;
+	calspeed24 = tempspeed;
+	
+	while(tempspeed <= calspeed24){
+	tempspeed = ReadEncoder();
+		i++;
+		if (i > 9999)
+		{
+			break;
+		}
+	}	
+		i=0;
+	calspeed25 = tempspeed;
+	
+	while(tempspeed <= calspeed25){
+	tempspeed = ReadEncoder();
+		i++;
+		if (i > 9999)
+		{
+			break;
+		}
+	}	
+	
+	
+	printf("Speed 0  = %.2f  ", calspeed0);		
+	printf("Speed 1  = %.2f  ", calspeed1);
+	printf("Speed 2  = %.2f  ", calspeed2);
+	printf("Speed 3  = %.2f\n", calspeed3);
+	printf("Speed 4  = %.2f ", calspeed4);
+	printf("Speed 5  = %.2f ", calspeed5);
+	printf("Speed 6  = %.2f ", calspeed6);
+	printf("Speed 7  = %.2f\n", calspeed7);
+	printf("Speed 8  = %.2f ", calspeed8);
+	printf("Speed 9  = %.2f ", calspeed9);
 	printf("Speed 10 = %.2f ", calspeed10);
 	printf("Speed 11 = %.2f\n", calspeed11);
 	printf("Speed 12 = %.2f ", calspeed12);
-	printf("Speed 13 = %.2f\n", calspeed13);
+	printf("Speed 13 = %.2f ", calspeed13);
 	printf("Speed 14 = %.2f ", calspeed14);
 	printf("Speed 15 = %.2f\n", calspeed15);
 	printf("Speed 16 = %.2f ", calspeed16);
-	printf("Speed 17 = %.2f\n", calspeed17);
-//	printf("Speed 4 = %.2f\n", calspeed18);
-//	printf("Speed 1 = %.2f\n", calspeed19);
-//	printf("Speed 2 = %.2f\n", calspeed20);
-//	printf("Speed 3 = %.2f\n", calspeed21);
-//	printf("Speed 4 = %.2f\n", calspeed22);
+	printf("Speed 17 = %.2f ", calspeed17);
+	printf("Speed 18 = %.2f ", calspeed18);
+	printf("Speed 19 = %.2f\n", calspeed19);
+	printf("Speed 20 = %.2f ", calspeed20);
+	printf("Speed 21 = %.2f ", calspeed21);
+	printf("Speed 22 = %.2f ", calspeed22);
+	printf("Speed 23 = %.2f\n", calspeed20);
+	printf("Speed 24 = %.2f ", calspeed21);
+	printf("Speed 25 = %.2f\n ", calspeed22);
 	
 	PWMPulseWidthSet(PWM1_BASE, PWM_OUT_6, 0);
 			
