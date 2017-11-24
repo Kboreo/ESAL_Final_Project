@@ -66916,9 +66916,30 @@ N
 N#include "gpio.h"
 N#include "uart.h"
 N#include "../inc/tm4c123gh6pm.h"
-W "Calibrate.h" 30 21 last line of file ends without a newline
 N#include "pin_map.h"
+N
+W "Calibrate.h" 32 29 last line of file ends without a newline
+Nvoid initialize_aandw(void);
 L 55 "project.h" 2
+N#include "HAL_ADC.h"
+L 1 "HAL_ADC.h" 1
+N#include <stdbool.h>
+N#include <stdint.h>
+N#include "sysctl.h"
+N#include "hw_memmap.h"
+N#include "gpio.h"
+N#include "adc.h"
+N#include "uart.h"
+N#include "tm4c123gh6pm.h"
+N#include "hw_gpio.h"
+N#include "hw_types.h"
+N#include <stdio.h>
+N
+Nextern uint32_t ADC_Values[13];
+N
+Nvoid SetupADC(void);
+Ndouble ADCReadChan(void);  
+L 56 "project.h" 2
 N
 L 4 "Speed_Control.c" 2
 N#include "tm4c123gh6pm.h"	//Header file accesses registers in TMC123 microcontroller
@@ -67151,31 +67172,66 @@ N
 N	double Target_Speed;
 N	uint32_t Period;
 N	uint32_t Speed;
-N	double Error;
-N	uint32_t DutyC;
+N	double Error, speed2;
+N	double DutyC;
 Nvoid Speed_Control(double Speed, double uSpeed)
 N{	
 N
-N		
-N		DutyC = ROM_PWMPulseWidthGet(PWM1_BASE, PWM_OUT_6);
-X		DutyC = ((uint32_t (*)(uint32_t ui32Base, uint32_t ui32PWMOut))((uint32_t *)(((uint32_t *)0x01000010)[8]))[6])(0x40029000, 0x00000106);
+N	
+N	//sets duty cycle to predicted value needed to achieve speed
+N	DutyC = uSpeed * 19;
+N	PWMPulseWidthSet(PWM1_BASE, PWM_OUT_6, DutyC);
+X	PWMPulseWidthSet(0x40029000, 0x00000106, DutyC);
+N
+N	//Delay to allow motor to achieve speed preset
+N	for (int i = 0; i<1600000;i++)
+N	{
+W "Speed_Control.c" 23 3 expression has no effect
+N		__nop;
+N	}	
+N	while(1)
+N	{
 N	
 N	for (int i = 0; i<100;i++)
 N	{
-N		Speed = ReadEncoder();
-N		Error = uSpeed - Speed;
-N		DutyC = DutyC + (9 * Error); 
-N		if (DutyC < 16) DutyC = 16;
-N		if (DutyC > 310) DutyC = 100;
+N	Speed= ReadEncoder();
+N	speed2 = Speed;
 N		
+N		i=0;
+N	while(Speed == speed2){
+N		Speed = ReadEncoder();
+N		i++;
+N		if (i >999){
+N		break;
+N		}
+N	}
+N		Error = uSpeed - Speed;
+N		DutyC =(10 * Error)+DutyC; 
+N		if (DutyC < 1) {
+N			DutyC = 1;
+N		}
+N		if (DutyC > 310){
+N			DutyC = 320;
+N		}
 N
 N		//Set new PWM 
 N	PWMPulseWidthSet(PWM1_BASE, PWM_OUT_6, DutyC);
 X	PWMPulseWidthSet(0x40029000, 0x00000106, DutyC);
+N//		for (int i = 0; i<16000000;i++)
+N//	{
+N//		__nop;
+N//	}	
 N	
-N	}
-N	Speed = ReadEncoder();
-N	printf("User input, IN CONTROL %.3f\n\n",uSpeed);		
-N	printf("Speed is, IN CONTROL %.2f rps \n\n", Speed);
-N	//printf ("PWM duty cycle is %i\n\n", DutyC);
+N	
+N//		for (int i = 0; i<1600000;i++)
+N//	{
+N//		__nop;
+N//	}	
 N}
+N	Speed = ReadEncoder();
+N	//printf("User input, IN CONTROL %.3f\n\n",uSpeed);		
+N	printf("Speed is, IN CONTROL %.2f rps \n\n", Speed);
+N	//printf ("PWM duty cycle is %.2f\n\n", DutyC);
+N
+N}
+N	}

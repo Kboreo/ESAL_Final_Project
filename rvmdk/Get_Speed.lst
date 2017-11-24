@@ -1454,7 +1454,7 @@ Ndouble GetUserSpeed(void)
 N{
 N	volatile double userSpeed;	//variable for the user requested speed
 N	
-N	printf("Please type the speed you would like: \n"); //Ask to enter the speed they would like.
+N	printf("Please type the speed you would like: Between 2 and 31 radians/second \n"); //Ask to enter the speed they would like.
 N	//scanf("%la", &userSpeed);	//scans the whole line (alternative way)
 N	scanf("%lf", &userSpeed);	//scans the whole line
 N	printf("You entered %.3f\n\n",userSpeed); //Lets the user know what they have selected, using a precision of three places after the decimal. 

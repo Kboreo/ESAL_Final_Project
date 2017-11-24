@@ -19785,7 +19785,27 @@ double ReadEncoder(void);
 #line 29 "Calibrate.h"
 #line 30 "Calibrate.h"
 #line 31 "Calibrate.h"
+
+void initialize_aandw(void);
 #line 55 "project.h"
+#line 1 "HAL_ADC.h"
+#line 2 "HAL_ADC.h"
+#line 3 "HAL_ADC.h"
+#line 4 "HAL_ADC.h"
+#line 5 "HAL_ADC.h"
+#line 6 "HAL_ADC.h"
+#line 7 "HAL_ADC.h"
+#line 8 "HAL_ADC.h"
+#line 9 "HAL_ADC.h"
+#line 10 "HAL_ADC.h"
+#line 11 "HAL_ADC.h"
+#line 12 "HAL_ADC.h"
+
+extern uint32_t ADC_Values[13];
+
+void SetupADC(void);
+double ADCReadChan(void);  
+#line 56 "project.h"
 
 #line 4 "Read_Encoder.c"
 #line 5 "Read_Encoder.c"
@@ -19805,7 +19825,7 @@ double ReadEncoder(void);
 	
 
 	
-Espeed = ticks * 12.56637 / 19.2;
+Espeed = ticks * 6.283185 / 19.2;
 	
 return Espeed;	
 

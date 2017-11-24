@@ -28,3 +28,5 @@
 #include "uart.h"
 #include "../inc/tm4c123gh6pm.h"
 #include "pin_map.h"
+
+void initialize_aandw(void);

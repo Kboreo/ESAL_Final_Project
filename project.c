@@ -21,6 +21,7 @@ void SetupHardware()
 	setupPWM();
 	FPUEnable();
 	FPULazyStackingEnable();
+	SetupADC();
 }
 
 
@@ -35,7 +36,7 @@ int  main(void)
 	printf("Hardware setup complete\n\n");		
 	printf("PWM setup complete \n\n");
 	
-	
+	initialize_aandw();
 	
 	
 	
@@ -68,7 +69,7 @@ void mainMenu(char ctemp)
 		//printf("User input, IN MAIN %.3f\n\n",uSpeed);
 		//speed = ReadEncoder();
 		//printf("Speed is, IN MAIN %.2f rps \n\n", speed);
-		Speed_Control(speed, uSpeed); 		
+			Speed_Control(speed, uSpeed); 		
 				break;
 			
 						

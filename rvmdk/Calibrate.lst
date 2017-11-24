@@ -66916,9 +66916,30 @@ N
 N#include "gpio.h"
 N#include "uart.h"
 N#include "../inc/tm4c123gh6pm.h"
-W "Calibrate.h" 30 21 last line of file ends without a newline
 N#include "pin_map.h"
+N
+W "Calibrate.h" 32 29 last line of file ends without a newline
+Nvoid initialize_aandw(void);
 L 55 "project.h" 2
+N#include "HAL_ADC.h"
+L 1 "HAL_ADC.h" 1
+N#include <stdbool.h>
+N#include <stdint.h>
+N#include "sysctl.h"
+N#include "hw_memmap.h"
+N#include "gpio.h"
+N#include "adc.h"
+N#include "uart.h"
+N#include "tm4c123gh6pm.h"
+N#include "hw_gpio.h"
+N#include "hw_types.h"
+N#include <stdio.h>
+N
+Nextern uint32_t ADC_Values[13];
+N
+Nvoid SetupADC(void);
+Ndouble ADCReadChan(void);  
+L 56 "project.h" 2
 N
 L 4 "Calibrate.c" 2
 N#include "tm4c123gh6pm.h"	//Header file accesses registers in TMC123 microcontroller
@@ -67374,8 +67395,10 @@ N
 N#include "gpio.h"
 N#include "uart.h"
 N#include "../inc/tm4c123gh6pm.h"
-W "Calibrate.h" 30 21 last line of file ends without a newline
 N#include "pin_map.h"
+N
+W "Calibrate.h" 32 29 last line of file ends without a newline
+Nvoid initialize_aandw(void);
 L 7 "Calibrate.c" 2
 N#include "myPWM.h"
 L 1 "myPWM.h" 1
@@ -67405,17 +67428,28 @@ N	char ct;
 N	int i = 0;
 N	//int t = 1;
 N	int A = 1;
-N	double calspeed, tempspeed;
+N	double calspeed, tempspeed, voltage;
 N	double calspeed0, calspeed1,calspeed2,calspeed3,calspeed4,calspeed5,calspeed6,calspeed7,calspeed8,calspeed9,calspeed10,calspeed11,calspeed12,calspeed13,calspeed14,calspeed15, calspeed16;
 N	double calspeed17,calspeed18,calspeed19,calspeed20,calspeed21,calspeed22,calspeed23,calspeed24,calspeed25;
 N	double k, t, AvK;
+N	
+N	float aandw[36];
+N	
+Nvoid initialize_aandw()
+N{
+N	int i;
+N	for (i = 0; i< 36;i++)
+N	{
+N		aandw[i] = i* 3.141719;
+N	}
+N}
 N
 Nvoid Calibrate (void)
 N{
-N	while (1)
-N	{
+N	
+N	
 N	//PWMPulseWidthSet(PWM1_BASE, PWM_OUT_6, 0);
-W "Calibrate.c" 29 3 function "stopmotor" declared implicitly
+W "Calibrate.c" 40 3 function "stopmotor" declared implicitly
 N		stopmotor();
 N		
 N		
@@ -67715,10 +67749,12 @@ N	printf("Speed 23 = %.2f\n", calspeed20);
 N	printf("Speed 24 = %.2f ", calspeed21);
 N	printf("Speed 25 = %.2f\n ", calspeed22);
 N	
+N	voltage = ADCReadChan();
 N	PWMPulseWidthSet(PWM1_BASE, PWM_OUT_6, 0);
 X	PWMPulseWidthSet(0x40029000, 0x00000106, 0);
+N	
 N			
-Nk = calspeed17 / 5;
+Nk = calspeed25 / voltage;
 NAvK = calspeed17 * .6321;
 N
 Nif (AvK < calspeed2){
@@ -67769,8 +67805,10 @@ N}
 Nelse if (AvK < calspeed17){
 N	t = .17;
 N}
+N	printf("K = %.2f\n", k);
 N	printf("Avk = %.2f\n", AvK);
 N	printf("Time const = %.2f\n", t);
-N	}
+N	printf("Voltage = %.2f\n", voltage);
+N	stopmotor();
 N}
 N	

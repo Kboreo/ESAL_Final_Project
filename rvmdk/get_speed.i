@@ -1164,7 +1164,7 @@ double GetUserSpeed(void)
 {
 	volatile double userSpeed;	
 	
-	printf("Please type the speed you would like: \n"); 
+	printf("Please type the speed you would like: Between 2 and 31 radians/second \n"); 
 	
 	scanf("%lf", &userSpeed);	
 	printf("You entered %.3f\n\n",userSpeed); 

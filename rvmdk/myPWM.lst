@@ -24513,8 +24513,8 @@ N	PWMGenConfigure(PWM1_BASE, PWM_GEN_3, PWM_GEN_MODE_DOWN | PWM_GEN_MODE_NO_SYNC
 X	PWMGenConfigure(0x40029000, 0x00000100, 0x00000000 | 0x00000000);
 N	
 N	//Set the Period (expressed in clock ticks)
-N	PWMGenPeriodSet(PWM1_BASE, PWM_GEN_3, 320);
-X	PWMGenPeriodSet(0x40029000, 0x00000100, 320);
+N	PWMGenPeriodSet(PWM1_BASE, PWM_GEN_3, 640);
+X	PWMGenPeriodSet(0x40029000, 0x00000100, 640);
 N	
 N	//Set PWM duty-50% (Period/2)
 N	PWMPulseWidthSet(PWM1_BASE, PWM_OUT_6, 10);

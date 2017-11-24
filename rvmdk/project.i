@@ -19452,7 +19452,27 @@ double ReadEncoder(void);
 #line 29 "Calibrate.h"
 #line 30 "Calibrate.h"
 #line 31 "Calibrate.h"
+
+void initialize_aandw(void);
 #line 55 "project.h"
+#line 1 "HAL_ADC.h"
+#line 2 "HAL_ADC.h"
+#line 3 "HAL_ADC.h"
+#line 4 "HAL_ADC.h"
+#line 5 "HAL_ADC.h"
+#line 6 "HAL_ADC.h"
+#line 7 "HAL_ADC.h"
+#line 8 "HAL_ADC.h"
+#line 9 "HAL_ADC.h"
+#line 10 "HAL_ADC.h"
+#line 11 "HAL_ADC.h"
+#line 12 "HAL_ADC.h"
+
+extern uint32_t ADC_Values[13];
+
+void SetupADC(void);
+double ADCReadChan(void);  
+#line 56 "project.h"
 
 #line 2 "project.c"
 #line 3 "project.c"
@@ -19472,6 +19492,7 @@ void SetupHardware()
 	setupPWM();
 	FPUEnable();
 	FPULazyStackingEnable();
+	SetupADC();
 }
 
 
@@ -19486,7 +19507,7 @@ int  main(void)
 	printf("Hardware setup complete\n\n");		
 	printf("PWM setup complete \n\n");
 	
-	
+	initialize_aandw();
 	
 	
 	
@@ -19519,7 +19540,7 @@ void mainMenu(char ctemp)
 		
 		
 		
-		Speed_Control(speed, uSpeed); 		
+			Speed_Control(speed, uSpeed); 		
 				break;
 			
 						

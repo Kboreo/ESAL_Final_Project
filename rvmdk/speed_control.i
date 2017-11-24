@@ -19785,7 +19785,27 @@ double ReadEncoder(void);
 #line 29 "Calibrate.h"
 #line 30 "Calibrate.h"
 #line 31 "Calibrate.h"
+
+void initialize_aandw(void);
 #line 55 "project.h"
+#line 1 "HAL_ADC.h"
+#line 2 "HAL_ADC.h"
+#line 3 "HAL_ADC.h"
+#line 4 "HAL_ADC.h"
+#line 5 "HAL_ADC.h"
+#line 6 "HAL_ADC.h"
+#line 7 "HAL_ADC.h"
+#line 8 "HAL_ADC.h"
+#line 9 "HAL_ADC.h"
+#line 10 "HAL_ADC.h"
+#line 11 "HAL_ADC.h"
+#line 12 "HAL_ADC.h"
+
+extern uint32_t ADC_Values[13];
+
+void SetupADC(void);
+double ADCReadChan(void);  
+#line 56 "project.h"
 
 #line 4 "Speed_Control.c"
 #line 5 "Speed_Control.c"
@@ -20012,29 +20032,63 @@ void Speed_Control(double Speed, double uSpeed);
 	double Target_Speed;
 	uint32_t Period;
 	uint32_t Speed;
-	double Error;
-	uint32_t DutyC;
+	double Error, speed2;
+	double DutyC;
 void Speed_Control(double Speed, double uSpeed)
 {	
 
-		
-		DutyC = ((uint32_t (*)(uint32_t ui32Base, uint32_t ui32PWMOut))((uint32_t *)(((uint32_t *)0x01000010)[8]))[6])(0x40029000, 0x00000106);
+	
+	
+	DutyC = uSpeed * 19;
+	PWMPulseWidthSet(0x40029000, 0x00000106, DutyC);
+
+	
+	for (int i = 0; i<1600000;i++)
+	{
+		__nop;
+	}	
+	while(1)
+	{
 	
 	for (int i = 0; i<100;i++)
 	{
-		Speed = ReadEncoder();
-		Error = uSpeed - Speed;
-		DutyC = DutyC + (9 * Error); 
-		if (DutyC < 16) DutyC = 16;
-		if (DutyC > 310) DutyC = 100;
+	Speed= ReadEncoder();
+	speed2 = Speed;
 		
+		i=0;
+	while(Speed == speed2){
+		Speed = ReadEncoder();
+		i++;
+		if (i >999){
+		break;
+		}
+	}
+		Error = uSpeed - Speed;
+		DutyC =(10 * Error)+DutyC; 
+		if (DutyC < 1) {
+			DutyC = 1;
+		}
+		if (DutyC > 310){
+			DutyC = 320;
+		}
 
 		
 	PWMPulseWidthSet(0x40029000, 0x00000106, DutyC);
+
+
+
+
 	
-	}
+	
+
+
+
+
+}
 	Speed = ReadEncoder();
-	printf("User input, IN CONTROL %.3f\n\n",uSpeed);		
+	
 	printf("Speed is, IN CONTROL %.2f rps \n\n", Speed);
 	
+
 }
+	}

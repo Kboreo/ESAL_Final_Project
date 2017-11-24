@@ -19785,7 +19785,27 @@ double ReadEncoder(void);
 #line 29 "Calibrate.h"
 #line 30 "Calibrate.h"
 #line 31 "Calibrate.h"
+
+void initialize_aandw(void);
 #line 55 "project.h"
+#line 1 "HAL_ADC.h"
+#line 2 "HAL_ADC.h"
+#line 3 "HAL_ADC.h"
+#line 4 "HAL_ADC.h"
+#line 5 "HAL_ADC.h"
+#line 6 "HAL_ADC.h"
+#line 7 "HAL_ADC.h"
+#line 8 "HAL_ADC.h"
+#line 9 "HAL_ADC.h"
+#line 10 "HAL_ADC.h"
+#line 11 "HAL_ADC.h"
+#line 12 "HAL_ADC.h"
+
+extern uint32_t ADC_Values[13];
+
+void SetupADC(void);
+double ADCReadChan(void);  
+#line 56 "project.h"
 
 #line 4 "Calibrate.c"
 #line 5 "Calibrate.c"
@@ -20231,6 +20251,8 @@ double ReadEncoder(void);
 #line 29 "Calibrate.h"
 #line 30 "Calibrate.h"
 #line 31 "Calibrate.h"
+
+void initialize_aandw(void);
 #line 7 "Calibrate.c"
 #line 1 "myPWM.h"
 #line 2 "myPWM.h"
@@ -20259,15 +20281,26 @@ double ReadEncoder(void);
 	int i = 0;
 	
 	int A = 1;
-	double calspeed, tempspeed;
+	double calspeed, tempspeed, voltage;
 	double calspeed0, calspeed1,calspeed2,calspeed3,calspeed4,calspeed5,calspeed6,calspeed7,calspeed8,calspeed9,calspeed10,calspeed11,calspeed12,calspeed13,calspeed14,calspeed15, calspeed16;
 	double calspeed17,calspeed18,calspeed19,calspeed20,calspeed21,calspeed22,calspeed23,calspeed24,calspeed25;
 	double k, t, AvK;
+	
+	float aandw[36];
+	
+void initialize_aandw()
+{
+	int i;
+	for (i = 0; i< 36;i++)
+	{
+		aandw[i] = i* 3.141719;
+	}
+}
 
 void Calibrate (void)
 {
-	while (1)
-	{
+	
+	
 	
 		stopmotor();
 		
@@ -20566,9 +20599,11 @@ void Calibrate (void)
 	printf("Speed 24 = %.2f ", calspeed21);
 	printf("Speed 25 = %.2f\n ", calspeed22);
 	
+	voltage = ADCReadChan();
 	PWMPulseWidthSet(0x40029000, 0x00000106, 0);
+	
 			
-k = calspeed17 / 5;
+k = calspeed25 / voltage;
 AvK = calspeed17 * .6321;
 
 if (AvK < calspeed2){
@@ -20619,8 +20654,10 @@ else if (AvK < calspeed16){
 else if (AvK < calspeed17){
 	t = .17;
 }
+	printf("K = %.2f\n", k);
 	printf("Avk = %.2f\n", AvK);
 	printf("Time const = %.2f\n", t);
-	}
+	printf("Voltage = %.2f\n", voltage);
+	stopmotor();
 }
 	

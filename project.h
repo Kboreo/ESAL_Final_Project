@@ -52,4 +52,5 @@
 #include "Read_Encoder.h"
 #include "Get_Speed.h" 
 #include "Calibrate.h"
+#include "HAL_ADC.h"
 

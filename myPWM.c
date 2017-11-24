@@ -42,7 +42,7 @@ void setupPWM(void)
 	PWMGenConfigure(PWM1_BASE, PWM_GEN_3, PWM_GEN_MODE_DOWN | PWM_GEN_MODE_NO_SYNC);
 	
 	//Set the Period (expressed in clock ticks)
-	PWMGenPeriodSet(PWM1_BASE, PWM_GEN_3, 320);
+	PWMGenPeriodSet(PWM1_BASE, PWM_GEN_3, 640);
 	
 	//Set PWM duty-50% (Period/2)
 	PWMPulseWidthSet(PWM1_BASE, PWM_OUT_6, 10);
