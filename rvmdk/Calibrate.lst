@@ -67461,8 +67461,8 @@ N
 N	
 N
 N		
-N	PWMPulseWidthSet(PWM1_BASE, PWM_OUT_6, 320);
-X	PWMPulseWidthSet(0x40029000, 0x00000106, 320);
+N	PWMPulseWidthSet(PWM1_BASE, PWM_OUT_6, 6400);
+X	PWMPulseWidthSet(0x40029000, 0x00000106, 6400);
 N	
 N	calspeed0 = ReadEncoder();
 N	tempspeed = calspeed0;
@@ -67805,10 +67805,10 @@ N}
 Nelse if (AvK < calspeed17){
 N	t = .17;
 N}
-N	printf("K = %.2f\n", k);
-N	printf("Avk = %.2f\n", AvK);
-N	printf("Time const = %.2f\n", t);
-N	printf("Voltage = %.2f\n", voltage);
+N	printf("K = %.2f", k);
+N	printf("Avk = %.2f", AvK);
+N	printf("Time const = %.2f", t);
+N	printf("Voltage = %.2f", voltage);
 N	stopmotor();
 N}
 N	

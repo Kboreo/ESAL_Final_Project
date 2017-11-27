@@ -20312,7 +20312,7 @@ void Calibrate (void)
 	
 
 		
-	PWMPulseWidthSet(0x40029000, 0x00000106, 320);
+	PWMPulseWidthSet(0x40029000, 0x00000106, 6400);
 	
 	calspeed0 = ReadEncoder();
 	tempspeed = calspeed0;
@@ -20654,10 +20654,10 @@ else if (AvK < calspeed16){
 else if (AvK < calspeed17){
 	t = .17;
 }
-	printf("K = %.2f\n", k);
-	printf("Avk = %.2f\n", AvK);
-	printf("Time const = %.2f\n", t);
-	printf("Voltage = %.2f\n", voltage);
+	printf("K = %.2f", k);
+	printf("Avk = %.2f", AvK);
+	printf("Time const = %.2f", t);
+	printf("Voltage = %.2f", voltage);
 	stopmotor();
 }
 	

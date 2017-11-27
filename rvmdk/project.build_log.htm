@@ -30,11 +30,11 @@ Rebuild target 'project'
 creating preprocessor file for project.c...
 assembling startup_rvmdk.S...
 creating preprocessor file for myPWM.c...
+creating preprocessor file for Encoder.c...
 compiling myPWM.c...
 myPWM.c(81): warning:  #1-D: last line of file ends without a newline
   	
 myPWM.c: 1 warning, 0 errors
-creating preprocessor file for Encoder.c...
 creating preprocessor file for Float_Setup.c...
 compiling Encoder.c...
 Read_Encoder.h(27): warning:  #1-D: last line of file ends without a newline
@@ -66,17 +66,6 @@ Encoder.c(28): warning:  #47-D: incompatible redefinition of macro "SYSCTL_RCGCG
 Encoder.c(75): warning:  #1-D: last line of file ends without a newline
   	
 Encoder.c: 14 warnings, 0 errors
-creating preprocessor file for Uart_helper.c...
-compiling Float_Setup.c...
-Float_Setup.h(22): warning:  #1-D: last line of file ends without a newline
-  #include "Uart_helper.h"
-Read_Encoder.h(27): warning:  #1-D: last line of file ends without a newline
-  double ReadEncoder(void);
-Encoder.h(28): warning:  #1-D: last line of file ends without a newline
-  void QEIConfigure(uint32_t ui32Base, uint32_t ui32Config, uint32_t ui32MaxPosition);
-Float_Setup.c(18): warning:  #1-D: last line of file ends without a newline
-   
-Float_Setup.c: 4 warnings, 0 errors
 compiling project.c...
 driverlib/hibernate.h(229): warning:  #231-D: declaration is not visible outside of function
   extern void HibernateCalendarSet(struct tm *psTime);
@@ -105,6 +94,17 @@ project.c(61): warning:  #223-D: function "Calibrate" declared implicitly
 project.c(72): warning:  #223-D: function "Speed_Control" declared implicitly
   			Speed_Control(speed, uSpeed); 		
 project.c: 13 warnings, 0 errors
+creating preprocessor file for Uart_helper.c...
+compiling Float_Setup.c...
+Float_Setup.h(22): warning:  #1-D: last line of file ends without a newline
+  #include "Uart_helper.h"
+Read_Encoder.h(27): warning:  #1-D: last line of file ends without a newline
+  double ReadEncoder(void);
+Encoder.h(28): warning:  #1-D: last line of file ends without a newline
+  void QEIConfigure(uint32_t ui32Base, uint32_t ui32Config, uint32_t ui32MaxPosition);
+Float_Setup.c(18): warning:  #1-D: last line of file ends without a newline
+   
+Float_Setup.c: 4 warnings, 0 errors
 creating preprocessor file for Read_Encoder.c...
 compiling Uart_helper.c...
 src\Uart_helper.c(72): warning:  #1-D: last line of file ends without a newline
@@ -212,7 +212,7 @@ Calibrate.c(40): warning:  #223-D: function "stopmotor" declared implicitly
   		stopmotor();
 Calibrate.c: 16 warnings, 0 errors
 linking...
-Program Size: Code=14808 RO-data=1388 RW-data=380 ZI-data=556  
+Program Size: Code=14696 RO-data=1388 RW-data=380 ZI-data=412  
 FromELF: creating hex file...
 After Build - User command #1: fromelf --bin --output .\rvmdk\project.bin .\rvmdk\project.axf
 ".\rvmdk\project.axf" - 0 Error(s), 77 Warning(s).
@@ -238,7 +238,7 @@ Package Vendor: Keil
 <h2>Collection of Component Files used:</h2>
 
    * Component: ARM::CMSIS:CORE:5.0.1
-Build Time Elapsed:  00:00:08
+Build Time Elapsed:  00:00:10
 </pre>
 </body>
 </html>

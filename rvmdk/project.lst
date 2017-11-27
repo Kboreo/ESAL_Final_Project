@@ -66641,7 +66641,7 @@ N	SetupHardware();  //Initializes all of the required HardWare for the project.
 N	printf("Hardware setup complete\n\n");		
 N	printf("PWM setup complete \n\n");
 N	
-N	initialize_aandw();
+N	//initialize_aandw();
 N	
 N	
 N	

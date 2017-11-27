@@ -19507,7 +19507,7 @@ int  main(void)
 	printf("Hardware setup complete\n\n");		
 	printf("PWM setup complete \n\n");
 	
-	initialize_aandw();
+	
 	
 	
 	
