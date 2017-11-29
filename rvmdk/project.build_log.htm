@@ -30,14 +30,14 @@ Rebuild target 'project'
 creating preprocessor file for project.c...
 assembling startup_rvmdk.S...
 creating preprocessor file for myPWM.c...
-creating preprocessor file for Encoder.c...
 compiling myPWM.c...
 myPWM.c(81): warning:  #1-D: last line of file ends without a newline
   	
 myPWM.c: 1 warning, 0 errors
+creating preprocessor file for Encoder.c...
 creating preprocessor file for Float_Setup.c...
 compiling Encoder.c...
-Read_Encoder.h(27): warning:  #1-D: last line of file ends without a newline
+Read_Encoder.h(39): warning:  #1-D: last line of file ends without a newline
   double ReadEncoder(void);
 Encoder.h(28): warning:  #1-D: last line of file ends without a newline
   void QEIConfigure(uint32_t ui32Base, uint32_t ui32Config, uint32_t ui32MaxPosition);
@@ -66,6 +66,7 @@ Encoder.c(28): warning:  #47-D: incompatible redefinition of macro "SYSCTL_RCGCG
 Encoder.c(75): warning:  #1-D: last line of file ends without a newline
   	
 Encoder.c: 14 warnings, 0 errors
+creating preprocessor file for Uart_helper.c...
 compiling project.c...
 driverlib/hibernate.h(229): warning:  #231-D: declaration is not visible outside of function
   extern void HibernateCalendarSet(struct tm *psTime);
@@ -75,54 +76,53 @@ driverlib/hibernate.h(231): warning:  #231-D: declaration is not visible outside
   extern void HibernateCalendarMatchSet(uint32_t ui32Index, struct tm *psTime);
 driverlib/hibernate.h(232): warning:  #231-D: declaration is not visible outside of function
   extern void HibernateCalendarMatchGet(uint32_t ui32Index, struct tm *psTime);
-Read_Encoder.h(27): warning:  #1-D: last line of file ends without a newline
+Read_Encoder.h(39): warning:  #1-D: last line of file ends without a newline
   double ReadEncoder(void);
-Get_Speed.h(1): warning:  #1-D: last line of file ends without a newline
+Get_Speed.h(13): warning:  #1-D: last line of file ends without a newline
    double GetUserSpeed(void);
-Read_Encoder.h(27): warning:  #1-D: last line of file ends without a newline
+Read_Encoder.h(39): warning:  #1-D: last line of file ends without a newline
   double ReadEncoder(void);
-Calibrate.h(32): warning:  #1-D: last line of file ends without a newline
+Calibrate.h(45): warning:  #1-D: last line of file ends without a newline
   void initialize_aandw(void);
-project.c(19): warning:  #223-D: function "FloatSetup" declared implicitly
-  	FloatSetup();
-project.c(20): warning:  #223-D: function "setupENCODER" declared implicitly
-  	setupENCODER();	
-project.c(21): warning:  #223-D: function "setupPWM" declared implicitly
-  	setupPWM();
-project.c(61): warning:  #223-D: function "Calibrate" declared implicitly
+project.c(47): warning:  #223-D: function "FloatSetup" declared implicitly
+  	FloatSetup(); //setup to allow floating point print 
+project.c(48): warning:  #223-D: function "setupENCODER" declared implicitly
+  	setupENCODER();	 //setup to read motor encoder
+project.c(49): warning:  #223-D: function "setupPWM" declared implicitly
+  	setupPWM();	//setup PWM output
+project.c(86): warning:  #223-D: function "Calibrate" declared implicitly
   			Calibrate(); 
-project.c(72): warning:  #223-D: function "Speed_Control" declared implicitly
+project.c(97): warning:  #223-D: function "Speed_Control" declared implicitly
   			Speed_Control(speed, uSpeed); 		
 project.c: 13 warnings, 0 errors
-creating preprocessor file for Uart_helper.c...
 compiling Float_Setup.c...
-Float_Setup.h(22): warning:  #1-D: last line of file ends without a newline
+Float_Setup.h(35): warning:  #1-D: last line of file ends without a newline
   #include "Uart_helper.h"
-Read_Encoder.h(27): warning:  #1-D: last line of file ends without a newline
+Read_Encoder.h(39): warning:  #1-D: last line of file ends without a newline
   double ReadEncoder(void);
 Encoder.h(28): warning:  #1-D: last line of file ends without a newline
   void QEIConfigure(uint32_t ui32Base, uint32_t ui32Config, uint32_t ui32MaxPosition);
-Float_Setup.c(18): warning:  #1-D: last line of file ends without a newline
+Float_Setup.c(31): warning:  #1-D: last line of file ends without a newline
    
 Float_Setup.c: 4 warnings, 0 errors
 creating preprocessor file for Read_Encoder.c...
+creating preprocessor file for Speed_Control.c...
 compiling Uart_helper.c...
-src\Uart_helper.c(72): warning:  #1-D: last line of file ends without a newline
+src\Uart_helper.c(85): warning:  #1-D: last line of file ends without a newline
   }
 src\Uart_helper.c: 1 warning, 0 errors
-creating preprocessor file for Speed_Control.c...
 creating preprocessor file for Get_Speed.c...
 compiling Get_Speed.c...
-Get_Speed.h(1): warning:  #1-D: last line of file ends without a newline
+Get_Speed.h(13): warning:  #1-D: last line of file ends without a newline
    double GetUserSpeed(void);
-Get_Speed.c(14): warning:  #1-D: last line of file ends without a newline
+Get_Speed.c(26): warning:  #1-D: last line of file ends without a newline
   }
 Get_Speed.c: 2 warnings, 0 errors
 creating preprocessor file for Calibrate.c...
 compiling Read_Encoder.c...
-Read_Encoder.h(27): warning:  #1-D: last line of file ends without a newline
+Read_Encoder.h(39): warning:  #1-D: last line of file ends without a newline
   double ReadEncoder(void);
-Read_Encoder.h(27): warning:  #1-D: last line of file ends without a newline
+Read_Encoder.h(39): warning:  #1-D: last line of file ends without a newline
   double ReadEncoder(void);
 Encoder.h(28): warning:  #1-D: last line of file ends without a newline
   void QEIConfigure(uint32_t ui32Base, uint32_t ui32Config, uint32_t ui32MaxPosition);
@@ -134,22 +134,22 @@ driverlib/hibernate.h(231): warning:  #231-D: declaration is not visible outside
   extern void HibernateCalendarMatchSet(uint32_t ui32Index, struct tm *psTime);
 driverlib/hibernate.h(232): warning:  #231-D: declaration is not visible outside of function
   extern void HibernateCalendarMatchGet(uint32_t ui32Index, struct tm *psTime);
-Read_Encoder.h(27): warning:  #1-D: last line of file ends without a newline
+Read_Encoder.h(39): warning:  #1-D: last line of file ends without a newline
   double ReadEncoder(void);
-Get_Speed.h(1): warning:  #1-D: last line of file ends without a newline
+Get_Speed.h(13): warning:  #1-D: last line of file ends without a newline
    double GetUserSpeed(void);
-Read_Encoder.h(27): warning:  #1-D: last line of file ends without a newline
+Read_Encoder.h(39): warning:  #1-D: last line of file ends without a newline
   double ReadEncoder(void);
-Calibrate.h(32): warning:  #1-D: last line of file ends without a newline
+Calibrate.h(45): warning:  #1-D: last line of file ends without a newline
   void initialize_aandw(void);
-Read_Encoder.c(29): warning:  #1-D: last line of file ends without a newline
+Read_Encoder.c(42): warning:  #1-D: last line of file ends without a newline
   	//int direction = QEIDirectionGet(QEI0_BASE);
 Read_Encoder.c: 12 warnings, 0 errors
 creating preprocessor file for HAL_ADC.c...
 compiling Speed_Control.c...
-Read_Encoder.h(27): warning:  #1-D: last line of file ends without a newline
+Read_Encoder.h(39): warning:  #1-D: last line of file ends without a newline
   double ReadEncoder(void);
-Read_Encoder.h(27): warning:  #1-D: last line of file ends without a newline
+Read_Encoder.h(39): warning:  #1-D: last line of file ends without a newline
   double ReadEncoder(void);
 Encoder.h(28): warning:  #1-D: last line of file ends without a newline
   void QEIConfigure(uint32_t ui32Base, uint32_t ui32Config, uint32_t ui32MaxPosition);
@@ -161,26 +161,26 @@ driverlib/hibernate.h(231): warning:  #231-D: declaration is not visible outside
   extern void HibernateCalendarMatchSet(uint32_t ui32Index, struct tm *psTime);
 driverlib/hibernate.h(232): warning:  #231-D: declaration is not visible outside of function
   extern void HibernateCalendarMatchGet(uint32_t ui32Index, struct tm *psTime);
-Read_Encoder.h(27): warning:  #1-D: last line of file ends without a newline
+Read_Encoder.h(39): warning:  #1-D: last line of file ends without a newline
   double ReadEncoder(void);
-Get_Speed.h(1): warning:  #1-D: last line of file ends without a newline
+Get_Speed.h(13): warning:  #1-D: last line of file ends without a newline
    double GetUserSpeed(void);
-Read_Encoder.h(27): warning:  #1-D: last line of file ends without a newline
+Read_Encoder.h(39): warning:  #1-D: last line of file ends without a newline
   double ReadEncoder(void);
-Calibrate.h(32): warning:  #1-D: last line of file ends without a newline
+Calibrate.h(45): warning:  #1-D: last line of file ends without a newline
   void initialize_aandw(void);
-Read_Encoder.h(27): warning:  #1-D: last line of file ends without a newline
+Read_Encoder.h(39): warning:  #1-D: last line of file ends without a newline
   double ReadEncoder(void);
-Speed_Control.h(25): warning:  #1-D: last line of file ends without a newline
+Speed_Control.h(38): warning:  #1-D: last line of file ends without a newline
   void Speed_Control(double Speed, double uSpeed);
-Speed_Control.c(23): warning:  #174-D: expression has no effect
+Speed_Control.c(36): warning:  #174-D: expression has no effect
   		__nop;
 Speed_Control.c: 14 warnings, 0 errors
 compiling HAL_ADC.c...
 compiling Calibrate.c...
-Read_Encoder.h(27): warning:  #1-D: last line of file ends without a newline
+Read_Encoder.h(39): warning:  #1-D: last line of file ends without a newline
   double ReadEncoder(void);
-Read_Encoder.h(27): warning:  #1-D: last line of file ends without a newline
+Read_Encoder.h(39): warning:  #1-D: last line of file ends without a newline
   double ReadEncoder(void);
 Encoder.h(28): warning:  #1-D: last line of file ends without a newline
   void QEIConfigure(uint32_t ui32Base, uint32_t ui32Config, uint32_t ui32MaxPosition);
@@ -192,27 +192,27 @@ driverlib/hibernate.h(231): warning:  #231-D: declaration is not visible outside
   extern void HibernateCalendarMatchSet(uint32_t ui32Index, struct tm *psTime);
 driverlib/hibernate.h(232): warning:  #231-D: declaration is not visible outside of function
   extern void HibernateCalendarMatchGet(uint32_t ui32Index, struct tm *psTime);
-Read_Encoder.h(27): warning:  #1-D: last line of file ends without a newline
+Read_Encoder.h(39): warning:  #1-D: last line of file ends without a newline
   double ReadEncoder(void);
-Get_Speed.h(1): warning:  #1-D: last line of file ends without a newline
+Get_Speed.h(13): warning:  #1-D: last line of file ends without a newline
    double GetUserSpeed(void);
-Read_Encoder.h(27): warning:  #1-D: last line of file ends without a newline
+Read_Encoder.h(39): warning:  #1-D: last line of file ends without a newline
   double ReadEncoder(void);
-Calibrate.h(32): warning:  #1-D: last line of file ends without a newline
+Calibrate.h(45): warning:  #1-D: last line of file ends without a newline
   void initialize_aandw(void);
-Read_Encoder.h(27): warning:  #1-D: last line of file ends without a newline
+Read_Encoder.h(39): warning:  #1-D: last line of file ends without a newline
   double ReadEncoder(void);
-Speed_Control.h(25): warning:  #1-D: last line of file ends without a newline
+Speed_Control.h(38): warning:  #1-D: last line of file ends without a newline
   void Speed_Control(double Speed, double uSpeed);
-Read_Encoder.h(27): warning:  #1-D: last line of file ends without a newline
+Read_Encoder.h(39): warning:  #1-D: last line of file ends without a newline
   double ReadEncoder(void);
-Calibrate.h(32): warning:  #1-D: last line of file ends without a newline
+Calibrate.h(45): warning:  #1-D: last line of file ends without a newline
   void initialize_aandw(void);
-Calibrate.c(40): warning:  #223-D: function "stopmotor" declared implicitly
+Calibrate.c(53): warning:  #223-D: function "stopmotor" declared implicitly
   		stopmotor();
 Calibrate.c: 16 warnings, 0 errors
 linking...
-Program Size: Code=14696 RO-data=1388 RW-data=380 ZI-data=412  
+Program Size: Code=14644 RO-data=1388 RW-data=380 ZI-data=412  
 FromELF: creating hex file...
 After Build - User command #1: fromelf --bin --output .\rvmdk\project.bin .\rvmdk\project.axf
 ".\rvmdk\project.axf" - 0 Error(s), 77 Warning(s).

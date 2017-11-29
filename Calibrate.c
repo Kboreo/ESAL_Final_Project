@@ -402,10 +402,10 @@ else if (AvK < calspeed16){
 else if (AvK < calspeed17){
 	t = .17;
 }
-	printf("K = %.2f", k);
-	printf("Avk = %.2f", AvK);
-	printf("Time const = %.2f", t);
-	printf("Voltage = %.2f", voltage);
+	printf("K = %.2f, ", k);
+	printf("Avk = %.2f\n", AvK);
+	printf("Time const = %.2f, ", t);
+	printf("Voltage = %.2f\n\n", voltage);
 	stopmotor();
 }
 	

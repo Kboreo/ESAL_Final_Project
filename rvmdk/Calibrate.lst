@@ -1,6 +1,31 @@
 L 1 "Calibrate.c"
+N/*********************************************************************************************************************************
+N**
+N** Module Name:   Calibrate.c
+N**
+N** Module Description: Handles the calibration of a motor based on a step input
+N**
+N**********************************************************************************************************************************
+N**
+N** Author(s):		Kodey Boreo, Phillip Tesolin 
+N**
+N**********************************************************************************************************************************/
+N
+N
 N#include "Read_Encoder.h"
 L 1 "Read_Encoder.h" 1
+N/*********************************************************************************************************************************
+N**
+N** Module Name:   Read_Encoder.h
+N**
+N** Module Description: Reads the current speed 
+N**
+N**********************************************************************************************************************************
+N**
+N** Author(s):		Kodey Boreo, Phillip Tesolin 
+N**
+N**********************************************************************************************************************************/
+N
 N#include "driverlib/pin_map.h"
 L 1 "driverlib/pin_map.h" 1
 N//*****************************************************************************
@@ -20956,7 +20981,7 @@ S
 N#endif // PART_TM4C129XNCZAD
 N
 N#endif // __DRIVERLIB_PIN_MAP_H__
-L 2 "Read_Encoder.h" 2
+L 14 "Read_Encoder.h" 2
 N#include <stdint.h>
 L 1 "C:\Keil_v5\ARM\ARMCC\Bin\..\include\stdint.h" 1
 N/* Copyright (C) ARM Ltd., 1999,2014 */
@@ -21288,7 +21313,7 @@ N
 N#endif /* __stdint_h */
 N
 N/* end of stdint.h */
-L 3 "Read_Encoder.h" 2
+L 15 "Read_Encoder.h" 2
 N#include <stdio.h>
 L 1 "C:\Keil_v5\ARM\ARMCC\Bin\..\include\stdio.h" 1
 N/* stdio.h: ANSI 'C' (X3J11 Oct 88) library header, section 4.9 */
@@ -22401,7 +22426,7 @@ N#endif /* ndef __stdio_h */
 N
 N/* end of stdio.h */
 N
-L 4 "Read_Encoder.h" 2
+L 16 "Read_Encoder.h" 2
 N#include <stdbool.h>
 L 1 "C:\Keil_v5\ARM\ARMCC\Bin\..\include\stdbool.h" 1
 N/* stdbool.h: ISO/IEC 9899:1999 (C99), section 7.16 */
@@ -22431,7 +22456,7 @@ N  #endif
 N
 N#endif /* __bool_true_false_are_defined */
 N
-L 5 "Read_Encoder.h" 2
+L 17 "Read_Encoder.h" 2
 N#include <math.h>
 L 1 "C:\Keil_v5\ARM\ARMCC\Bin\..\include\math.h" 1
 N/*
@@ -23993,7 +24018,7 @@ N
 N#endif /* __math_h */
 N
 N/* end of math.h */
-L 6 "Read_Encoder.h" 2
+L 18 "Read_Encoder.h" 2
 N#include "inc/hw_gpio.h"
 L 1 "inc/hw_gpio.h" 1
 N//*****************************************************************************
@@ -24209,7 +24234,7 @@ N#define GPIO_PC_EDM2_S          4
 N#define GPIO_PC_EDM1_S          2
 N
 N#endif // __HW_GPIO_H__
-L 7 "Read_Encoder.h" 2
+L 19 "Read_Encoder.h" 2
 N#include "inc/hw_types.h"
 L 1 "inc/hw_types.h" 1
 N//*****************************************************************************
@@ -24372,7 +24397,7 @@ N#define CLASS_IS_SNOWFLAKE CLASS_IS_TM4C123
 N#endif
 N
 N#endif // __HW_TYPES_H__
-L 8 "Read_Encoder.h" 2
+L 20 "Read_Encoder.h" 2
 N#include "inc/hw_memmap.h"
 L 1 "inc/hw_memmap.h" 1
 N//*****************************************************************************
@@ -24526,7 +24551,7 @@ N#define NVIC_BASE               0xE000E000  // Nested Vectored Interrupt Ctrl
 N#define TPIU_BASE               0xE0040000  // Trace Port Interface Unit
 N
 N#endif // __HW_MEMMAP_H__
-L 9 "Read_Encoder.h" 2
+L 21 "Read_Encoder.h" 2
 N#include "driverlib/sysctl.h"
 L 1 "driverlib/sysctl.h" 1
 N//*****************************************************************************
@@ -25198,7 +25223,7 @@ S}
 N#endif
 N
 N#endif // __DRIVERLIB_SYSCTL_H__
-L 10 "Read_Encoder.h" 2
+L 22 "Read_Encoder.h" 2
 N#include "driverlib/pin_map.h"
 N#include "driverlib/gpio.h"
 L 1 "driverlib/gpio.h" 1
@@ -25407,7 +25432,7 @@ S}
 N#endif
 N
 N#endif // __DRIVERLIB_GPIO_H__
-L 12 "Read_Encoder.h" 2
+L 24 "Read_Encoder.h" 2
 N#include "driverlib/pwm.h"
 L 1 "driverlib/pwm.h" 1
 N//*****************************************************************************
@@ -25754,7 +25779,7 @@ S}
 N#endif
 N
 N#endif // __DRIVERLIB_PWM_H__
-L 13 "Read_Encoder.h" 2
+L 25 "Read_Encoder.h" 2
 N#include "driverlib/uart.h"
 L 1 "driverlib/uart.h" 1
 N//*****************************************************************************
@@ -26020,7 +26045,7 @@ S}
 N#endif
 N
 N#endif // __DRIVERLIB_UART_H__
-L 14 "Read_Encoder.h" 2
+L 26 "Read_Encoder.h" 2
 N#include "driverlib/qei.h"
 L 1 "driverlib/qei.h" 1
 N//*****************************************************************************
@@ -26179,7 +26204,7 @@ S}
 N#endif
 N
 N#endif // __DRIVERLIB_QEI_H__
-L 15 "Read_Encoder.h" 2
+L 27 "Read_Encoder.h" 2
 N#include <stdint.h>
 N#include <stdbool.h>
 N#include "driverlib/fpu.h"
@@ -26297,7 +26322,7 @@ S}
 N#endif
 N
 N#endif // __DRIVERLIB_FPU_H__
-L 18 "Read_Encoder.h" 2
+L 30 "Read_Encoder.h" 2
 N#include "sysctl.h"
 N#include "hw_memmap.h"
 N#include "tm4c123gh6pm.h"
@@ -39385,10 +39410,23 @@ N
 N#endif
 N
 N#endif // __TM4C123GH6PM_H__
-L 21 "Read_Encoder.h" 2
+L 33 "Read_Encoder.h" 2
 N#include "hw_types.h"
 N#include "Uart_helper.h"
 L 1 ".\src\Uart_helper.h" 1
+N/*********************************************************************************************************************************
+N**
+N** Module Name:   Uart_helper.h
+N**
+N** Module Description: Set up for Uart
+N**
+N**********************************************************************************************************************************
+N**
+N** Author(s):		Kodey Boreo, Phillip Tesolin 
+N**
+N**********************************************************************************************************************************/
+N
+N
 N#include <stdbool.h>
 N#include <stdint.h>
 N#include <stdio.h>
@@ -39470,14 +39508,14 @@ N//MMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMM
 N//MMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMM
 N//MMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMM
 N
-L 23 "Read_Encoder.h" 2
+L 35 "Read_Encoder.h" 2
 N
 N//double ReadEncoder(void);
 N//void ReadEncoder(void);
 N
-W "Read_Encoder.h" 27 26 last line of file ends without a newline
+W "Read_Encoder.h" 39 26 last line of file ends without a newline
 Ndouble ReadEncoder(void);
-L 2 "Calibrate.c" 2
+L 15 "Calibrate.c" 2
 N#include "Encoder.h"
 L 1 "Encoder.h" 1
 N#include "driverlib/pin_map.h"
@@ -39503,6 +39541,19 @@ N#include "tm4c123gh6pm.h"
 N#include "hw_types.h"
 N#include "Uart_helper.h"
 L 1 ".\src\Uart_helper.h" 1
+N/*********************************************************************************************************************************
+N**
+N** Module Name:   Uart_helper.h
+N**
+N** Module Description: Set up for Uart
+N**
+N**********************************************************************************************************************************
+N**
+N** Author(s):		Kodey Boreo, Phillip Tesolin 
+N**
+N**********************************************************************************************************************************/
+N
+N
 N#include <stdbool.h>
 N#include <stdint.h>
 N#include <stdio.h>
@@ -39587,6 +39638,18 @@ N
 L 23 "Encoder.h" 2
 N#include "Read_Encoder.h"
 L 1 "Read_Encoder.h" 1
+N/*********************************************************************************************************************************
+N**
+N** Module Name:   Read_Encoder.h
+N**
+N** Module Description: Reads the current speed 
+N**
+N**********************************************************************************************************************************
+N**
+N** Author(s):		Kodey Boreo, Phillip Tesolin 
+N**
+N**********************************************************************************************************************************/
+N
 N#include "driverlib/pin_map.h"
 N#include <stdint.h>
 N#include <stdio.h>
@@ -39610,6 +39673,19 @@ N#include "tm4c123gh6pm.h"
 N#include "hw_types.h"
 N#include "Uart_helper.h"
 L 1 ".\src\Uart_helper.h" 1
+N/*********************************************************************************************************************************
+N**
+N** Module Name:   Uart_helper.h
+N**
+N** Module Description: Set up for Uart
+N**
+N**********************************************************************************************************************************
+N**
+N** Author(s):		Kodey Boreo, Phillip Tesolin 
+N**
+N**********************************************************************************************************************************/
+N
+N
 N#include <stdbool.h>
 N#include <stdint.h>
 N#include <stdio.h>
@@ -39691,12 +39767,12 @@ N//MMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMM
 N//MMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMM
 N//MMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMM
 N
-L 23 "Read_Encoder.h" 2
+L 35 "Read_Encoder.h" 2
 N
 N//double ReadEncoder(void);
 N//void ReadEncoder(void);
 N
-W "Read_Encoder.h" 27 26 last line of file ends without a newline
+W "Read_Encoder.h" 39 26 last line of file ends without a newline
 Ndouble ReadEncoder(void);
 L 24 "Encoder.h" 2
 N
@@ -39705,7 +39781,7 @@ N
 N
 W "Encoder.h" 28 85 last line of file ends without a newline
 Nvoid QEIConfigure(uint32_t ui32Base, uint32_t ui32Config, uint32_t ui32MaxPosition);
-L 3 "Calibrate.c" 2
+L 16 "Calibrate.c" 2
 N#include "project.h"
 L 1 "project.h" 1
 N#include <stdbool.h>
@@ -66382,6 +66458,19 @@ N#include "tm4c123gh6pm.h"
 N
 N#include "src/Uart_helper.h"
 L 1 "src/Uart_helper.h" 1
+N/*********************************************************************************************************************************
+N**
+N** Module Name:   Uart_helper.h
+N**
+N** Module Description: Set up for Uart
+N**
+N**********************************************************************************************************************************
+N**
+N** Author(s):		Kodey Boreo, Phillip Tesolin 
+N**
+N**********************************************************************************************************************************/
+N
+N
 N#include <stdbool.h>
 N#include <stdint.h>
 N#include <stdio.h>
@@ -66487,6 +66576,19 @@ N
 L 50 "project.h" 2
 N#include "./src/Uart_helper.h"
 L 1 "./src/Uart_helper.h" 1
+N/*********************************************************************************************************************************
+N**
+N** Module Name:   Uart_helper.h
+N**
+N** Module Description: Set up for Uart
+N**
+N**********************************************************************************************************************************
+N**
+N** Author(s):		Kodey Boreo, Phillip Tesolin 
+N**
+N**********************************************************************************************************************************/
+N
+N
 N#include <stdbool.h>
 N#include <stdint.h>
 N#include <stdio.h>
@@ -66572,6 +66674,18 @@ L 51 "project.h" 2
 N
 N#include "Read_Encoder.h"
 L 1 "Read_Encoder.h" 1
+N/*********************************************************************************************************************************
+N**
+N** Module Name:   Read_Encoder.h
+N**
+N** Module Description: Reads the current speed 
+N**
+N**********************************************************************************************************************************
+N**
+N** Author(s):		Kodey Boreo, Phillip Tesolin 
+N**
+N**********************************************************************************************************************************/
+N
 N#include "driverlib/pin_map.h"
 N#include <stdint.h>
 N#include <stdio.h>
@@ -66595,6 +66709,19 @@ N#include "tm4c123gh6pm.h"
 N#include "hw_types.h"
 N#include "Uart_helper.h"
 L 1 ".\src\Uart_helper.h" 1
+N/*********************************************************************************************************************************
+N**
+N** Module Name:   Uart_helper.h
+N**
+N** Module Description: Set up for Uart
+N**
+N**********************************************************************************************************************************
+N**
+N** Author(s):		Kodey Boreo, Phillip Tesolin 
+N**
+N**********************************************************************************************************************************/
+N
+N
 N#include <stdbool.h>
 N#include <stdint.h>
 N#include <stdio.h>
@@ -66676,21 +66803,46 @@ N//MMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMM
 N//MMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMM
 N//MMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMM
 N
-L 23 "Read_Encoder.h" 2
+L 35 "Read_Encoder.h" 2
 N
 N//double ReadEncoder(void);
 N//void ReadEncoder(void);
 N
-W "Read_Encoder.h" 27 26 last line of file ends without a newline
+W "Read_Encoder.h" 39 26 last line of file ends without a newline
 Ndouble ReadEncoder(void);
 L 53 "project.h" 2
 N#include "Get_Speed.h" 
 L 1 "Get_Speed.h" 1
-W "Get_Speed.h" 1 28 last line of file ends without a newline
+N /*********************************************************************************************************************************
+N**
+N** Module Name:   Get_Speed.h
+N**
+N** Module Description: Gets the users speed
+N**
+N**********************************************************************************************************************************
+N**
+N** Author(s):		Kodey Boreo, Phillip Tesolin 
+N**
+N**********************************************************************************************************************************/
+N
+W "Get_Speed.h" 13 28 last line of file ends without a newline
 N double GetUserSpeed(void);
 L 54 "project.h" 2
 N#include "Calibrate.h"
 L 1 "Calibrate.h" 1
+N/*********************************************************************************************************************************
+N**
+N** Module Name:   Calibrate.h
+N**
+N** Module Description: Handles the calibration of a motor based on a step input
+N**
+N**********************************************************************************************************************************
+N**
+N** Author(s):		Kodey Boreo, Phillip Tesolin 
+N**
+N**********************************************************************************************************************************/
+N
+N
 N#include "driverlib/pin_map.h"
 N#include <stdint.h>
 N#include <stdio.h>
@@ -66714,6 +66866,19 @@ N#include "tm4c123gh6pm.h"
 N#include "hw_types.h"
 N#include "Uart_helper.h"
 L 1 ".\src\Uart_helper.h" 1
+N/*********************************************************************************************************************************
+N**
+N** Module Name:   Uart_helper.h
+N**
+N** Module Description: Set up for Uart
+N**
+N**********************************************************************************************************************************
+N**
+N** Author(s):		Kodey Boreo, Phillip Tesolin 
+N**
+N**********************************************************************************************************************************/
+N
+N
 N#include <stdbool.h>
 N#include <stdint.h>
 N#include <stdio.h>
@@ -66795,9 +66960,21 @@ N//MMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMM
 N//MMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMM
 N//MMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMM
 N
-L 23 "Calibrate.h" 2
+L 36 "Calibrate.h" 2
 N#include "Read_Encoder.h"
 L 1 "Read_Encoder.h" 1
+N/*********************************************************************************************************************************
+N**
+N** Module Name:   Read_Encoder.h
+N**
+N** Module Description: Reads the current speed 
+N**
+N**********************************************************************************************************************************
+N**
+N** Author(s):		Kodey Boreo, Phillip Tesolin 
+N**
+N**********************************************************************************************************************************/
+N
 N#include "driverlib/pin_map.h"
 N#include <stdint.h>
 N#include <stdio.h>
@@ -66821,6 +66998,19 @@ N#include "tm4c123gh6pm.h"
 N#include "hw_types.h"
 N#include "Uart_helper.h"
 L 1 ".\src\Uart_helper.h" 1
+N/*********************************************************************************************************************************
+N**
+N** Module Name:   Uart_helper.h
+N**
+N** Module Description: Set up for Uart
+N**
+N**********************************************************************************************************************************
+N**
+N** Author(s):		Kodey Boreo, Phillip Tesolin 
+N**
+N**********************************************************************************************************************************/
+N
+N
 N#include <stdbool.h>
 N#include <stdint.h>
 N#include <stdio.h>
@@ -66902,14 +67092,14 @@ N//MMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMM
 N//MMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMM
 N//MMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMM
 N
-L 23 "Read_Encoder.h" 2
+L 35 "Read_Encoder.h" 2
 N
 N//double ReadEncoder(void);
 N//void ReadEncoder(void);
 N
-W "Read_Encoder.h" 27 26 last line of file ends without a newline
+W "Read_Encoder.h" 39 26 last line of file ends without a newline
 Ndouble ReadEncoder(void);
-L 24 "Calibrate.h" 2
+L 37 "Calibrate.h" 2
 N
 N
 N
@@ -66918,7 +67108,7 @@ N#include "uart.h"
 N#include "../inc/tm4c123gh6pm.h"
 N#include "pin_map.h"
 N
-W "Calibrate.h" 32 29 last line of file ends without a newline
+W "Calibrate.h" 45 29 last line of file ends without a newline
 Nvoid initialize_aandw(void);
 L 55 "project.h" 2
 N#include "HAL_ADC.h"
@@ -66941,10 +67131,23 @@ Nvoid SetupADC(void);
 Ndouble ADCReadChan(void);  
 L 56 "project.h" 2
 N
-L 4 "Calibrate.c" 2
+L 17 "Calibrate.c" 2
 N#include "tm4c123gh6pm.h"	//Header file accesses registers in TMC123 microcontroller
 N#include "Speed_Control.h"
 L 1 "Speed_Control.h" 1
+N/*********************************************************************************************************************************
+N**
+N** Module Name:   Speed_Control.h
+N**
+N** Module Description: Controls the speed of the motor based on user input in Get_Speed.c 
+N**
+N**********************************************************************************************************************************
+N**
+N** Author(s):		Kodey Boreo, Phillip Tesolin 
+N**
+N**********************************************************************************************************************************/
+N
+N
 N#include "driverlib/pin_map.h"
 N#include <stdint.h>
 N#include <stdio.h>
@@ -66968,6 +67171,19 @@ N#include "tm4c123gh6pm.h"
 N#include "hw_types.h"
 N#include "Uart_helper.h"
 L 1 ".\src\Uart_helper.h" 1
+N/*********************************************************************************************************************************
+N**
+N** Module Name:   Uart_helper.h
+N**
+N** Module Description: Set up for Uart
+N**
+N**********************************************************************************************************************************
+N**
+N** Author(s):		Kodey Boreo, Phillip Tesolin 
+N**
+N**********************************************************************************************************************************/
+N
+N
 N#include <stdbool.h>
 N#include <stdint.h>
 N#include <stdio.h>
@@ -67049,9 +67265,21 @@ N//MMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMM
 N//MMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMM
 N//MMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMM
 N
-L 23 "Speed_Control.h" 2
+L 36 "Speed_Control.h" 2
 N#include "Read_Encoder.h"
 L 1 "Read_Encoder.h" 1
+N/*********************************************************************************************************************************
+N**
+N** Module Name:   Read_Encoder.h
+N**
+N** Module Description: Reads the current speed 
+N**
+N**********************************************************************************************************************************
+N**
+N** Author(s):		Kodey Boreo, Phillip Tesolin 
+N**
+N**********************************************************************************************************************************/
+N
 N#include "driverlib/pin_map.h"
 N#include <stdint.h>
 N#include <stdio.h>
@@ -67075,6 +67303,19 @@ N#include "tm4c123gh6pm.h"
 N#include "hw_types.h"
 N#include "Uart_helper.h"
 L 1 ".\src\Uart_helper.h" 1
+N/*********************************************************************************************************************************
+N**
+N** Module Name:   Uart_helper.h
+N**
+N** Module Description: Set up for Uart
+N**
+N**********************************************************************************************************************************
+N**
+N** Author(s):		Kodey Boreo, Phillip Tesolin 
+N**
+N**********************************************************************************************************************************/
+N
+N
 N#include <stdbool.h>
 N#include <stdint.h>
 N#include <stdio.h>
@@ -67156,20 +67397,33 @@ N//MMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMM
 N//MMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMM
 N//MMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMM
 N
-L 23 "Read_Encoder.h" 2
+L 35 "Read_Encoder.h" 2
 N
 N//double ReadEncoder(void);
 N//void ReadEncoder(void);
 N
-W "Read_Encoder.h" 27 26 last line of file ends without a newline
+W "Read_Encoder.h" 39 26 last line of file ends without a newline
 Ndouble ReadEncoder(void);
-L 24 "Speed_Control.h" 2
+L 37 "Speed_Control.h" 2
 N
-W "Speed_Control.h" 25 49 last line of file ends without a newline
+W "Speed_Control.h" 38 49 last line of file ends without a newline
 Nvoid Speed_Control(double Speed, double uSpeed);
-L 6 "Calibrate.c" 2
+L 19 "Calibrate.c" 2
 N#include "Calibrate.h"
 L 1 "Calibrate.h" 1
+N/*********************************************************************************************************************************
+N**
+N** Module Name:   Calibrate.h
+N**
+N** Module Description: Handles the calibration of a motor based on a step input
+N**
+N**********************************************************************************************************************************
+N**
+N** Author(s):		Kodey Boreo, Phillip Tesolin 
+N**
+N**********************************************************************************************************************************/
+N
+N
 N#include "driverlib/pin_map.h"
 N#include <stdint.h>
 N#include <stdio.h>
@@ -67193,6 +67447,19 @@ N#include "tm4c123gh6pm.h"
 N#include "hw_types.h"
 N#include "Uart_helper.h"
 L 1 ".\src\Uart_helper.h" 1
+N/*********************************************************************************************************************************
+N**
+N** Module Name:   Uart_helper.h
+N**
+N** Module Description: Set up for Uart
+N**
+N**********************************************************************************************************************************
+N**
+N** Author(s):		Kodey Boreo, Phillip Tesolin 
+N**
+N**********************************************************************************************************************************/
+N
+N
 N#include <stdbool.h>
 N#include <stdint.h>
 N#include <stdio.h>
@@ -67274,9 +67541,21 @@ N//MMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMM
 N//MMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMM
 N//MMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMM
 N
-L 23 "Calibrate.h" 2
+L 36 "Calibrate.h" 2
 N#include "Read_Encoder.h"
 L 1 "Read_Encoder.h" 1
+N/*********************************************************************************************************************************
+N**
+N** Module Name:   Read_Encoder.h
+N**
+N** Module Description: Reads the current speed 
+N**
+N**********************************************************************************************************************************
+N**
+N** Author(s):		Kodey Boreo, Phillip Tesolin 
+N**
+N**********************************************************************************************************************************/
+N
 N#include "driverlib/pin_map.h"
 N#include <stdint.h>
 N#include <stdio.h>
@@ -67300,6 +67579,19 @@ N#include "tm4c123gh6pm.h"
 N#include "hw_types.h"
 N#include "Uart_helper.h"
 L 1 ".\src\Uart_helper.h" 1
+N/*********************************************************************************************************************************
+N**
+N** Module Name:   Uart_helper.h
+N**
+N** Module Description: Set up for Uart
+N**
+N**********************************************************************************************************************************
+N**
+N** Author(s):		Kodey Boreo, Phillip Tesolin 
+N**
+N**********************************************************************************************************************************/
+N
+N
 N#include <stdbool.h>
 N#include <stdint.h>
 N#include <stdio.h>
@@ -67381,14 +67673,14 @@ N//MMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMM
 N//MMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMM
 N//MMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMM
 N
-L 23 "Read_Encoder.h" 2
+L 35 "Read_Encoder.h" 2
 N
 N//double ReadEncoder(void);
 N//void ReadEncoder(void);
 N
-W "Read_Encoder.h" 27 26 last line of file ends without a newline
+W "Read_Encoder.h" 39 26 last line of file ends without a newline
 Ndouble ReadEncoder(void);
-L 24 "Calibrate.h" 2
+L 37 "Calibrate.h" 2
 N
 N
 N
@@ -67397,9 +67689,9 @@ N#include "uart.h"
 N#include "../inc/tm4c123gh6pm.h"
 N#include "pin_map.h"
 N
-W "Calibrate.h" 32 29 last line of file ends without a newline
+W "Calibrate.h" 45 29 last line of file ends without a newline
 Nvoid initialize_aandw(void);
-L 7 "Calibrate.c" 2
+L 20 "Calibrate.c" 2
 N#include "myPWM.h"
 L 1 "myPWM.h" 1
 N#include "driverlib/pin_map.h"
@@ -67416,7 +67708,7 @@ N#include "driverlib/pwm.h"
 N#include "driverlib/uart.h"
 N
 N
-L 8 "Calibrate.c" 2
+L 21 "Calibrate.c" 2
 N
 N#include <stdio.h>
 N#include <stdint.h>
@@ -67449,7 +67741,7 @@ N{
 N	
 N	
 N	//PWMPulseWidthSet(PWM1_BASE, PWM_OUT_6, 0);
-W "Calibrate.c" 40 3 function "stopmotor" declared implicitly
+W "Calibrate.c" 53 3 function "stopmotor" declared implicitly
 N		stopmotor();
 N		
 N		
@@ -67805,10 +68097,10 @@ N}
 Nelse if (AvK < calspeed17){
 N	t = .17;
 N}
-N	printf("K = %.2f", k);
-N	printf("Avk = %.2f", AvK);
-N	printf("Time const = %.2f", t);
-N	printf("Voltage = %.2f", voltage);
+N	printf("K = %.2f, ", k);
+N	printf("Avk = %.2f\n", AvK);
+N	printf("Time const = %.2f, ", t);
+N	printf("Voltage = %.2f\n\n", voltage);
 N	stopmotor();
 N}
 N	

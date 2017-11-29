@@ -16687,7 +16687,7 @@ N//Function to read the ADC value from the Channel
 Ndouble ADCReadChan()
 N{	
 N//	SysTickWait10msDN(10); //Delay Function
-N	printf("\n\n");
+N	//printf("\n");
 N	int32_t scratch;
 N	//
 N	// Trigger the sample sequence.

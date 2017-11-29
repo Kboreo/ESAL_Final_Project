@@ -10592,7 +10592,7 @@ void SetupADC()
 double ADCReadChan()
 {	
 
-	printf("\n\n");
+	
 	int32_t scratch;
 	
 	

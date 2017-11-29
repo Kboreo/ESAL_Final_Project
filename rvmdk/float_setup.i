@@ -1,5 +1,31 @@
 #line 1 "Float_Setup.c"
+
+
+
+
+
+
+
+
+
+
+ 
+
+
 #line 1 "Float_Setup.h"
+
+
+
+
+
+
+
+
+
+
+ 
+
+
 #line 1 "driverlib/pin_map.h"
 
 
@@ -689,7 +715,7 @@
 
 #line 20952 "driverlib/pin_map.h"
 
-#line 2 "Float_Setup.h"
+#line 15 "Float_Setup.h"
 #line 1 "C:\\Keil_v5\\ARM\\ARMCC\\Bin\\..\\include\\stdint.h"
  
  
@@ -946,7 +972,7 @@ typedef unsigned     long long uintmax_t;
 
 
  
-#line 3 "Float_Setup.h"
+#line 16 "Float_Setup.h"
 #line 1 "C:\\Keil_v5\\ARM\\ARMCC\\Bin\\..\\include\\stdio.h"
  
  
@@ -1846,7 +1872,7 @@ extern __declspec(__nothrow) void __use_no_semihosting(void);
 
  
 
-#line 4 "Float_Setup.h"
+#line 17 "Float_Setup.h"
 #line 1 "C:\\Keil_v5\\ARM\\ARMCC\\Bin\\..\\include\\stdbool.h"
  
 
@@ -1865,7 +1891,7 @@ extern __declspec(__nothrow) void __use_no_semihosting(void);
 
 
 
-#line 5 "Float_Setup.h"
+#line 18 "Float_Setup.h"
 #line 1 "C:\\Keil_v5\\ARM\\ARMCC\\Bin\\..\\include\\math.h"
 
 
@@ -2691,7 +2717,7 @@ __declspec(__nothrow) long double truncl(long double );
 
 
  
-#line 6 "Float_Setup.h"
+#line 19 "Float_Setup.h"
 #line 1 "inc/hw_gpio.h"
 
 
@@ -2861,7 +2887,7 @@ __declspec(__nothrow) long double truncl(long double );
                                             
 #line 212 "inc/hw_gpio.h"
 
-#line 7 "Float_Setup.h"
+#line 20 "Float_Setup.h"
 #line 1 "inc/hw_types.h"
 
 
@@ -2995,7 +3021,7 @@ __declspec(__nothrow) long double truncl(long double );
 
 
 
-#line 8 "Float_Setup.h"
+#line 21 "Float_Setup.h"
 #line 1 "inc/hw_memmap.h"
 
 
@@ -3057,7 +3083,7 @@ __declspec(__nothrow) long double truncl(long double );
                                             
 #line 150 "inc/hw_memmap.h"
 
-#line 9 "Float_Setup.h"
+#line 22 "Float_Setup.h"
 #line 1 "driverlib/sysctl.h"
 
 
@@ -3351,8 +3377,8 @@ extern _Bool SysCtlVCOGet(uint32_t ui32Crystal, uint32_t *pui32VCOFrequency);
 
 
 
-#line 10 "Float_Setup.h"
-#line 11 "Float_Setup.h"
+#line 23 "Float_Setup.h"
+#line 24 "Float_Setup.h"
 #line 1 "driverlib/gpio.h"
 
 
@@ -3525,7 +3551,7 @@ extern void GPIOADCTriggerDisable(uint32_t ui32Port, uint8_t ui8Pins);
 
 
 
-#line 12 "Float_Setup.h"
+#line 25 "Float_Setup.h"
 #line 1 "driverlib/pwm.h"
 
 
@@ -3776,7 +3802,7 @@ extern void PWMOutputUpdateMode(uint32_t ui32Base,
 
 
 
-#line 13 "Float_Setup.h"
+#line 26 "Float_Setup.h"
 #line 1 "driverlib/uart.h"
 
 
@@ -4007,7 +4033,7 @@ extern void UARTLoopbackEnable(uint32_t ui32Base);
 
 
 
-#line 14 "Float_Setup.h"
+#line 27 "Float_Setup.h"
 #line 1 "driverlib/qei.h"
 
 
@@ -4133,9 +4159,9 @@ extern void QEIIntClear(uint32_t ui32Base, uint32_t ui32IntFlags);
 
 
 
-#line 15 "Float_Setup.h"
-#line 16 "Float_Setup.h"
-#line 17 "Float_Setup.h"
+#line 28 "Float_Setup.h"
+#line 29 "Float_Setup.h"
+#line 30 "Float_Setup.h"
 #line 1 "driverlib/fpu.h"
 
 
@@ -4249,9 +4275,9 @@ extern void FPURoundingModeSet(uint32_t ui32Mode);
 
 
 
-#line 18 "Float_Setup.h"
-#line 19 "Float_Setup.h"
-#line 20 "Float_Setup.h"
+#line 31 "Float_Setup.h"
+#line 32 "Float_Setup.h"
+#line 33 "Float_Setup.h"
 #line 1 ".\\inc\\tm4c123gh6pm.h"
 
 
@@ -12311,18 +12337,31 @@ extern void FPURoundingModeSet(uint32_t ui32Mode);
 
 
 
-#line 21 "Float_Setup.h"
-#line 22 "Float_Setup.h"
+#line 34 "Float_Setup.h"
+#line 35 "Float_Setup.h"
 #line 1 ".\\src\\Uart_helper.h"
-#line 2 ".\\src\\Uart_helper.h"
-#line 3 ".\\src\\Uart_helper.h"
-#line 4 ".\\src\\Uart_helper.h"
-#line 5 ".\\src\\Uart_helper.h"
-#line 6 ".\\src\\Uart_helper.h"
-#line 7 ".\\src\\Uart_helper.h"
-#line 8 ".\\src\\Uart_helper.h"
-#line 9 ".\\src\\Uart_helper.h"
-#line 10 ".\\src\\Uart_helper.h"
+
+
+
+
+
+
+
+
+
+
+ 
+
+
+#line 15 ".\\src\\Uart_helper.h"
+#line 16 ".\\src\\Uart_helper.h"
+#line 17 ".\\src\\Uart_helper.h"
+#line 18 ".\\src\\Uart_helper.h"
+#line 19 ".\\src\\Uart_helper.h"
+#line 20 ".\\src\\Uart_helper.h"
+#line 21 ".\\src\\Uart_helper.h"
+#line 22 ".\\src\\Uart_helper.h"
+#line 23 ".\\src\\Uart_helper.h"
 
 
 void UartSetup(void);		
@@ -12395,8 +12434,8 @@ int fgetc(FILE *f);
 
 
 
-#line 23 "Float_Setup.h"
-#line 2 "Float_Setup.c"
+#line 36 "Float_Setup.h"
+#line 15 "Float_Setup.c"
 #line 1 "Encoder.h"
 #line 2 "Encoder.h"
 #line 3 "Encoder.h"
@@ -12420,15 +12459,28 @@ int fgetc(FILE *f);
 #line 21 "Encoder.h"
 #line 22 "Encoder.h"
 #line 1 ".\\src\\Uart_helper.h"
-#line 2 ".\\src\\Uart_helper.h"
-#line 3 ".\\src\\Uart_helper.h"
-#line 4 ".\\src\\Uart_helper.h"
-#line 5 ".\\src\\Uart_helper.h"
-#line 6 ".\\src\\Uart_helper.h"
-#line 7 ".\\src\\Uart_helper.h"
-#line 8 ".\\src\\Uart_helper.h"
-#line 9 ".\\src\\Uart_helper.h"
-#line 10 ".\\src\\Uart_helper.h"
+
+
+
+
+
+
+
+
+
+
+ 
+
+
+#line 15 ".\\src\\Uart_helper.h"
+#line 16 ".\\src\\Uart_helper.h"
+#line 17 ".\\src\\Uart_helper.h"
+#line 18 ".\\src\\Uart_helper.h"
+#line 19 ".\\src\\Uart_helper.h"
+#line 20 ".\\src\\Uart_helper.h"
+#line 21 ".\\src\\Uart_helper.h"
+#line 22 ".\\src\\Uart_helper.h"
+#line 23 ".\\src\\Uart_helper.h"
 
 
 void UartSetup(void);		
@@ -12503,18 +12555,18 @@ int fgetc(FILE *f);
 
 #line 23 "Encoder.h"
 #line 1 "Read_Encoder.h"
-#line 2 "Read_Encoder.h"
-#line 3 "Read_Encoder.h"
-#line 4 "Read_Encoder.h"
-#line 5 "Read_Encoder.h"
-#line 6 "Read_Encoder.h"
-#line 7 "Read_Encoder.h"
-#line 8 "Read_Encoder.h"
-#line 9 "Read_Encoder.h"
-#line 10 "Read_Encoder.h"
-#line 11 "Read_Encoder.h"
-#line 12 "Read_Encoder.h"
-#line 13 "Read_Encoder.h"
+
+
+
+
+
+
+
+
+
+
+ 
+
 #line 14 "Read_Encoder.h"
 #line 15 "Read_Encoder.h"
 #line 16 "Read_Encoder.h"
@@ -12524,16 +12576,41 @@ int fgetc(FILE *f);
 #line 20 "Read_Encoder.h"
 #line 21 "Read_Encoder.h"
 #line 22 "Read_Encoder.h"
+#line 23 "Read_Encoder.h"
+#line 24 "Read_Encoder.h"
+#line 25 "Read_Encoder.h"
+#line 26 "Read_Encoder.h"
+#line 27 "Read_Encoder.h"
+#line 28 "Read_Encoder.h"
+#line 29 "Read_Encoder.h"
+#line 30 "Read_Encoder.h"
+#line 31 "Read_Encoder.h"
+#line 32 "Read_Encoder.h"
+#line 33 "Read_Encoder.h"
+#line 34 "Read_Encoder.h"
 #line 1 ".\\src\\Uart_helper.h"
-#line 2 ".\\src\\Uart_helper.h"
-#line 3 ".\\src\\Uart_helper.h"
-#line 4 ".\\src\\Uart_helper.h"
-#line 5 ".\\src\\Uart_helper.h"
-#line 6 ".\\src\\Uart_helper.h"
-#line 7 ".\\src\\Uart_helper.h"
-#line 8 ".\\src\\Uart_helper.h"
-#line 9 ".\\src\\Uart_helper.h"
-#line 10 ".\\src\\Uart_helper.h"
+
+
+
+
+
+
+
+
+
+
+ 
+
+
+#line 15 ".\\src\\Uart_helper.h"
+#line 16 ".\\src\\Uart_helper.h"
+#line 17 ".\\src\\Uart_helper.h"
+#line 18 ".\\src\\Uart_helper.h"
+#line 19 ".\\src\\Uart_helper.h"
+#line 20 ".\\src\\Uart_helper.h"
+#line 21 ".\\src\\Uart_helper.h"
+#line 22 ".\\src\\Uart_helper.h"
+#line 23 ".\\src\\Uart_helper.h"
 
 
 void UartSetup(void);		
@@ -12606,7 +12683,7 @@ int fgetc(FILE *f);
 
 
 
-#line 23 "Read_Encoder.h"
+#line 35 "Read_Encoder.h"
 
 
 
@@ -12618,8 +12695,8 @@ double ReadEncoder(void);
 
 
 void QEIConfigure(uint32_t ui32Base, uint32_t ui32Config, uint32_t ui32MaxPosition);
-#line 3 "Float_Setup.c"
-#line 4 "Float_Setup.c"
+#line 16 "Float_Setup.c"
+#line 17 "Float_Setup.c"
 
 
 

@@ -39402,6 +39402,19 @@ L 21 "Encoder.h" 2
 N#include "hw_types.h"
 N#include "Uart_helper.h"
 L 1 ".\src\Uart_helper.h" 1
+N/*********************************************************************************************************************************
+N**
+N** Module Name:   Uart_helper.h
+N**
+N** Module Description: Set up for Uart
+N**
+N**********************************************************************************************************************************
+N**
+N** Author(s):		Kodey Boreo, Phillip Tesolin 
+N**
+N**********************************************************************************************************************************/
+N
+N
 N#include <stdbool.h>
 N#include <stdint.h>
 N#include <stdio.h>
@@ -39486,6 +39499,18 @@ N
 L 23 "Encoder.h" 2
 N#include "Read_Encoder.h"
 L 1 "Read_Encoder.h" 1
+N/*********************************************************************************************************************************
+N**
+N** Module Name:   Read_Encoder.h
+N**
+N** Module Description: Reads the current speed 
+N**
+N**********************************************************************************************************************************
+N**
+N** Author(s):		Kodey Boreo, Phillip Tesolin 
+N**
+N**********************************************************************************************************************************/
+N
 N#include "driverlib/pin_map.h"
 N#include <stdint.h>
 N#include <stdio.h>
@@ -39509,6 +39534,19 @@ N#include "tm4c123gh6pm.h"
 N#include "hw_types.h"
 N#include "Uart_helper.h"
 L 1 ".\src\Uart_helper.h" 1
+N/*********************************************************************************************************************************
+N**
+N** Module Name:   Uart_helper.h
+N**
+N** Module Description: Set up for Uart
+N**
+N**********************************************************************************************************************************
+N**
+N** Author(s):		Kodey Boreo, Phillip Tesolin 
+N**
+N**********************************************************************************************************************************/
+N
+N
 N#include <stdbool.h>
 N#include <stdint.h>
 N#include <stdio.h>
@@ -39590,12 +39628,12 @@ N//MMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMM
 N//MMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMM
 N//MMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMM
 N
-L 23 "Read_Encoder.h" 2
+L 35 "Read_Encoder.h" 2
 N
 N//double ReadEncoder(void);
 N//void ReadEncoder(void);
 N
-W "Read_Encoder.h" 27 26 last line of file ends without a newline
+W "Read_Encoder.h" 39 26 last line of file ends without a newline
 Ndouble ReadEncoder(void);
 L 24 "Encoder.h" 2
 N

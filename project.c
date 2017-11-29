@@ -43,13 +43,13 @@ void mainMenu(char ctemp);
 
 void SetupHardware()
 {
-	UartSetup();
-	FloatSetup();
-	setupENCODER();	
-	setupPWM();
-	FPUEnable();
-	FPULazyStackingEnable();
-	SetupADC();
+	UartSetup(); //setup for user input
+	FloatSetup(); //setup to allow floating point print 
+	setupENCODER();	 //setup to read motor encoder
+	setupPWM();	//setup PWM output
+	FPUEnable();	//inable floating point
+	FPULazyStackingEnable(); //inable lazy stack for floating point
+	SetupADC(); //setup to read motor voltage 
 }
 
 
@@ -64,10 +64,7 @@ int  main(void)
 	printf("Hardware setup complete\n\n");		
 	printf("PWM setup complete \n\n");
 	
-	//initialize_aandw();
-	
-	
-	
+		//program menu options contained in mainMenu
 		mainMenu(ctemp);
 }	
 	
@@ -106,9 +103,9 @@ void mainMenu(char ctemp)
 			//Default case if user types anything other than the given options
 			default:				
 				printf("Ya done messed up, try again!\n\n");
-				GPIOPinWrite(GPIO_PORTF_BASE, GPIO_PIN_1, 0x0);  // Turn off LED
-				GPIOPinWrite(GPIO_PORTF_BASE, GPIO_PIN_2, 0x0);  // Turn off LED
-				GPIOPinWrite(GPIO_PORTF_BASE, GPIO_PIN_3, 0x0);  // Turn off LED
+//				GPIOPinWrite(GPIO_PORTF_BASE, GPIO_PIN_1, 0x0);  // Turn off LED
+//				GPIOPinWrite(GPIO_PORTF_BASE, GPIO_PIN_2, 0x0);  // Turn off LED
+//				GPIOPinWrite(GPIO_PORTF_BASE, GPIO_PIN_3, 0x0);  // Turn off LED
 				break;		
 		}
 	}	

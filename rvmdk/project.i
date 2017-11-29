@@ -1,4 +1,32 @@
 #line 1 "project.c"
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+ 
+
+
+
 #line 1 "project.h"
 #line 1 "C:\\Keil_v5\\ARM\\ARMCC\\Bin\\..\\include\\stdbool.h"
  
@@ -16903,8 +16931,21 @@ extern void WatchdogStallDisable(uint32_t ui32Base);
 #line 43 "project.h"
 
 #line 1 "src/Uart_helper.h"
-#line 2 "src/Uart_helper.h"
-#line 3 "src/Uart_helper.h"
+
+
+
+
+
+
+
+
+
+
+ 
+
+
+#line 15 "src/Uart_helper.h"
+#line 16 "src/Uart_helper.h"
 #line 1 "C:\\Keil_v5\\ARM\\ARMCC\\Bin\\..\\include\\stdio.h"
  
  
@@ -17804,13 +17845,13 @@ extern __declspec(__nothrow) void __use_no_semihosting(void);
 
  
 
-#line 4 "src/Uart_helper.h"
-#line 5 "src/Uart_helper.h"
-#line 6 "src/Uart_helper.h"
-#line 7 "src/Uart_helper.h"
-#line 8 "src/Uart_helper.h"
-#line 9 "src/Uart_helper.h"
-#line 10 "src/Uart_helper.h"
+#line 17 "src/Uart_helper.h"
+#line 18 "src/Uart_helper.h"
+#line 19 "src/Uart_helper.h"
+#line 20 "src/Uart_helper.h"
+#line 21 "src/Uart_helper.h"
+#line 22 "src/Uart_helper.h"
+#line 23 "src/Uart_helper.h"
 
 
 void UartSetup(void);		
@@ -18207,15 +18248,28 @@ int fgetc(FILE *f);
 
 #line 50 "project.h"
 #line 1 "./src/Uart_helper.h"
-#line 2 "./src/Uart_helper.h"
-#line 3 "./src/Uart_helper.h"
-#line 4 "./src/Uart_helper.h"
-#line 5 "./src/Uart_helper.h"
-#line 6 "./src/Uart_helper.h"
-#line 7 "./src/Uart_helper.h"
-#line 8 "./src/Uart_helper.h"
-#line 9 "./src/Uart_helper.h"
-#line 10 "./src/Uart_helper.h"
+
+
+
+
+
+
+
+
+
+
+ 
+
+
+#line 15 "./src/Uart_helper.h"
+#line 16 "./src/Uart_helper.h"
+#line 17 "./src/Uart_helper.h"
+#line 18 "./src/Uart_helper.h"
+#line 19 "./src/Uart_helper.h"
+#line 20 "./src/Uart_helper.h"
+#line 21 "./src/Uart_helper.h"
+#line 22 "./src/Uart_helper.h"
+#line 23 "./src/Uart_helper.h"
 
 
 void UartSetup(void);		
@@ -18291,10 +18345,22 @@ int fgetc(FILE *f);
 #line 51 "project.h"
 
 #line 1 "Read_Encoder.h"
-#line 2 "Read_Encoder.h"
-#line 3 "Read_Encoder.h"
-#line 4 "Read_Encoder.h"
-#line 5 "Read_Encoder.h"
+
+
+
+
+
+
+
+
+
+
+ 
+
+#line 14 "Read_Encoder.h"
+#line 15 "Read_Encoder.h"
+#line 16 "Read_Encoder.h"
+#line 17 "Read_Encoder.h"
 #line 1 "C:\\Keil_v5\\ARM\\ARMCC\\Bin\\..\\include\\math.h"
 
 
@@ -19120,33 +19186,46 @@ __declspec(__nothrow) long double truncl(long double );
 
 
  
-#line 6 "Read_Encoder.h"
-#line 7 "Read_Encoder.h"
-#line 8 "Read_Encoder.h"
-#line 9 "Read_Encoder.h"
-#line 10 "Read_Encoder.h"
-#line 11 "Read_Encoder.h"
-#line 12 "Read_Encoder.h"
-#line 13 "Read_Encoder.h"
-#line 14 "Read_Encoder.h"
-#line 15 "Read_Encoder.h"
-#line 16 "Read_Encoder.h"
-#line 17 "Read_Encoder.h"
 #line 18 "Read_Encoder.h"
 #line 19 "Read_Encoder.h"
 #line 20 "Read_Encoder.h"
 #line 21 "Read_Encoder.h"
 #line 22 "Read_Encoder.h"
+#line 23 "Read_Encoder.h"
+#line 24 "Read_Encoder.h"
+#line 25 "Read_Encoder.h"
+#line 26 "Read_Encoder.h"
+#line 27 "Read_Encoder.h"
+#line 28 "Read_Encoder.h"
+#line 29 "Read_Encoder.h"
+#line 30 "Read_Encoder.h"
+#line 31 "Read_Encoder.h"
+#line 32 "Read_Encoder.h"
+#line 33 "Read_Encoder.h"
+#line 34 "Read_Encoder.h"
 #line 1 ".\\src\\Uart_helper.h"
-#line 2 ".\\src\\Uart_helper.h"
-#line 3 ".\\src\\Uart_helper.h"
-#line 4 ".\\src\\Uart_helper.h"
-#line 5 ".\\src\\Uart_helper.h"
-#line 6 ".\\src\\Uart_helper.h"
-#line 7 ".\\src\\Uart_helper.h"
-#line 8 ".\\src\\Uart_helper.h"
-#line 9 ".\\src\\Uart_helper.h"
-#line 10 ".\\src\\Uart_helper.h"
+
+
+
+
+
+
+
+
+
+
+ 
+
+
+#line 15 ".\\src\\Uart_helper.h"
+#line 16 ".\\src\\Uart_helper.h"
+#line 17 ".\\src\\Uart_helper.h"
+#line 18 ".\\src\\Uart_helper.h"
+#line 19 ".\\src\\Uart_helper.h"
+#line 20 ".\\src\\Uart_helper.h"
+#line 21 ".\\src\\Uart_helper.h"
+#line 22 ".\\src\\Uart_helper.h"
+#line 23 ".\\src\\Uart_helper.h"
 
 
 void UartSetup(void);		
@@ -19219,7 +19298,7 @@ int fgetc(FILE *f);
 
 
 
-#line 23 "Read_Encoder.h"
+#line 35 "Read_Encoder.h"
 
 
 
@@ -19227,22 +19306,34 @@ int fgetc(FILE *f);
 double ReadEncoder(void);
 #line 53 "project.h"
 #line 1 "Get_Speed.h"
+ 
+
+
+
+
+
+
+
+
+
+ 
+
  double GetUserSpeed(void);
 #line 54 "project.h"
 #line 1 "Calibrate.h"
-#line 2 "Calibrate.h"
-#line 3 "Calibrate.h"
-#line 4 "Calibrate.h"
-#line 5 "Calibrate.h"
-#line 6 "Calibrate.h"
-#line 7 "Calibrate.h"
-#line 8 "Calibrate.h"
-#line 9 "Calibrate.h"
-#line 10 "Calibrate.h"
-#line 11 "Calibrate.h"
-#line 12 "Calibrate.h"
-#line 13 "Calibrate.h"
-#line 14 "Calibrate.h"
+
+
+
+
+
+
+
+
+
+
+ 
+
+
 #line 15 "Calibrate.h"
 #line 16 "Calibrate.h"
 #line 17 "Calibrate.h"
@@ -19251,16 +19342,42 @@ double ReadEncoder(void);
 #line 20 "Calibrate.h"
 #line 21 "Calibrate.h"
 #line 22 "Calibrate.h"
+#line 23 "Calibrate.h"
+#line 24 "Calibrate.h"
+#line 25 "Calibrate.h"
+#line 26 "Calibrate.h"
+#line 27 "Calibrate.h"
+#line 28 "Calibrate.h"
+#line 29 "Calibrate.h"
+#line 30 "Calibrate.h"
+#line 31 "Calibrate.h"
+#line 32 "Calibrate.h"
+#line 33 "Calibrate.h"
+#line 34 "Calibrate.h"
+#line 35 "Calibrate.h"
 #line 1 ".\\src\\Uart_helper.h"
-#line 2 ".\\src\\Uart_helper.h"
-#line 3 ".\\src\\Uart_helper.h"
-#line 4 ".\\src\\Uart_helper.h"
-#line 5 ".\\src\\Uart_helper.h"
-#line 6 ".\\src\\Uart_helper.h"
-#line 7 ".\\src\\Uart_helper.h"
-#line 8 ".\\src\\Uart_helper.h"
-#line 9 ".\\src\\Uart_helper.h"
-#line 10 ".\\src\\Uart_helper.h"
+
+
+
+
+
+
+
+
+
+
+ 
+
+
+#line 15 ".\\src\\Uart_helper.h"
+#line 16 ".\\src\\Uart_helper.h"
+#line 17 ".\\src\\Uart_helper.h"
+#line 18 ".\\src\\Uart_helper.h"
+#line 19 ".\\src\\Uart_helper.h"
+#line 20 ".\\src\\Uart_helper.h"
+#line 21 ".\\src\\Uart_helper.h"
+#line 22 ".\\src\\Uart_helper.h"
+#line 23 ".\\src\\Uart_helper.h"
 
 
 void UartSetup(void);		
@@ -19333,20 +19450,20 @@ int fgetc(FILE *f);
 
 
 
-#line 23 "Calibrate.h"
+#line 36 "Calibrate.h"
 #line 1 "Read_Encoder.h"
-#line 2 "Read_Encoder.h"
-#line 3 "Read_Encoder.h"
-#line 4 "Read_Encoder.h"
-#line 5 "Read_Encoder.h"
-#line 6 "Read_Encoder.h"
-#line 7 "Read_Encoder.h"
-#line 8 "Read_Encoder.h"
-#line 9 "Read_Encoder.h"
-#line 10 "Read_Encoder.h"
-#line 11 "Read_Encoder.h"
-#line 12 "Read_Encoder.h"
-#line 13 "Read_Encoder.h"
+
+
+
+
+
+
+
+
+
+
+ 
+
 #line 14 "Read_Encoder.h"
 #line 15 "Read_Encoder.h"
 #line 16 "Read_Encoder.h"
@@ -19356,16 +19473,41 @@ int fgetc(FILE *f);
 #line 20 "Read_Encoder.h"
 #line 21 "Read_Encoder.h"
 #line 22 "Read_Encoder.h"
+#line 23 "Read_Encoder.h"
+#line 24 "Read_Encoder.h"
+#line 25 "Read_Encoder.h"
+#line 26 "Read_Encoder.h"
+#line 27 "Read_Encoder.h"
+#line 28 "Read_Encoder.h"
+#line 29 "Read_Encoder.h"
+#line 30 "Read_Encoder.h"
+#line 31 "Read_Encoder.h"
+#line 32 "Read_Encoder.h"
+#line 33 "Read_Encoder.h"
+#line 34 "Read_Encoder.h"
 #line 1 ".\\src\\Uart_helper.h"
-#line 2 ".\\src\\Uart_helper.h"
-#line 3 ".\\src\\Uart_helper.h"
-#line 4 ".\\src\\Uart_helper.h"
-#line 5 ".\\src\\Uart_helper.h"
-#line 6 ".\\src\\Uart_helper.h"
-#line 7 ".\\src\\Uart_helper.h"
-#line 8 ".\\src\\Uart_helper.h"
-#line 9 ".\\src\\Uart_helper.h"
-#line 10 ".\\src\\Uart_helper.h"
+
+
+
+
+
+
+
+
+
+
+ 
+
+
+#line 15 ".\\src\\Uart_helper.h"
+#line 16 ".\\src\\Uart_helper.h"
+#line 17 ".\\src\\Uart_helper.h"
+#line 18 ".\\src\\Uart_helper.h"
+#line 19 ".\\src\\Uart_helper.h"
+#line 20 ".\\src\\Uart_helper.h"
+#line 21 ".\\src\\Uart_helper.h"
+#line 22 ".\\src\\Uart_helper.h"
+#line 23 ".\\src\\Uart_helper.h"
 
 
 void UartSetup(void);		
@@ -19438,20 +19580,20 @@ int fgetc(FILE *f);
 
 
 
-#line 23 "Read_Encoder.h"
+#line 35 "Read_Encoder.h"
 
 
 
 
 double ReadEncoder(void);
-#line 24 "Calibrate.h"
+#line 37 "Calibrate.h"
 
 
 
-#line 28 "Calibrate.h"
-#line 29 "Calibrate.h"
-#line 30 "Calibrate.h"
-#line 31 "Calibrate.h"
+#line 41 "Calibrate.h"
+#line 42 "Calibrate.h"
+#line 43 "Calibrate.h"
+#line 44 "Calibrate.h"
 
 void initialize_aandw(void);
 #line 55 "project.h"
@@ -19474,25 +19616,25 @@ void SetupADC(void);
 double ADCReadChan(void);  
 #line 56 "project.h"
 
-#line 2 "project.c"
-#line 3 "project.c"
-#line 4 "project.c"
+#line 30 "project.c"
+#line 31 "project.c"
+#line 32 "project.c"
 
 _Bool TESTING = 1;  
 
-#line 13 "project.c"
+#line 41 "project.c"
 
 void mainMenu(char ctemp);
 
 void SetupHardware()
 {
-	UartSetup();
-	FloatSetup();
-	setupENCODER();	
-	setupPWM();
-	FPUEnable();
-	FPULazyStackingEnable();
-	SetupADC();
+	UartSetup(); 
+	FloatSetup(); 
+	setupENCODER();	 
+	setupPWM();	
+	FPUEnable();	
+	FPULazyStackingEnable(); 
+	SetupADC(); 
 }
 
 
@@ -19507,10 +19649,7 @@ int  main(void)
 	printf("Hardware setup complete\n\n");		
 	printf("PWM setup complete \n\n");
 	
-	
-	
-	
-	
+		
 		mainMenu(ctemp);
 }	
 	
@@ -19549,9 +19688,9 @@ void mainMenu(char ctemp)
 			
 			default:				
 				printf("Ya done messed up, try again!\n\n");
-				GPIOPinWrite(0x40025000, 0x00000002, 0x0);  
-				GPIOPinWrite(0x40025000, 0x00000004, 0x0);  
-				GPIOPinWrite(0x40025000, 0x00000008, 0x0);  
+
+
+
 				break;		
 		}
 	}	

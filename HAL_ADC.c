@@ -74,7 +74,7 @@ void SetupADC()
 double ADCReadChan()
 {	
 //	SysTickWait10msDN(10); //Delay Function
-	printf("\n\n");
+	//printf("\n");
 	int32_t scratch;
 	//
 	// Trigger the sample sequence.
