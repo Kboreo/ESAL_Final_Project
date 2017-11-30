@@ -67130,6 +67130,25 @@ N
 Nvoid SetupADC(void);
 Ndouble ADCReadChan(void);  
 L 56 "project.h" 2
+N#include "myGPIO.h"
+L 1 "myGPIO.h" 1
+N#include <stdio.h>
+N#include <stdbool.h>
+N#include <stdint.h>
+N#include "hw_memmap.h"
+N#include "hw_gpio.h"
+N#include "hw_types.h"
+N#include "../inc/tm4c123gh6pm.h"
+N#include "pin_map.h"
+N#include "gpio.h"
+N#include "sysctl.h"
+N#include "driverlib/uart.h"
+N
+W "myGPIO.h" 13 6 Deprecated declaration setup_IO - give arg types
+Nvoid setup_IO();
+W "myGPIO.h" 14 54 last line of file ends without a newline
+Nvoid pinReadAndWrite(uint32_t ui32Loop,uint8_t temp);
+L 57 "project.h" 2
 N
 L 17 "Calibrate.c" 2
 N#include "tm4c123gh6pm.h"	//Header file accesses registers in TMC123 microcontroller
@@ -68097,10 +68116,12 @@ N}
 Nelse if (AvK < calspeed17){
 N	t = .17;
 N}
+N	stopmotor();
 N	printf("K = %.2f, ", k);
 N	printf("Avk = %.2f\n", AvK);
 N	printf("Time const = %.2f, ", t);
 N	printf("Voltage = %.2f\n\n", voltage);
-N	stopmotor();
+N	
+N	printf("System transfer function is %.2f / (%.2ft + 1)\n\n", k, t);
 N}
 N	

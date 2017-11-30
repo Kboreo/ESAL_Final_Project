@@ -510,6 +510,16 @@
               <FileType>5</FileType>
               <FilePath>.\HAL_ADC.h</FilePath>
             </File>
+            <File>
+              <FileName>myGPIO.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>.\myGPIO.c</FilePath>
+            </File>
+            <File>
+              <FileName>myGPIO.h</FileName>
+              <FileType>5</FileType>
+              <FilePath>.\myGPIO.h</FilePath>
+            </File>
           </Files>
         </Group>
         <Group>

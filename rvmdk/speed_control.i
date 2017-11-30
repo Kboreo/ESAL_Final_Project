@@ -19996,6 +19996,22 @@ extern uint32_t ADC_Values[13];
 void SetupADC(void);
 double ADCReadChan(void);  
 #line 56 "project.h"
+#line 1 "myGPIO.h"
+#line 2 "myGPIO.h"
+#line 3 "myGPIO.h"
+#line 4 "myGPIO.h"
+#line 5 "myGPIO.h"
+#line 6 "myGPIO.h"
+#line 7 "myGPIO.h"
+#line 8 "myGPIO.h"
+#line 9 "myGPIO.h"
+#line 10 "myGPIO.h"
+#line 11 "myGPIO.h"
+#line 12 "myGPIO.h"
+
+void setup_IO();
+void pinReadAndWrite(uint32_t ui32Loop,uint8_t temp);
+#line 57 "project.h"
 
 #line 17 "Speed_Control.c"
 #line 18 "Speed_Control.c"
@@ -20273,63 +20289,66 @@ void Speed_Control(double Speed, double uSpeed);
 	double Target_Speed;
 	uint32_t Period;
 	uint32_t Speed;
-	double Error, speed2;
-	double DutyC;
+	double Error , speed2;
+	double DutyC, vol;	
+
+	
+	
 void Speed_Control(double Speed, double uSpeed)
+	
 {	
-
+	int i = 1;
+	int x; 
+	int a = 0;
 	
-	
-	DutyC = uSpeed * 19;
-	PWMPulseWidthSet(0x40029000, 0x00000106, DutyC);
-
-	
-	for (int i = 0; i<1600000;i++)
-	{
-		__nop;
-	}	
-	while(1)
-	{
-	
-	for (int i = 0; i<100;i++)
-	{
-	Speed= ReadEncoder();
-	speed2 = Speed;
+	while (i == 1)
+	{				
 		
-		i=0;
-	while(Speed == speed2){
+		for (int i = 0; i<10;i++)
+			{
+			Speed= ReadEncoder();
+			speed2 = Speed;		
+		
+			
+			a=0;	
+			while(Speed == speed2){
+				Speed = ReadEncoder();
+				a++;
+				if (a >999){
+				break;
+				}
+				}
+				
+				
+				
+				Error = uSpeed - Speed;
+				vol = DutyC/640*10;
+				vol = vol + .04 * Error; 
+				DutyC = vol/10*640;	
+	
+				
+				if (DutyC < 4) {
+					DutyC = 4;
+					}
+				if (DutyC > 640){
+					DutyC = 640;
+					}
+
+				
+				PWMPulseWidthSet(0x40029000, 0x00000106, DutyC);
+
+			}
+	
 		Speed = ReadEncoder();
-		i++;
-		if (i >999){
-		break;
-		}
-	}
-		Error = uSpeed - Speed;
-		DutyC =(10 * Error)+DutyC; 
-		if (DutyC < 1) {
-			DutyC = 1;
-		}
-		if (DutyC > 310){
-			DutyC = 320;
-		}
-
+		printf("Speed is, IN CONTROL %.2f rps \n\n", Speed);
+	
 		
-	PWMPulseWidthSet(0x40029000, 0x00000106, DutyC);
-
-
-
-
-	
-	
-
-
-
+		x = GPIOPinRead(0x40025000, 0x00000001); 
+			if ( x == 0){
+					i = 0;
+			}	
 
 }
-	Speed = ReadEncoder();
-	
-	printf("Speed is, IN CONTROL %.2f rps \n\n", Speed);
-	
-
-}
+		
+		stopmotor();
 	}

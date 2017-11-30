@@ -19615,6 +19615,22 @@ extern uint32_t ADC_Values[13];
 void SetupADC(void);
 double ADCReadChan(void);  
 #line 56 "project.h"
+#line 1 "myGPIO.h"
+#line 2 "myGPIO.h"
+#line 3 "myGPIO.h"
+#line 4 "myGPIO.h"
+#line 5 "myGPIO.h"
+#line 6 "myGPIO.h"
+#line 7 "myGPIO.h"
+#line 8 "myGPIO.h"
+#line 9 "myGPIO.h"
+#line 10 "myGPIO.h"
+#line 11 "myGPIO.h"
+#line 12 "myGPIO.h"
+
+void setup_IO();
+void pinReadAndWrite(uint32_t ui32Loop,uint8_t temp);
+#line 57 "project.h"
 
 #line 30 "project.c"
 #line 31 "project.c"
@@ -19628,6 +19644,7 @@ void mainMenu(char ctemp);
 
 void SetupHardware()
 {
+	setup_IO(); 
 	UartSetup(); 
 	FloatSetup(); 
 	setupENCODER();	 
@@ -19635,6 +19652,7 @@ void SetupHardware()
 	FPUEnable();	
 	FPULazyStackingEnable(); 
 	SetupADC(); 
+	
 }
 
 
@@ -19649,48 +19667,38 @@ int  main(void)
 	printf("Hardware setup complete\n\n");		
 	printf("PWM setup complete \n\n");
 	
-		
-		mainMenu(ctemp);
+	
+	mainMenu(ctemp);
 }	
 	
 
 void mainMenu(char ctemp)
 {	
 	
-
 	while (1)
 {
 		printf("What function would you like to test?\n 1.Calibrate\n 2.Speed Control\n"); 
 		ctemp = getc((& __stdin)); 
 		printf("You entered %c\n\n",ctemp); 
 		
-		switch (ctemp)		
+	
+	switch (ctemp)		
 		{
 			
 			case '1':						
-			Calibrate(); 
+				Calibrate(); 
 				break;	
 			
 			
-		
-
-			case '2':		
-			uSpeed = GetUserSpeed();
-		
-		
-		
-			Speed_Control(speed, uSpeed); 		
+			case '2':	
+				printf("Press SW2 to exit\n\n");
+				uSpeed = GetUserSpeed();
+				Speed_Control(speed, uSpeed); 		
 				break;
-			
-						
-
-			
+					
 			
 			default:				
 				printf("Ya done messed up, try again!\n\n");
-
-
-
 				break;		
 		}
 	}	

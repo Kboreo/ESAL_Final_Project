@@ -19996,6 +19996,22 @@ extern uint32_t ADC_Values[13];
 void SetupADC(void);
 double ADCReadChan(void);  
 #line 56 "project.h"
+#line 1 "myGPIO.h"
+#line 2 "myGPIO.h"
+#line 3 "myGPIO.h"
+#line 4 "myGPIO.h"
+#line 5 "myGPIO.h"
+#line 6 "myGPIO.h"
+#line 7 "myGPIO.h"
+#line 8 "myGPIO.h"
+#line 9 "myGPIO.h"
+#line 10 "myGPIO.h"
+#line 11 "myGPIO.h"
+#line 12 "myGPIO.h"
+
+void setup_IO();
+void pinReadAndWrite(uint32_t ui32Loop,uint8_t temp);
+#line 57 "project.h"
 
 #line 17 "Calibrate.c"
 #line 18 "Calibrate.c"
@@ -20946,10 +20962,12 @@ else if (AvK < calspeed16){
 else if (AvK < calspeed17){
 	t = .17;
 }
+	stopmotor();
 	printf("K = %.2f, ", k);
 	printf("Avk = %.2f\n", AvK);
 	printf("Time const = %.2f, ", t);
 	printf("Voltage = %.2f\n\n", voltage);
-	stopmotor();
+	
+	printf("System transfer function is %.2f / (%.2ft + 1)\n\n", k, t);
 }
 	

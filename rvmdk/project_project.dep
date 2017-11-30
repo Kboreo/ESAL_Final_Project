@@ -1,6 +1,6 @@
 Dependencies for Project 'project', Target 'project': (DO NOT MODIFY !)
-F (.\project.c)(0x5A1EB03C)(-c --cpu Cortex-M4.fp -D__EVAL -D__MICROLIB -g -O0 --apcs=interwork --split_sections -I ..\.. -I .\driverlib -I .\src -I .\inc --c99-I.\RTE\_project-IC:\Keil_v5\ARM\PACK\ARM\CMSIS\5.0.1\CMSIS\Include-IC:\Keil_v5\ARM\PACK\Keil\TM4C_DFP\1.1.0\Device\Include\TM4C123-D__UVISION_VERSION="524" -D_RTE_ -DTM4C123GH6PM -Drvmdk -DPART_TM4C123GH6PM -DTARGET_IS_TM4C123_RB1-o .\rvmdk\project.o --list_dir ".\\rvmdk\\" --list --omf_browse .\rvmdk\project.crf --depend .\rvmdk\project.d)
-I (project.h)(0x5A0DA1F4)
+F (.\project.c)(0x5A2059AD)(-c --cpu Cortex-M4.fp -D__EVAL -D__MICROLIB -g -O0 --apcs=interwork --split_sections -I ..\.. -I .\driverlib -I .\src -I .\inc --c99-I.\RTE\_project-IC:\Keil_v5\ARM\PACK\ARM\CMSIS\5.0.1\CMSIS\Include-IC:\Keil_v5\ARM\PACK\Keil\TM4C_DFP\1.1.0\Device\Include\TM4C123-D__UVISION_VERSION="524" -D_RTE_ -DTM4C123GH6PM -Drvmdk -DPART_TM4C123GH6PM -DTARGET_IS_TM4C123_RB1-o .\rvmdk\project.o --list_dir ".\\rvmdk\\" --list --omf_browse .\rvmdk\project.crf --depend .\rvmdk\project.d)
+I (project.h)(0x5A204CAC)
 I (C:\Keil_v5\ARM\ARMCC\include\stdbool.h)(0x588C2C04)
 I (C:\Keil_v5\ARM\ARMCC\include\stdint.h)(0x588C2C04)
 I (inc/hw_memmap.h)(0x59E68EC2)
@@ -54,7 +54,8 @@ I (.\src\Uart_helper.h)(0x5A1CA3C5)
 I (Get_Speed.h)(0x5A1CA3C5)
 I (Calibrate.h)(0x5A1CA3C5)
 I (HAL_ADC.h)(0x5A0DA181)
-F (.\project.h)(0x5A0DA1F4)()
+I (myGPIO.h)(0x5A204C89)
+F (.\project.h)(0x5A204CAC)()
 F (.\startup_rvmdk.S)(0x59F1F4AD)(--cpu Cortex-M4.fp --pd "__EVAL SETA 1" -g --apcs=interwork --pd "__MICROLIB SETA 1"-I.\RTE\_project-IC:\Keil_v5\ARM\PACK\ARM\CMSIS\5.0.1\CMSIS\Include-IC:\Keil_v5\ARM\PACK\Keil\TM4C_DFP\1.1.0\Device\Include\TM4C123--pd "__UVISION_VERSION SETA 524" --pd "_RTE_ SETA 1" --pd "TM4C123GH6PM SETA 1"--list .\rvmdk\startup_rvmdk.lst -o .\rvmdk\startup_rvmdk.o --depend .\rvmdk\startup_rvmdk.d)
 F (.\myPWM.c)(0x5A0DEC8A)(-c --cpu Cortex-M4.fp -D__EVAL -D__MICROLIB -g -O0 --apcs=interwork --split_sections -I ..\.. -I .\driverlib -I .\src -I .\inc --c99-I.\RTE\_project-IC:\Keil_v5\ARM\PACK\ARM\CMSIS\5.0.1\CMSIS\Include-IC:\Keil_v5\ARM\PACK\Keil\TM4C_DFP\1.1.0\Device\Include\TM4C123-D__UVISION_VERSION="524" -D_RTE_ -DTM4C123GH6PM -Drvmdk -DPART_TM4C123GH6PM -DTARGET_IS_TM4C123_RB1-o .\rvmdk\mypwm.o --list_dir ".\\rvmdk\\" --list --omf_browse .\rvmdk\mypwm.crf --depend .\rvmdk\mypwm.d)
 I (myPWM.h)(0x59E749F2)
@@ -93,7 +94,7 @@ F (.\Encoder.h)(0x59F20693)()
 F (.\inc\driverlib.lib)(0x59D4FF62)()
 F (.\README.txt)(0x59E68EC1)()
 F (.\Float_Setup.h)(0x5A1CA3C5)()
-F (.\Float_Setup.c)(0x5A1CA3C4)(-c --cpu Cortex-M4.fp -D__EVAL -D__MICROLIB -g -O0 --apcs=interwork --split_sections -I ..\.. -I .\driverlib -I .\src -I .\inc --c99-I.\RTE\_project-IC:\Keil_v5\ARM\PACK\ARM\CMSIS\5.0.1\CMSIS\Include-IC:\Keil_v5\ARM\PACK\Keil\TM4C_DFP\1.1.0\Device\Include\TM4C123-D__UVISION_VERSION="524" -D_RTE_ -DTM4C123GH6PM -Drvmdk -DPART_TM4C123GH6PM -DTARGET_IS_TM4C123_RB1-o .\rvmdk\float_setup.o --list_dir ".\\rvmdk\\" --list --omf_browse .\rvmdk\float_setup.crf --depend .\rvmdk\float_setup.d)
+F (.\Float_Setup.c)(0x5A2059AD)(-c --cpu Cortex-M4.fp -D__EVAL -D__MICROLIB -g -O0 --apcs=interwork --split_sections -I ..\.. -I .\driverlib -I .\src -I .\inc --c99-I.\RTE\_project-IC:\Keil_v5\ARM\PACK\ARM\CMSIS\5.0.1\CMSIS\Include-IC:\Keil_v5\ARM\PACK\Keil\TM4C_DFP\1.1.0\Device\Include\TM4C123-D__UVISION_VERSION="524" -D_RTE_ -DTM4C123GH6PM -Drvmdk -DPART_TM4C123GH6PM -DTARGET_IS_TM4C123_RB1-o .\rvmdk\float_setup.o --list_dir ".\\rvmdk\\" --list --omf_browse .\rvmdk\float_setup.crf --depend .\rvmdk\float_setup.d)
 I (Float_Setup.h)(0x5A1CA3C5)
 I (driverlib/pin_map.h)(0x59E68EC1)
 I (C:\Keil_v5\ARM\ARMCC\include\stdint.h)(0x588C2C04)
@@ -125,7 +126,7 @@ I (.\driverlib\uart.h)(0x59E68EC1)
 I (src\../inc/tm4c123gh6pm.h)(0x59E68EC2)
 I (.\driverlib\pin_map.h)(0x59E68EC1)
 F (.\src\Uart_helper.h)(0x5A1CA3C5)()
-F (.\Read_Encoder.c)(0x5A1CA3C4)(-c --cpu Cortex-M4.fp -D__EVAL -D__MICROLIB -g -O0 --apcs=interwork --split_sections -I ..\.. -I .\driverlib -I .\src -I .\inc --c99-I.\RTE\_project-IC:\Keil_v5\ARM\PACK\ARM\CMSIS\5.0.1\CMSIS\Include-IC:\Keil_v5\ARM\PACK\Keil\TM4C_DFP\1.1.0\Device\Include\TM4C123-D__UVISION_VERSION="524" -D_RTE_ -DTM4C123GH6PM -Drvmdk -DPART_TM4C123GH6PM -DTARGET_IS_TM4C123_RB1-o .\rvmdk\read_encoder.o --list_dir ".\\rvmdk\\" --list --omf_browse .\rvmdk\read_encoder.crf --depend .\rvmdk\read_encoder.d)
+F (.\Read_Encoder.c)(0x5A2059AD)(-c --cpu Cortex-M4.fp -D__EVAL -D__MICROLIB -g -O0 --apcs=interwork --split_sections -I ..\.. -I .\driverlib -I .\src -I .\inc --c99-I.\RTE\_project-IC:\Keil_v5\ARM\PACK\ARM\CMSIS\5.0.1\CMSIS\Include-IC:\Keil_v5\ARM\PACK\Keil\TM4C_DFP\1.1.0\Device\Include\TM4C123-D__UVISION_VERSION="524" -D_RTE_ -DTM4C123GH6PM -Drvmdk -DPART_TM4C123GH6PM -DTARGET_IS_TM4C123_RB1-o .\rvmdk\read_encoder.o --list_dir ".\\rvmdk\\" --list --omf_browse .\rvmdk\read_encoder.crf --depend .\rvmdk\read_encoder.d)
 I (Read_Encoder.h)(0x5A1CA3C5)
 I (driverlib/pin_map.h)(0x59E68EC1)
 I (C:\Keil_v5\ARM\ARMCC\include\stdint.h)(0x588C2C04)
@@ -144,7 +145,7 @@ I (driverlib/fpu.h)(0x59E68EC1)
 I (.\inc\tm4c123gh6pm.h)(0x59E68EC2)
 I (.\src\Uart_helper.h)(0x5A1CA3C5)
 I (Encoder.h)(0x59F20693)
-I (project.h)(0x5A0DA1F4)
+I (project.h)(0x5A204CAC)
 I (driverlib/adc.h)(0x59E68EC1)
 I (driverlib/aes.h)(0x59E68EC1)
 I (driverlib/can.h)(0x59E68EC1)
@@ -181,8 +182,9 @@ I (./src/Uart_helper.h)(0x5A1CA3C5)
 I (Get_Speed.h)(0x5A1CA3C5)
 I (Calibrate.h)(0x5A1CA3C5)
 I (HAL_ADC.h)(0x5A0DA181)
+I (myGPIO.h)(0x5A204C89)
 F (.\Read_Encoder.h)(0x5A1CA3C5)()
-F (.\Speed_Control.c)(0x5A1CA3C4)(-c --cpu Cortex-M4.fp -D__EVAL -D__MICROLIB -g -O0 --apcs=interwork --split_sections -I ..\.. -I .\driverlib -I .\src -I .\inc --c99-I.\RTE\_project-IC:\Keil_v5\ARM\PACK\ARM\CMSIS\5.0.1\CMSIS\Include-IC:\Keil_v5\ARM\PACK\Keil\TM4C_DFP\1.1.0\Device\Include\TM4C123-D__UVISION_VERSION="524" -D_RTE_ -DTM4C123GH6PM -Drvmdk -DPART_TM4C123GH6PM -DTARGET_IS_TM4C123_RB1-o .\rvmdk\speed_control.o --list_dir ".\\rvmdk\\" --list --omf_browse .\rvmdk\speed_control.crf --depend .\rvmdk\speed_control.d)
+F (.\Speed_Control.c)(0x5A20617A)(-c --cpu Cortex-M4.fp -D__EVAL -D__MICROLIB -g -O0 --apcs=interwork --split_sections -I ..\.. -I .\driverlib -I .\src -I .\inc --c99-I.\RTE\_project-IC:\Keil_v5\ARM\PACK\ARM\CMSIS\5.0.1\CMSIS\Include-IC:\Keil_v5\ARM\PACK\Keil\TM4C_DFP\1.1.0\Device\Include\TM4C123-D__UVISION_VERSION="524" -D_RTE_ -DTM4C123GH6PM -Drvmdk -DPART_TM4C123GH6PM -DTARGET_IS_TM4C123_RB1-o .\rvmdk\speed_control.o --list_dir ".\\rvmdk\\" --list --omf_browse .\rvmdk\speed_control.crf --depend .\rvmdk\speed_control.d)
 I (Read_Encoder.h)(0x5A1CA3C5)
 I (driverlib/pin_map.h)(0x59E68EC1)
 I (C:\Keil_v5\ARM\ARMCC\include\stdint.h)(0x588C2C04)
@@ -201,7 +203,7 @@ I (driverlib/fpu.h)(0x59E68EC1)
 I (.\inc\tm4c123gh6pm.h)(0x59E68EC2)
 I (.\src\Uart_helper.h)(0x5A1CA3C5)
 I (Encoder.h)(0x59F20693)
-I (project.h)(0x5A0DA1F4)
+I (project.h)(0x5A204CAC)
 I (driverlib/adc.h)(0x59E68EC1)
 I (driverlib/aes.h)(0x59E68EC1)
 I (driverlib/can.h)(0x59E68EC1)
@@ -238,6 +240,7 @@ I (./src/Uart_helper.h)(0x5A1CA3C5)
 I (Get_Speed.h)(0x5A1CA3C5)
 I (Calibrate.h)(0x5A1CA3C5)
 I (HAL_ADC.h)(0x5A0DA181)
+I (myGPIO.h)(0x5A204C89)
 I (Speed_Control.h)(0x5A1CA3C5)
 F (.\Speed_Control.h)(0x5A1CA3C5)()
 F (.\Get_Speed.c)(0x5A1CA3C5)(-c --cpu Cortex-M4.fp -D__EVAL -D__MICROLIB -g -O0 --apcs=interwork --split_sections -I ..\.. -I .\driverlib -I .\src -I .\inc --c99-I.\RTE\_project-IC:\Keil_v5\ARM\PACK\ARM\CMSIS\5.0.1\CMSIS\Include-IC:\Keil_v5\ARM\PACK\Keil\TM4C_DFP\1.1.0\Device\Include\TM4C123-D__UVISION_VERSION="524" -D_RTE_ -DTM4C123GH6PM -Drvmdk -DPART_TM4C123GH6PM -DTARGET_IS_TM4C123_RB1-o .\rvmdk\get_speed.o --list_dir ".\\rvmdk\\" --list --omf_browse .\rvmdk\get_speed.crf --depend .\rvmdk\get_speed.d)
@@ -245,7 +248,7 @@ I (C:\Keil_v5\ARM\ARMCC\include\stdio.h)(0x588C2C04)
 I (C:\Keil_v5\ARM\ARMCC\include\stdint.h)(0x588C2C04)
 I (Get_Speed.h)(0x5A1CA3C5)
 F (.\Get_Speed.h)(0x5A1CA3C5)()
-F (.\Calibrate.c)(0x5A1EB2DA)(-c --cpu Cortex-M4.fp -D__EVAL -D__MICROLIB -g -O0 --apcs=interwork --split_sections -I ..\.. -I .\driverlib -I .\src -I .\inc --c99-I.\RTE\_project-IC:\Keil_v5\ARM\PACK\ARM\CMSIS\5.0.1\CMSIS\Include-IC:\Keil_v5\ARM\PACK\Keil\TM4C_DFP\1.1.0\Device\Include\TM4C123-D__UVISION_VERSION="524" -D_RTE_ -DTM4C123GH6PM -Drvmdk -DPART_TM4C123GH6PM -DTARGET_IS_TM4C123_RB1-o .\rvmdk\calibrate.o --list_dir ".\\rvmdk\\" --list --omf_browse .\rvmdk\calibrate.crf --depend .\rvmdk\calibrate.d)
+F (.\Calibrate.c)(0x5A2057B6)(-c --cpu Cortex-M4.fp -D__EVAL -D__MICROLIB -g -O0 --apcs=interwork --split_sections -I ..\.. -I .\driverlib -I .\src -I .\inc --c99-I.\RTE\_project-IC:\Keil_v5\ARM\PACK\ARM\CMSIS\5.0.1\CMSIS\Include-IC:\Keil_v5\ARM\PACK\Keil\TM4C_DFP\1.1.0\Device\Include\TM4C123-D__UVISION_VERSION="524" -D_RTE_ -DTM4C123GH6PM -Drvmdk -DPART_TM4C123GH6PM -DTARGET_IS_TM4C123_RB1-o .\rvmdk\calibrate.o --list_dir ".\\rvmdk\\" --list --omf_browse .\rvmdk\calibrate.crf --depend .\rvmdk\calibrate.d)
 I (Read_Encoder.h)(0x5A1CA3C5)
 I (driverlib/pin_map.h)(0x59E68EC1)
 I (C:\Keil_v5\ARM\ARMCC\include\stdint.h)(0x588C2C04)
@@ -264,7 +267,7 @@ I (driverlib/fpu.h)(0x59E68EC1)
 I (.\inc\tm4c123gh6pm.h)(0x59E68EC2)
 I (.\src\Uart_helper.h)(0x5A1CA3C5)
 I (Encoder.h)(0x59F20693)
-I (project.h)(0x5A0DA1F4)
+I (project.h)(0x5A204CAC)
 I (driverlib/adc.h)(0x59E68EC1)
 I (driverlib/aes.h)(0x59E68EC1)
 I (driverlib/can.h)(0x59E68EC1)
@@ -301,6 +304,7 @@ I (./src/Uart_helper.h)(0x5A1CA3C5)
 I (Get_Speed.h)(0x5A1CA3C5)
 I (Calibrate.h)(0x5A1CA3C5)
 I (HAL_ADC.h)(0x5A0DA181)
+I (myGPIO.h)(0x5A204C89)
 I (Speed_Control.h)(0x5A1CA3C5)
 F (.\Calibrate.h)(0x5A1CA3C5)()
 F (.\HAL_ADC.c)(0x5A1EB2DA)(-c --cpu Cortex-M4.fp -D__EVAL -D__MICROLIB -g -O0 --apcs=interwork --split_sections -I ..\.. -I .\driverlib -I .\src -I .\inc --c99-I.\RTE\_project-IC:\Keil_v5\ARM\PACK\ARM\CMSIS\5.0.1\CMSIS\Include-IC:\Keil_v5\ARM\PACK\Keil\TM4C_DFP\1.1.0\Device\Include\TM4C123-D__UVISION_VERSION="524" -D_RTE_ -DTM4C123GH6PM -Drvmdk -DPART_TM4C123GH6PM -DTARGET_IS_TM4C123_RB1-o .\rvmdk\hal_adc.o --list_dir ".\\rvmdk\\" --list --omf_browse .\rvmdk\hal_adc.crf --depend .\rvmdk\hal_adc.d)
@@ -317,3 +321,17 @@ I (.\inc\hw_gpio.h)(0x59E68EC2)
 I (.\inc\hw_types.h)(0x59E68EC2)
 I (C:\Keil_v5\ARM\ARMCC\include\stdio.h)(0x588C2C04)
 F (.\HAL_ADC.h)(0x5A0DA181)()
+F (.\myGPIO.c)(0x5A204DE7)(-c --cpu Cortex-M4.fp -D__EVAL -D__MICROLIB -g -O0 --apcs=interwork --split_sections -I ..\.. -I .\driverlib -I .\src -I .\inc --c99-I.\RTE\_project-IC:\Keil_v5\ARM\PACK\ARM\CMSIS\5.0.1\CMSIS\Include-IC:\Keil_v5\ARM\PACK\Keil\TM4C_DFP\1.1.0\Device\Include\TM4C123-D__UVISION_VERSION="524" -D_RTE_ -DTM4C123GH6PM -Drvmdk -DPART_TM4C123GH6PM -DTARGET_IS_TM4C123_RB1-o .\rvmdk\mygpio.o --list_dir ".\\rvmdk\\" --list --omf_browse .\rvmdk\mygpio.crf --depend .\rvmdk\mygpio.d)
+I (C:\Keil_v5\ARM\ARMCC\include\stdio.h)(0x588C2C04)
+I (C:\Keil_v5\ARM\ARMCC\include\stdint.h)(0x588C2C04)
+I (myGPIO.h)(0x5A204C89)
+I (C:\Keil_v5\ARM\ARMCC\include\stdbool.h)(0x588C2C04)
+I (.\inc\hw_memmap.h)(0x59E68EC2)
+I (.\inc\hw_gpio.h)(0x59E68EC2)
+I (.\inc\hw_types.h)(0x59E68EC2)
+I (.\driverlib\../inc/tm4c123gh6pm.h)(0x59E68EC2)
+I (.\driverlib\pin_map.h)(0x59E68EC1)
+I (.\driverlib\gpio.h)(0x59E68EC1)
+I (.\driverlib\sysctl.h)(0x59E68EC1)
+I (driverlib/uart.h)(0x59E68EC1)
+F (.\myGPIO.h)(0x5A204C89)()

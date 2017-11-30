@@ -20,63 +20,66 @@
 	double Target_Speed;
 	uint32_t Period;
 	uint32_t Speed;
-	double Error, speed2;
-	double DutyC;
+	double Error , speed2;
+	double DutyC, vol;	
+
+	
+	
 void Speed_Control(double Speed, double uSpeed)
+	
 {	
-
+	int i = 1;
+	int x; 
+	int a = 0;
 	
-	//sets duty cycle to predicted value needed to achieve speed
-	DutyC = uSpeed * 19;
-	PWMPulseWidthSet(PWM1_BASE, PWM_OUT_6, DutyC);
-
-	//Delay to allow motor to achieve speed preset
-	for (int i = 0; i<1600000;i++)
-	{
-		__nop;
-	}	
-	while(1)
-	{
-	
-	for (int i = 0; i<100;i++)
-	{
-	Speed= ReadEncoder();
-	speed2 = Speed;
+	while (i == 1)
+	{				
+		//adjusts speed 10 times before printing speed
+		for (int i = 0; i<10;i++)
+			{
+			Speed= ReadEncoder();
+			speed2 = Speed;		
 		
-		i=0;
-	while(Speed == speed2){
+			//waits here for speed to change 
+			a=0;	
+			while(Speed == speed2){
+				Speed = ReadEncoder();
+				a++;
+				if (a >999){
+				break;
+				}
+				}
+				
+				
+				//speed corrections
+				Error = uSpeed - Speed;
+				vol = DutyC/640*10;
+				vol = vol + .04 * Error; 
+				DutyC = vol/10*640;	
+	
+				//sets limits for duty cycle
+				if (DutyC < 4) {
+					DutyC = 4;
+					}
+				if (DutyC > 640){
+					DutyC = 640;
+					}
+
+				//Set new PWM 
+				PWMPulseWidthSet(PWM1_BASE, PWM_OUT_6, DutyC);
+
+			}
+	
 		Speed = ReadEncoder();
-		i++;
-		if (i >999){
-		break;
-		}
-	}
-		Error = uSpeed - Speed;
-		DutyC =(10 * Error)+DutyC; 
-		if (DutyC < 1) {
-			DutyC = 1;
-		}
-		if (DutyC > 310){
-			DutyC = 320;
-		}
-
-		//Set new PWM 
-	PWMPulseWidthSet(PWM1_BASE, PWM_OUT_6, DutyC);
-//		for (int i = 0; i<16000000;i++)
-//	{
-//		__nop;
-//	}	
+		printf("Speed is, IN CONTROL %.2f rps \n\n", Speed);
 	
-	
-//		for (int i = 0; i<1600000;i++)
-//	{
-//		__nop;
-//	}	
-}
-	Speed = ReadEncoder();
-	//printf("User input, IN CONTROL %.3f\n\n",uSpeed);		
-	printf("Speed is, IN CONTROL %.2f rps \n\n", Speed);
-	//printf ("PWM duty cycle is %.2f\n\n", DutyC);
+		//will exit GPIO when SW2 is pressed
+		x = GPIOPinRead(GPIO_PORTF_BASE, GPIO_PIN_0); // set x equal to the output of button SW2 		
+			if ( x == 0){
+					i = 0;
+			}	
 
 }
+		//turns off motor before exiting 
+		stopmotor();
 	}

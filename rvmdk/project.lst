@@ -66740,6 +66740,25 @@ N
 Nvoid SetupADC(void);
 Ndouble ADCReadChan(void);  
 L 56 "project.h" 2
+N#include "myGPIO.h"
+L 1 "myGPIO.h" 1
+N#include <stdio.h>
+N#include <stdbool.h>
+N#include <stdint.h>
+N#include "hw_memmap.h"
+N#include "hw_gpio.h"
+N#include "hw_types.h"
+N#include "../inc/tm4c123gh6pm.h"
+N#include "pin_map.h"
+N#include "gpio.h"
+N#include "sysctl.h"
+N#include "driverlib/uart.h"
+N
+W "myGPIO.h" 13 6 Deprecated declaration setup_IO - give arg types
+Nvoid setup_IO();
+W "myGPIO.h" 14 54 last line of file ends without a newline
+Nvoid pinReadAndWrite(uint32_t ui32Loop,uint8_t temp);
+L 57 "project.h" 2
 N
 L 30 "project.c" 2
 N#include <stdio.h>
@@ -66759,16 +66778,18 @@ Nvoid mainMenu(char ctemp);
 N
 Nvoid SetupHardware()
 N{
+N	setup_IO(); //setup for pins
 N	UartSetup(); //setup for user input
-W "project.c" 47 2 function "FloatSetup" declared implicitly
+W "project.c" 48 2 function "FloatSetup" declared implicitly
 N	FloatSetup(); //setup to allow floating point print 
-W "project.c" 48 2 function "setupENCODER" declared implicitly
+W "project.c" 49 2 function "setupENCODER" declared implicitly
 N	setupENCODER();	 //setup to read motor encoder
-W "project.c" 49 2 function "setupPWM" declared implicitly
+W "project.c" 50 2 function "setupPWM" declared implicitly
 N	setupPWM();	//setup PWM output
 N	FPUEnable();	//inable floating point
 N	FPULazyStackingEnable(); //inable lazy stack for floating point
 N	SetupADC(); //setup to read motor voltage 
+N	
 N}
 N
 N
@@ -66783,15 +66804,14 @@ N	SetupHardware();  //Initializes all of the required HardWare for the project.
 N	printf("Hardware setup complete\n\n");		
 N	printf("PWM setup complete \n\n");
 N	
-N		//program menu options contained in mainMenu
-N		mainMenu(ctemp);
+N	//program menu options contained in mainMenu
+N	mainMenu(ctemp);
 N}	
 N	
 N//Main menu that displays to the UART terminal for a HMI	
 Nvoid mainMenu(char ctemp)
 N{	
 N	//While loop for main user menu	
-N
 N	while (1)
 N{
 N		printf("What function would you like to test?\n 1.Calibrate\n 2.Speed Control\n"); //Askes user what function they would like to use.
@@ -66799,35 +66819,26 @@ N		ctemp = getc(stdin); //Gets a char from the terminal from the user.
 X		ctemp = getc((& __stdin)); 
 N		printf("You entered %c\n\n",ctemp); //Lets the user know what they have selected
 N		
-N		switch (ctemp)		//Switch statement that selects which function depending on the user input.
+N	//Switch statement that selects which function depending on the user input.	
+N	switch (ctemp)		
 N		{
-N			//GPIO
+N			//Function to calibrate motor
 N			case '1':						
-W "project.c" 86 4 function "Calibrate" declared implicitly
-N			Calibrate(); 
+W "project.c" 88 5 function "Calibrate" declared implicitly
+N				Calibrate(); 
 N				break;	
 N			
-N			
-N		
-N
-N			case '2':		
-N			uSpeed = GetUserSpeed();
-N		//printf("User input, IN MAIN %.3f\n\n",uSpeed);
-N		//speed = ReadEncoder();
-N		//printf("Speed is, IN MAIN %.2f rps \n\n", speed);
-W "project.c" 97 4 function "Speed_Control" declared implicitly
-N			Speed_Control(speed, uSpeed); 		
+N			//Function for spped control
+N			case '2':	
+N				printf("Press SW2 to exit\n\n");
+N				uSpeed = GetUserSpeed();
+W "project.c" 95 5 function "Speed_Control" declared implicitly
+N				Speed_Control(speed, uSpeed); 		
 N				break;
-N			
-N						
-N
-N			
+N					
 N			//Default case if user types anything other than the given options
 N			default:				
 N				printf("Ya done messed up, try again!\n\n");
-N//				GPIOPinWrite(GPIO_PORTF_BASE, GPIO_PIN_1, 0x0);  // Turn off LED
-N//				GPIOPinWrite(GPIO_PORTF_BASE, GPIO_PIN_2, 0x0);  // Turn off LED
-N//				GPIOPinWrite(GPIO_PORTF_BASE, GPIO_PIN_3, 0x0);  // Turn off LED
 N				break;		
 N		}
 N	}	

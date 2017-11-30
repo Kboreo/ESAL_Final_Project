@@ -43,6 +43,7 @@ void mainMenu(char ctemp);
 
 void SetupHardware()
 {
+	setup_IO(); //setup for pins
 	UartSetup(); //setup for user input
 	FloatSetup(); //setup to allow floating point print 
 	setupENCODER();	 //setup to read motor encoder
@@ -50,6 +51,7 @@ void SetupHardware()
 	FPUEnable();	//inable floating point
 	FPULazyStackingEnable(); //inable lazy stack for floating point
 	SetupADC(); //setup to read motor voltage 
+	
 }
 
 
@@ -64,48 +66,38 @@ int  main(void)
 	printf("Hardware setup complete\n\n");		
 	printf("PWM setup complete \n\n");
 	
-		//program menu options contained in mainMenu
-		mainMenu(ctemp);
+	//program menu options contained in mainMenu
+	mainMenu(ctemp);
 }	
 	
 //Main menu that displays to the UART terminal for a HMI	
 void mainMenu(char ctemp)
 {	
 	//While loop for main user menu	
-
 	while (1)
 {
 		printf("What function would you like to test?\n 1.Calibrate\n 2.Speed Control\n"); //Askes user what function they would like to use.
 		ctemp = getc(stdin); //Gets a char from the terminal from the user.
 		printf("You entered %c\n\n",ctemp); //Lets the user know what they have selected
 		
-		switch (ctemp)		//Switch statement that selects which function depending on the user input.
+	//Switch statement that selects which function depending on the user input.	
+	switch (ctemp)		
 		{
-			//GPIO
+			//Function to calibrate motor
 			case '1':						
-			Calibrate(); 
+				Calibrate(); 
 				break;	
 			
-			
-		
-
-			case '2':		
-			uSpeed = GetUserSpeed();
-		//printf("User input, IN MAIN %.3f\n\n",uSpeed);
-		//speed = ReadEncoder();
-		//printf("Speed is, IN MAIN %.2f rps \n\n", speed);
-			Speed_Control(speed, uSpeed); 		
+			//Function for spped control
+			case '2':	
+				printf("Press SW2 to exit\n\n");
+				uSpeed = GetUserSpeed();
+				Speed_Control(speed, uSpeed); 		
 				break;
-			
-						
-
-			
+					
 			//Default case if user types anything other than the given options
 			default:				
 				printf("Ya done messed up, try again!\n\n");
-//				GPIOPinWrite(GPIO_PORTF_BASE, GPIO_PIN_1, 0x0);  // Turn off LED
-//				GPIOPinWrite(GPIO_PORTF_BASE, GPIO_PIN_2, 0x0);  // Turn off LED
-//				GPIOPinWrite(GPIO_PORTF_BASE, GPIO_PIN_3, 0x0);  // Turn off LED
 				break;		
 		}
 	}	

@@ -19996,6 +19996,22 @@ extern uint32_t ADC_Values[13];
 void SetupADC(void);
 double ADCReadChan(void);  
 #line 56 "project.h"
+#line 1 "myGPIO.h"
+#line 2 "myGPIO.h"
+#line 3 "myGPIO.h"
+#line 4 "myGPIO.h"
+#line 5 "myGPIO.h"
+#line 6 "myGPIO.h"
+#line 7 "myGPIO.h"
+#line 8 "myGPIO.h"
+#line 9 "myGPIO.h"
+#line 10 "myGPIO.h"
+#line 11 "myGPIO.h"
+#line 12 "myGPIO.h"
+
+void setup_IO();
+void pinReadAndWrite(uint32_t ui32Loop,uint8_t temp);
+#line 57 "project.h"
 
 #line 17 "Read_Encoder.c"
 #line 18 "Read_Encoder.c"
@@ -20003,22 +20019,15 @@ double ADCReadChan(void);
 	uint32_t ticks;
 	double Espeed;
 	int x = 0;
-
-
-	double ReadEncoder(void)
-	{	
-
-
 	
-
+double ReadEncoder(void)
+	{		
+	
 	ticks = QEIVelocityGet(0x4002C000);
 	
-
 	
-Espeed = ticks * 6.283185 / 19.2;
-	
-return Espeed;	
-
+	Espeed = ticks * 6.283185 / 19.2;
+	return Espeed;	
 	}
 
 	

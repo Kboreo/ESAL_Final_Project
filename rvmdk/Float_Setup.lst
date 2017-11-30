@@ -39785,13 +39785,10 @@ N//Variables
 Nuint32_t first_Test[13];
 Nuint32_t test[13];
 N 
-N void FloatSetup()
-N {
-N
-N
-N	 first_Test[12] = 1;
-N	 test[2] = 2;
-N 
-N }
-W "Float_Setup.c" 31 2 last line of file ends without a newline
+Nvoid FloatSetup()
+N{
+N	first_Test[12] = 1;
+N	test[2] = 2;
+N}
+W "Float_Setup.c" 28 2 last line of file ends without a newline
 N 

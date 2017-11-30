@@ -19,22 +19,15 @@
 	uint32_t ticks;
 	double Espeed;
 	int x = 0;
-
-
-	double ReadEncoder(void)
-	{	
-
-
 	
-//Read encoder speed
+double ReadEncoder(void)
+	{		
+	//Read encoder speed
 	ticks = QEIVelocityGet(QEI0_BASE);
 	
-// speed in rad/seco
-	
-Espeed = ticks * 6.283185 / 19.2;
-	
-return Espeed;	
-
+	// speed in rad/seco	
+	Espeed = ticks * 6.283185 / 19.2;
+	return Espeed;	
 	}
 
 	//for later use

@@ -67130,6 +67130,25 @@ N
 Nvoid SetupADC(void);
 Ndouble ADCReadChan(void);  
 L 56 "project.h" 2
+N#include "myGPIO.h"
+L 1 "myGPIO.h" 1
+N#include <stdio.h>
+N#include <stdbool.h>
+N#include <stdint.h>
+N#include "hw_memmap.h"
+N#include "hw_gpio.h"
+N#include "hw_types.h"
+N#include "../inc/tm4c123gh6pm.h"
+N#include "pin_map.h"
+N#include "gpio.h"
+N#include "sysctl.h"
+N#include "driverlib/uart.h"
+N
+W "myGPIO.h" 13 6 Deprecated declaration setup_IO - give arg types
+Nvoid setup_IO();
+W "myGPIO.h" 14 54 last line of file ends without a newline
+Nvoid pinReadAndWrite(uint32_t ui32Loop,uint8_t temp);
+L 57 "project.h" 2
 N
 L 17 "Speed_Control.c" 2
 N#include "tm4c123gh6pm.h"	//Header file accesses registers in TMC123 microcontroller
@@ -67413,66 +67432,69 @@ N
 N	double Target_Speed;
 N	uint32_t Period;
 N	uint32_t Speed;
-N	double Error, speed2;
-N	double DutyC;
+N	double Error , speed2;
+N	double DutyC, vol;	
+N
+N	
+N	
 Nvoid Speed_Control(double Speed, double uSpeed)
+N	
 N{	
-N
+N	int i = 1;
+N	int x; 
+N	int a = 0;
 N	
-N	//sets duty cycle to predicted value needed to achieve speed
-N	DutyC = uSpeed * 19;
-N	PWMPulseWidthSet(PWM1_BASE, PWM_OUT_6, DutyC);
-X	PWMPulseWidthSet(0x40029000, 0x00000106, DutyC);
-N
-N	//Delay to allow motor to achieve speed preset
-N	for (int i = 0; i<1600000;i++)
-N	{
-W "Speed_Control.c" 36 3 expression has no effect
-N		__nop;
-N	}	
-N	while(1)
-N	{
-N	
-N	for (int i = 0; i<100;i++)
-N	{
-N	Speed= ReadEncoder();
-N	speed2 = Speed;
+N	while (i == 1)
+N	{				
+N		//adjusts speed 10 times before printing speed
+N		for (int i = 0; i<10;i++)
+N			{
+N			Speed= ReadEncoder();
+N			speed2 = Speed;		
 N		
-N		i=0;
-N	while(Speed == speed2){
+N			//waits here for speed to change 
+N			a=0;	
+N			while(Speed == speed2){
+N				Speed = ReadEncoder();
+N				a++;
+N				if (a >999){
+N				break;
+N				}
+N				}
+N				
+N				
+N				//speed corrections
+N				Error = uSpeed - Speed;
+N				vol = DutyC/640*10;
+N				vol = vol + .04 * Error; 
+N				DutyC = vol/10*640;	
+N	
+N				//sets limits for duty cycle
+N				if (DutyC < 4) {
+N					DutyC = 4;
+N					}
+N				if (DutyC > 640){
+N					DutyC = 640;
+N					}
+N
+N				//Set new PWM 
+N				PWMPulseWidthSet(PWM1_BASE, PWM_OUT_6, DutyC);
+X				PWMPulseWidthSet(0x40029000, 0x00000106, DutyC);
+N
+N			}
+N	
 N		Speed = ReadEncoder();
-N		i++;
-N		if (i >999){
-N		break;
-N		}
-N	}
-N		Error = uSpeed - Speed;
-N		DutyC =(10 * Error)+DutyC; 
-N		if (DutyC < 1) {
-N			DutyC = 1;
-N		}
-N		if (DutyC > 310){
-N			DutyC = 320;
-N		}
-N
-N		//Set new PWM 
-N	PWMPulseWidthSet(PWM1_BASE, PWM_OUT_6, DutyC);
-X	PWMPulseWidthSet(0x40029000, 0x00000106, DutyC);
-N//		for (int i = 0; i<16000000;i++)
-N//	{
-N//		__nop;
-N//	}	
+N		printf("Speed is, IN CONTROL %.2f rps \n\n", Speed);
 N	
-N	
-N//		for (int i = 0; i<1600000;i++)
-N//	{
-N//		__nop;
-N//	}	
-N}
-N	Speed = ReadEncoder();
-N	//printf("User input, IN CONTROL %.3f\n\n",uSpeed);		
-N	printf("Speed is, IN CONTROL %.2f rps \n\n", Speed);
-N	//printf ("PWM duty cycle is %.2f\n\n", DutyC);
+N		//will exit GPIO when SW2 is pressed
+N		x = GPIOPinRead(GPIO_PORTF_BASE, GPIO_PIN_0); // set x equal to the output of button SW2 		
+X		x = GPIOPinRead(0x40025000, 0x00000001); 
+N			if ( x == 0){
+N					i = 0;
+N			}	
 N
 N}
+N		//turns off motor before exiting 
+W "Speed_Control.c" 84 3 function "stopmotor" declared implicitly
+N		stopmotor();
 N	}
