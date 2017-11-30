@@ -20289,8 +20289,8 @@ void Speed_Control(double Speed, double uSpeed);
 	double Target_Speed;
 	uint32_t Period;
 	uint32_t Speed;
-	double Error , speed2;
-	double DutyC, vol;	
+	double Error[4] = {0,0,0,0}, speed2;
+	double DutyC, vol, Ki, Kd;	
 
 	
 	
@@ -20318,12 +20318,15 @@ void Speed_Control(double Speed, double uSpeed)
 				break;
 				}
 				}
+				Error[4]=Error[3];
+				Error[3]=Error[2];
+				Error[2]=Error[1];
+				Ki = Error[1] + Error[2] + Error[3];
+				Kd = (Error[2]-Error[1]) / .01;
 				
-				
-				
-				Error = uSpeed - Speed;
+				Error[1] = uSpeed - Speed;
 				vol = DutyC/640*10;
-				vol = vol + .04 * Error; 
+				vol = vol + .035 * Error[1] + .00001247*Ki - .0000000000000000027691*Kd; 
 				DutyC = vol/10*640;	
 	
 				

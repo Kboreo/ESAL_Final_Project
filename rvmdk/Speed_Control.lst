@@ -67432,8 +67432,8 @@ N
 N	double Target_Speed;
 N	uint32_t Period;
 N	uint32_t Speed;
-N	double Error , speed2;
-N	double DutyC, vol;	
+N	double Error[4] = {0,0,0,0}, speed2;
+N	double DutyC, vol, Ki, Kd;	
 N
 N	
 N	
@@ -67461,12 +67461,16 @@ N				if (a >999){
 N				break;
 N				}
 N				}
-N				
-N				
+W "Speed_Control.c" 52 5 subscript out of range
+N				Error[4]=Error[3];
+N				Error[3]=Error[2];
+N				Error[2]=Error[1];
+N				Ki = Error[1] + Error[2] + Error[3];
+N				Kd = (Error[2]-Error[1]) / .01;
 N				//speed corrections
-N				Error = uSpeed - Speed;
+N				Error[1] = uSpeed - Speed;
 N				vol = DutyC/640*10;
-N				vol = vol + .04 * Error; 
+N				vol = vol + .035 * Error[1] + .00001247*Ki - .0000000000000000027691*Kd; 
 N				DutyC = vol/10*640;	
 N	
 N				//sets limits for duty cycle
@@ -67495,6 +67499,6 @@ N			}
 N
 N}
 N		//turns off motor before exiting 
-W "Speed_Control.c" 84 3 function "stopmotor" declared implicitly
+W "Speed_Control.c" 87 3 function "stopmotor" declared implicitly
 N		stopmotor();
 N	}

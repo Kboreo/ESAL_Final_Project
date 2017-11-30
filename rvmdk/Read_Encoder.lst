@@ -67153,7 +67153,7 @@ N
 L 17 "Read_Encoder.c" 2
 N#include "tm4c123gh6pm.h"	//Header file accesses registers in TMC123 microcontroller
 N
-N	uint32_t ticks;
+N	double ticks;
 N	double Espeed;
 N	int x = 0;
 N	

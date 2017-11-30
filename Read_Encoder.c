@@ -16,7 +16,7 @@
 #include "project.h"
 #include "tm4c123gh6pm.h"	//Header file accesses registers in TMC123 microcontroller
 
-	uint32_t ticks;
+	double ticks;
 	double Espeed;
 	int x = 0;
 	
