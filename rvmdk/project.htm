@@ -3,7 +3,7 @@
 <title>Static Call Graph - [.\rvmdk\project.axf]</title></head>
 <body><HR>
 <H1>Static Call Graph for image .\rvmdk\project.axf</H1><HR>
-<BR><P>#&#060CALLGRAPH&#062# ARM Linker, 5060528: Last Updated: Fri Dec 01 14:02:29 2017
+<BR><P>#&#060CALLGRAPH&#062# ARM Linker, 5060528: Last Updated: Fri Dec 01 14:18:28 2017
 <BR><P>
 <H3>Maximum Stack Usage =        264 bytes + Unknown(Functions without stacksize, Cycles, Untraceable Function Pointers)</H3><H3>
 Call chain for Maximum Stack Depth:</H3>
@@ -408,8 +408,8 @@ Global Symbols
 <LI><a href="#[38]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;GPIOPinTypeGPIOInput
 <LI><a href="#[35]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;GPIOPinTypeADC
 <LI><a href="#[3c]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;GPIOPinTypeUART
-<LI><a href="#[3b]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;GPIOPinTypeQEI
 <LI><a href="#[3a]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;GPIOPinTypePWM
+<LI><a href="#[3b]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;GPIOPinTypeQEI
 </UL>
 
 <P><STRONG><a name="[37]"></a>GPIOPadConfigSet</STRONG> (Thumb, 312 bytes, Stack size 24 bytes, gpio.o(i.GPIOPadConfigSet))
@@ -419,8 +419,8 @@ Global Symbols
 <LI><a href="#[38]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;GPIOPinTypeGPIOInput
 <LI><a href="#[35]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;GPIOPinTypeADC
 <LI><a href="#[3c]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;GPIOPinTypeUART
-<LI><a href="#[3b]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;GPIOPinTypeQEI
 <LI><a href="#[3a]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;GPIOPinTypePWM
+<LI><a href="#[3b]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;GPIOPinTypeQEI
 <LI><a href="#[49]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;setup_IO
 <LI><a href="#[4c]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;setupENCODER
 </UL>
@@ -681,9 +681,9 @@ Global Symbols
 <BR>[Calls]<UL><LI><a href="#[55]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;UARTConfigSetExpClk
 <LI><a href="#[3c]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;GPIOPinTypeUART
 <LI><a href="#[41]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;SysCtlPeripheralReady
-<LI><a href="#[40]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;SysCtlPeripheralEnable
 <LI><a href="#[54]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;SysCtlClockSet
 <LI><a href="#[57]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;SysCtlClockGet
+<LI><a href="#[40]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;SysCtlPeripheralEnable
 <LI><a href="#[56]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;GPIOPinConfigure
 </UL>
 <BR>[Called By]<UL><LI><a href="#[48]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;SetupHardware
@@ -768,16 +768,16 @@ Global Symbols
 <P><STRONG><a name="[4c]"></a>setupENCODER</STRONG> (Thumb, 120 bytes, Stack size 8 bytes, encoder.o(i.setupENCODER))
 <BR><BR>[Stack]<UL><LI>Max Depth = 44<LI>Call Chain = setupENCODER &rArr; GPIOPinTypeQEI &rArr; GPIOPadConfigSet
 </UL>
-<BR>[Calls]<UL><LI><a href="#[65]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;QEIVelocityEnable
+<BR>[Calls]<UL><LI><a href="#[40]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;SysCtlPeripheralEnable
+<LI><a href="#[65]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;QEIVelocityEnable
 <LI><a href="#[66]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;QEIVelocityConfigure
 <LI><a href="#[61]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;QEIIntDisable
 <LI><a href="#[64]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;QEIFilterEnable
 <LI><a href="#[63]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;QEIEnable
 <LI><a href="#[62]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;QEIConfigure
 <LI><a href="#[3b]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;GPIOPinTypeQEI
-<LI><a href="#[37]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;GPIOPadConfigSet
-<LI><a href="#[40]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;SysCtlPeripheralEnable
 <LI><a href="#[56]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;GPIOPinConfigure
+<LI><a href="#[37]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;GPIOPadConfigSet
 </UL>
 <BR>[Called By]<UL><LI><a href="#[48]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;SetupHardware
 </UL>
@@ -786,7 +786,6 @@ Global Symbols
 <BR><BR>[Stack]<UL><LI>Max Depth = 44<LI>Call Chain = setupPWM &rArr; GPIOPinTypePWM &rArr; GPIOPadConfigSet
 </UL>
 <BR>[Calls]<UL><LI><a href="#[41]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;SysCtlPeripheralReady
-<LI><a href="#[40]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;SysCtlPeripheralEnable
 <LI><a href="#[67]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;SysCtlPWMClockSet
 <LI><a href="#[54]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;SysCtlClockSet
 <LI><a href="#[32]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;PWMPulseWidthSet
@@ -795,6 +794,7 @@ Global Symbols
 <LI><a href="#[6a]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;PWMGenEnable
 <LI><a href="#[68]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;PWMGenConfigure
 <LI><a href="#[3a]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;GPIOPinTypePWM
+<LI><a href="#[40]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;SysCtlPeripheralEnable
 <LI><a href="#[56]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;GPIOPinConfigure
 </UL>
 <BR>[Called By]<UL><LI><a href="#[48]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;SetupHardware
@@ -806,9 +806,9 @@ Global Symbols
 <BR>[Calls]<UL><LI><a href="#[39]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;GPIOPinTypeGPIOOutput
 <LI><a href="#[38]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;GPIOPinTypeGPIOInput
 <LI><a href="#[6c]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;PortF_Init
-<LI><a href="#[37]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;GPIOPadConfigSet
 <LI><a href="#[41]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;SysCtlPeripheralReady
 <LI><a href="#[40]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;SysCtlPeripheralEnable
+<LI><a href="#[37]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;GPIOPadConfigSet
 </UL>
 <BR>[Called By]<UL><LI><a href="#[48]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;SetupHardware
 </UL>

@@ -1,9 +1,9 @@
 --cpu=Cortex-M4.fp
 ".\rvmdk\project.o"
 ".\rvmdk\startup_rvmdk.o"
-".\rvmdk\mypwm.o"
-".\rvmdk\encoder.o"
 ".\inc\driverlib.lib"
+".\rvmdk\encoder.o"
+".\rvmdk\mypwm.o"
 ".\rvmdk\float_setup.o"
 ".\rvmdk\uart_helper_1.o"
 ".\rvmdk\read_encoder.o"
