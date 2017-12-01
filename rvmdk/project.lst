@@ -66813,14 +66813,14 @@ Nvoid mainMenu(char ctemp)
 N{	
 N	//While loop for main user menu	
 N	while (1)
-N{
+N	{
 N		printf("What function would you like to test?\n 1.Calibrate\n 2.Speed Control\n"); //Askes user what function they would like to use.
 N		ctemp = getc(stdin); //Gets a char from the terminal from the user.
 X		ctemp = getc((& __stdin)); 
 N		printf("You entered %c\n\n",ctemp); //Lets the user know what they have selected
 N		
-N	//Switch statement that selects which function depending on the user input.	
-N	switch (ctemp)		
+N		//Switch statement that selects which function depending on the user input.	
+N		switch (ctemp)		
 N		{
 N			//Function to calibrate motor
 N			case '1':						

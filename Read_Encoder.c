@@ -18,7 +18,6 @@
 
 	double ticks;
 	double Espeed;
-	int x = 0;
 	
 double ReadEncoder(void)
 	{		

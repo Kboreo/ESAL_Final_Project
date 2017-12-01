@@ -20318,11 +20318,14 @@ void Speed_Control(double Speed, double uSpeed)
 				break;
 				}
 				}
+				
+				
 				Error[4]=Error[3];
 				Error[3]=Error[2];
 				Error[2]=Error[1];
 				Ki = Error[1] + Error[2] + Error[3];
 				Kd = (Error[2]-Error[1]) / .01;
+				
 				
 				Error[1] = uSpeed - Speed;
 				vol = DutyC/640*10;
@@ -20351,7 +20354,7 @@ void Speed_Control(double Speed, double uSpeed)
 					i = 0;
 			}	
 
-}
+	}
 		
 		stopmotor();
-	}
+}

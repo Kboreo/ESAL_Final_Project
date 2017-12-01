@@ -67760,21 +67760,20 @@ N{
 N	
 N	
 N	//PWMPulseWidthSet(PWM1_BASE, PWM_OUT_6, 0);
-W "Calibrate.c" 53 3 function "stopmotor" declared implicitly
-N		stopmotor();
-N		
-N		
-N		printf("Press any key to calibrate\n motor will turn on "); //lets the user know to get ready
-N		ct = getc(stdin); //Gets a char from the terminal from the user.
-X		ct = getc((& __stdin)); 
-N		printf("You entered %c\n\n",ct); //Lets the user know what they have selected
-N		
+W "Calibrate.c" 53 2 function "stopmotor" declared implicitly
+N	stopmotor();
+N			
+N	printf("Press any key to calibrate\n motor will turn on "); //lets the user know to get ready
+N	ct = getc(stdin); //Gets a char from the terminal from the user.
+X	ct = getc((& __stdin)); 
+N	printf("You entered %c\n\n",ct); //Lets the user know what they have selected
 N	
-N
-N		
+N	//give 100% PWM to motor
 N	PWMPulseWidthSet(PWM1_BASE, PWM_OUT_6, 6400);
 X	PWMPulseWidthSet(0x40029000, 0x00000106, 6400);
 N	
+N	//sets current speed equal to calspeed(n)
+N	//waits for current speed to change (10mS) then repeats
 N	calspeed0 = ReadEncoder();
 N	tempspeed = calspeed0;
 N	
@@ -67788,13 +67787,14 @@ N	tempspeed = ReadEncoder();
 N	}
 N	calspeed2 = tempspeed;
 N	
+N	//if motor has met its final velocity break statement will allow program to exit while loop
 N	while(tempspeed <= calspeed2){
 N	tempspeed = ReadEncoder();
 N		i++;
 N		if (i > 9999){
 N			break;
 N		}
-N	}
+N		}
 N	i=0;	
 N	calspeed3 = tempspeed;
 N	
@@ -67804,7 +67804,7 @@ N		i++;
 N		if (i > 9999){
 N			break;
 N		}
-N	}
+N		}
 N	i=0;	
 N	calspeed4 = tempspeed;
 N	
@@ -67814,7 +67814,7 @@ N		i++;
 N		if (i > 9999){
 N			break;
 N		}
-N	}	
+N		}	
 N	i=0;
 N	calspeed5 = tempspeed;
 N	
@@ -67824,7 +67824,7 @@ N		i++;
 N		if (i > 9999){
 N			break;
 N		}
-N	}
+N		}
 N	i=0;	
 N	calspeed6 = tempspeed;
 N	
@@ -67834,7 +67834,7 @@ N		i++;
 N		if (i > 9999){
 N			break;
 N		}
-N	}
+N		}
 N	i=0;	
 N	calspeed7 = tempspeed;
 N	
@@ -67844,7 +67844,7 @@ N		i++;
 N		if (i > 9999){
 N			break;
 N		}
-N	}	
+N		}	
 N	i=0;
 N	calspeed8 = tempspeed;
 N	
@@ -67855,7 +67855,7 @@ N		if (i > 9999)
 N		{
 N			break;
 N		}
-N	}	
+N		}	
 N	i=0;
 N		calspeed9 = tempspeed;
 N	
@@ -67865,7 +67865,7 @@ N		i++;
 N		if (i > 9999){
 N			break;
 N		}
-N	}
+N		}
 N	i=0;	
 N	calspeed10 = tempspeed;
 N	
@@ -67875,7 +67875,7 @@ N		i++;
 N		if (i > 9999){
 N			break;
 N		}
-N	}
+N		}
 N	i=0;	
 N	calspeed11 = tempspeed;
 N	
@@ -67885,7 +67885,7 @@ N		i++;
 N		if (i > 9999){
 N			break;
 N		}
-N	}	
+N		}	
 N	i=0;
 N	calspeed12 = tempspeed;
 N	
@@ -67895,7 +67895,7 @@ N		i++;
 N		if (i > 9999){
 N			break;
 N		}
-N	}
+N		}
 N	i=0;	
 N	calspeed13 = tempspeed;
 N	
@@ -67905,7 +67905,7 @@ N		i++;
 N		if (i > 9999){
 N			break;
 N		}
-N	}
+N		}
 N	i=0;	
 N	calspeed14 = tempspeed;
 N	
@@ -67915,7 +67915,7 @@ N		i++;
 N		if (i > 9999){
 N			break;
 N		}
-N	}	
+N		}	
 N	i=0;
 N	calspeed15 = tempspeed;
 N	
@@ -67926,7 +67926,7 @@ N		if (i > 9999)
 N		{
 N			break;
 N		}
-N	}	
+N		}	
 N	i=0;
 N	calspeed16 = tempspeed;
 N	
@@ -67936,7 +67936,7 @@ N		i++;
 N		if (i > 9999){
 N			break;
 N		}
-N	}
+N		}
 N	i=0;	
 N	calspeed17 = tempspeed;
 N	
@@ -67946,7 +67946,7 @@ N		i++;
 N		if (i > 9999){
 N			break;
 N		}
-N	}
+N		}
 N	i=0;	
 N	calspeed18 = tempspeed;
 N	
@@ -67956,7 +67956,7 @@ N		i++;
 N		if (i > 9999){
 N			break;
 N		}
-N	}	
+N		}	
 N	i=0;
 N	calspeed19 = tempspeed;
 N	
@@ -67966,7 +67966,7 @@ N		i++;
 N		if (i > 9999){
 N			break;
 N		}
-N	}
+N		}
 N	i=0;	
 N	calspeed20 = tempspeed;
 N	
@@ -67976,7 +67976,7 @@ N		i++;
 N		if (i > 9999){
 N			break;
 N		}
-N	}
+N		}
 N	i=0;	
 N	calspeed21 = tempspeed;
 N	
@@ -67986,7 +67986,7 @@ N		i++;
 N		if (i > 9999){
 N			break;
 N		}
-N	}	
+N		}	
 N	i=0;
 N	calspeed22 = tempspeed;
 N	
@@ -67997,7 +67997,7 @@ N		if (i > 9999)
 N		{
 N			break;
 N		}
-N	}	
+N		}	
 N		i=0;
 N	calspeed23 = tempspeed;
 N	
@@ -68008,7 +68008,7 @@ N		if (i > 9999)
 N		{
 N			break;
 N		}
-N	}	
+N		}	
 N		i=0;
 N	calspeed24 = tempspeed;
 N	
@@ -68019,7 +68019,7 @@ N		if (i > 9999)
 N		{
 N			break;
 N		}
-N	}	
+N		}	
 N		i=0;
 N	calspeed25 = tempspeed;
 N	
@@ -68030,9 +68030,9 @@ N		if (i > 9999)
 N		{
 N			break;
 N		}
-N	}	
+N		}	
 N	
-N	
+N	//prints saved speeds 
 N	printf("Speed 0  = %.2f  ", calspeed0);		
 N	printf("Speed 1  = %.2f  ", calspeed1);
 N	printf("Speed 2  = %.2f  ", calspeed2);
@@ -68060,68 +68060,70 @@ N	printf("Speed 23 = %.2f\n", calspeed20);
 N	printf("Speed 24 = %.2f ", calspeed21);
 N	printf("Speed 25 = %.2f\n ", calspeed22);
 N	
+N	//reads voltage supplied to motor
 N	voltage = ADCReadChan();
+N	//sets pwm to 0%
 N	PWMPulseWidthSet(PWM1_BASE, PWM_OUT_6, 0);
 X	PWMPulseWidthSet(0x40029000, 0x00000106, 0);
 N	
 N			
-Nk = calspeed25 / voltage;
-NAvK = calspeed17 * .6321;
+N	k = calspeed25 / voltage;
+N	AvK = calspeed17 * .6321;
 N
-Nif (AvK < calspeed2){
-N	t = .02;
-N}
-Nelse if (AvK < calspeed3){
-N	t = .03;
-N}
-Nelse if (AvK < calspeed4){
-N	t = .04;
-N}
-Nelse if (AvK < calspeed5){
-N	t = .05;
-N}
-Nelse if (AvK < calspeed6){
-N	t = .06;
-N}
-Nelse if (AvK < calspeed7){
-N	t = .07;
-N}
-Nelse if (AvK < calspeed8){
-N	t = .08;
-N}
-Nelse if (AvK < calspeed9){
-N	t = .09;
-N}
-Nelse if (AvK < calspeed10){
-N	t = .10;
-N}
-Nelse if (AvK < calspeed11){
-N	t = .11;
-N}
-Nelse if (AvK < calspeed12){
-N	t = .12;
-N}
-Nelse if (AvK < calspeed13){
-N	t = .13;
-N}
-Nelse if (AvK < calspeed14){
-N	t = .14;
-N}
-Nelse if (AvK < calspeed15){
-N	t = .15;
-N}
-Nelse if (AvK < calspeed16){
-N	t = .16;
-N}
-Nelse if (AvK < calspeed17){
-N	t = .17;
-N}
+N	if (AvK < calspeed2){
+N		t = .02;
+N	}
+N	else if (AvK < calspeed3){
+N		t = .03;
+N	}
+N	else if (AvK < calspeed4){
+N		t = .04;
+N	}
+N	else if (AvK < calspeed5){
+N		t = .05;
+N	}
+N	else if (AvK < calspeed6){
+N		t = .06;
+N	}
+N	else if (AvK < calspeed7){
+N		t = .07;
+N	}
+N	else if (AvK < calspeed8){
+N		t = .08;
+N	}
+N	else if (AvK < calspeed9){
+N		t = .09;
+N	}
+N	else if (AvK < calspeed10){
+N		t = .10;
+N	}
+N	else if (AvK < calspeed11){
+N		t = .11;
+N	}
+N	else if (AvK < calspeed12){
+N		t = .12;
+N	}
+N	else if (AvK < calspeed13){
+N		t = .13;
+N	}
+N	else if (AvK < calspeed14){
+N		t = .14;
+N	}
+N	else if (AvK < calspeed15){
+N		t = .15;
+N	}
+N	else if (AvK < calspeed16){
+N		t = .16;
+N	}
+N	else if (AvK < calspeed17){
+N		t = .17;
+N	}
+N	//stops motor and prints T function
 N	stopmotor();
 N	printf("K = %.2f, ", k);
 N	printf("Avk = %.2f\n", AvK);
 N	printf("Time const = %.2f, ", t);
 N	printf("Voltage = %.2f\n\n", voltage);
-N	
 N	printf("System transfer function is %.2f / (%.2ft + 1)\n\n", k, t);
 N}
 N	

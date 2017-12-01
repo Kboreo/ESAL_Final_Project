@@ -36983,21 +36983,21 @@ N//------------UART_InChar------------
 N// Wait for new serial port input
 N// Input: none
 N// Output: ASCII code for key typed
-Nchar UART_InChar()
-N{
-N	while((UART0_FR_R&UART_FR_RXFE) !=0){};
-X	while(((*((volatile uint32_t *)0x4000C018))&0x00000010) !=0){};
-N	return ((char)(UART0_DR_R&0xFF)); //returns the character from the port
-X	return ((char)((*((volatile uint32_t *)0x4000C000))&0xFF)); 
-N}
+N	char UART_InChar()
+N	{
+N		while((UART0_FR_R&UART_FR_RXFE) !=0){};
+X		while(((*((volatile uint32_t *)0x4000C018))&0x00000010) !=0){};
+N		return ((char)(UART0_DR_R&0xFF)); //returns the character from the port
+X		return ((char)((*((volatile uint32_t *)0x4000C000))&0xFF)); 
+N	}
 N
-N// Get a character from UART.
-Nint fgetc(FILE *f){
-N  return UART_InChar();
-N}
+N	// Get a character from UART.
+N	int fgetc(FILE *f){
+N		return UART_InChar();
+N		}
 N
-N// Function called when file error occurs.
-Nint ferror(FILE *f){
+N	// Function called when file error occurs.
+N	int ferror(FILE *f){
 N  /* Your implementation of ferror */
 N  return 1;
 W "src\Uart_helper.c" 85 2 last line of file ends without a newline

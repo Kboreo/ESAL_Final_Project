@@ -67461,12 +67461,15 @@ N				if (a >999){
 N				break;
 N				}
 N				}
-W "Speed_Control.c" 52 5 subscript out of range
+N				
+N				//saves errors from the last 4 error calcs
+W "Speed_Control.c" 54 5 subscript out of range
 N				Error[4]=Error[3];
 N				Error[3]=Error[2];
 N				Error[2]=Error[1];
 N				Ki = Error[1] + Error[2] + Error[3];
 N				Kd = (Error[2]-Error[1]) / .01;
+N				
 N				//speed corrections
 N				Error[1] = uSpeed - Speed;
 N				vol = DutyC/640*10;
@@ -67497,8 +67500,8 @@ N			if ( x == 0){
 N					i = 0;
 N			}	
 N
-N}
-N		//turns off motor before exiting 
-W "Speed_Control.c" 87 3 function "stopmotor" declared implicitly
-N		stopmotor();
 N	}
+N		//turns off motor before exiting 
+W "Speed_Control.c" 90 3 function "stopmotor" declared implicitly
+N		stopmotor();
+N}

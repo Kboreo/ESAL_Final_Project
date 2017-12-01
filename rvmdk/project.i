@@ -19676,13 +19676,13 @@ void mainMenu(char ctemp)
 {	
 	
 	while (1)
-{
+	{
 		printf("What function would you like to test?\n 1.Calibrate\n 2.Speed Control\n"); 
 		ctemp = getc((& __stdin)); 
 		printf("You entered %c\n\n",ctemp); 
 		
-	
-	switch (ctemp)		
+		
+		switch (ctemp)		
 		{
 			
 			case '1':						

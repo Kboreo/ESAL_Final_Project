@@ -24542,17 +24542,6 @@ N{
 N    SysCtlDelay((SysCtlClockGet()/(3*1000))*ms);
 N}
 N
-N//void pwmTest(void)
-N//{	
-N//	//Fade
-N//  bool fadeUp = true;
-N//  unsigned long increment = 10; //Long increment
-N//  unsigned long pwmNow = 100;	//new PWM value
-N//	int i = 1; //Int used in while loop
-N//	int x;  //Int that contains the output of the button SW2
-N//	int y;  //Int that contains the output of the button SW1
-N//	volatile int flashTime = 10; //Long that controls the speed of the flashing
-N//	
-N//}
-W "myPWM.c" 81 2 last line of file ends without a newline
+N
+W "myPWM.c" 70 2 last line of file ends without a newline
 N	

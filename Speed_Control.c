@@ -49,11 +49,14 @@ void Speed_Control(double Speed, double uSpeed)
 				break;
 				}
 				}
+				
+				//saves errors from the last 4 error calcs
 				Error[4]=Error[3];
 				Error[3]=Error[2];
 				Error[2]=Error[1];
 				Ki = Error[1] + Error[2] + Error[3];
 				Kd = (Error[2]-Error[1]) / .01;
+				
 				//speed corrections
 				Error[1] = uSpeed - Speed;
 				vol = DutyC/640*10;
@@ -82,7 +85,7 @@ void Speed_Control(double Speed, double uSpeed)
 					i = 0;
 			}	
 
-}
+	}
 		//turns off motor before exiting 
 		stopmotor();
-	}
+}

@@ -30,11 +30,11 @@ Rebuild target 'project'
 creating preprocessor file for project.c...
 assembling startup_rvmdk.S...
 creating preprocessor file for myPWM.c...
-creating preprocessor file for Encoder.c...
 compiling myPWM.c...
-myPWM.c(81): warning:  #1-D: last line of file ends without a newline
+myPWM.c(70): warning:  #1-D: last line of file ends without a newline
   	
 myPWM.c: 1 warning, 0 errors
+creating preprocessor file for Encoder.c...
 creating preprocessor file for Float_Setup.c...
 compiling Encoder.c...
 Read_Encoder.h(39): warning:  #1-D: last line of file ends without a newline
@@ -150,9 +150,9 @@ myGPIO.h(13): warning:  #1295-D: Deprecated declaration setup_IO - give arg type
   void setup_IO();
 myGPIO.h(14): warning:  #1-D: last line of file ends without a newline
   void pinReadAndWrite(uint32_t ui32Loop,uint8_t temp);
-Read_Encoder.c(35): warning:  #1-D: last line of file ends without a newline
-  	//int direction = QEIDirectionGet(QEI0_BASE);
 Read_Encoder.c: 14 warnings, 0 errors
+-D: last line of file ends without a newline
+  	//int direction = QEIDirectionGet(QEI0_BASE);
 creating preprocessor file for HAL_ADC.c...
 compiling Speed_Control.c...
 Read_Encoder.h(39): warning:  #1-D: last line of file ends without a newline
@@ -185,13 +185,13 @@ Read_Encoder.h(39): warning:  #1-D: last line of file ends without a newline
   double ReadEncoder(void);
 Speed_Control.h(38): warning:  #1-D: last line of file ends without a newline
   void Speed_Control(double Speed, double uSpeed);
-Speed_Control.c(52): warning:  #175-D: subscript out of range
+Speed_Control.c(54): warning:  #175-D: subscript out of range
   				Error[4]=Error[3];
-Speed_Control.c(87): warning:  #223-D: function "stopmotor" declared implicitly
+Speed_Control.c(90): warning:  #223-D: function "stopmotor" declared implicitly
   		stopmotor();
 Speed_Control.c: 17 warnings, 0 errors
-creating preprocessor file for myGPIO.c...
 compiling HAL_ADC.c...
+creating preprocessor file for myGPIO.c...
 compiling Calibrate.c...
 Read_Encoder.h(39): warning:  #1-D: last line of file ends without a newline
   double ReadEncoder(void);
@@ -228,7 +228,7 @@ Read_Encoder.h(39): warning:  #1-D: last line of file ends without a newline
 Calibrate.h(45): warning:  #1-D: last line of file ends without a newline
   void initialize_aandw(void);
 Calibrate.c(53): warning:  #223-D: function "stopmotor" declared implicitly
-  		stopmotor();
+  	stopmotor();
 Calibrate.c: 18 warnings, 0 errors
 compiling myGPIO.c...
 myGPIO.h(13): warning:  #1295-D: Deprecated declaration setup_IO - give arg types
@@ -259,10 +259,10 @@ myGPIO.c(138): warning:  #1-D: last line of file ends without a newline
   	
 myGPIO.c: 13 warnings, 0 errors
 linking...
-Program Size: Code=15344 RO-data=1388 RW-data=396 ZI-data=452  
+Program Size: Code=15344 RO-data=1388 RW-data=388 ZI-data=452  
 FromELF: creating hex file...
 After Build - User command #1: fromelf --bin --output .\rvmdk\project.bin .\rvmdk\project.axf
-".\rvmdk\project.axf" - 0 Error(s), 99 Warning(s).
+".\rvmdk\project.axf" - 0 Error(s), 98 Warning(s).
 
 <h2>Software Packages used:</h2>
 
@@ -285,7 +285,7 @@ Package Vendor: Keil
 <h2>Collection of Component Files used:</h2>
 
    * Component: ARM::CMSIS:CORE:5.0.1
-Build Time Elapsed:  00:00:08
+Build Time Elapsed:  00:00:07
 </pre>
 </body>
 </html>

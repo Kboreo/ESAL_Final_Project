@@ -66,16 +66,5 @@ void delayMS(int ms)
     SysCtlDelay((SysCtlClockGet()/(3*1000))*ms);
 }
 
-//void pwmTest(void)
-//{	
-//	//Fade
-//  bool fadeUp = true;
-//  unsigned long increment = 10; //Long increment
-//  unsigned long pwmNow = 100;	//new PWM value
-//	int i = 1; //Int used in while loop
-//	int x;  //Int that contains the output of the button SW2
-//	int y;  //Int that contains the output of the button SW1
-//	volatile int flashTime = 10; //Long that controls the speed of the flashing
-//	
-//}
+
 	

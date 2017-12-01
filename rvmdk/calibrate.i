@@ -20610,17 +20610,16 @@ void Calibrate (void)
 	
 	
 	
-		stopmotor();
-		
-		
-		printf("Press any key to calibrate\n motor will turn on "); 
-		ct = getc((& __stdin)); 
-		printf("You entered %c\n\n",ct); 
-		
+	stopmotor();
+			
+	printf("Press any key to calibrate\n motor will turn on "); 
+	ct = getc((& __stdin)); 
+	printf("You entered %c\n\n",ct); 
 	
-
-		
+	
 	PWMPulseWidthSet(0x40029000, 0x00000106, 6400);
+	
+	
 	
 	calspeed0 = ReadEncoder();
 	tempspeed = calspeed0;
@@ -20635,13 +20634,14 @@ void Calibrate (void)
 	}
 	calspeed2 = tempspeed;
 	
+	
 	while(tempspeed <= calspeed2){
 	tempspeed = ReadEncoder();
 		i++;
 		if (i > 9999){
 			break;
 		}
-	}
+		}
 	i=0;	
 	calspeed3 = tempspeed;
 	
@@ -20651,7 +20651,7 @@ void Calibrate (void)
 		if (i > 9999){
 			break;
 		}
-	}
+		}
 	i=0;	
 	calspeed4 = tempspeed;
 	
@@ -20661,7 +20661,7 @@ void Calibrate (void)
 		if (i > 9999){
 			break;
 		}
-	}	
+		}	
 	i=0;
 	calspeed5 = tempspeed;
 	
@@ -20671,7 +20671,7 @@ void Calibrate (void)
 		if (i > 9999){
 			break;
 		}
-	}
+		}
 	i=0;	
 	calspeed6 = tempspeed;
 	
@@ -20681,7 +20681,7 @@ void Calibrate (void)
 		if (i > 9999){
 			break;
 		}
-	}
+		}
 	i=0;	
 	calspeed7 = tempspeed;
 	
@@ -20691,7 +20691,7 @@ void Calibrate (void)
 		if (i > 9999){
 			break;
 		}
-	}	
+		}	
 	i=0;
 	calspeed8 = tempspeed;
 	
@@ -20702,7 +20702,7 @@ void Calibrate (void)
 		{
 			break;
 		}
-	}	
+		}	
 	i=0;
 		calspeed9 = tempspeed;
 	
@@ -20712,7 +20712,7 @@ void Calibrate (void)
 		if (i > 9999){
 			break;
 		}
-	}
+		}
 	i=0;	
 	calspeed10 = tempspeed;
 	
@@ -20722,7 +20722,7 @@ void Calibrate (void)
 		if (i > 9999){
 			break;
 		}
-	}
+		}
 	i=0;	
 	calspeed11 = tempspeed;
 	
@@ -20732,7 +20732,7 @@ void Calibrate (void)
 		if (i > 9999){
 			break;
 		}
-	}	
+		}	
 	i=0;
 	calspeed12 = tempspeed;
 	
@@ -20742,7 +20742,7 @@ void Calibrate (void)
 		if (i > 9999){
 			break;
 		}
-	}
+		}
 	i=0;	
 	calspeed13 = tempspeed;
 	
@@ -20752,7 +20752,7 @@ void Calibrate (void)
 		if (i > 9999){
 			break;
 		}
-	}
+		}
 	i=0;	
 	calspeed14 = tempspeed;
 	
@@ -20762,7 +20762,7 @@ void Calibrate (void)
 		if (i > 9999){
 			break;
 		}
-	}	
+		}	
 	i=0;
 	calspeed15 = tempspeed;
 	
@@ -20773,7 +20773,7 @@ void Calibrate (void)
 		{
 			break;
 		}
-	}	
+		}	
 	i=0;
 	calspeed16 = tempspeed;
 	
@@ -20783,7 +20783,7 @@ void Calibrate (void)
 		if (i > 9999){
 			break;
 		}
-	}
+		}
 	i=0;	
 	calspeed17 = tempspeed;
 	
@@ -20793,7 +20793,7 @@ void Calibrate (void)
 		if (i > 9999){
 			break;
 		}
-	}
+		}
 	i=0;	
 	calspeed18 = tempspeed;
 	
@@ -20803,7 +20803,7 @@ void Calibrate (void)
 		if (i > 9999){
 			break;
 		}
-	}	
+		}	
 	i=0;
 	calspeed19 = tempspeed;
 	
@@ -20813,7 +20813,7 @@ void Calibrate (void)
 		if (i > 9999){
 			break;
 		}
-	}
+		}
 	i=0;	
 	calspeed20 = tempspeed;
 	
@@ -20823,7 +20823,7 @@ void Calibrate (void)
 		if (i > 9999){
 			break;
 		}
-	}
+		}
 	i=0;	
 	calspeed21 = tempspeed;
 	
@@ -20833,7 +20833,7 @@ void Calibrate (void)
 		if (i > 9999){
 			break;
 		}
-	}	
+		}	
 	i=0;
 	calspeed22 = tempspeed;
 	
@@ -20844,7 +20844,7 @@ void Calibrate (void)
 		{
 			break;
 		}
-	}	
+		}	
 		i=0;
 	calspeed23 = tempspeed;
 	
@@ -20855,7 +20855,7 @@ void Calibrate (void)
 		{
 			break;
 		}
-	}	
+		}	
 		i=0;
 	calspeed24 = tempspeed;
 	
@@ -20866,7 +20866,7 @@ void Calibrate (void)
 		{
 			break;
 		}
-	}	
+		}	
 		i=0;
 	calspeed25 = tempspeed;
 	
@@ -20877,7 +20877,7 @@ void Calibrate (void)
 		{
 			break;
 		}
-	}	
+		}	
 	
 	
 	printf("Speed 0  = %.2f  ", calspeed0);		
@@ -20907,67 +20907,69 @@ void Calibrate (void)
 	printf("Speed 24 = %.2f ", calspeed21);
 	printf("Speed 25 = %.2f\n ", calspeed22);
 	
+	
 	voltage = ADCReadChan();
+	
 	PWMPulseWidthSet(0x40029000, 0x00000106, 0);
 	
 			
-k = calspeed25 / voltage;
-AvK = calspeed17 * .6321;
+	k = calspeed25 / voltage;
+	AvK = calspeed17 * .6321;
 
-if (AvK < calspeed2){
-	t = .02;
-}
-else if (AvK < calspeed3){
-	t = .03;
-}
-else if (AvK < calspeed4){
-	t = .04;
-}
-else if (AvK < calspeed5){
-	t = .05;
-}
-else if (AvK < calspeed6){
-	t = .06;
-}
-else if (AvK < calspeed7){
-	t = .07;
-}
-else if (AvK < calspeed8){
-	t = .08;
-}
-else if (AvK < calspeed9){
-	t = .09;
-}
-else if (AvK < calspeed10){
-	t = .10;
-}
-else if (AvK < calspeed11){
-	t = .11;
-}
-else if (AvK < calspeed12){
-	t = .12;
-}
-else if (AvK < calspeed13){
-	t = .13;
-}
-else if (AvK < calspeed14){
-	t = .14;
-}
-else if (AvK < calspeed15){
-	t = .15;
-}
-else if (AvK < calspeed16){
-	t = .16;
-}
-else if (AvK < calspeed17){
-	t = .17;
-}
+	if (AvK < calspeed2){
+		t = .02;
+	}
+	else if (AvK < calspeed3){
+		t = .03;
+	}
+	else if (AvK < calspeed4){
+		t = .04;
+	}
+	else if (AvK < calspeed5){
+		t = .05;
+	}
+	else if (AvK < calspeed6){
+		t = .06;
+	}
+	else if (AvK < calspeed7){
+		t = .07;
+	}
+	else if (AvK < calspeed8){
+		t = .08;
+	}
+	else if (AvK < calspeed9){
+		t = .09;
+	}
+	else if (AvK < calspeed10){
+		t = .10;
+	}
+	else if (AvK < calspeed11){
+		t = .11;
+	}
+	else if (AvK < calspeed12){
+		t = .12;
+	}
+	else if (AvK < calspeed13){
+		t = .13;
+	}
+	else if (AvK < calspeed14){
+		t = .14;
+	}
+	else if (AvK < calspeed15){
+		t = .15;
+	}
+	else if (AvK < calspeed16){
+		t = .16;
+	}
+	else if (AvK < calspeed17){
+		t = .17;
+	}
+	
 	stopmotor();
 	printf("K = %.2f, ", k);
 	printf("Avk = %.2f\n", AvK);
 	printf("Time const = %.2f, ", t);
 	printf("Voltage = %.2f\n\n", voltage);
-	
 	printf("System transfer function is %.2f / (%.2ft + 1)\n\n", k, t);
 }
 	

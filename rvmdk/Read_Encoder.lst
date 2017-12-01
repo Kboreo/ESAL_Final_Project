@@ -67155,7 +67155,6 @@ N#include "tm4c123gh6pm.h"	//Header file accesses registers in TMC123 microcontr
 N
 N	double ticks;
 N	double Espeed;
-N	int x = 0;
 N	
 Ndouble ReadEncoder(void)
 N	{		
@@ -67170,5 +67169,5 @@ N	}
 N
 N	//for later use
 N	//int  posistion = QEIPositionGet(QEI0_BASE);
-W "Read_Encoder.c" 35 47 last line of file ends without a newline
+W "Read_Encoder.c" 34 47 last line of file ends without a newline
 N	//int direction = QEIDirectionGet(QEI0_BASE);

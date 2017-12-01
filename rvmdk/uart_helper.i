@@ -10840,19 +10840,19 @@ int fputc(int ch, FILE *f){
 
 
 
-char UART_InChar()
-{
-	while(((*((volatile uint32_t *)0x4000C018))&0x00000010) !=0){};
-	return ((char)((*((volatile uint32_t *)0x4000C000))&0xFF)); 
-}
+	char UART_InChar()
+	{
+		while(((*((volatile uint32_t *)0x4000C018))&0x00000010) !=0){};
+		return ((char)((*((volatile uint32_t *)0x4000C000))&0xFF)); 
+	}
 
+	
+	int fgetc(FILE *f){
+		return UART_InChar();
+		}
 
-int fgetc(FILE *f){
-  return UART_InChar();
-}
-
-
-int ferror(FILE *f){
+	
+	int ferror(FILE *f){
    
   return 1;
 }
