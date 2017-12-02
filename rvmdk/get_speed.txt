@@ -19,7 +19,7 @@
 ;;;9      	printf("Please type the speed you would like: \n"); //Ask to enter the speed they would like.
 000002  a008              ADR      r0,|L1.36|
 000004  f7fffffe          BL       __2printf
-;;;10     	//scanf("%la", &userSpeed);	//scans the whole line
+;;;10     	//scanf("%la", &userSpeed);	//scans the whole line (alternative way)
 ;;;11     	scanf("%lf", &userSpeed);	//scans the whole line
 000008  4669              MOV      r1,sp
 00000a  a010              ADR      r0,|L1.76|
