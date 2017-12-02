@@ -18,8 +18,11 @@ Voltage Divider
 ## Hardware Description
 The motor's natural response was improved using a root locus design and adding overshoot. Then the transient response was improved further.  All of this can be seen below.
 
-![schematic](https://github.com/Kboreo/ESAL_Final_Project/blob/master/images/natural_response_graph.jpg)     
+![schematic](https://github.com/Kboreo/ESAL_Final_Project/blob/master/images/natural_response_graph.JPG)     
+Natural Response Graph
 
+![schematic](https://github.com/Kboreo/ESAL_Final_Project/blob/master/images/natural_response.JPG)     
+Natural Response Block Diagram
 
 ## Software Description
 C files added by users, special functions, important functions, software flow, etc.   Flowcharts are also fine.  
