@@ -10,16 +10,15 @@ traveled (if connected to a vehicle) will be equal to the distance
 traveled if the motor velocity response was instantaneous.
     
 ## Hardware List
-Motor - Pololu 30:1 Metal Gearmotor 37Dx68L MM with a 64 CPR Encoder  
-Superphased Motor Encoder - 13 bit - Off-World encoders...    
-...     
-...    
-Embedded web links, prices, etc.  
+Tiva C Series Launchpad
+Motor - Pololu 30:1 Metal Gearmotor 37Dx68L MM with a 64 CPR Encoder
+Power N-Channel MOSFET 30V 60A P/N - IRLB8721PbF
+Voltage Divider 
 
 ## Hardware Description
-The Motor is connected to the encoder via JPF-23 cable, 3 wire, doubled shield.  The Encoder has a 13 bit resolution which allows the micrprocessor to control the motor to within N rpms, etc etc.  The schematic is show below.
+The motor's natural response was improved using a root locus design and adding overshoot. Then the transient response was improved further.  All of this can be seen below.
 
-![schematic](https://github.com/drnobodyphd/LAB_SETUP/blob/master/images/schem.jpg)    
+![schematic](https://github.com/Kboreo/ESAL_Final_Project/blob/master/images/natural_response_graph.jpg)     
 
 
 ## Software Description
