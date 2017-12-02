@@ -92,4 +92,5 @@ The motor's natural response was improved using a root locus design and adding o
     └── </code></pre>
 
 ## Summary and Conclusions
-Put something here that shows you learned something and / or you understand what you are talking about.  
+This project was a good reminder of control systems and how important they are.  This project involved many different modules that we learned from the first half of the class.  
+Here are some of the modules used in this project: GPIO, UART, PWM, and ADC.  Overall this project had a variety of different modules and was a great learning experience.  
