@@ -68,21 +68,21 @@ The motor's natural response was improved using a root locus design and adding o
 	       ├── myPWM.h  	         <em>(H file for PWM functionality)</em>
 	       ├── Float_Setup.c  	 <em>(C file for setting up Floating Point)</em>
 	       ├── Float_Setup.h  	 <em>(H file for setting up Floating Point)</em>
-	|       ├── Uart_helper.c  	 <em>(C file for setting up the Uart functionality)</em>
-	|       ├── Uart_helper.h  	 <em>(H file for setting up the Uart functionality)</em>
-	|       ├── Read_Encoder.c  	 <em>(C file for reading the current speed from the encoder)</em>
-	|       ├── Read_Encoder.h  	 <em>(H file for reading the current speed from the encoder)</em>
-	|       ├── Speed_Control.c  	 <em>(C file for Controlling the speed of the motor based on user input)</em>
-	|       ├── Speed_Control.h  	 <em>(H file for Controlling the speed of the motor based on user input)</em>
-	|       ├── Get_Speed.c  	 <em>(C file for getting speed from user)</em>
-	|       ├── Get_Speed.h  	 <em>(H file for getting speed from user)</em>
-	|       ├── Calibrate.c  	 <em>(C file that handles the calibration of a motor based on a step input)</em>
-	|       ├── Calibrate.h  	 <em>(H file that handles the calibration of a motor based on a step input)</em>
-	|       ├── HAL_ADC.c  	  	 <em>(C file that sets up the hardware that is used in ADC)</em>
-	|       ├── HAL_ADC.h  	  	 <em>(H file that sets up the hardware that is used in ADC)</em>
-	|       ├── myGPIO.c  	  	 <em>(C file that handles all of the general purpose IO for the project)</em>
-	|       ├── myGPIO.h  	  	 <em>(H file that handles all of the general purpose IO for the project)</em>
-	|		└── ...  			
+	       ├── Uart_helper.c  	 <em>(C file for setting up the Uart functionality)</em>
+	       ├── Uart_helper.h  	 <em>(H file for setting up the Uart functionality)</em>
+	       ├── Read_Encoder.c  	 <em>(C file for reading the current speed from the encoder)</em>
+	       ├── Read_Encoder.h  	 <em>(H file for reading the current speed from the encoder)</em>
+	       ├── Speed_Control.c  	 <em>(C file for Controlling the speed of the motor based on user input)</em>
+	       ├── Speed_Control.h  	 <em>(H file for Controlling the speed of the motor based on user input)</em>
+	       ├── Get_Speed.c  	 <em>(C file for getting speed from user)</em>
+	       ├── Get_Speed.h  	 <em>(H file for getting speed from user)</em>
+	       ├── Calibrate.c  	 <em>(C file that handles the calibration of a motor based on a step input)</em>
+	       ├── Calibrate.h  	 <em>(H file that handles the calibration of a motor based on a step input)</em>
+	       ├── HAL_ADC.c  	  	 <em>(C file that sets up the hardware that is used in ADC)</em>
+	       ├── HAL_ADC.h  	  	 <em>(H file that sets up the hardware that is used in ADC)</em>
+	       ├── myGPIO.c  	  	 <em>(C file that handles all of the general purpose IO for the project)</em>
+	       ├── myGPIO.h  	  	 <em>(H file that handles all of the general purpose IO for the project)</em>
+	       └── ...  			
     |   ├── inc                       <em>(Directory for precompiled libraries and headers)</em>
     |       ├── *.h files             <em>(*.h , the menu for micro controller)</em>
     |       ├── *.lib files           <em>(*.lib ,precompiled libraries)</em>
