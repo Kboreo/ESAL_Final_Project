@@ -62,8 +62,8 @@ The motor's natural response was improved using a root locus design and adding o
     |   ├── project.sct               <em>(scatter file)</em>
     |   ├── startup_rvmdk.S           <em>(startup file in asm)</em>
     |   ├── src                       <em>(Directory .c and .h files)</em>
-				├── Encoder.c             <em>(C file that handles all of the Encoder functionality)</em>
-				├── Encoder.h             <em>(H file for Encoder functionality)</em>
+			├── Encoder.c             <em>(C file that handles all of the Encoder functionality)</em>
+			├── Encoder.h             <em>(H file for Encoder functionality)</em>
 			├── myPWM.c  	          <em>(C file for PWM functionality)</em>
 			├── myPWM.h  	          <em>(H file for PWM functionality)</em>
 			├── Float_Setup.c  	  <em>(C file for setting up Floating Point)</em>
