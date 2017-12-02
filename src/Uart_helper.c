@@ -1,6 +1,19 @@
+/*********************************************************************************************************************************
+**
+** Module Name:   Uart_helper.h
+**
+** Module Description: Set up for Uart
+**
+**********************************************************************************************************************************
+**
+** Author(s):		Kodey Boreo, Phillip Tesolin 
+**
+**********************************************************************************************************************************/
+
+
 #include "Uart_helper.h"
 
-//Modified from Valvano starter files.
+
 
 //------------UART_InChar------------
 // Wait for new serial port input
@@ -54,19 +67,19 @@ int fputc(int ch, FILE *f){
 // Wait for new serial port input
 // Input: none
 // Output: ASCII code for key typed
-char UART_InChar()
-{
-	while((UART0_FR_R&UART_FR_RXFE) !=0){};
-	return ((char)(UART0_DR_R&0xFF)); //returns the character from the port
-}
+	char UART_InChar()
+	{
+		while((UART0_FR_R&UART_FR_RXFE) !=0){};
+		return ((char)(UART0_DR_R&0xFF)); //returns the character from the port
+	}
 
-// Get a character from UART.
-int fgetc(FILE *f){
-  return UART_InChar();
-}
+	// Get a character from UART.
+	int fgetc(FILE *f){
+		return UART_InChar();
+		}
 
-// Function called when file error occurs.
-int ferror(FILE *f){
+	// Function called when file error occurs.
+	int ferror(FILE *f){
   /* Your implementation of ferror */
   return 1;
 }

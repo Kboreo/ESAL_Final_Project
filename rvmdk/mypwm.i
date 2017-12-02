@@ -3228,10 +3228,10 @@ void setupPWM(void)
 	PWMGenConfigure(0x40029000, 0x00000100, 0x00000000 | 0x00000000);
 	
 	
-	PWMGenPeriodSet(0x40029000, 0x00000100, 320);
+	PWMGenPeriodSet(0x40029000, 0x00000100, 640);
 	
 	
-	PWMPulseWidthSet(0x40029000, 0x00000106, 100);
+	PWMPulseWidthSet(0x40029000, 0x00000106, 10);
 	
 	
 	PWMGenEnable(0x40029000, 0x00000100);
@@ -3240,22 +3240,17 @@ void setupPWM(void)
 	PWMOutputState(0x40029000, 0x00000040, 1);
 }
 
+void stopmotor(void)
+{
+	PWMPulseWidthSet(0x40029000, 0x00000106, 10);
+}
+	
+
 
 void delayMS(int ms) 
 {
     SysCtlDelay((SysCtlClockGet()/(3*1000))*ms);
 }
-
-
-
-
-
-
-
-
-
-
-
 
 
 	

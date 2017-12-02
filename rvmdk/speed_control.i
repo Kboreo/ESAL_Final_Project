@@ -1,5 +1,30 @@
 #line 1 "Speed_Control.c"
+
+
+
+
+
+
+
+
+
+
+ 
+
+
 #line 1 "Read_Encoder.h"
+
+
+
+
+
+
+
+
+
+
+ 
+
 #line 1 "driverlib/pin_map.h"
 
 
@@ -689,7 +714,7 @@
 
 #line 20952 "driverlib/pin_map.h"
 
-#line 2 "Read_Encoder.h"
+#line 14 "Read_Encoder.h"
 #line 1 "C:\\Keil_v5\\ARM\\ARMCC\\Bin\\..\\include\\stdint.h"
  
  
@@ -946,7 +971,7 @@ typedef unsigned     long long uintmax_t;
 
 
  
-#line 3 "Read_Encoder.h"
+#line 15 "Read_Encoder.h"
 #line 1 "C:\\Keil_v5\\ARM\\ARMCC\\Bin\\..\\include\\stdio.h"
  
  
@@ -1846,7 +1871,7 @@ extern __declspec(__nothrow) void __use_no_semihosting(void);
 
  
 
-#line 4 "Read_Encoder.h"
+#line 16 "Read_Encoder.h"
 #line 1 "C:\\Keil_v5\\ARM\\ARMCC\\Bin\\..\\include\\stdbool.h"
  
 
@@ -1865,7 +1890,7 @@ extern __declspec(__nothrow) void __use_no_semihosting(void);
 
 
 
-#line 5 "Read_Encoder.h"
+#line 17 "Read_Encoder.h"
 #line 1 "C:\\Keil_v5\\ARM\\ARMCC\\Bin\\..\\include\\math.h"
 
 
@@ -2691,7 +2716,7 @@ __declspec(__nothrow) long double truncl(long double );
 
 
  
-#line 6 "Read_Encoder.h"
+#line 18 "Read_Encoder.h"
 #line 1 "inc/hw_gpio.h"
 
 
@@ -2861,7 +2886,7 @@ __declspec(__nothrow) long double truncl(long double );
                                             
 #line 212 "inc/hw_gpio.h"
 
-#line 7 "Read_Encoder.h"
+#line 19 "Read_Encoder.h"
 #line 1 "inc/hw_types.h"
 
 
@@ -2995,7 +3020,7 @@ __declspec(__nothrow) long double truncl(long double );
 
 
 
-#line 8 "Read_Encoder.h"
+#line 20 "Read_Encoder.h"
 #line 1 "inc/hw_memmap.h"
 
 
@@ -3057,7 +3082,7 @@ __declspec(__nothrow) long double truncl(long double );
                                             
 #line 150 "inc/hw_memmap.h"
 
-#line 9 "Read_Encoder.h"
+#line 21 "Read_Encoder.h"
 #line 1 "driverlib/sysctl.h"
 
 
@@ -3351,8 +3376,8 @@ extern _Bool SysCtlVCOGet(uint32_t ui32Crystal, uint32_t *pui32VCOFrequency);
 
 
 
-#line 10 "Read_Encoder.h"
-#line 11 "Read_Encoder.h"
+#line 22 "Read_Encoder.h"
+#line 23 "Read_Encoder.h"
 #line 1 "driverlib/gpio.h"
 
 
@@ -3525,7 +3550,7 @@ extern void GPIOADCTriggerDisable(uint32_t ui32Port, uint8_t ui8Pins);
 
 
 
-#line 12 "Read_Encoder.h"
+#line 24 "Read_Encoder.h"
 #line 1 "driverlib/pwm.h"
 
 
@@ -3776,7 +3801,7 @@ extern void PWMOutputUpdateMode(uint32_t ui32Base,
 
 
 
-#line 13 "Read_Encoder.h"
+#line 25 "Read_Encoder.h"
 #line 1 "driverlib/uart.h"
 
 
@@ -4007,7 +4032,7 @@ extern void UARTLoopbackEnable(uint32_t ui32Base);
 
 
 
-#line 14 "Read_Encoder.h"
+#line 26 "Read_Encoder.h"
 #line 1 "driverlib/qei.h"
 
 
@@ -4133,9 +4158,9 @@ extern void QEIIntClear(uint32_t ui32Base, uint32_t ui32IntFlags);
 
 
 
-#line 15 "Read_Encoder.h"
-#line 16 "Read_Encoder.h"
-#line 17 "Read_Encoder.h"
+#line 27 "Read_Encoder.h"
+#line 28 "Read_Encoder.h"
+#line 29 "Read_Encoder.h"
 #line 1 "driverlib/fpu.h"
 
 
@@ -4249,9 +4274,9 @@ extern void FPURoundingModeSet(uint32_t ui32Mode);
 
 
 
-#line 18 "Read_Encoder.h"
-#line 19 "Read_Encoder.h"
-#line 20 "Read_Encoder.h"
+#line 30 "Read_Encoder.h"
+#line 31 "Read_Encoder.h"
+#line 32 "Read_Encoder.h"
 #line 1 ".\\inc\\tm4c123gh6pm.h"
 
 
@@ -12311,18 +12336,31 @@ extern void FPURoundingModeSet(uint32_t ui32Mode);
 
 
 
-#line 21 "Read_Encoder.h"
-#line 22 "Read_Encoder.h"
+#line 33 "Read_Encoder.h"
+#line 34 "Read_Encoder.h"
 #line 1 ".\\src\\Uart_helper.h"
-#line 2 ".\\src\\Uart_helper.h"
-#line 3 ".\\src\\Uart_helper.h"
-#line 4 ".\\src\\Uart_helper.h"
-#line 5 ".\\src\\Uart_helper.h"
-#line 6 ".\\src\\Uart_helper.h"
-#line 7 ".\\src\\Uart_helper.h"
-#line 8 ".\\src\\Uart_helper.h"
-#line 9 ".\\src\\Uart_helper.h"
-#line 10 ".\\src\\Uart_helper.h"
+
+
+
+
+
+
+
+
+
+
+ 
+
+
+#line 15 ".\\src\\Uart_helper.h"
+#line 16 ".\\src\\Uart_helper.h"
+#line 17 ".\\src\\Uart_helper.h"
+#line 18 ".\\src\\Uart_helper.h"
+#line 19 ".\\src\\Uart_helper.h"
+#line 20 ".\\src\\Uart_helper.h"
+#line 21 ".\\src\\Uart_helper.h"
+#line 22 ".\\src\\Uart_helper.h"
+#line 23 ".\\src\\Uart_helper.h"
 
 
 void UartSetup(void);		
@@ -12395,13 +12433,13 @@ int fgetc(FILE *f);
 
 
 
-#line 23 "Read_Encoder.h"
+#line 35 "Read_Encoder.h"
 
 
 
 
 double ReadEncoder(void);
-#line 2 "Speed_Control.c"
+#line 15 "Speed_Control.c"
 #line 1 "Encoder.h"
 #line 2 "Encoder.h"
 #line 3 "Encoder.h"
@@ -12425,15 +12463,28 @@ double ReadEncoder(void);
 #line 21 "Encoder.h"
 #line 22 "Encoder.h"
 #line 1 ".\\src\\Uart_helper.h"
-#line 2 ".\\src\\Uart_helper.h"
-#line 3 ".\\src\\Uart_helper.h"
-#line 4 ".\\src\\Uart_helper.h"
-#line 5 ".\\src\\Uart_helper.h"
-#line 6 ".\\src\\Uart_helper.h"
-#line 7 ".\\src\\Uart_helper.h"
-#line 8 ".\\src\\Uart_helper.h"
-#line 9 ".\\src\\Uart_helper.h"
-#line 10 ".\\src\\Uart_helper.h"
+
+
+
+
+
+
+
+
+
+
+ 
+
+
+#line 15 ".\\src\\Uart_helper.h"
+#line 16 ".\\src\\Uart_helper.h"
+#line 17 ".\\src\\Uart_helper.h"
+#line 18 ".\\src\\Uart_helper.h"
+#line 19 ".\\src\\Uart_helper.h"
+#line 20 ".\\src\\Uart_helper.h"
+#line 21 ".\\src\\Uart_helper.h"
+#line 22 ".\\src\\Uart_helper.h"
+#line 23 ".\\src\\Uart_helper.h"
 
 
 void UartSetup(void);		
@@ -12508,18 +12559,18 @@ int fgetc(FILE *f);
 
 #line 23 "Encoder.h"
 #line 1 "Read_Encoder.h"
-#line 2 "Read_Encoder.h"
-#line 3 "Read_Encoder.h"
-#line 4 "Read_Encoder.h"
-#line 5 "Read_Encoder.h"
-#line 6 "Read_Encoder.h"
-#line 7 "Read_Encoder.h"
-#line 8 "Read_Encoder.h"
-#line 9 "Read_Encoder.h"
-#line 10 "Read_Encoder.h"
-#line 11 "Read_Encoder.h"
-#line 12 "Read_Encoder.h"
-#line 13 "Read_Encoder.h"
+
+
+
+
+
+
+
+
+
+
+ 
+
 #line 14 "Read_Encoder.h"
 #line 15 "Read_Encoder.h"
 #line 16 "Read_Encoder.h"
@@ -12529,16 +12580,41 @@ int fgetc(FILE *f);
 #line 20 "Read_Encoder.h"
 #line 21 "Read_Encoder.h"
 #line 22 "Read_Encoder.h"
+#line 23 "Read_Encoder.h"
+#line 24 "Read_Encoder.h"
+#line 25 "Read_Encoder.h"
+#line 26 "Read_Encoder.h"
+#line 27 "Read_Encoder.h"
+#line 28 "Read_Encoder.h"
+#line 29 "Read_Encoder.h"
+#line 30 "Read_Encoder.h"
+#line 31 "Read_Encoder.h"
+#line 32 "Read_Encoder.h"
+#line 33 "Read_Encoder.h"
+#line 34 "Read_Encoder.h"
 #line 1 ".\\src\\Uart_helper.h"
-#line 2 ".\\src\\Uart_helper.h"
-#line 3 ".\\src\\Uart_helper.h"
-#line 4 ".\\src\\Uart_helper.h"
-#line 5 ".\\src\\Uart_helper.h"
-#line 6 ".\\src\\Uart_helper.h"
-#line 7 ".\\src\\Uart_helper.h"
-#line 8 ".\\src\\Uart_helper.h"
-#line 9 ".\\src\\Uart_helper.h"
-#line 10 ".\\src\\Uart_helper.h"
+
+
+
+
+
+
+
+
+
+
+ 
+
+
+#line 15 ".\\src\\Uart_helper.h"
+#line 16 ".\\src\\Uart_helper.h"
+#line 17 ".\\src\\Uart_helper.h"
+#line 18 ".\\src\\Uart_helper.h"
+#line 19 ".\\src\\Uart_helper.h"
+#line 20 ".\\src\\Uart_helper.h"
+#line 21 ".\\src\\Uart_helper.h"
+#line 22 ".\\src\\Uart_helper.h"
+#line 23 ".\\src\\Uart_helper.h"
 
 
 void UartSetup(void);		
@@ -12611,7 +12687,7 @@ int fgetc(FILE *f);
 
 
 
-#line 23 "Read_Encoder.h"
+#line 35 "Read_Encoder.h"
 
 
 
@@ -12623,7 +12699,7 @@ double ReadEncoder(void);
 
 
 void QEIConfigure(uint32_t ui32Base, uint32_t ui32Config, uint32_t ui32MaxPosition);
-#line 3 "Speed_Control.c"
+#line 16 "Speed_Control.c"
 #line 1 "project.h"
 #line 2 "project.h"
 #line 3 "project.h"
@@ -19262,15 +19338,28 @@ extern void WatchdogStallDisable(uint32_t ui32Base);
 #line 43 "project.h"
 
 #line 1 "src/Uart_helper.h"
-#line 2 "src/Uart_helper.h"
-#line 3 "src/Uart_helper.h"
-#line 4 "src/Uart_helper.h"
-#line 5 "src/Uart_helper.h"
-#line 6 "src/Uart_helper.h"
-#line 7 "src/Uart_helper.h"
-#line 8 "src/Uart_helper.h"
-#line 9 "src/Uart_helper.h"
-#line 10 "src/Uart_helper.h"
+
+
+
+
+
+
+
+
+
+
+ 
+
+
+#line 15 "src/Uart_helper.h"
+#line 16 "src/Uart_helper.h"
+#line 17 "src/Uart_helper.h"
+#line 18 "src/Uart_helper.h"
+#line 19 "src/Uart_helper.h"
+#line 20 "src/Uart_helper.h"
+#line 21 "src/Uart_helper.h"
+#line 22 "src/Uart_helper.h"
+#line 23 "src/Uart_helper.h"
 
 
 void UartSetup(void);		
@@ -19365,15 +19454,28 @@ int fgetc(FILE *f);
 
 #line 50 "project.h"
 #line 1 "./src/Uart_helper.h"
-#line 2 "./src/Uart_helper.h"
-#line 3 "./src/Uart_helper.h"
-#line 4 "./src/Uart_helper.h"
-#line 5 "./src/Uart_helper.h"
-#line 6 "./src/Uart_helper.h"
-#line 7 "./src/Uart_helper.h"
-#line 8 "./src/Uart_helper.h"
-#line 9 "./src/Uart_helper.h"
-#line 10 "./src/Uart_helper.h"
+
+
+
+
+
+
+
+
+
+
+ 
+
+
+#line 15 "./src/Uart_helper.h"
+#line 16 "./src/Uart_helper.h"
+#line 17 "./src/Uart_helper.h"
+#line 18 "./src/Uart_helper.h"
+#line 19 "./src/Uart_helper.h"
+#line 20 "./src/Uart_helper.h"
+#line 21 "./src/Uart_helper.h"
+#line 22 "./src/Uart_helper.h"
+#line 23 "./src/Uart_helper.h"
 
 
 void UartSetup(void);		
@@ -19449,18 +19551,18 @@ int fgetc(FILE *f);
 #line 51 "project.h"
 
 #line 1 "Read_Encoder.h"
-#line 2 "Read_Encoder.h"
-#line 3 "Read_Encoder.h"
-#line 4 "Read_Encoder.h"
-#line 5 "Read_Encoder.h"
-#line 6 "Read_Encoder.h"
-#line 7 "Read_Encoder.h"
-#line 8 "Read_Encoder.h"
-#line 9 "Read_Encoder.h"
-#line 10 "Read_Encoder.h"
-#line 11 "Read_Encoder.h"
-#line 12 "Read_Encoder.h"
-#line 13 "Read_Encoder.h"
+
+
+
+
+
+
+
+
+
+
+ 
+
 #line 14 "Read_Encoder.h"
 #line 15 "Read_Encoder.h"
 #line 16 "Read_Encoder.h"
@@ -19470,16 +19572,41 @@ int fgetc(FILE *f);
 #line 20 "Read_Encoder.h"
 #line 21 "Read_Encoder.h"
 #line 22 "Read_Encoder.h"
+#line 23 "Read_Encoder.h"
+#line 24 "Read_Encoder.h"
+#line 25 "Read_Encoder.h"
+#line 26 "Read_Encoder.h"
+#line 27 "Read_Encoder.h"
+#line 28 "Read_Encoder.h"
+#line 29 "Read_Encoder.h"
+#line 30 "Read_Encoder.h"
+#line 31 "Read_Encoder.h"
+#line 32 "Read_Encoder.h"
+#line 33 "Read_Encoder.h"
+#line 34 "Read_Encoder.h"
 #line 1 ".\\src\\Uart_helper.h"
-#line 2 ".\\src\\Uart_helper.h"
-#line 3 ".\\src\\Uart_helper.h"
-#line 4 ".\\src\\Uart_helper.h"
-#line 5 ".\\src\\Uart_helper.h"
-#line 6 ".\\src\\Uart_helper.h"
-#line 7 ".\\src\\Uart_helper.h"
-#line 8 ".\\src\\Uart_helper.h"
-#line 9 ".\\src\\Uart_helper.h"
-#line 10 ".\\src\\Uart_helper.h"
+
+
+
+
+
+
+
+
+
+
+ 
+
+
+#line 15 ".\\src\\Uart_helper.h"
+#line 16 ".\\src\\Uart_helper.h"
+#line 17 ".\\src\\Uart_helper.h"
+#line 18 ".\\src\\Uart_helper.h"
+#line 19 ".\\src\\Uart_helper.h"
+#line 20 ".\\src\\Uart_helper.h"
+#line 21 ".\\src\\Uart_helper.h"
+#line 22 ".\\src\\Uart_helper.h"
+#line 23 ".\\src\\Uart_helper.h"
 
 
 void UartSetup(void);		
@@ -19552,7 +19679,7 @@ int fgetc(FILE *f);
 
 
 
-#line 23 "Read_Encoder.h"
+#line 35 "Read_Encoder.h"
 
 
 
@@ -19560,25 +19687,348 @@ int fgetc(FILE *f);
 double ReadEncoder(void);
 #line 53 "project.h"
 #line 1 "Get_Speed.h"
+ 
+
+
+
+
+
+
+
+
+
+ 
+
  double GetUserSpeed(void);
 #line 54 "project.h"
+#line 1 "Calibrate.h"
 
-#line 4 "Speed_Control.c"
-#line 5 "Speed_Control.c"
+
+
+
+
+
+
+
+
+
+ 
+
+
+#line 15 "Calibrate.h"
+#line 16 "Calibrate.h"
+#line 17 "Calibrate.h"
+#line 18 "Calibrate.h"
+#line 19 "Calibrate.h"
+#line 20 "Calibrate.h"
+#line 21 "Calibrate.h"
+#line 22 "Calibrate.h"
+#line 23 "Calibrate.h"
+#line 24 "Calibrate.h"
+#line 25 "Calibrate.h"
+#line 26 "Calibrate.h"
+#line 27 "Calibrate.h"
+#line 28 "Calibrate.h"
+#line 29 "Calibrate.h"
+#line 30 "Calibrate.h"
+#line 31 "Calibrate.h"
+#line 32 "Calibrate.h"
+#line 33 "Calibrate.h"
+#line 34 "Calibrate.h"
+#line 35 "Calibrate.h"
+#line 1 ".\\src\\Uart_helper.h"
+
+
+
+
+
+
+
+
+
+
+ 
+
+
+#line 15 ".\\src\\Uart_helper.h"
+#line 16 ".\\src\\Uart_helper.h"
+#line 17 ".\\src\\Uart_helper.h"
+#line 18 ".\\src\\Uart_helper.h"
+#line 19 ".\\src\\Uart_helper.h"
+#line 20 ".\\src\\Uart_helper.h"
+#line 21 ".\\src\\Uart_helper.h"
+#line 22 ".\\src\\Uart_helper.h"
+#line 23 ".\\src\\Uart_helper.h"
+
+
+void UartSetup(void);		
+
+
+int fputc(int ch, FILE *f);
+
+
+
+int fgetc(FILE *f);
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+#line 36 "Calibrate.h"
+#line 1 "Read_Encoder.h"
+
+
+
+
+
+
+
+
+
+
+ 
+
+#line 14 "Read_Encoder.h"
+#line 15 "Read_Encoder.h"
+#line 16 "Read_Encoder.h"
+#line 17 "Read_Encoder.h"
+#line 18 "Read_Encoder.h"
+#line 19 "Read_Encoder.h"
+#line 20 "Read_Encoder.h"
+#line 21 "Read_Encoder.h"
+#line 22 "Read_Encoder.h"
+#line 23 "Read_Encoder.h"
+#line 24 "Read_Encoder.h"
+#line 25 "Read_Encoder.h"
+#line 26 "Read_Encoder.h"
+#line 27 "Read_Encoder.h"
+#line 28 "Read_Encoder.h"
+#line 29 "Read_Encoder.h"
+#line 30 "Read_Encoder.h"
+#line 31 "Read_Encoder.h"
+#line 32 "Read_Encoder.h"
+#line 33 "Read_Encoder.h"
+#line 34 "Read_Encoder.h"
+#line 1 ".\\src\\Uart_helper.h"
+
+
+
+
+
+
+
+
+
+
+ 
+
+
+#line 15 ".\\src\\Uart_helper.h"
+#line 16 ".\\src\\Uart_helper.h"
+#line 17 ".\\src\\Uart_helper.h"
+#line 18 ".\\src\\Uart_helper.h"
+#line 19 ".\\src\\Uart_helper.h"
+#line 20 ".\\src\\Uart_helper.h"
+#line 21 ".\\src\\Uart_helper.h"
+#line 22 ".\\src\\Uart_helper.h"
+#line 23 ".\\src\\Uart_helper.h"
+
+
+void UartSetup(void);		
+
+
+int fputc(int ch, FILE *f);
+
+
+
+int fgetc(FILE *f);
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+#line 35 "Read_Encoder.h"
+
+
+
+
+double ReadEncoder(void);
+#line 37 "Calibrate.h"
+
+
+
+#line 41 "Calibrate.h"
+#line 42 "Calibrate.h"
+#line 43 "Calibrate.h"
+#line 44 "Calibrate.h"
+
+void initialize_aandw(void);
+#line 55 "project.h"
+#line 1 "HAL_ADC.h"
+#line 2 "HAL_ADC.h"
+#line 3 "HAL_ADC.h"
+#line 4 "HAL_ADC.h"
+#line 5 "HAL_ADC.h"
+#line 6 "HAL_ADC.h"
+#line 7 "HAL_ADC.h"
+#line 8 "HAL_ADC.h"
+#line 9 "HAL_ADC.h"
+#line 10 "HAL_ADC.h"
+#line 11 "HAL_ADC.h"
+#line 12 "HAL_ADC.h"
+
+extern uint32_t ADC_Values[13];
+
+void SetupADC(void);
+double ADCReadChan(void);  
+#line 56 "project.h"
+#line 1 "myGPIO.h"
+#line 2 "myGPIO.h"
+#line 3 "myGPIO.h"
+#line 4 "myGPIO.h"
+#line 5 "myGPIO.h"
+#line 6 "myGPIO.h"
+#line 7 "myGPIO.h"
+#line 8 "myGPIO.h"
+#line 9 "myGPIO.h"
+#line 10 "myGPIO.h"
+#line 11 "myGPIO.h"
+#line 12 "myGPIO.h"
+
+void setup_IO();
+void pinReadAndWrite(uint32_t ui32Loop,uint8_t temp);
+#line 57 "project.h"
+
+#line 17 "Speed_Control.c"
+#line 18 "Speed_Control.c"
 #line 1 "Speed_Control.h"
-#line 2 "Speed_Control.h"
-#line 3 "Speed_Control.h"
-#line 4 "Speed_Control.h"
-#line 5 "Speed_Control.h"
-#line 6 "Speed_Control.h"
-#line 7 "Speed_Control.h"
-#line 8 "Speed_Control.h"
-#line 9 "Speed_Control.h"
-#line 10 "Speed_Control.h"
-#line 11 "Speed_Control.h"
-#line 12 "Speed_Control.h"
-#line 13 "Speed_Control.h"
-#line 14 "Speed_Control.h"
+
+
+
+
+
+
+
+
+
+
+ 
+
+
 #line 15 "Speed_Control.h"
 #line 16 "Speed_Control.h"
 #line 17 "Speed_Control.h"
@@ -19587,16 +20037,42 @@ double ReadEncoder(void);
 #line 20 "Speed_Control.h"
 #line 21 "Speed_Control.h"
 #line 22 "Speed_Control.h"
+#line 23 "Speed_Control.h"
+#line 24 "Speed_Control.h"
+#line 25 "Speed_Control.h"
+#line 26 "Speed_Control.h"
+#line 27 "Speed_Control.h"
+#line 28 "Speed_Control.h"
+#line 29 "Speed_Control.h"
+#line 30 "Speed_Control.h"
+#line 31 "Speed_Control.h"
+#line 32 "Speed_Control.h"
+#line 33 "Speed_Control.h"
+#line 34 "Speed_Control.h"
+#line 35 "Speed_Control.h"
 #line 1 ".\\src\\Uart_helper.h"
-#line 2 ".\\src\\Uart_helper.h"
-#line 3 ".\\src\\Uart_helper.h"
-#line 4 ".\\src\\Uart_helper.h"
-#line 5 ".\\src\\Uart_helper.h"
-#line 6 ".\\src\\Uart_helper.h"
-#line 7 ".\\src\\Uart_helper.h"
-#line 8 ".\\src\\Uart_helper.h"
-#line 9 ".\\src\\Uart_helper.h"
-#line 10 ".\\src\\Uart_helper.h"
+
+
+
+
+
+
+
+
+
+
+ 
+
+
+#line 15 ".\\src\\Uart_helper.h"
+#line 16 ".\\src\\Uart_helper.h"
+#line 17 ".\\src\\Uart_helper.h"
+#line 18 ".\\src\\Uart_helper.h"
+#line 19 ".\\src\\Uart_helper.h"
+#line 20 ".\\src\\Uart_helper.h"
+#line 21 ".\\src\\Uart_helper.h"
+#line 22 ".\\src\\Uart_helper.h"
+#line 23 ".\\src\\Uart_helper.h"
 
 
 void UartSetup(void);		
@@ -19669,20 +20145,20 @@ int fgetc(FILE *f);
 
 
 
-#line 23 "Speed_Control.h"
+#line 36 "Speed_Control.h"
 #line 1 "Read_Encoder.h"
-#line 2 "Read_Encoder.h"
-#line 3 "Read_Encoder.h"
-#line 4 "Read_Encoder.h"
-#line 5 "Read_Encoder.h"
-#line 6 "Read_Encoder.h"
-#line 7 "Read_Encoder.h"
-#line 8 "Read_Encoder.h"
-#line 9 "Read_Encoder.h"
-#line 10 "Read_Encoder.h"
-#line 11 "Read_Encoder.h"
-#line 12 "Read_Encoder.h"
-#line 13 "Read_Encoder.h"
+
+
+
+
+
+
+
+
+
+
+ 
+
 #line 14 "Read_Encoder.h"
 #line 15 "Read_Encoder.h"
 #line 16 "Read_Encoder.h"
@@ -19692,16 +20168,41 @@ int fgetc(FILE *f);
 #line 20 "Read_Encoder.h"
 #line 21 "Read_Encoder.h"
 #line 22 "Read_Encoder.h"
+#line 23 "Read_Encoder.h"
+#line 24 "Read_Encoder.h"
+#line 25 "Read_Encoder.h"
+#line 26 "Read_Encoder.h"
+#line 27 "Read_Encoder.h"
+#line 28 "Read_Encoder.h"
+#line 29 "Read_Encoder.h"
+#line 30 "Read_Encoder.h"
+#line 31 "Read_Encoder.h"
+#line 32 "Read_Encoder.h"
+#line 33 "Read_Encoder.h"
+#line 34 "Read_Encoder.h"
 #line 1 ".\\src\\Uart_helper.h"
-#line 2 ".\\src\\Uart_helper.h"
-#line 3 ".\\src\\Uart_helper.h"
-#line 4 ".\\src\\Uart_helper.h"
-#line 5 ".\\src\\Uart_helper.h"
-#line 6 ".\\src\\Uart_helper.h"
-#line 7 ".\\src\\Uart_helper.h"
-#line 8 ".\\src\\Uart_helper.h"
-#line 9 ".\\src\\Uart_helper.h"
-#line 10 ".\\src\\Uart_helper.h"
+
+
+
+
+
+
+
+
+
+
+ 
+
+
+#line 15 ".\\src\\Uart_helper.h"
+#line 16 ".\\src\\Uart_helper.h"
+#line 17 ".\\src\\Uart_helper.h"
+#line 18 ".\\src\\Uart_helper.h"
+#line 19 ".\\src\\Uart_helper.h"
+#line 20 ".\\src\\Uart_helper.h"
+#line 21 ".\\src\\Uart_helper.h"
+#line 22 ".\\src\\Uart_helper.h"
+#line 23 ".\\src\\Uart_helper.h"
 
 
 void UartSetup(void);		
@@ -19774,33 +20275,86 @@ int fgetc(FILE *f);
 
 
 
-#line 23 "Read_Encoder.h"
+#line 35 "Read_Encoder.h"
 
 
 
 
 double ReadEncoder(void);
-#line 24 "Speed_Control.h"
+#line 37 "Speed_Control.h"
 
 void Speed_Control(double Speed, double uSpeed);
-#line 6 "Speed_Control.c"
+#line 19 "Speed_Control.c"
 
 	double Target_Speed;
 	uint32_t Period;
 	uint32_t Speed;
-	uint32_t Error;
-	uint32_t DutyC;
-void Speed_Control(double Speed, double uSpeed)
-{	
-	
-	
-	Error = uSpeed - Speed;
-	DutyC = DutyC + (.238 * Error) / 64; 
-	
-	
+	double Error[4] = {0,0,0,0}, speed2;
+	double DutyC, vol, Ki, Kd;	
 
+	
+	
+void Speed_Control(double Speed, double uSpeed)
+	
+{	
+	int i = 1;
+	int x; 
+	int a = 0;
+	
+	while (i == 1)
+	{				
 		
-	PWMPulseWidthSet(0x40029000, 0x00000106, DutyC);
+		for (int i = 0; i<10;i++)
+			{
+			Speed= ReadEncoder();
+			speed2 = Speed;		
+		
+			
+			a=0;	
+			while(Speed == speed2){
+				Speed = ReadEncoder();
+				a++;
+				if (a >999){
+				break;
+				}
+				}
+				
+				
+				Error[4]=Error[3];
+				Error[3]=Error[2];
+				Error[2]=Error[1];
+				Ki = Error[1] + Error[2] + Error[3];
+				Kd = (Error[2]-Error[1]) / .01;
+				
+				
+				Error[1] = uSpeed - Speed;
+				vol = DutyC/640*10;
+				vol = vol + .035 * Error[1] + .00001247*Ki - .0000000000000000027691*Kd; 
+				DutyC = vol/10*640;	
 	
+				
+				if (DutyC < 4) {
+					DutyC = 4;
+					}
+				if (DutyC > 640){
+					DutyC = 640;
+					}
+
+				
+				PWMPulseWidthSet(0x40029000, 0x00000106, DutyC);
+
+			}
 	
+		Speed = ReadEncoder();
+		printf("Speed is, IN CONTROL %.2f rps \n\n", Speed);
+	
+		
+		x = GPIOPinRead(0x40025000, 0x00000001); 
+			if ( x == 0){
+					i = 0;
+			}	
+
+	}
+		
+		stopmotor();
 }

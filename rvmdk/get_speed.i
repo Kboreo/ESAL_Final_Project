@@ -1,4 +1,16 @@
 #line 1 "Get_Speed.c"
+
+
+
+
+
+
+
+
+
+
+ 
+
 #line 1 "C:\\Keil_v5\\ARM\\ARMCC\\Bin\\..\\include\\stdio.h"
  
  
@@ -898,7 +910,7 @@ extern __declspec(__nothrow) void __use_no_semihosting(void);
 
  
 
-#line 2 "Get_Speed.c"
+#line 14 "Get_Speed.c"
 #line 1 "C:\\Keil_v5\\ARM\\ARMCC\\Bin\\..\\include\\stdint.h"
  
  
@@ -1155,16 +1167,28 @@ typedef unsigned     long long uintmax_t;
 
 
  
-#line 3 "Get_Speed.c"
+#line 15 "Get_Speed.c"
 #line 1 "Get_Speed.h"
+ 
+
+
+
+
+
+
+
+
+
+ 
+
  double GetUserSpeed(void);
-#line 4 "Get_Speed.c"
+#line 16 "Get_Speed.c"
 
 double GetUserSpeed(void)
 {
 	volatile double userSpeed;	
 	
-	printf("Please type the speed you would like: \n"); 
+	printf("Please type the speed you would like: Between 2 and 31 radians/second \n"); 
 	
 	scanf("%lf", &userSpeed);	
 	printf("You entered %.3f\n\n",userSpeed); 

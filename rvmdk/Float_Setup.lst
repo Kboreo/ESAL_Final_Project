@@ -1,6 +1,32 @@
 L 1 "Float_Setup.c"
+N/*********************************************************************************************************************************
+N**
+N** Module Name:   Float_Setup.c
+N**
+N** Module Description: Set up for floating point
+N**
+N**********************************************************************************************************************************
+N**
+N** Author(s):		Kodey Boreo, Phillip Tesolin 
+N**
+N**********************************************************************************************************************************/
+N
+N
 N#include "Float_Setup.h"
 L 1 "Float_Setup.h" 1
+N/*********************************************************************************************************************************
+N**
+N** Module Name:   Float_Setup.c
+N**
+N** Module Description: Set up for floating point
+N**
+N**********************************************************************************************************************************
+N**
+N** Author(s):		Kodey Boreo, Phillip Tesolin 
+N**
+N**********************************************************************************************************************************/
+N
+N
 N#include "driverlib/pin_map.h"
 L 1 "driverlib/pin_map.h" 1
 N//*****************************************************************************
@@ -20956,7 +20982,7 @@ S
 N#endif // PART_TM4C129XNCZAD
 N
 N#endif // __DRIVERLIB_PIN_MAP_H__
-L 2 "Float_Setup.h" 2
+L 15 "Float_Setup.h" 2
 N#include <stdint.h>
 L 1 "C:\Keil_v5\ARM\ARMCC\Bin\..\include\stdint.h" 1
 N/* Copyright (C) ARM Ltd., 1999,2014 */
@@ -21288,7 +21314,7 @@ N
 N#endif /* __stdint_h */
 N
 N/* end of stdint.h */
-L 3 "Float_Setup.h" 2
+L 16 "Float_Setup.h" 2
 N#include <stdio.h>
 L 1 "C:\Keil_v5\ARM\ARMCC\Bin\..\include\stdio.h" 1
 N/* stdio.h: ANSI 'C' (X3J11 Oct 88) library header, section 4.9 */
@@ -22401,7 +22427,7 @@ N#endif /* ndef __stdio_h */
 N
 N/* end of stdio.h */
 N
-L 4 "Float_Setup.h" 2
+L 17 "Float_Setup.h" 2
 N#include <stdbool.h>
 L 1 "C:\Keil_v5\ARM\ARMCC\Bin\..\include\stdbool.h" 1
 N/* stdbool.h: ISO/IEC 9899:1999 (C99), section 7.16 */
@@ -22431,7 +22457,7 @@ N  #endif
 N
 N#endif /* __bool_true_false_are_defined */
 N
-L 5 "Float_Setup.h" 2
+L 18 "Float_Setup.h" 2
 N#include <math.h>
 L 1 "C:\Keil_v5\ARM\ARMCC\Bin\..\include\math.h" 1
 N/*
@@ -23993,7 +24019,7 @@ N
 N#endif /* __math_h */
 N
 N/* end of math.h */
-L 6 "Float_Setup.h" 2
+L 19 "Float_Setup.h" 2
 N#include "inc/hw_gpio.h"
 L 1 "inc/hw_gpio.h" 1
 N//*****************************************************************************
@@ -24209,7 +24235,7 @@ N#define GPIO_PC_EDM2_S          4
 N#define GPIO_PC_EDM1_S          2
 N
 N#endif // __HW_GPIO_H__
-L 7 "Float_Setup.h" 2
+L 20 "Float_Setup.h" 2
 N#include "inc/hw_types.h"
 L 1 "inc/hw_types.h" 1
 N//*****************************************************************************
@@ -24372,7 +24398,7 @@ N#define CLASS_IS_SNOWFLAKE CLASS_IS_TM4C123
 N#endif
 N
 N#endif // __HW_TYPES_H__
-L 8 "Float_Setup.h" 2
+L 21 "Float_Setup.h" 2
 N#include "inc/hw_memmap.h"
 L 1 "inc/hw_memmap.h" 1
 N//*****************************************************************************
@@ -24526,7 +24552,7 @@ N#define NVIC_BASE               0xE000E000  // Nested Vectored Interrupt Ctrl
 N#define TPIU_BASE               0xE0040000  // Trace Port Interface Unit
 N
 N#endif // __HW_MEMMAP_H__
-L 9 "Float_Setup.h" 2
+L 22 "Float_Setup.h" 2
 N#include "driverlib/sysctl.h"
 L 1 "driverlib/sysctl.h" 1
 N//*****************************************************************************
@@ -25198,7 +25224,7 @@ S}
 N#endif
 N
 N#endif // __DRIVERLIB_SYSCTL_H__
-L 10 "Float_Setup.h" 2
+L 23 "Float_Setup.h" 2
 N#include "driverlib/pin_map.h"
 N#include "driverlib/gpio.h"
 L 1 "driverlib/gpio.h" 1
@@ -25407,7 +25433,7 @@ S}
 N#endif
 N
 N#endif // __DRIVERLIB_GPIO_H__
-L 12 "Float_Setup.h" 2
+L 25 "Float_Setup.h" 2
 N#include "driverlib/pwm.h"
 L 1 "driverlib/pwm.h" 1
 N//*****************************************************************************
@@ -25754,7 +25780,7 @@ S}
 N#endif
 N
 N#endif // __DRIVERLIB_PWM_H__
-L 13 "Float_Setup.h" 2
+L 26 "Float_Setup.h" 2
 N#include "driverlib/uart.h"
 L 1 "driverlib/uart.h" 1
 N//*****************************************************************************
@@ -26020,7 +26046,7 @@ S}
 N#endif
 N
 N#endif // __DRIVERLIB_UART_H__
-L 14 "Float_Setup.h" 2
+L 27 "Float_Setup.h" 2
 N#include "driverlib/qei.h"
 L 1 "driverlib/qei.h" 1
 N//*****************************************************************************
@@ -26179,7 +26205,7 @@ S}
 N#endif
 N
 N#endif // __DRIVERLIB_QEI_H__
-L 15 "Float_Setup.h" 2
+L 28 "Float_Setup.h" 2
 N#include <stdint.h>
 N#include <stdbool.h>
 N#include "driverlib/fpu.h"
@@ -26297,7 +26323,7 @@ S}
 N#endif
 N
 N#endif // __DRIVERLIB_FPU_H__
-L 18 "Float_Setup.h" 2
+L 31 "Float_Setup.h" 2
 N#include "sysctl.h"
 N#include "hw_memmap.h"
 N#include "tm4c123gh6pm.h"
@@ -39385,11 +39411,24 @@ N
 N#endif
 N
 N#endif // __TM4C123GH6PM_H__
-L 21 "Float_Setup.h" 2
+L 34 "Float_Setup.h" 2
 N#include "hw_types.h"
-W "Float_Setup.h" 22 25 last line of file ends without a newline
+W "Float_Setup.h" 35 25 last line of file ends without a newline
 N#include "Uart_helper.h"
 L 1 ".\src\Uart_helper.h" 1
+N/*********************************************************************************************************************************
+N**
+N** Module Name:   Uart_helper.h
+N**
+N** Module Description: Set up for Uart
+N**
+N**********************************************************************************************************************************
+N**
+N** Author(s):		Kodey Boreo, Phillip Tesolin 
+N**
+N**********************************************************************************************************************************/
+N
+N
 N#include <stdbool.h>
 N#include <stdint.h>
 N#include <stdio.h>
@@ -39471,8 +39510,8 @@ N//MMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMM
 N//MMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMM
 N//MMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMM
 N
-L 23 "Float_Setup.h" 2
-L 2 "Float_Setup.c" 2
+L 36 "Float_Setup.h" 2
+L 15 "Float_Setup.c" 2
 N#include "Encoder.h"
 L 1 "Encoder.h" 1
 N#include "driverlib/pin_map.h"
@@ -39498,6 +39537,19 @@ N#include "tm4c123gh6pm.h"
 N#include "hw_types.h"
 N#include "Uart_helper.h"
 L 1 ".\src\Uart_helper.h" 1
+N/*********************************************************************************************************************************
+N**
+N** Module Name:   Uart_helper.h
+N**
+N** Module Description: Set up for Uart
+N**
+N**********************************************************************************************************************************
+N**
+N** Author(s):		Kodey Boreo, Phillip Tesolin 
+N**
+N**********************************************************************************************************************************/
+N
+N
 N#include <stdbool.h>
 N#include <stdint.h>
 N#include <stdio.h>
@@ -39582,6 +39634,18 @@ N
 L 23 "Encoder.h" 2
 N#include "Read_Encoder.h"
 L 1 "Read_Encoder.h" 1
+N/*********************************************************************************************************************************
+N**
+N** Module Name:   Read_Encoder.h
+N**
+N** Module Description: Reads the current speed 
+N**
+N**********************************************************************************************************************************
+N**
+N** Author(s):		Kodey Boreo, Phillip Tesolin 
+N**
+N**********************************************************************************************************************************/
+N
 N#include "driverlib/pin_map.h"
 N#include <stdint.h>
 N#include <stdio.h>
@@ -39605,6 +39669,19 @@ N#include "tm4c123gh6pm.h"
 N#include "hw_types.h"
 N#include "Uart_helper.h"
 L 1 ".\src\Uart_helper.h" 1
+N/*********************************************************************************************************************************
+N**
+N** Module Name:   Uart_helper.h
+N**
+N** Module Description: Set up for Uart
+N**
+N**********************************************************************************************************************************
+N**
+N** Author(s):		Kodey Boreo, Phillip Tesolin 
+N**
+N**********************************************************************************************************************************/
+N
+N
 N#include <stdbool.h>
 N#include <stdint.h>
 N#include <stdio.h>
@@ -39686,12 +39763,12 @@ N//MMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMM
 N//MMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMM
 N//MMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMM
 N
-L 23 "Read_Encoder.h" 2
+L 35 "Read_Encoder.h" 2
 N
 N//double ReadEncoder(void);
 N//void ReadEncoder(void);
 N
-W "Read_Encoder.h" 27 26 last line of file ends without a newline
+W "Read_Encoder.h" 39 26 last line of file ends without a newline
 Ndouble ReadEncoder(void);
 L 24 "Encoder.h" 2
 N
@@ -39700,7 +39777,7 @@ N
 N
 W "Encoder.h" 28 85 last line of file ends without a newline
 Nvoid QEIConfigure(uint32_t ui32Base, uint32_t ui32Config, uint32_t ui32MaxPosition);
-L 3 "Float_Setup.c" 2
+L 16 "Float_Setup.c" 2
 N#include "tm4c123gh6pm.h"
 N
 N
@@ -39708,13 +39785,10 @@ N//Variables
 Nuint32_t first_Test[13];
 Nuint32_t test[13];
 N 
-N void FloatSetup()
-N {
-N
-N
-N	 first_Test[12] = 1;
-N	 test[2] = 2;
-N 
-N }
-W "Float_Setup.c" 18 2 last line of file ends without a newline
+Nvoid FloatSetup()
+N{
+N	first_Test[12] = 1;
+N	test[2] = 2;
+N}
+W "Float_Setup.c" 28 2 last line of file ends without a newline
 N 

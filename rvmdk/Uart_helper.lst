@@ -1,6 +1,32 @@
 L 1 "src\Uart_helper.c"
+N/*********************************************************************************************************************************
+N**
+N** Module Name:   Uart_helper.h
+N**
+N** Module Description: Set up for Uart
+N**
+N**********************************************************************************************************************************
+N**
+N** Author(s):		Kodey Boreo, Phillip Tesolin 
+N**
+N**********************************************************************************************************************************/
+N
+N
 N#include "Uart_helper.h"
 L 1 "src\Uart_helper.h" 1
+N/*********************************************************************************************************************************
+N**
+N** Module Name:   Uart_helper.h
+N**
+N** Module Description: Set up for Uart
+N**
+N**********************************************************************************************************************************
+N**
+N** Author(s):		Kodey Boreo, Phillip Tesolin 
+N**
+N**********************************************************************************************************************************/
+N
+N
 N#include <stdbool.h>
 L 1 "C:\Keil_v5\ARM\ARMCC\Bin\..\include\stdbool.h" 1
 N/* stdbool.h: ISO/IEC 9899:1999 (C99), section 7.16 */
@@ -30,7 +56,7 @@ N  #endif
 N
 N#endif /* __bool_true_false_are_defined */
 N
-L 2 "src\Uart_helper.h" 2
+L 15 "src\Uart_helper.h" 2
 N#include <stdint.h>
 L 1 "C:\Keil_v5\ARM\ARMCC\Bin\..\include\stdint.h" 1
 N/* Copyright (C) ARM Ltd., 1999,2014 */
@@ -362,7 +388,7 @@ N
 N#endif /* __stdint_h */
 N
 N/* end of stdint.h */
-L 3 "src\Uart_helper.h" 2
+L 16 "src\Uart_helper.h" 2
 N#include <stdio.h>
 L 1 "C:\Keil_v5\ARM\ARMCC\Bin\..\include\stdio.h" 1
 N/* stdio.h: ANSI 'C' (X3J11 Oct 88) library header, section 4.9 */
@@ -1475,7 +1501,7 @@ N#endif /* ndef __stdio_h */
 N
 N/* end of stdio.h */
 N
-L 4 "src\Uart_helper.h" 2
+L 17 "src\Uart_helper.h" 2
 N#include "sysctl.h"
 L 1 ".\driverlib\sysctl.h" 1
 N//*****************************************************************************
@@ -2147,7 +2173,7 @@ S}
 N#endif
 N
 N#endif // __DRIVERLIB_SYSCTL_H__
-L 5 "src\Uart_helper.h" 2
+L 18 "src\Uart_helper.h" 2
 N#include "hw_memmap.h"
 L 1 ".\inc\hw_memmap.h" 1
 N//*****************************************************************************
@@ -2301,7 +2327,7 @@ N#define NVIC_BASE               0xE000E000  // Nested Vectored Interrupt Ctrl
 N#define TPIU_BASE               0xE0040000  // Trace Port Interface Unit
 N
 N#endif // __HW_MEMMAP_H__
-L 6 "src\Uart_helper.h" 2
+L 19 "src\Uart_helper.h" 2
 N#include "gpio.h"
 L 1 ".\driverlib\gpio.h" 1
 N//*****************************************************************************
@@ -2509,7 +2535,7 @@ S}
 N#endif
 N
 N#endif // __DRIVERLIB_GPIO_H__
-L 7 "src\Uart_helper.h" 2
+L 20 "src\Uart_helper.h" 2
 N#include "uart.h"
 L 1 ".\driverlib\uart.h" 1
 N//*****************************************************************************
@@ -2775,7 +2801,7 @@ S}
 N#endif
 N
 N#endif // __DRIVERLIB_UART_H__
-L 8 "src\Uart_helper.h" 2
+L 21 "src\Uart_helper.h" 2
 N#include "../inc/tm4c123gh6pm.h"
 L 1 "src\../inc/tm4c123gh6pm.h" 1
 N//*****************************************************************************
@@ -15861,7 +15887,7 @@ N
 N#endif
 N
 N#endif // __TM4C123GH6PM_H__
-L 9 "src\Uart_helper.h" 2
+L 22 "src\Uart_helper.h" 2
 N#include "pin_map.h"
 L 1 ".\driverlib\pin_map.h" 1
 N//*****************************************************************************
@@ -36817,7 +36843,7 @@ S
 N#endif // PART_TM4C129XNCZAD
 N
 N#endif // __DRIVERLIB_PIN_MAP_H__
-L 10 "src\Uart_helper.h" 2
+L 23 "src\Uart_helper.h" 2
 N
 N
 Nvoid UartSetup(void);		//sets up Uart for my configuration using library
@@ -36890,9 +36916,9 @@ N//MMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMM
 N//MMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMM
 N//MMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMM
 N
-L 2 "src\Uart_helper.c" 2
+L 15 "src\Uart_helper.c" 2
 N
-N//Modified from Valvano starter files.
+N
 N
 N//------------UART_InChar------------
 N// Wait for new serial port input
@@ -36957,22 +36983,22 @@ N//------------UART_InChar------------
 N// Wait for new serial port input
 N// Input: none
 N// Output: ASCII code for key typed
-Nchar UART_InChar()
-N{
-N	while((UART0_FR_R&UART_FR_RXFE) !=0){};
-X	while(((*((volatile uint32_t *)0x4000C018))&0x00000010) !=0){};
-N	return ((char)(UART0_DR_R&0xFF)); //returns the character from the port
-X	return ((char)((*((volatile uint32_t *)0x4000C000))&0xFF)); 
-N}
+N	char UART_InChar()
+N	{
+N		while((UART0_FR_R&UART_FR_RXFE) !=0){};
+X		while(((*((volatile uint32_t *)0x4000C018))&0x00000010) !=0){};
+N		return ((char)(UART0_DR_R&0xFF)); //returns the character from the port
+X		return ((char)((*((volatile uint32_t *)0x4000C000))&0xFF)); 
+N	}
 N
-N// Get a character from UART.
-Nint fgetc(FILE *f){
-N  return UART_InChar();
-N}
+N	// Get a character from UART.
+N	int fgetc(FILE *f){
+N		return UART_InChar();
+N		}
 N
-N// Function called when file error occurs.
-Nint ferror(FILE *f){
+N	// Function called when file error occurs.
+N	int ferror(FILE *f){
 N  /* Your implementation of ferror */
 N  return 1;
-W "src\Uart_helper.c" 72 2 last line of file ends without a newline
+W "src\Uart_helper.c" 85 2 last line of file ends without a newline
 N}

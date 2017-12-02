@@ -12327,15 +12327,28 @@ extern void FPURoundingModeSet(uint32_t ui32Mode);
 #line 21 "Encoder.h"
 #line 22 "Encoder.h"
 #line 1 ".\\src\\Uart_helper.h"
-#line 2 ".\\src\\Uart_helper.h"
-#line 3 ".\\src\\Uart_helper.h"
-#line 4 ".\\src\\Uart_helper.h"
-#line 5 ".\\src\\Uart_helper.h"
-#line 6 ".\\src\\Uart_helper.h"
-#line 7 ".\\src\\Uart_helper.h"
-#line 8 ".\\src\\Uart_helper.h"
-#line 9 ".\\src\\Uart_helper.h"
-#line 10 ".\\src\\Uart_helper.h"
+
+
+
+
+
+
+
+
+
+
+ 
+
+
+#line 15 ".\\src\\Uart_helper.h"
+#line 16 ".\\src\\Uart_helper.h"
+#line 17 ".\\src\\Uart_helper.h"
+#line 18 ".\\src\\Uart_helper.h"
+#line 19 ".\\src\\Uart_helper.h"
+#line 20 ".\\src\\Uart_helper.h"
+#line 21 ".\\src\\Uart_helper.h"
+#line 22 ".\\src\\Uart_helper.h"
+#line 23 ".\\src\\Uart_helper.h"
 
 
 void UartSetup(void);		
@@ -12410,18 +12423,18 @@ int fgetc(FILE *f);
 
 #line 23 "Encoder.h"
 #line 1 "Read_Encoder.h"
-#line 2 "Read_Encoder.h"
-#line 3 "Read_Encoder.h"
-#line 4 "Read_Encoder.h"
-#line 5 "Read_Encoder.h"
-#line 6 "Read_Encoder.h"
-#line 7 "Read_Encoder.h"
-#line 8 "Read_Encoder.h"
-#line 9 "Read_Encoder.h"
-#line 10 "Read_Encoder.h"
-#line 11 "Read_Encoder.h"
-#line 12 "Read_Encoder.h"
-#line 13 "Read_Encoder.h"
+
+
+
+
+
+
+
+
+
+
+ 
+
 #line 14 "Read_Encoder.h"
 #line 15 "Read_Encoder.h"
 #line 16 "Read_Encoder.h"
@@ -12431,16 +12444,41 @@ int fgetc(FILE *f);
 #line 20 "Read_Encoder.h"
 #line 21 "Read_Encoder.h"
 #line 22 "Read_Encoder.h"
+#line 23 "Read_Encoder.h"
+#line 24 "Read_Encoder.h"
+#line 25 "Read_Encoder.h"
+#line 26 "Read_Encoder.h"
+#line 27 "Read_Encoder.h"
+#line 28 "Read_Encoder.h"
+#line 29 "Read_Encoder.h"
+#line 30 "Read_Encoder.h"
+#line 31 "Read_Encoder.h"
+#line 32 "Read_Encoder.h"
+#line 33 "Read_Encoder.h"
+#line 34 "Read_Encoder.h"
 #line 1 ".\\src\\Uart_helper.h"
-#line 2 ".\\src\\Uart_helper.h"
-#line 3 ".\\src\\Uart_helper.h"
-#line 4 ".\\src\\Uart_helper.h"
-#line 5 ".\\src\\Uart_helper.h"
-#line 6 ".\\src\\Uart_helper.h"
-#line 7 ".\\src\\Uart_helper.h"
-#line 8 ".\\src\\Uart_helper.h"
-#line 9 ".\\src\\Uart_helper.h"
-#line 10 ".\\src\\Uart_helper.h"
+
+
+
+
+
+
+
+
+
+
+ 
+
+
+#line 15 ".\\src\\Uart_helper.h"
+#line 16 ".\\src\\Uart_helper.h"
+#line 17 ".\\src\\Uart_helper.h"
+#line 18 ".\\src\\Uart_helper.h"
+#line 19 ".\\src\\Uart_helper.h"
+#line 20 ".\\src\\Uart_helper.h"
+#line 21 ".\\src\\Uart_helper.h"
+#line 22 ".\\src\\Uart_helper.h"
+#line 23 ".\\src\\Uart_helper.h"
 
 
 void UartSetup(void);		
@@ -12513,7 +12551,7 @@ int fgetc(FILE *f);
 
 
 
-#line 23 "Read_Encoder.h"
+#line 35 "Read_Encoder.h"
 
 
 
@@ -12569,8 +12607,8 @@ void setupENCODER(void)
 	QEIEnable(0x4002C000);
 	QEIFilterEnable(0x4002C000);
 	QEIVelocityEnable(0x4002C000);
-	QEIVelocityConfigure(0x4002C000, 0x00000040, 16000);
-  QEIFilterConfigure(0x4002C000, 0x00000000);
+	QEIVelocityConfigure(0x4002C000, 0x00000000, 160000);
+  
 
 
 }

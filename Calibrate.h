@@ -1,8 +1,8 @@
 /*********************************************************************************************************************************
 **
-** Module Name:   Float_Setup.c
+** Module Name:   Calibrate.h
 **
-** Module Description: Set up for floating point
+** Module Description: Handles the calibration of a motor based on a step input
 **
 **********************************************************************************************************************************
 **
@@ -33,3 +33,13 @@
 #include "tm4c123gh6pm.h"
 #include "hw_types.h"
 #include "Uart_helper.h"
+#include "Read_Encoder.h"
+
+
+
+#include "gpio.h"
+#include "uart.h"
+#include "../inc/tm4c123gh6pm.h"
+#include "pin_map.h"
+
+void initialize_aandw(void);

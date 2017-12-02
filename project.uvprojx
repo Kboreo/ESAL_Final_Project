@@ -395,26 +395,6 @@
               <FileType>2</FileType>
               <FilePath>.\startup_rvmdk.S</FilePath>
             </File>
-            <File>
-              <FileName>myPWM.c</FileName>
-              <FileType>1</FileType>
-              <FilePath>.\myPWM.c</FilePath>
-            </File>
-            <File>
-              <FileName>myPWM.h</FileName>
-              <FileType>5</FileType>
-              <FilePath>.\myPWM.h</FilePath>
-            </File>
-            <File>
-              <FileName>Encoder.c</FileName>
-              <FileType>1</FileType>
-              <FilePath>.\Encoder.c</FilePath>
-            </File>
-            <File>
-              <FileName>Encoder.h</FileName>
-              <FileType>5</FileType>
-              <FilePath>.\Encoder.h</FilePath>
-            </File>
           </Files>
         </Group>
         <Group>
@@ -440,6 +420,26 @@
         <Group>
           <GroupName>src</GroupName>
           <Files>
+            <File>
+              <FileName>Encoder.h</FileName>
+              <FileType>5</FileType>
+              <FilePath>.\Encoder.h</FilePath>
+            </File>
+            <File>
+              <FileName>Encoder.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>.\Encoder.c</FilePath>
+            </File>
+            <File>
+              <FileName>myPWM.h</FileName>
+              <FileType>5</FileType>
+              <FilePath>.\myPWM.h</FilePath>
+            </File>
+            <File>
+              <FileName>myPWM.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>.\myPWM.c</FilePath>
+            </File>
             <File>
               <FileName>Float_Setup.h</FileName>
               <FileType>5</FileType>
@@ -489,6 +489,36 @@
               <FileName>Get_Speed.h</FileName>
               <FileType>5</FileType>
               <FilePath>.\Get_Speed.h</FilePath>
+            </File>
+            <File>
+              <FileName>Calibrate.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>.\Calibrate.c</FilePath>
+            </File>
+            <File>
+              <FileName>Calibrate.h</FileName>
+              <FileType>5</FileType>
+              <FilePath>.\Calibrate.h</FilePath>
+            </File>
+            <File>
+              <FileName>HAL_ADC.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>.\HAL_ADC.c</FilePath>
+            </File>
+            <File>
+              <FileName>HAL_ADC.h</FileName>
+              <FileType>5</FileType>
+              <FilePath>.\HAL_ADC.h</FilePath>
+            </File>
+            <File>
+              <FileName>myGPIO.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>.\myGPIO.c</FilePath>
+            </File>
+            <File>
+              <FileName>myGPIO.h</FileName>
+              <FileType>5</FileType>
+              <FilePath>.\myGPIO.h</FilePath>
             </File>
           </Files>
         </Group>

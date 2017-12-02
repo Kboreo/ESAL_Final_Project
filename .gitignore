@@ -50,3 +50,6 @@ modules.order
 Module.symvers
 Mkfile.old
 dkms.conf
+rvmdk/uart_helper_1.crf
+rvmdk/speed_control.crf
+rvmdk/uart_helper_1.crf

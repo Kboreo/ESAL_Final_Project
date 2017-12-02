@@ -1,9 +1,9 @@
-L 1 "Read_Encoder.c"
+L 1 "Calibrate.c"
 N/*********************************************************************************************************************************
 N**
-N** Module Name:   Read_Encoder.c
+N** Module Name:   Calibrate.c
 N**
-N** Module Description: Reads the current speed 
+N** Module Description: Handles the calibration of a motor based on a step input
 N**
 N**********************************************************************************************************************************
 N**
@@ -39515,7 +39515,7 @@ N//void ReadEncoder(void);
 N
 W "Read_Encoder.h" 39 26 last line of file ends without a newline
 Ndouble ReadEncoder(void);
-L 15 "Read_Encoder.c" 2
+L 15 "Calibrate.c" 2
 N#include "Encoder.h"
 L 1 "Encoder.h" 1
 N#include "driverlib/pin_map.h"
@@ -39781,7 +39781,7 @@ N
 N
 W "Encoder.h" 28 85 last line of file ends without a newline
 Nvoid QEIConfigure(uint32_t ui32Base, uint32_t ui32Config, uint32_t ui32MaxPosition);
-L 16 "Read_Encoder.c" 2
+L 16 "Calibrate.c" 2
 N#include "project.h"
 L 1 "project.h" 1
 N#include <stdbool.h>
@@ -67150,24 +67150,980 @@ W "myGPIO.h" 14 54 last line of file ends without a newline
 Nvoid pinReadAndWrite(uint32_t ui32Loop,uint8_t temp);
 L 57 "project.h" 2
 N
-L 17 "Read_Encoder.c" 2
+L 17 "Calibrate.c" 2
 N#include "tm4c123gh6pm.h"	//Header file accesses registers in TMC123 microcontroller
+N#include "Speed_Control.h"
+L 1 "Speed_Control.h" 1
+N/*********************************************************************************************************************************
+N**
+N** Module Name:   Speed_Control.h
+N**
+N** Module Description: Controls the speed of the motor based on user input in Get_Speed.c 
+N**
+N**********************************************************************************************************************************
+N**
+N** Author(s):		Kodey Boreo, Phillip Tesolin 
+N**
+N**********************************************************************************************************************************/
 N
-N	double ticks;
-N	double Espeed;
+N
+N#include "driverlib/pin_map.h"
+N#include <stdint.h>
+N#include <stdio.h>
+N#include <stdbool.h>
+N#include <math.h>
+N#include "inc/hw_gpio.h"
+N#include "inc/hw_types.h"
+N#include "inc/hw_memmap.h"
+N#include "driverlib/sysctl.h"
+N#include "driverlib/pin_map.h"
+N#include "driverlib/gpio.h"
+N#include "driverlib/pwm.h"
+N#include "driverlib/uart.h"
+N#include "driverlib/qei.h"
+N#include <stdint.h>
+N#include <stdbool.h>
+N#include "driverlib/fpu.h"
+N#include "sysctl.h"
+N#include "hw_memmap.h"
+N#include "tm4c123gh6pm.h"
+N#include "hw_types.h"
+N#include "Uart_helper.h"
+L 1 ".\src\Uart_helper.h" 1
+N/*********************************************************************************************************************************
+N**
+N** Module Name:   Uart_helper.h
+N**
+N** Module Description: Set up for Uart
+N**
+N**********************************************************************************************************************************
+N**
+N** Author(s):		Kodey Boreo, Phillip Tesolin 
+N**
+N**********************************************************************************************************************************/
+N
+N
+N#include <stdbool.h>
+N#include <stdint.h>
+N#include <stdio.h>
+N#include "sysctl.h"
+N#include "hw_memmap.h"
+N#include "gpio.h"
+N#include "uart.h"
+N#include "../inc/tm4c123gh6pm.h"
+N#include "pin_map.h"
+N
+N
+Nvoid UartSetup(void);		//sets up Uart for my configuration using library
+N
+N//redirect for printf.
+Nint fputc(int ch, FILE *f);
+N
+N//redirect input from serial port
+N//read info edit by: Sir Hutson
+Nint fgetc(FILE *f);
+N
+N
+N//MMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMM
+N//MMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMM
+N//MMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMM
+N//MMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMNNNNNNNMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMM
+N//MMMMMMMMMMMMMMMMMMMMMMMMMMMMMMM8O+++?7IIII7ZNMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMM
+N//MMMMMMMMMMMMMMMMMMMMMMMMMMMMMD+++II7IIIIIII7IIODMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMM
+N//MMMMMMMMMMMMMMMMMMMMMMMMMMMMN+?IIIIIIIIIIIIIIIIINMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMM
+N//MMMMMMMMMMMMMMMMMMMMMMMMMMN7IIIIIIIIIDIIIIIIIIII77NMMMMMMMMMMMMMMMMMMMMMMMMMMMMM
+N//MMMMMMMMMMMMMMMMMMMMDNZI7IIIIIIIIIIIID,.NZ7IIIIIIIZMMMMMMMMMMMMMMMMMMMMMMMMMMMMM
+N//MMMMMMMMMMMMMMMMMD77IIIIIIIIIIIIIIIDN.,DNNIIIIIIIIIDMMMMMMMMMMMMMMMMMMMMMMMMMMMM
+N//MMMMMMMMMMMMMMMMNOZOIIIIIIIIIIIIIIONNNNNNNOIIIIIIIIZMMMMMMMMMMMMMMMMMMMMMMMMMMMM
+N//MMMMMMMMMMMMMMMMDZZOZIIIIIIIIIIII7NNNNNNNDOIIIIIIIIINMMMMMMMMMMMMMMMMMMMMMMMMMMM
+N//MMMMMMMMMMMMMMMMN8888ZND7IIIIIIIINZNNNNDD,7IIIIIIIIIDMMMMMMMMMMMMMMMMMMMMMMMMMMM
+N//MMMMMMMMMMMMMMMMN88888888N$IIIIII7DOZZZZ+N7IIIIIIIIIMMMMMMMMMMMMMMMMMMMMMMMMMMMM
+N//MMMMMMMMMMMMMMMMMND88888888DZIIIIIII7ODN$77IIIIIIIINMMMMMMMMMMMMMMMMMMMMMMMMMMMM
+N//MMMMMMMMMMMMMMMMMMDD88888888O88IIIIIIIIIIIIIIIIIIIINMMMMMMMMMMMMMMM8MMO=MMMMMMMM
+N//MMMMMMMMMMMMMMMMMMMMMN888888D$$8IIIIIIIIIIIIIIIIII7MMMMMMMMMMMMMMMM7+++++MMMMMMM
+N//MMMMMMMMMMMMMMMMMMMMMMDN8O8O??$$$D8OIIIIIIIIIIIIIIOMMMMMMMMMMMMMMM$=+++=+7MMMMMM
+N//MMMMMMMMMMMMMNMMMMMMMMM88N?+???7$$8IIIIIIIIIIIIIIIDMMMMMMMMMMMMMMM=++++++=MMMMMM
+N//MMMMMMMMMMMMDIINMMMMMNN8D+?++??$NIIIIIIIIIIIIIIII7MMMMMMMMMMMMMMMM=+++++++=MMMMM
+N//MMMMMMMMMM8IIIIII?OMDD88O??O?IN7IIIIIIIIIIIIIIIIIDMMMMMMMMMMMMMN=+=+++777++OMMMM
+N//MMMMMMMMMMD7IIIIIII+NN887??D8IIIIIIIIIIIIIIIIIIIINM8DZ7IIIIIDMM=+++++?777777ZMMM
+N//MMMMMMMMM8$7IIIIIII7DZNND7IIIIIIIII77IIIIIII77NZ=+++IIIIIII$MMM++++++7777777MMMM
+N//MMMMMMMMMMMD7IIIIIIIIINN$III$ONNNO777IIII7ID=++++IIIIIIIIIIIIM$=+++++?77777ZMMMM
+N//MMMMMMMMMMMMM7IIIIIIIIIII77?N777777IIIIIID7I77IIIIIIIIIIIIIIDMM8=+???7777777MMMM
+N//MMMMMMMMMMMMMNIIIIIIIIIIII78NNNO77IIIIIIIIIIIIIIIIIIIIIIIIIZNMMM+=777777777ZMMMM
+N//MMMMMMMMMMMMMMM87IIIIIIIII$~~~~~=NIIIIIIIIIIIIIIIIIIIIIIIZNMMMMM?7$777I777$MMMMM
+N//MMMMMMMMMMMMMMMMD77IIIII$+~~~~~~~~I7IIIIIIIIIIIIIIIII77DMMMMMMMMMMMMN7ID7DMMMMMM
+N//MMMMMMMMMMMMMMMMMD$7III7=~~~~~~~~~~I7IIIIIIIIIIIII7788MMMMMMMMMMMMMMM7I$MMMMMMMM
+N//MMMMMMMMMMMMMMMMMMMN77IN~~~~~~~~~~~~87IIIIIIII777ONMMMMMMMMMMMMMMMMMM7IIMMMMMMMM
+N//MMMMMMMMMMMMMMMMMMMMMND~~~~~~~~~~~~~~ZIIIIIII8NO7I7MMMMMMMMMMMMMMMMMM7IINMMMMMMM
+N//MMMMMMMMMMMMMMMMMMMMMM:~~~~~~~~~~~~~~87IIIIIIIIIIIINMMMMMMMMMMMMMMMMN7I$NMMMMMMM
+N//MMMMMMMMMMMMMMMMMMMMMN~~~~~~~~~~~~~~~+IIIIIIIIIIIIINMMMMMMMMMMMMMMMMNII8NMMMMMMM
+N//MMMMMMMMMMMMMMMMMMMMM+~~~~~~~~~~~~~~~~Z7IIIIIIIIIIIOMMMMMMMMMMMMMMM87I7NNMMMMMMM
+N//MMMMMMMMMMMMMMMMMMMMD~~~~~~~~~~~~~~~~~NIIIIIIIIIIIIIDMMMMMMMMMMMMMNIII$~DMMMMMMM
+N//MMMMMMMMMMMMMMMMMMMMN~~~~~~~~~~~~~~~~~NIIIIIIIIIIIIINMMMMMMMMMMMMD$IIIN~MMMMMMMM
+N//MMMMMMMMMMMMMMMMMMMMN~~~~~~~~~~~~~~~~~NIIIIIIIIIIIIINMMMMMMMMMMMNIIII8~NMMMMMMMM
+N//MMMMMMMMMMMMMMMMMMMMN~~~~~~~~~~~~~~~~~Z7IIIIIIIIIIIIDMMMMMMMMMD$7III7?~DMMMMMMMM
+N//MMMMMMMMMMMMMN=+?IIIN~~~~~~~~~~~~~~~~=IIIIIIIIIIIIIIZMMMMMM8NIIIIIIID~NMMMMMMMMM
+N//MMMMMMMMMMMN7++IIIII7~~~~~~~~~~~~~~~~Z77IIIIIIIIIIII$NNN87IIIIIIII78~OMMMMMMMMMM
+N//MMMMMMMMMMM?++IIIIII7D~~~~~~~~~~~~~~~NIIIIIIIIIIIIII$7I7IIIIIIII7Z?+8MMMMMMMMMMM
+N//MMMMMMMMMMM+?IIIIII777~~~~~~~~~~~~~ZZIIIIIIIIIIIIIII87IIIIIIIII7D++NMMMMMMMMMMMM
+N//MMMMMMMMMM8IIIII777777D=~~~~~~~~~~D7IIIIIIIIIIIIIII7N777IIIIIID7+?DMMMMMMMMMMMMM
+N//NNNN777ONNNIII777777777O+~~~~~~~~NIIIIIIIIIIIIIIIII$Z7777778D+++ZDMMMMMMMMMMMMMM
+N//MD~,.7III7IZII7777777777O+++=~~~N7IIIIIIIIIIIIIIII7N7777ND++++=NMMMMMMMMMMMMMMMM
+N//MMMNNIIIIIIIII77777777777$D+++++Z777IIIIIIIIIIII777O$?++++++IDMMMMMMMMMMMMMMMMMM
+N//MMMMMNZ777777I777777777777Z8DI?+$777I7IIIIIIIII777O++++++?OMMMMMMMMMMMMMMMMMMMMM
+N//MMMMMMM877777777777777DNMMMMMMM8N777777IIIII777777O++?$NMMMMMMMMMMMMMMMMMMMMMMMM
+N//MMMMMMMMMN$77777777$NMMMMMMMMMMMM$777777777777777NNDMMMMMMMMMMMMMMMMMMMMMMMMMMMM
+N//MMMMMMMMMMMN$777777DMMMMMMMMMMMMMMD7777777777777DMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMM
+N//MMMMMMMMMMMMMN7777NMMMMMMMMMMMMMMMMN7777777777ODMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMM
+N//MMMMMMMMMMMMMMMMNDMMMMMMMMMMMMMMMMMMO$7777777DZMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMM
+N//MMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMD77777777777DMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMM
+N//MMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMM7NDN7DN87NND8MMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMM
+N//MMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMNN=O7?~I7?~NMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMM
+N//MMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMOMMM~DNN8MMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMM
+N//MMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMM
+N//MMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMM
+N//MMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMM
+N
+L 36 "Speed_Control.h" 2
+N#include "Read_Encoder.h"
+L 1 "Read_Encoder.h" 1
+N/*********************************************************************************************************************************
+N**
+N** Module Name:   Read_Encoder.h
+N**
+N** Module Description: Reads the current speed 
+N**
+N**********************************************************************************************************************************
+N**
+N** Author(s):		Kodey Boreo, Phillip Tesolin 
+N**
+N**********************************************************************************************************************************/
+N
+N#include "driverlib/pin_map.h"
+N#include <stdint.h>
+N#include <stdio.h>
+N#include <stdbool.h>
+N#include <math.h>
+N#include "inc/hw_gpio.h"
+N#include "inc/hw_types.h"
+N#include "inc/hw_memmap.h"
+N#include "driverlib/sysctl.h"
+N#include "driverlib/pin_map.h"
+N#include "driverlib/gpio.h"
+N#include "driverlib/pwm.h"
+N#include "driverlib/uart.h"
+N#include "driverlib/qei.h"
+N#include <stdint.h>
+N#include <stdbool.h>
+N#include "driverlib/fpu.h"
+N#include "sysctl.h"
+N#include "hw_memmap.h"
+N#include "tm4c123gh6pm.h"
+N#include "hw_types.h"
+N#include "Uart_helper.h"
+L 1 ".\src\Uart_helper.h" 1
+N/*********************************************************************************************************************************
+N**
+N** Module Name:   Uart_helper.h
+N**
+N** Module Description: Set up for Uart
+N**
+N**********************************************************************************************************************************
+N**
+N** Author(s):		Kodey Boreo, Phillip Tesolin 
+N**
+N**********************************************************************************************************************************/
+N
+N
+N#include <stdbool.h>
+N#include <stdint.h>
+N#include <stdio.h>
+N#include "sysctl.h"
+N#include "hw_memmap.h"
+N#include "gpio.h"
+N#include "uart.h"
+N#include "../inc/tm4c123gh6pm.h"
+N#include "pin_map.h"
+N
+N
+Nvoid UartSetup(void);		//sets up Uart for my configuration using library
+N
+N//redirect for printf.
+Nint fputc(int ch, FILE *f);
+N
+N//redirect input from serial port
+N//read info edit by: Sir Hutson
+Nint fgetc(FILE *f);
+N
+N
+N//MMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMM
+N//MMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMM
+N//MMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMM
+N//MMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMNNNNNNNMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMM
+N//MMMMMMMMMMMMMMMMMMMMMMMMMMMMMMM8O+++?7IIII7ZNMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMM
+N//MMMMMMMMMMMMMMMMMMMMMMMMMMMMMD+++II7IIIIIII7IIODMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMM
+N//MMMMMMMMMMMMMMMMMMMMMMMMMMMMN+?IIIIIIIIIIIIIIIIINMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMM
+N//MMMMMMMMMMMMMMMMMMMMMMMMMMN7IIIIIIIIIDIIIIIIIIII77NMMMMMMMMMMMMMMMMMMMMMMMMMMMMM
+N//MMMMMMMMMMMMMMMMMMMMDNZI7IIIIIIIIIIIID,.NZ7IIIIIIIZMMMMMMMMMMMMMMMMMMMMMMMMMMMMM
+N//MMMMMMMMMMMMMMMMMD77IIIIIIIIIIIIIIIDN.,DNNIIIIIIIIIDMMMMMMMMMMMMMMMMMMMMMMMMMMMM
+N//MMMMMMMMMMMMMMMMNOZOIIIIIIIIIIIIIIONNNNNNNOIIIIIIIIZMMMMMMMMMMMMMMMMMMMMMMMMMMMM
+N//MMMMMMMMMMMMMMMMDZZOZIIIIIIIIIIII7NNNNNNNDOIIIIIIIIINMMMMMMMMMMMMMMMMMMMMMMMMMMM
+N//MMMMMMMMMMMMMMMMN8888ZND7IIIIIIIINZNNNNDD,7IIIIIIIIIDMMMMMMMMMMMMMMMMMMMMMMMMMMM
+N//MMMMMMMMMMMMMMMMN88888888N$IIIIII7DOZZZZ+N7IIIIIIIIIMMMMMMMMMMMMMMMMMMMMMMMMMMMM
+N//MMMMMMMMMMMMMMMMMND88888888DZIIIIIII7ODN$77IIIIIIIINMMMMMMMMMMMMMMMMMMMMMMMMMMMM
+N//MMMMMMMMMMMMMMMMMMDD88888888O88IIIIIIIIIIIIIIIIIIIINMMMMMMMMMMMMMMM8MMO=MMMMMMMM
+N//MMMMMMMMMMMMMMMMMMMMMN888888D$$8IIIIIIIIIIIIIIIIII7MMMMMMMMMMMMMMMM7+++++MMMMMMM
+N//MMMMMMMMMMMMMMMMMMMMMMDN8O8O??$$$D8OIIIIIIIIIIIIIIOMMMMMMMMMMMMMMM$=+++=+7MMMMMM
+N//MMMMMMMMMMMMMNMMMMMMMMM88N?+???7$$8IIIIIIIIIIIIIIIDMMMMMMMMMMMMMMM=++++++=MMMMMM
+N//MMMMMMMMMMMMDIINMMMMMNN8D+?++??$NIIIIIIIIIIIIIIII7MMMMMMMMMMMMMMMM=+++++++=MMMMM
+N//MMMMMMMMMM8IIIIII?OMDD88O??O?IN7IIIIIIIIIIIIIIIIIDMMMMMMMMMMMMMN=+=+++777++OMMMM
+N//MMMMMMMMMMD7IIIIIII+NN887??D8IIIIIIIIIIIIIIIIIIIINM8DZ7IIIIIDMM=+++++?777777ZMMM
+N//MMMMMMMMM8$7IIIIIII7DZNND7IIIIIIIII77IIIIIII77NZ=+++IIIIIII$MMM++++++7777777MMMM
+N//MMMMMMMMMMMD7IIIIIIIIINN$III$ONNNO777IIII7ID=++++IIIIIIIIIIIIM$=+++++?77777ZMMMM
+N//MMMMMMMMMMMMM7IIIIIIIIIII77?N777777IIIIIID7I77IIIIIIIIIIIIIIDMM8=+???7777777MMMM
+N//MMMMMMMMMMMMMNIIIIIIIIIIII78NNNO77IIIIIIIIIIIIIIIIIIIIIIIIIZNMMM+=777777777ZMMMM
+N//MMMMMMMMMMMMMMM87IIIIIIIII$~~~~~=NIIIIIIIIIIIIIIIIIIIIIIIZNMMMMM?7$777I777$MMMMM
+N//MMMMMMMMMMMMMMMMD77IIIII$+~~~~~~~~I7IIIIIIIIIIIIIIIII77DMMMMMMMMMMMMN7ID7DMMMMMM
+N//MMMMMMMMMMMMMMMMMD$7III7=~~~~~~~~~~I7IIIIIIIIIIIII7788MMMMMMMMMMMMMMM7I$MMMMMMMM
+N//MMMMMMMMMMMMMMMMMMMN77IN~~~~~~~~~~~~87IIIIIIII777ONMMMMMMMMMMMMMMMMMM7IIMMMMMMMM
+N//MMMMMMMMMMMMMMMMMMMMMND~~~~~~~~~~~~~~ZIIIIIII8NO7I7MMMMMMMMMMMMMMMMMM7IINMMMMMMM
+N//MMMMMMMMMMMMMMMMMMMMMM:~~~~~~~~~~~~~~87IIIIIIIIIIIINMMMMMMMMMMMMMMMMN7I$NMMMMMMM
+N//MMMMMMMMMMMMMMMMMMMMMN~~~~~~~~~~~~~~~+IIIIIIIIIIIIINMMMMMMMMMMMMMMMMNII8NMMMMMMM
+N//MMMMMMMMMMMMMMMMMMMMM+~~~~~~~~~~~~~~~~Z7IIIIIIIIIIIOMMMMMMMMMMMMMMM87I7NNMMMMMMM
+N//MMMMMMMMMMMMMMMMMMMMD~~~~~~~~~~~~~~~~~NIIIIIIIIIIIIIDMMMMMMMMMMMMMNIII$~DMMMMMMM
+N//MMMMMMMMMMMMMMMMMMMMN~~~~~~~~~~~~~~~~~NIIIIIIIIIIIIINMMMMMMMMMMMMD$IIIN~MMMMMMMM
+N//MMMMMMMMMMMMMMMMMMMMN~~~~~~~~~~~~~~~~~NIIIIIIIIIIIIINMMMMMMMMMMMNIIII8~NMMMMMMMM
+N//MMMMMMMMMMMMMMMMMMMMN~~~~~~~~~~~~~~~~~Z7IIIIIIIIIIIIDMMMMMMMMMD$7III7?~DMMMMMMMM
+N//MMMMMMMMMMMMMN=+?IIIN~~~~~~~~~~~~~~~~=IIIIIIIIIIIIIIZMMMMMM8NIIIIIIID~NMMMMMMMMM
+N//MMMMMMMMMMMN7++IIIII7~~~~~~~~~~~~~~~~Z77IIIIIIIIIIII$NNN87IIIIIIII78~OMMMMMMMMMM
+N//MMMMMMMMMMM?++IIIIII7D~~~~~~~~~~~~~~~NIIIIIIIIIIIIII$7I7IIIIIIII7Z?+8MMMMMMMMMMM
+N//MMMMMMMMMMM+?IIIIII777~~~~~~~~~~~~~ZZIIIIIIIIIIIIIII87IIIIIIIII7D++NMMMMMMMMMMMM
+N//MMMMMMMMMM8IIIII777777D=~~~~~~~~~~D7IIIIIIIIIIIIIII7N777IIIIIID7+?DMMMMMMMMMMMMM
+N//NNNN777ONNNIII777777777O+~~~~~~~~NIIIIIIIIIIIIIIIII$Z7777778D+++ZDMMMMMMMMMMMMMM
+N//MD~,.7III7IZII7777777777O+++=~~~N7IIIIIIIIIIIIIIII7N7777ND++++=NMMMMMMMMMMMMMMMM
+N//MMMNNIIIIIIIII77777777777$D+++++Z777IIIIIIIIIIII777O$?++++++IDMMMMMMMMMMMMMMMMMM
+N//MMMMMNZ777777I777777777777Z8DI?+$777I7IIIIIIIII777O++++++?OMMMMMMMMMMMMMMMMMMMMM
+N//MMMMMMM877777777777777DNMMMMMMM8N777777IIIII777777O++?$NMMMMMMMMMMMMMMMMMMMMMMMM
+N//MMMMMMMMMN$77777777$NMMMMMMMMMMMM$777777777777777NNDMMMMMMMMMMMMMMMMMMMMMMMMMMMM
+N//MMMMMMMMMMMN$777777DMMMMMMMMMMMMMMD7777777777777DMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMM
+N//MMMMMMMMMMMMMN7777NMMMMMMMMMMMMMMMMN7777777777ODMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMM
+N//MMMMMMMMMMMMMMMMNDMMMMMMMMMMMMMMMMMMO$7777777DZMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMM
+N//MMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMD77777777777DMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMM
+N//MMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMM7NDN7DN87NND8MMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMM
+N//MMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMNN=O7?~I7?~NMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMM
+N//MMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMOMMM~DNN8MMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMM
+N//MMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMM
+N//MMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMM
+N//MMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMM
+N
+L 35 "Read_Encoder.h" 2
+N
+N//double ReadEncoder(void);
+N//void ReadEncoder(void);
+N
+W "Read_Encoder.h" 39 26 last line of file ends without a newline
+Ndouble ReadEncoder(void);
+L 37 "Speed_Control.h" 2
+N
+W "Speed_Control.h" 38 49 last line of file ends without a newline
+Nvoid Speed_Control(double Speed, double uSpeed);
+L 19 "Calibrate.c" 2
+N#include "Calibrate.h"
+L 1 "Calibrate.h" 1
+N/*********************************************************************************************************************************
+N**
+N** Module Name:   Calibrate.h
+N**
+N** Module Description: Handles the calibration of a motor based on a step input
+N**
+N**********************************************************************************************************************************
+N**
+N** Author(s):		Kodey Boreo, Phillip Tesolin 
+N**
+N**********************************************************************************************************************************/
+N
+N
+N#include "driverlib/pin_map.h"
+N#include <stdint.h>
+N#include <stdio.h>
+N#include <stdbool.h>
+N#include <math.h>
+N#include "inc/hw_gpio.h"
+N#include "inc/hw_types.h"
+N#include "inc/hw_memmap.h"
+N#include "driverlib/sysctl.h"
+N#include "driverlib/pin_map.h"
+N#include "driverlib/gpio.h"
+N#include "driverlib/pwm.h"
+N#include "driverlib/uart.h"
+N#include "driverlib/qei.h"
+N#include <stdint.h>
+N#include <stdbool.h>
+N#include "driverlib/fpu.h"
+N#include "sysctl.h"
+N#include "hw_memmap.h"
+N#include "tm4c123gh6pm.h"
+N#include "hw_types.h"
+N#include "Uart_helper.h"
+L 1 ".\src\Uart_helper.h" 1
+N/*********************************************************************************************************************************
+N**
+N** Module Name:   Uart_helper.h
+N**
+N** Module Description: Set up for Uart
+N**
+N**********************************************************************************************************************************
+N**
+N** Author(s):		Kodey Boreo, Phillip Tesolin 
+N**
+N**********************************************************************************************************************************/
+N
+N
+N#include <stdbool.h>
+N#include <stdint.h>
+N#include <stdio.h>
+N#include "sysctl.h"
+N#include "hw_memmap.h"
+N#include "gpio.h"
+N#include "uart.h"
+N#include "../inc/tm4c123gh6pm.h"
+N#include "pin_map.h"
+N
+N
+Nvoid UartSetup(void);		//sets up Uart for my configuration using library
+N
+N//redirect for printf.
+Nint fputc(int ch, FILE *f);
+N
+N//redirect input from serial port
+N//read info edit by: Sir Hutson
+Nint fgetc(FILE *f);
+N
+N
+N//MMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMM
+N//MMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMM
+N//MMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMM
+N//MMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMNNNNNNNMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMM
+N//MMMMMMMMMMMMMMMMMMMMMMMMMMMMMMM8O+++?7IIII7ZNMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMM
+N//MMMMMMMMMMMMMMMMMMMMMMMMMMMMMD+++II7IIIIIII7IIODMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMM
+N//MMMMMMMMMMMMMMMMMMMMMMMMMMMMN+?IIIIIIIIIIIIIIIIINMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMM
+N//MMMMMMMMMMMMMMMMMMMMMMMMMMN7IIIIIIIIIDIIIIIIIIII77NMMMMMMMMMMMMMMMMMMMMMMMMMMMMM
+N//MMMMMMMMMMMMMMMMMMMMDNZI7IIIIIIIIIIIID,.NZ7IIIIIIIZMMMMMMMMMMMMMMMMMMMMMMMMMMMMM
+N//MMMMMMMMMMMMMMMMMD77IIIIIIIIIIIIIIIDN.,DNNIIIIIIIIIDMMMMMMMMMMMMMMMMMMMMMMMMMMMM
+N//MMMMMMMMMMMMMMMMNOZOIIIIIIIIIIIIIIONNNNNNNOIIIIIIIIZMMMMMMMMMMMMMMMMMMMMMMMMMMMM
+N//MMMMMMMMMMMMMMMMDZZOZIIIIIIIIIIII7NNNNNNNDOIIIIIIIIINMMMMMMMMMMMMMMMMMMMMMMMMMMM
+N//MMMMMMMMMMMMMMMMN8888ZND7IIIIIIIINZNNNNDD,7IIIIIIIIIDMMMMMMMMMMMMMMMMMMMMMMMMMMM
+N//MMMMMMMMMMMMMMMMN88888888N$IIIIII7DOZZZZ+N7IIIIIIIIIMMMMMMMMMMMMMMMMMMMMMMMMMMMM
+N//MMMMMMMMMMMMMMMMMND88888888DZIIIIIII7ODN$77IIIIIIIINMMMMMMMMMMMMMMMMMMMMMMMMMMMM
+N//MMMMMMMMMMMMMMMMMMDD88888888O88IIIIIIIIIIIIIIIIIIIINMMMMMMMMMMMMMMM8MMO=MMMMMMMM
+N//MMMMMMMMMMMMMMMMMMMMMN888888D$$8IIIIIIIIIIIIIIIIII7MMMMMMMMMMMMMMMM7+++++MMMMMMM
+N//MMMMMMMMMMMMMMMMMMMMMMDN8O8O??$$$D8OIIIIIIIIIIIIIIOMMMMMMMMMMMMMMM$=+++=+7MMMMMM
+N//MMMMMMMMMMMMMNMMMMMMMMM88N?+???7$$8IIIIIIIIIIIIIIIDMMMMMMMMMMMMMMM=++++++=MMMMMM
+N//MMMMMMMMMMMMDIINMMMMMNN8D+?++??$NIIIIIIIIIIIIIIII7MMMMMMMMMMMMMMMM=+++++++=MMMMM
+N//MMMMMMMMMM8IIIIII?OMDD88O??O?IN7IIIIIIIIIIIIIIIIIDMMMMMMMMMMMMMN=+=+++777++OMMMM
+N//MMMMMMMMMMD7IIIIIII+NN887??D8IIIIIIIIIIIIIIIIIIIINM8DZ7IIIIIDMM=+++++?777777ZMMM
+N//MMMMMMMMM8$7IIIIIII7DZNND7IIIIIIIII77IIIIIII77NZ=+++IIIIIII$MMM++++++7777777MMMM
+N//MMMMMMMMMMMD7IIIIIIIIINN$III$ONNNO777IIII7ID=++++IIIIIIIIIIIIM$=+++++?77777ZMMMM
+N//MMMMMMMMMMMMM7IIIIIIIIIII77?N777777IIIIIID7I77IIIIIIIIIIIIIIDMM8=+???7777777MMMM
+N//MMMMMMMMMMMMMNIIIIIIIIIIII78NNNO77IIIIIIIIIIIIIIIIIIIIIIIIIZNMMM+=777777777ZMMMM
+N//MMMMMMMMMMMMMMM87IIIIIIIII$~~~~~=NIIIIIIIIIIIIIIIIIIIIIIIZNMMMMM?7$777I777$MMMMM
+N//MMMMMMMMMMMMMMMMD77IIIII$+~~~~~~~~I7IIIIIIIIIIIIIIIII77DMMMMMMMMMMMMN7ID7DMMMMMM
+N//MMMMMMMMMMMMMMMMMD$7III7=~~~~~~~~~~I7IIIIIIIIIIIII7788MMMMMMMMMMMMMMM7I$MMMMMMMM
+N//MMMMMMMMMMMMMMMMMMMN77IN~~~~~~~~~~~~87IIIIIIII777ONMMMMMMMMMMMMMMMMMM7IIMMMMMMMM
+N//MMMMMMMMMMMMMMMMMMMMMND~~~~~~~~~~~~~~ZIIIIIII8NO7I7MMMMMMMMMMMMMMMMMM7IINMMMMMMM
+N//MMMMMMMMMMMMMMMMMMMMMM:~~~~~~~~~~~~~~87IIIIIIIIIIIINMMMMMMMMMMMMMMMMN7I$NMMMMMMM
+N//MMMMMMMMMMMMMMMMMMMMMN~~~~~~~~~~~~~~~+IIIIIIIIIIIIINMMMMMMMMMMMMMMMMNII8NMMMMMMM
+N//MMMMMMMMMMMMMMMMMMMMM+~~~~~~~~~~~~~~~~Z7IIIIIIIIIIIOMMMMMMMMMMMMMMM87I7NNMMMMMMM
+N//MMMMMMMMMMMMMMMMMMMMD~~~~~~~~~~~~~~~~~NIIIIIIIIIIIIIDMMMMMMMMMMMMMNIII$~DMMMMMMM
+N//MMMMMMMMMMMMMMMMMMMMN~~~~~~~~~~~~~~~~~NIIIIIIIIIIIIINMMMMMMMMMMMMD$IIIN~MMMMMMMM
+N//MMMMMMMMMMMMMMMMMMMMN~~~~~~~~~~~~~~~~~NIIIIIIIIIIIIINMMMMMMMMMMMNIIII8~NMMMMMMMM
+N//MMMMMMMMMMMMMMMMMMMMN~~~~~~~~~~~~~~~~~Z7IIIIIIIIIIIIDMMMMMMMMMD$7III7?~DMMMMMMMM
+N//MMMMMMMMMMMMMN=+?IIIN~~~~~~~~~~~~~~~~=IIIIIIIIIIIIIIZMMMMMM8NIIIIIIID~NMMMMMMMMM
+N//MMMMMMMMMMMN7++IIIII7~~~~~~~~~~~~~~~~Z77IIIIIIIIIIII$NNN87IIIIIIII78~OMMMMMMMMMM
+N//MMMMMMMMMMM?++IIIIII7D~~~~~~~~~~~~~~~NIIIIIIIIIIIIII$7I7IIIIIIII7Z?+8MMMMMMMMMMM
+N//MMMMMMMMMMM+?IIIIII777~~~~~~~~~~~~~ZZIIIIIIIIIIIIIII87IIIIIIIII7D++NMMMMMMMMMMMM
+N//MMMMMMMMMM8IIIII777777D=~~~~~~~~~~D7IIIIIIIIIIIIIII7N777IIIIIID7+?DMMMMMMMMMMMMM
+N//NNNN777ONNNIII777777777O+~~~~~~~~NIIIIIIIIIIIIIIIII$Z7777778D+++ZDMMMMMMMMMMMMMM
+N//MD~,.7III7IZII7777777777O+++=~~~N7IIIIIIIIIIIIIIII7N7777ND++++=NMMMMMMMMMMMMMMMM
+N//MMMNNIIIIIIIII77777777777$D+++++Z777IIIIIIIIIIII777O$?++++++IDMMMMMMMMMMMMMMMMMM
+N//MMMMMNZ777777I777777777777Z8DI?+$777I7IIIIIIIII777O++++++?OMMMMMMMMMMMMMMMMMMMMM
+N//MMMMMMM877777777777777DNMMMMMMM8N777777IIIII777777O++?$NMMMMMMMMMMMMMMMMMMMMMMMM
+N//MMMMMMMMMN$77777777$NMMMMMMMMMMMM$777777777777777NNDMMMMMMMMMMMMMMMMMMMMMMMMMMMM
+N//MMMMMMMMMMMN$777777DMMMMMMMMMMMMMMD7777777777777DMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMM
+N//MMMMMMMMMMMMMN7777NMMMMMMMMMMMMMMMMN7777777777ODMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMM
+N//MMMMMMMMMMMMMMMMNDMMMMMMMMMMMMMMMMMMO$7777777DZMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMM
+N//MMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMD77777777777DMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMM
+N//MMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMM7NDN7DN87NND8MMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMM
+N//MMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMNN=O7?~I7?~NMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMM
+N//MMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMOMMM~DNN8MMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMM
+N//MMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMM
+N//MMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMM
+N//MMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMM
+N
+L 36 "Calibrate.h" 2
+N#include "Read_Encoder.h"
+L 1 "Read_Encoder.h" 1
+N/*********************************************************************************************************************************
+N**
+N** Module Name:   Read_Encoder.h
+N**
+N** Module Description: Reads the current speed 
+N**
+N**********************************************************************************************************************************
+N**
+N** Author(s):		Kodey Boreo, Phillip Tesolin 
+N**
+N**********************************************************************************************************************************/
+N
+N#include "driverlib/pin_map.h"
+N#include <stdint.h>
+N#include <stdio.h>
+N#include <stdbool.h>
+N#include <math.h>
+N#include "inc/hw_gpio.h"
+N#include "inc/hw_types.h"
+N#include "inc/hw_memmap.h"
+N#include "driverlib/sysctl.h"
+N#include "driverlib/pin_map.h"
+N#include "driverlib/gpio.h"
+N#include "driverlib/pwm.h"
+N#include "driverlib/uart.h"
+N#include "driverlib/qei.h"
+N#include <stdint.h>
+N#include <stdbool.h>
+N#include "driverlib/fpu.h"
+N#include "sysctl.h"
+N#include "hw_memmap.h"
+N#include "tm4c123gh6pm.h"
+N#include "hw_types.h"
+N#include "Uart_helper.h"
+L 1 ".\src\Uart_helper.h" 1
+N/*********************************************************************************************************************************
+N**
+N** Module Name:   Uart_helper.h
+N**
+N** Module Description: Set up for Uart
+N**
+N**********************************************************************************************************************************
+N**
+N** Author(s):		Kodey Boreo, Phillip Tesolin 
+N**
+N**********************************************************************************************************************************/
+N
+N
+N#include <stdbool.h>
+N#include <stdint.h>
+N#include <stdio.h>
+N#include "sysctl.h"
+N#include "hw_memmap.h"
+N#include "gpio.h"
+N#include "uart.h"
+N#include "../inc/tm4c123gh6pm.h"
+N#include "pin_map.h"
+N
+N
+Nvoid UartSetup(void);		//sets up Uart for my configuration using library
+N
+N//redirect for printf.
+Nint fputc(int ch, FILE *f);
+N
+N//redirect input from serial port
+N//read info edit by: Sir Hutson
+Nint fgetc(FILE *f);
+N
+N
+N//MMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMM
+N//MMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMM
+N//MMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMM
+N//MMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMNNNNNNNMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMM
+N//MMMMMMMMMMMMMMMMMMMMMMMMMMMMMMM8O+++?7IIII7ZNMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMM
+N//MMMMMMMMMMMMMMMMMMMMMMMMMMMMMD+++II7IIIIIII7IIODMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMM
+N//MMMMMMMMMMMMMMMMMMMMMMMMMMMMN+?IIIIIIIIIIIIIIIIINMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMM
+N//MMMMMMMMMMMMMMMMMMMMMMMMMMN7IIIIIIIIIDIIIIIIIIII77NMMMMMMMMMMMMMMMMMMMMMMMMMMMMM
+N//MMMMMMMMMMMMMMMMMMMMDNZI7IIIIIIIIIIIID,.NZ7IIIIIIIZMMMMMMMMMMMMMMMMMMMMMMMMMMMMM
+N//MMMMMMMMMMMMMMMMMD77IIIIIIIIIIIIIIIDN.,DNNIIIIIIIIIDMMMMMMMMMMMMMMMMMMMMMMMMMMMM
+N//MMMMMMMMMMMMMMMMNOZOIIIIIIIIIIIIIIONNNNNNNOIIIIIIIIZMMMMMMMMMMMMMMMMMMMMMMMMMMMM
+N//MMMMMMMMMMMMMMMMDZZOZIIIIIIIIIIII7NNNNNNNDOIIIIIIIIINMMMMMMMMMMMMMMMMMMMMMMMMMMM
+N//MMMMMMMMMMMMMMMMN8888ZND7IIIIIIIINZNNNNDD,7IIIIIIIIIDMMMMMMMMMMMMMMMMMMMMMMMMMMM
+N//MMMMMMMMMMMMMMMMN88888888N$IIIIII7DOZZZZ+N7IIIIIIIIIMMMMMMMMMMMMMMMMMMMMMMMMMMMM
+N//MMMMMMMMMMMMMMMMMND88888888DZIIIIIII7ODN$77IIIIIIIINMMMMMMMMMMMMMMMMMMMMMMMMMMMM
+N//MMMMMMMMMMMMMMMMMMDD88888888O88IIIIIIIIIIIIIIIIIIIINMMMMMMMMMMMMMMM8MMO=MMMMMMMM
+N//MMMMMMMMMMMMMMMMMMMMMN888888D$$8IIIIIIIIIIIIIIIIII7MMMMMMMMMMMMMMMM7+++++MMMMMMM
+N//MMMMMMMMMMMMMMMMMMMMMMDN8O8O??$$$D8OIIIIIIIIIIIIIIOMMMMMMMMMMMMMMM$=+++=+7MMMMMM
+N//MMMMMMMMMMMMMNMMMMMMMMM88N?+???7$$8IIIIIIIIIIIIIIIDMMMMMMMMMMMMMMM=++++++=MMMMMM
+N//MMMMMMMMMMMMDIINMMMMMNN8D+?++??$NIIIIIIIIIIIIIIII7MMMMMMMMMMMMMMMM=+++++++=MMMMM
+N//MMMMMMMMMM8IIIIII?OMDD88O??O?IN7IIIIIIIIIIIIIIIIIDMMMMMMMMMMMMMN=+=+++777++OMMMM
+N//MMMMMMMMMMD7IIIIIII+NN887??D8IIIIIIIIIIIIIIIIIIIINM8DZ7IIIIIDMM=+++++?777777ZMMM
+N//MMMMMMMMM8$7IIIIIII7DZNND7IIIIIIIII77IIIIIII77NZ=+++IIIIIII$MMM++++++7777777MMMM
+N//MMMMMMMMMMMD7IIIIIIIIINN$III$ONNNO777IIII7ID=++++IIIIIIIIIIIIM$=+++++?77777ZMMMM
+N//MMMMMMMMMMMMM7IIIIIIIIIII77?N777777IIIIIID7I77IIIIIIIIIIIIIIDMM8=+???7777777MMMM
+N//MMMMMMMMMMMMMNIIIIIIIIIIII78NNNO77IIIIIIIIIIIIIIIIIIIIIIIIIZNMMM+=777777777ZMMMM
+N//MMMMMMMMMMMMMMM87IIIIIIIII$~~~~~=NIIIIIIIIIIIIIIIIIIIIIIIZNMMMMM?7$777I777$MMMMM
+N//MMMMMMMMMMMMMMMMD77IIIII$+~~~~~~~~I7IIIIIIIIIIIIIIIII77DMMMMMMMMMMMMN7ID7DMMMMMM
+N//MMMMMMMMMMMMMMMMMD$7III7=~~~~~~~~~~I7IIIIIIIIIIIII7788MMMMMMMMMMMMMMM7I$MMMMMMMM
+N//MMMMMMMMMMMMMMMMMMMN77IN~~~~~~~~~~~~87IIIIIIII777ONMMMMMMMMMMMMMMMMMM7IIMMMMMMMM
+N//MMMMMMMMMMMMMMMMMMMMMND~~~~~~~~~~~~~~ZIIIIIII8NO7I7MMMMMMMMMMMMMMMMMM7IINMMMMMMM
+N//MMMMMMMMMMMMMMMMMMMMMM:~~~~~~~~~~~~~~87IIIIIIIIIIIINMMMMMMMMMMMMMMMMN7I$NMMMMMMM
+N//MMMMMMMMMMMMMMMMMMMMMN~~~~~~~~~~~~~~~+IIIIIIIIIIIIINMMMMMMMMMMMMMMMMNII8NMMMMMMM
+N//MMMMMMMMMMMMMMMMMMMMM+~~~~~~~~~~~~~~~~Z7IIIIIIIIIIIOMMMMMMMMMMMMMMM87I7NNMMMMMMM
+N//MMMMMMMMMMMMMMMMMMMMD~~~~~~~~~~~~~~~~~NIIIIIIIIIIIIIDMMMMMMMMMMMMMNIII$~DMMMMMMM
+N//MMMMMMMMMMMMMMMMMMMMN~~~~~~~~~~~~~~~~~NIIIIIIIIIIIIINMMMMMMMMMMMMD$IIIN~MMMMMMMM
+N//MMMMMMMMMMMMMMMMMMMMN~~~~~~~~~~~~~~~~~NIIIIIIIIIIIIINMMMMMMMMMMMNIIII8~NMMMMMMMM
+N//MMMMMMMMMMMMMMMMMMMMN~~~~~~~~~~~~~~~~~Z7IIIIIIIIIIIIDMMMMMMMMMD$7III7?~DMMMMMMMM
+N//MMMMMMMMMMMMMN=+?IIIN~~~~~~~~~~~~~~~~=IIIIIIIIIIIIIIZMMMMMM8NIIIIIIID~NMMMMMMMMM
+N//MMMMMMMMMMMN7++IIIII7~~~~~~~~~~~~~~~~Z77IIIIIIIIIIII$NNN87IIIIIIII78~OMMMMMMMMMM
+N//MMMMMMMMMMM?++IIIIII7D~~~~~~~~~~~~~~~NIIIIIIIIIIIIII$7I7IIIIIIII7Z?+8MMMMMMMMMMM
+N//MMMMMMMMMMM+?IIIIII777~~~~~~~~~~~~~ZZIIIIIIIIIIIIIII87IIIIIIIII7D++NMMMMMMMMMMMM
+N//MMMMMMMMMM8IIIII777777D=~~~~~~~~~~D7IIIIIIIIIIIIIII7N777IIIIIID7+?DMMMMMMMMMMMMM
+N//NNNN777ONNNIII777777777O+~~~~~~~~NIIIIIIIIIIIIIIIII$Z7777778D+++ZDMMMMMMMMMMMMMM
+N//MD~,.7III7IZII7777777777O+++=~~~N7IIIIIIIIIIIIIIII7N7777ND++++=NMMMMMMMMMMMMMMMM
+N//MMMNNIIIIIIIII77777777777$D+++++Z777IIIIIIIIIIII777O$?++++++IDMMMMMMMMMMMMMMMMMM
+N//MMMMMNZ777777I777777777777Z8DI?+$777I7IIIIIIIII777O++++++?OMMMMMMMMMMMMMMMMMMMMM
+N//MMMMMMM877777777777777DNMMMMMMM8N777777IIIII777777O++?$NMMMMMMMMMMMMMMMMMMMMMMMM
+N//MMMMMMMMMN$77777777$NMMMMMMMMMMMM$777777777777777NNDMMMMMMMMMMMMMMMMMMMMMMMMMMMM
+N//MMMMMMMMMMMN$777777DMMMMMMMMMMMMMMD7777777777777DMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMM
+N//MMMMMMMMMMMMMN7777NMMMMMMMMMMMMMMMMN7777777777ODMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMM
+N//MMMMMMMMMMMMMMMMNDMMMMMMMMMMMMMMMMMMO$7777777DZMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMM
+N//MMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMD77777777777DMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMM
+N//MMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMM7NDN7DN87NND8MMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMM
+N//MMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMNN=O7?~I7?~NMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMM
+N//MMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMOMMM~DNN8MMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMM
+N//MMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMM
+N//MMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMM
+N//MMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMM
+N
+L 35 "Read_Encoder.h" 2
+N
+N//double ReadEncoder(void);
+N//void ReadEncoder(void);
+N
+W "Read_Encoder.h" 39 26 last line of file ends without a newline
+Ndouble ReadEncoder(void);
+L 37 "Calibrate.h" 2
+N
+N
+N
+N#include "gpio.h"
+N#include "uart.h"
+N#include "../inc/tm4c123gh6pm.h"
+N#include "pin_map.h"
+N
+W "Calibrate.h" 45 29 last line of file ends without a newline
+Nvoid initialize_aandw(void);
+L 20 "Calibrate.c" 2
+N#include "myPWM.h"
+L 1 "myPWM.h" 1
+N#include "driverlib/pin_map.h"
+N#include <stdint.h>
+N#include <stdio.h>
+N#include <stdbool.h>
+N#include "inc/hw_gpio.h"
+N#include "inc/hw_types.h"
+N#include "inc/hw_memmap.h"
+N#include "driverlib/sysctl.h"
+N#include "driverlib/pin_map.h"
+N#include "driverlib/gpio.h"
+N#include "driverlib/pwm.h"
+N#include "driverlib/uart.h"
+N
+N
+L 21 "Calibrate.c" 2
+N
+N#include <stdio.h>
+N#include <stdint.h>
+N
+N
+N#include "tm4c123gh6pm.h"	
+N
+N	char ct;
+N	int i = 0;
+N	//int t = 1;
+N	int A = 1;
+N	double calspeed, tempspeed, voltage;
+N	double calspeed0, calspeed1,calspeed2,calspeed3,calspeed4,calspeed5,calspeed6,calspeed7,calspeed8,calspeed9,calspeed10,calspeed11,calspeed12,calspeed13,calspeed14,calspeed15, calspeed16;
+N	double calspeed17,calspeed18,calspeed19,calspeed20,calspeed21,calspeed22,calspeed23,calspeed24,calspeed25;
+N	double k, t, AvK;
 N	
-Ndouble ReadEncoder(void)
-N	{		
-N	//Read encoder speed
-N	ticks = QEIVelocityGet(QEI0_BASE);
-X	ticks = QEIVelocityGet(0x4002C000);
+N	float aandw[36];
 N	
-N	// speed in rad/seco	
-N	Espeed = ticks * 6.283185 / 19.2;
-N	return Espeed;	
+Nvoid initialize_aandw()
+N{
+N	int i;
+N	for (i = 0; i< 36;i++)
+N	{
+N		aandw[i] = i* 3.141719;
 N	}
+N}
 N
-N	//for later use
-N	//int  posistion = QEIPositionGet(QEI0_BASE);
-W "Read_Encoder.c" 34 47 last line of file ends without a newline
-N	//int direction = QEIDirectionGet(QEI0_BASE);
+Nvoid Calibrate (void)
+N{
+N	
+N	
+N	//PWMPulseWidthSet(PWM1_BASE, PWM_OUT_6, 0);
+W "Calibrate.c" 53 2 function "stopmotor" declared implicitly
+N	stopmotor();
+N			
+N	printf("Press any key to calibrate\n motor will turn on "); //lets the user know to get ready
+N	ct = getc(stdin); //Gets a char from the terminal from the user.
+X	ct = getc((& __stdin)); 
+N	printf("You entered %c\n\n",ct); //Lets the user know what they have selected
+N	
+N	//give 100% PWM to motor
+N	PWMPulseWidthSet(PWM1_BASE, PWM_OUT_6, 6400);
+X	PWMPulseWidthSet(0x40029000, 0x00000106, 6400);
+N	
+N	//sets current speed equal to calspeed(n)
+N	//waits for current speed to change (10mS) then repeats
+N	calspeed0 = ReadEncoder();
+N	tempspeed = calspeed0;
+N	
+N	while(tempspeed <= calspeed0){
+N	tempspeed = ReadEncoder();
+N	}
+N	calspeed1 = tempspeed;
+N	
+N	while(tempspeed <= calspeed1){
+N	tempspeed = ReadEncoder();
+N	}
+N	calspeed2 = tempspeed;
+N	
+N	//if motor has met its final velocity break statement will allow program to exit while loop
+N	while(tempspeed <= calspeed2){
+N	tempspeed = ReadEncoder();
+N		i++;
+N		if (i > 9999){
+N			break;
+N		}
+N		}
+N	i=0;	
+N	calspeed3 = tempspeed;
+N	
+N	while(tempspeed <= calspeed3){
+N	tempspeed = ReadEncoder();
+N		i++;
+N		if (i > 9999){
+N			break;
+N		}
+N		}
+N	i=0;	
+N	calspeed4 = tempspeed;
+N	
+N	while(tempspeed <= calspeed4){
+N	tempspeed = ReadEncoder();
+N		i++;
+N		if (i > 9999){
+N			break;
+N		}
+N		}	
+N	i=0;
+N	calspeed5 = tempspeed;
+N	
+N	while(tempspeed <= calspeed5){
+N	tempspeed = ReadEncoder();
+N		i++;
+N		if (i > 9999){
+N			break;
+N		}
+N		}
+N	i=0;	
+N	calspeed6 = tempspeed;
+N	
+N	while(tempspeed <= calspeed6){
+N	tempspeed = ReadEncoder();
+N		i++;
+N		if (i > 9999){
+N			break;
+N		}
+N		}
+N	i=0;	
+N	calspeed7 = tempspeed;
+N	
+N	while(tempspeed <= calspeed7){
+N	tempspeed = ReadEncoder();
+N		i++;
+N		if (i > 9999){
+N			break;
+N		}
+N		}	
+N	i=0;
+N	calspeed8 = tempspeed;
+N	
+N	while(tempspeed <= calspeed8){
+N	tempspeed = ReadEncoder();
+N		i++;
+N		if (i > 9999)
+N		{
+N			break;
+N		}
+N		}	
+N	i=0;
+N		calspeed9 = tempspeed;
+N	
+N	while(tempspeed <= calspeed9){
+N	tempspeed = ReadEncoder();
+N		i++;
+N		if (i > 9999){
+N			break;
+N		}
+N		}
+N	i=0;	
+N	calspeed10 = tempspeed;
+N	
+N	while(tempspeed <= calspeed10){
+N	tempspeed = ReadEncoder();
+N		i++;
+N		if (i > 9999){
+N			break;
+N		}
+N		}
+N	i=0;	
+N	calspeed11 = tempspeed;
+N	
+N	while(tempspeed <= calspeed11){
+N	tempspeed = ReadEncoder();
+N		i++;
+N		if (i > 9999){
+N			break;
+N		}
+N		}	
+N	i=0;
+N	calspeed12 = tempspeed;
+N	
+N	while(tempspeed <= calspeed12){
+N	tempspeed = ReadEncoder();
+N		i++;
+N		if (i > 9999){
+N			break;
+N		}
+N		}
+N	i=0;	
+N	calspeed13 = tempspeed;
+N	
+N	while(tempspeed <= calspeed13){
+N	tempspeed = ReadEncoder();
+N		i++;
+N		if (i > 9999){
+N			break;
+N		}
+N		}
+N	i=0;	
+N	calspeed14 = tempspeed;
+N	
+N	while(tempspeed <= calspeed14){
+N	tempspeed = ReadEncoder();
+N		i++;
+N		if (i > 9999){
+N			break;
+N		}
+N		}	
+N	i=0;
+N	calspeed15 = tempspeed;
+N	
+N	while(tempspeed <= calspeed15){
+N	tempspeed = ReadEncoder();
+N		i++;
+N		if (i > 9999)
+N		{
+N			break;
+N		}
+N		}	
+N	i=0;
+N	calspeed16 = tempspeed;
+N	
+N	while(tempspeed <= calspeed16){
+N	tempspeed = ReadEncoder();
+N		i++;
+N		if (i > 9999){
+N			break;
+N		}
+N		}
+N	i=0;	
+N	calspeed17 = tempspeed;
+N	
+N	while(tempspeed <= calspeed17){
+N	tempspeed = ReadEncoder();
+N		i++;
+N		if (i > 9999){
+N			break;
+N		}
+N		}
+N	i=0;	
+N	calspeed18 = tempspeed;
+N	
+N	while(tempspeed <= calspeed18){
+N	tempspeed = ReadEncoder();
+N		i++;
+N		if (i > 9999){
+N			break;
+N		}
+N		}	
+N	i=0;
+N	calspeed19 = tempspeed;
+N	
+N	while(tempspeed <= calspeed19){
+N	tempspeed = ReadEncoder();
+N		i++;
+N		if (i > 9999){
+N			break;
+N		}
+N		}
+N	i=0;	
+N	calspeed20 = tempspeed;
+N	
+N	while(tempspeed <= calspeed20){
+N	tempspeed = ReadEncoder();
+N		i++;
+N		if (i > 9999){
+N			break;
+N		}
+N		}
+N	i=0;	
+N	calspeed21 = tempspeed;
+N	
+N	while(tempspeed <= calspeed21){
+N	tempspeed = ReadEncoder();
+N		i++;
+N		if (i > 9999){
+N			break;
+N		}
+N		}	
+N	i=0;
+N	calspeed22 = tempspeed;
+N	
+N	while(tempspeed <= calspeed22){
+N	tempspeed = ReadEncoder();
+N		i++;
+N		if (i > 9999)
+N		{
+N			break;
+N		}
+N		}	
+N		i=0;
+N	calspeed23 = tempspeed;
+N	
+N	while(tempspeed <= calspeed23){
+N	tempspeed = ReadEncoder();
+N		i++;
+N		if (i > 9999)
+N		{
+N			break;
+N		}
+N		}	
+N		i=0;
+N	calspeed24 = tempspeed;
+N	
+N	while(tempspeed <= calspeed24){
+N	tempspeed = ReadEncoder();
+N		i++;
+N		if (i > 9999)
+N		{
+N			break;
+N		}
+N		}	
+N		i=0;
+N	calspeed25 = tempspeed;
+N	
+N	while(tempspeed <= calspeed25){
+N	tempspeed = ReadEncoder();
+N		i++;
+N		if (i > 9999)
+N		{
+N			break;
+N		}
+N		}	
+N	
+N	//prints saved speeds 
+N	printf("Speed 0  = %.2f  ", calspeed0);		
+N	printf("Speed 1  = %.2f  ", calspeed1);
+N	printf("Speed 2  = %.2f  ", calspeed2);
+N	printf("Speed 3  = %.2f\n", calspeed3);
+N	printf("Speed 4  = %.2f ", calspeed4);
+N	printf("Speed 5  = %.2f ", calspeed5);
+N	printf("Speed 6  = %.2f ", calspeed6);
+N	printf("Speed 7  = %.2f\n", calspeed7);
+N	printf("Speed 8  = %.2f ", calspeed8);
+N	printf("Speed 9  = %.2f ", calspeed9);
+N	printf("Speed 10 = %.2f ", calspeed10);
+N	printf("Speed 11 = %.2f\n", calspeed11);
+N	printf("Speed 12 = %.2f ", calspeed12);
+N	printf("Speed 13 = %.2f ", calspeed13);
+N	printf("Speed 14 = %.2f ", calspeed14);
+N	printf("Speed 15 = %.2f\n", calspeed15);
+N	printf("Speed 16 = %.2f ", calspeed16);
+N	printf("Speed 17 = %.2f ", calspeed17);
+N	printf("Speed 18 = %.2f ", calspeed18);
+N	printf("Speed 19 = %.2f\n", calspeed19);
+N	printf("Speed 20 = %.2f ", calspeed20);
+N	printf("Speed 21 = %.2f ", calspeed21);
+N	printf("Speed 22 = %.2f ", calspeed22);
+N	printf("Speed 23 = %.2f\n", calspeed20);
+N	printf("Speed 24 = %.2f ", calspeed21);
+N	printf("Speed 25 = %.2f\n ", calspeed22);
+N	
+N	//reads voltage supplied to motor
+N	voltage = ADCReadChan();
+N	//sets pwm to 0%
+N	PWMPulseWidthSet(PWM1_BASE, PWM_OUT_6, 0);
+X	PWMPulseWidthSet(0x40029000, 0x00000106, 0);
+N	
+N			
+N	k = calspeed25 / voltage;
+N	AvK = calspeed17 * .6321;
+N
+N	if (AvK < calspeed2){
+N		t = .02;
+N	}
+N	else if (AvK < calspeed3){
+N		t = .03;
+N	}
+N	else if (AvK < calspeed4){
+N		t = .04;
+N	}
+N	else if (AvK < calspeed5){
+N		t = .05;
+N	}
+N	else if (AvK < calspeed6){
+N		t = .06;
+N	}
+N	else if (AvK < calspeed7){
+N		t = .07;
+N	}
+N	else if (AvK < calspeed8){
+N		t = .08;
+N	}
+N	else if (AvK < calspeed9){
+N		t = .09;
+N	}
+N	else if (AvK < calspeed10){
+N		t = .10;
+N	}
+N	else if (AvK < calspeed11){
+N		t = .11;
+N	}
+N	else if (AvK < calspeed12){
+N		t = .12;
+N	}
+N	else if (AvK < calspeed13){
+N		t = .13;
+N	}
+N	else if (AvK < calspeed14){
+N		t = .14;
+N	}
+N	else if (AvK < calspeed15){
+N		t = .15;
+N	}
+N	else if (AvK < calspeed16){
+N		t = .16;
+N	}
+N	else if (AvK < calspeed17){
+N		t = .17;
+N	}
+N	//stops motor and prints T function
+N	stopmotor();
+N	printf("K = %.2f, ", k);
+N	printf("Avk = %.2f\n", AvK);
+N	printf("Time const = %.2f, ", t);
+N	printf("Voltage = %.2f\n\n", voltage);
+N	printf("System transfer function is %.2f / (%.2ft + 1)\n\n", k, t);
+N}
+N	

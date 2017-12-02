@@ -24513,12 +24513,12 @@ N	PWMGenConfigure(PWM1_BASE, PWM_GEN_3, PWM_GEN_MODE_DOWN | PWM_GEN_MODE_NO_SYNC
 X	PWMGenConfigure(0x40029000, 0x00000100, 0x00000000 | 0x00000000);
 N	
 N	//Set the Period (expressed in clock ticks)
-N	PWMGenPeriodSet(PWM1_BASE, PWM_GEN_3, 320);
-X	PWMGenPeriodSet(0x40029000, 0x00000100, 320);
+N	PWMGenPeriodSet(PWM1_BASE, PWM_GEN_3, 640);
+X	PWMGenPeriodSet(0x40029000, 0x00000100, 640);
 N	
 N	//Set PWM duty-50% (Period/2)
-N	PWMPulseWidthSet(PWM1_BASE, PWM_OUT_6, 100);
-X	PWMPulseWidthSet(0x40029000, 0x00000106, 100);
+N	PWMPulseWidthSet(PWM1_BASE, PWM_OUT_6, 10);
+X	PWMPulseWidthSet(0x40029000, 0x00000106, 10);
 N	
 N	// Enable the PWM generator
 N	PWMGenEnable(PWM1_BASE, PWM_GEN_3);
@@ -24529,23 +24529,19 @@ N	PWMOutputState(PWM1_BASE, PWM_OUT_6_BIT, true);
 X	PWMOutputState(0x40029000, 0x00000040, 1);
 N}
 N
+Nvoid stopmotor(void)
+N{
+N	PWMPulseWidthSet(PWM1_BASE, PWM_OUT_6, 10);
+X	PWMPulseWidthSet(0x40029000, 0x00000106, 10);
+N}
+N	
+N
 N//Simple delay function.
 Nvoid delayMS(int ms) 
 N{
 N    SysCtlDelay((SysCtlClockGet()/(3*1000))*ms);
 N}
 N
-N//void pwmTest(void)
-N//{	
-N//	//Fade
-N//  bool fadeUp = true;
-N//  unsigned long increment = 10; //Long increment
-N//  unsigned long pwmNow = 100;	//new PWM value
-N//	int i = 1; //Int used in while loop
-N//	int x;  //Int that contains the output of the button SW2
-N//	int y;  //Int that contains the output of the button SW1
-N//	volatile int flashTime = 10; //Long that controls the speed of the flashing
-N//	
-N//}
-W "myPWM.c" 75 2 last line of file ends without a newline
+N
+W "myPWM.c" 70 2 last line of file ends without a newline
 N	
