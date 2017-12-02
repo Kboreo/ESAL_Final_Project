@@ -68,9 +68,9 @@ The file structure for this projects is as follows:
             ├── Encoder.h             <em>(H file for Encoder functionality)</em>
 			├── myPWM.c  	          <em>(C file for PWM functionality)</em>
 			├── myPWM.h  	          <em>(H file for PWM functionality)</em>
-			├── Float_Setup.c  	      <em>(C file for setting up Floating Point)</em>
-			├── Float_Setup.h  	      <em>(H file for setting up Floating Point)</em>
-			├── Uart_helper.c  	      <em>(C file for setting up the Uart functionality)</em>
+			├── Float_Setup.c  	   <em>(C file for setting up Floating Point)</em>
+			├── Float_Setup.h  	   <em>(H file for setting up Floating Point)</em>
+			├── Uart_helper.c  	   <em>(C file for setting up the Uart functionality)</em>
 			├── Uart_helper.h  	      <em>(H file for setting up the Uart functionality)</em>
 			├── Read_Encoder.c  	  <em>(C file for reading the current speed from the encoder)</em>
 			├── Read_Encoder.h  	  <em>(H file for reading the current speed from the encoder)</em>
