@@ -81,7 +81,7 @@ The motor's natural response was improved using a root locus design and adding o
 			├── HAL_ADC.c  	  	 <em>(C file that sets up the hardware that is used in ADC)</em>
 			├── HAL_ADC.h  	  	 <em>(H file that sets up the hardware that is used in ADC)</em>
 			├── myGPIO.c  	  	 <em>(C file that handles all of the general purpose IO for the project)</em>
-            ├── myGPIO.h  	  	  	  <em>(H file that handles all of the general purpose IO for the project)</em>
+			├── myGPIO.h  	  	  	  <em>(H file that handles all of the general purpose IO for the project)</em>
 			└── ...  			
     |   ├── inc                       <em>(Directory for precompiled libraries and headers)</em>
     |       ├── *.h files             <em>(*.h , the menu for micro controller)</em>
