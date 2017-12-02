@@ -14,6 +14,7 @@
 #include <stdint.h>
 #include "Get_Speed.h"
 
+//Function that gets the requested speed from the user
 double GetUserSpeed(void)
 {
 	volatile double userSpeed;	//variable for the user requested speed

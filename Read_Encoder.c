@@ -16,8 +16,8 @@
 #include "project.h"
 #include "tm4c123gh6pm.h"	//Header file accesses registers in TMC123 microcontroller
 
-	double ticks;
-	double Espeed;
+	double ticks;		//Double used in the calulation for the encoder speed.
+	double Espeed;	// Double used for the Speed read from the encoder.
 	
 double ReadEncoder(void)
 	{		

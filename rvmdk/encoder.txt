@@ -13,16 +13,16 @@
 ;;;37     //	double w,speed;
 ;;;38     	//enables peripheral QEI
 ;;;39       SysCtlPeripheralEnable(SYSCTL_PERIPH_GPIOD);
-000002  4820              LDR      r0,|L1.132|
+000002  481d              LDR      r0,|L1.120|
 000004  f7fffffe          BL       SysCtlPeripheralEnable
 ;;;40       SysCtlPeripheralEnable(SYSCTL_PERIPH_QEI0);
-000008  481f              LDR      r0,|L1.136|
+000008  481c              LDR      r0,|L1.124|
 00000a  f7fffffe          BL       SysCtlPeripheralEnable
 ;;;41     
 ;;;42     	//Unlock GPIOD7 
 ;;;43     	HWREG(GPIO_PORTD_BASE + GPIO_O_LOCK) = GPIO_LOCK_KEY; //(0x4C4F434B)
-00000e  481f              LDR      r0,|L1.140|
-000010  491f              LDR      r1,|L1.144|
+00000e  481c              LDR      r0,|L1.128|
+000010  491c              LDR      r1,|L1.132|
 000012  6008              STR      r0,[r1,#0]
 ;;;44     	HWREG(GPIO_PORTD_BASE + GPIO_O_CR) |= 0x80;
 000014  1d08              ADDS     r0,r1,#4
@@ -37,35 +37,35 @@
 ;;;46     
 ;;;47     	//Set Pins to be PHA0 and PHB0
 ;;;48     	GPIOPinConfigure(GPIO_PD6_PHA0);
-000026  481b              LDR      r0,|L1.148|
+000026  4818              LDR      r0,|L1.136|
 000028  f7fffffe          BL       GPIOPinConfigure
 ;;;49     	GPIOPinConfigure(GPIO_PD7_PHB0);
-00002c  481a              LDR      r0,|L1.152|
+00002c  4817              LDR      r0,|L1.140|
 00002e  f7fffffe          BL       GPIOPinConfigure
 ;;;50     
 ;;;51     	//Set GPIO pins for QEI. PhA0 -> PD6, PhB0 ->PD7.
 ;;;52     	GPIOPinTypeQEI(GPIO_PORTD_BASE, GPIO_PIN_6 | GPIO_PIN_7);
 000032  21c0              MOVS     r1,#0xc0
-000034  4819              LDR      r0,|L1.156|
+000034  4816              LDR      r0,|L1.144|
 000036  f7fffffe          BL       GPIOPinTypeQEI
 ;;;53     	GPIOPadConfigSet(GPIO_PORTD_BASE, GPIO_PIN_6 |  GPIO_PIN_7, GPIO_STRENGTH_2MA, GPIO_PIN_TYPE_STD); // change push pull gpio
 00003a  2308              MOVS     r3,#8
 00003c  2201              MOVS     r2,#1
 00003e  21c0              MOVS     r1,#0xc0
-000040  4816              LDR      r0,|L1.156|
+000040  4813              LDR      r0,|L1.144|
 000042  f7fffffe          BL       GPIOPadConfigSet
 ;;;54     
 ;;;55     	//Disable peripheral and int before configuration
 ;;;56     	QEIIntDisable(QEI0_BASE,QEI_INTERROR | QEI_INTDIR | QEI_INTTIMER | QEI_INTINDEX); 
 000046  210f              MOVS     r1,#0xf
-000048  4815              LDR      r0,|L1.160|
+000048  4812              LDR      r0,|L1.148|
 00004a  f7fffffe          BL       QEIIntDisable
 ;;;57     
 ;;;58     	// Configure quadrature encoder
 ;;;59     	QEIConfigure(QEI0_BASE, (QEI_CONFIG_CAPTURE_A_B  | QEI_CONFIG_NO_RESET 	| QEI_CONFIG_QUADRATURE | QEI_CONFIG_NO_SWAP), 1919);  //maxima posicion
 00004e  f240727f          MOV      r2,#0x77f
 000052  2108              MOVS     r1,#8
-000054  4812              LDR      r0,|L1.160|
+000054  480f              LDR      r0,|L1.148|
 000056  f7fffffe          BL       QEIConfigure
 ;;;60     
 ;;;61     
@@ -73,44 +73,42 @@
 ;;;63     	// Enable the quadrature encoder, filter and velocity capture
 ;;;64     	// clock tick = .625x10^-9 seconds.. 
 ;;;65     	QEIEnable(QEI0_BASE);
-00005a  4811              LDR      r0,|L1.160|
+00005a  480e              LDR      r0,|L1.148|
 00005c  f7fffffe          BL       QEIEnable
 ;;;66     	QEIFilterEnable(QEI0_BASE);
-000060  480f              LDR      r0,|L1.160|
+000060  480c              LDR      r0,|L1.148|
 000062  f7fffffe          BL       QEIFilterEnable
 ;;;67     	QEIVelocityEnable(QEI0_BASE);
-000066  480e              LDR      r0,|L1.160|
+000066  480b              LDR      r0,|L1.148|
 000068  f7fffffe          BL       QEIVelocityEnable
-;;;68     	QEIVelocityConfigure(QEI0_BASE, QEI_VELDIV_2, 16000);//capture velocity after .01 seconds
-00006c  f44f527a          MOV      r2,#0x3e80
-000070  2140              MOVS     r1,#0x40
-000072  480b              LDR      r0,|L1.160|
-000074  f7fffffe          BL       QEIVelocityConfigure
-;;;69       QEIFilterConfigure(QEI0_BASE, QEI_FILTCNT_2);
-000078  2100              MOVS     r1,#0
-00007a  4809              LDR      r0,|L1.160|
-00007c  f7fffffe          BL       QEIFilterConfigure
+;;;68     	QEIVelocityConfigure(QEI0_BASE, QEI_VELDIV_1, 160000);//capture velocity after .01 seconds
+00006c  4a0a              LDR      r2,|L1.152|
+00006e  2100              MOVS     r1,#0
+000070  4808              LDR      r0,|L1.148|
+000072  f7fffffe          BL       QEIVelocityConfigure
+;;;69       //QEIFilterConfigure(QEI0_BASE, QEI_FILTCNT_2);
 ;;;70     
 ;;;71     
 ;;;72     }
-000080  bd10              POP      {r4,pc}
+000076  bd10              POP      {r4,pc}
 ;;;73     
                           ENDP
 
-000082  0000              DCW      0x0000
-                  |L1.132|
+                  |L1.120|
                           DCD      0xf0000803
-                  |L1.136|
+                  |L1.124|
                           DCD      0xf0004400
-                  |L1.140|
+                  |L1.128|
                           DCD      0x4c4f434b
-                  |L1.144|
+                  |L1.132|
                           DCD      0x40007520
-                  |L1.148|
+                  |L1.136|
                           DCD      0x00031806
-                  |L1.152|
+                  |L1.140|
                           DCD      0x00031c06
-                  |L1.156|
+                  |L1.144|
                           DCD      0x40007000
-                  |L1.160|
+                  |L1.148|
                           DCD      0x4002c000
+                  |L1.152|
+                          DCD      0x00027100

@@ -14,7 +14,7 @@
 #include "Encoder.h"
 #include "tm4c123gh6pm.h"	//Header file accesses registers in TMC123 microcontroller
 
-
+//Defining variables to easily use for the rest of the project
 #define GPIO_PORTF_DATA_R       (*((volatile unsigned long *)0x400073FC))
 #define GPIO_PORTF_DIR_R        (*((volatile unsigned long *)0x40007400))
 #define GPIO_PORTF_AFSEL_R      (*((volatile unsigned long *)0x40007420))

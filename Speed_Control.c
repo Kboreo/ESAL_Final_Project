@@ -17,14 +17,15 @@
 #include "tm4c123gh6pm.h"	//Header file accesses registers in TMC123 microcontroller
 #include "Speed_Control.h"
 
-	double Target_Speed;
-	uint32_t Period;
-	uint32_t Speed;
-	double Error[4] = {0,0,0,0}, speed2;
-	double DutyC, vol, Ki, Kd;	
+	double Target_Speed;		//Double that is used for setting the target speed of the system. 
+	uint32_t Period;	//Uint used for the period.
+	uint32_t Speed;	//Uint used speed 
+	double Error[4] = {0,0,0,0}, speed2;	//Initilization of a double array that is used for error calculations
+	double DutyC, vol, Ki, Kd;	//Doubles used for Duty Cycle and other variables used for the control system
 
 	
-	
+//Function used for the speed control.
+//Inputs: Speed and user requested speed	
 void Speed_Control(double Speed, double uSpeed)
 	
 {	
@@ -64,7 +65,7 @@ void Speed_Control(double Speed, double uSpeed)
 				DutyC = vol/10*640;	
 	
 				//sets limits for duty cycle
-				if (DutyC < 4) {
+				if (DutyC < 4){
 					DutyC = 4;
 					}
 				if (DutyC > 640){
@@ -76,15 +77,14 @@ void Speed_Control(double Speed, double uSpeed)
 
 			}
 	
-		Speed = ReadEncoder();
+		Speed = ReadEncoder(); //Set varible equal to the read speed from the "ReadEncoder" function.
 		printf("Speed is, IN CONTROL %.2f rps \n\n", Speed);
 	
 		//will exit GPIO when SW2 is pressed
 		x = GPIOPinRead(GPIO_PORTF_BASE, GPIO_PIN_0); // set x equal to the output of button SW2 		
 			if ( x == 0){
 					i = 0;
-			}	
-
+			}
 	}
 		//turns off motor before exiting 
 		stopmotor();

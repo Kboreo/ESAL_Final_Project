@@ -20286,14 +20286,15 @@ double ReadEncoder(void);
 void Speed_Control(double Speed, double uSpeed);
 #line 19 "Speed_Control.c"
 
-	double Target_Speed;
-	uint32_t Period;
-	uint32_t Speed;
-	double Error[4] = {0,0,0,0}, speed2;
+	double Target_Speed;		
+	uint32_t Period;	
+	uint32_t Speed;	
+	double Error[4] = {0,0,0,0}, speed2;	
 	double DutyC, vol, Ki, Kd;	
 
 	
-	
+
+
 void Speed_Control(double Speed, double uSpeed)
 	
 {	
@@ -20333,7 +20334,7 @@ void Speed_Control(double Speed, double uSpeed)
 				DutyC = vol/10*640;	
 	
 				
-				if (DutyC < 4) {
+				if (DutyC < 4){
 					DutyC = 4;
 					}
 				if (DutyC > 640){
@@ -20345,15 +20346,14 @@ void Speed_Control(double Speed, double uSpeed)
 
 			}
 	
-		Speed = ReadEncoder();
+		Speed = ReadEncoder(); 
 		printf("Speed is, IN CONTROL %.2f rps \n\n", Speed);
 	
 		
 		x = GPIOPinRead(0x40025000, 0x00000001); 
 			if ( x == 0){
 					i = 0;
-			}	
-
+			}
 	}
 		
 		stopmotor();

@@ -67429,14 +67429,15 @@ W "Speed_Control.h" 38 49 last line of file ends without a newline
 Nvoid Speed_Control(double Speed, double uSpeed);
 L 19 "Speed_Control.c" 2
 N
-N	double Target_Speed;
-N	uint32_t Period;
-N	uint32_t Speed;
-N	double Error[4] = {0,0,0,0}, speed2;
-N	double DutyC, vol, Ki, Kd;	
+N	double Target_Speed;		//Double that is used for setting the target speed of the system. 
+N	uint32_t Period;	//Uint used for the period.
+N	uint32_t Speed;	//Uint used speed 
+N	double Error[4] = {0,0,0,0}, speed2;	//Initilization of a double array that is used for error calculations
+N	double DutyC, vol, Ki, Kd;	//Doubles used for Duty Cycle and other variables used for the control system
 N
 N	
-N	
+N//Function used for the speed control.
+N//Inputs: Speed and user requested speed	
 Nvoid Speed_Control(double Speed, double uSpeed)
 N	
 N{	
@@ -67463,7 +67464,7 @@ N				}
 N				}
 N				
 N				//saves errors from the last 4 error calcs
-W "Speed_Control.c" 54 5 subscript out of range
+W "Speed_Control.c" 55 5 subscript out of range
 N				Error[4]=Error[3];
 N				Error[3]=Error[2];
 N				Error[2]=Error[1];
@@ -67477,7 +67478,7 @@ N				vol = vol + .035 * Error[1] + .00001247*Ki - .0000000000000000027691*Kd;
 N				DutyC = vol/10*640;	
 N	
 N				//sets limits for duty cycle
-N				if (DutyC < 4) {
+N				if (DutyC < 4){
 N					DutyC = 4;
 N					}
 N				if (DutyC > 640){
@@ -67490,7 +67491,7 @@ X				PWMPulseWidthSet(0x40029000, 0x00000106, DutyC);
 N
 N			}
 N	
-N		Speed = ReadEncoder();
+N		Speed = ReadEncoder(); //Set varible equal to the read speed from the "ReadEncoder" function.
 N		printf("Speed is, IN CONTROL %.2f rps \n\n", Speed);
 N	
 N		//will exit GPIO when SW2 is pressed
@@ -67498,8 +67499,7 @@ N		x = GPIOPinRead(GPIO_PORTF_BASE, GPIO_PIN_0); // set x equal to the output of
 X		x = GPIOPinRead(0x40025000, 0x00000001); 
 N			if ( x == 0){
 N					i = 0;
-N			}	
-N
+N			}
 N	}
 N		//turns off motor before exiting 
 W "Speed_Control.c" 90 3 function "stopmotor" declared implicitly

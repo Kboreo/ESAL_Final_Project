@@ -616,7 +616,6 @@ ARM Macro Assembler    Page 10
 Command Line: --debug --diag_suppress=9931 --cpu=Cortex-M4.fp --apcs=interwork 
 --depend=.\rvmdk\startup_rvmdk.d -o.\rvmdk\startup_rvmdk.o -I.\RTE\_project -IC
 :\Keil_v5\ARM\PACK\ARM\CMSIS\5.0.1\CMSIS\Include -IC:\Keil_v5\ARM\PACK\Keil\TM4
-C_DFP\1.1.0\Device\Include\TM4C123 --predefine="__EVAL SETA 1" --predefine="__M
-ICROLIB SETA 1" --predefine="__UVISION_VERSION SETA 524" --predefine="_RTE_ SET
-A 1" --predefine="TM4C123GH6PM SETA 1" --list=.\rvmdk\startup_rvmdk.lst startup
-_rvmdk.S
+C_DFP\1.1.0\Device\Include\TM4C123 --predefine="__MICROLIB SETA 1" --predefine=
+"__UVISION_VERSION SETA 524" --predefine="_RTE_ SETA 1" --predefine="TM4C123GH6
+PM SETA 1" --list=.\rvmdk\startup_rvmdk.lst startup_rvmdk.S

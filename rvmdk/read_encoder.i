@@ -20016,8 +20016,8 @@ void pinReadAndWrite(uint32_t ui32Loop,uint8_t temp);
 #line 17 "Read_Encoder.c"
 #line 18 "Read_Encoder.c"
 
-	double ticks;
-	double Espeed;
+	double ticks;		
+	double Espeed;	
 	
 double ReadEncoder(void)
 	{		

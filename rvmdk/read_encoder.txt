@@ -4,105 +4,60 @@
 
                           AREA ||i.ReadEncoder||, CODE, READONLY, ALIGN=2
 
-                          REQUIRE _printf_percent
-                          REQUIRE _printf_widthprec
-                          REQUIRE _printf_f
-                          REQUIRE _printf_fp_dec
                   ReadEncoder PROC
-;;;10     	//double ReadEncoder(void)
-;;;11     	double ReadEncoder(void)
-000000  b570              PUSH     {r4-r6,lr}
-;;;12     	{	
-;;;13     	for (int y = 0; y<180; y++)
-000002  2400              MOVS     r4,#0
-000004  e027              B        |L1.86|
-                  |L1.6|
-;;;14     		{
-;;;15     		for (int i = 0; i<2000; i++)
-000006  2000              MOVS     r0,#0
-000008  e001              B        |L1.14|
-                  |L1.10|
-;;;16     	{
-;;;17     		__nop();
-00000a  bf00              NOP      
-00000c  1c40              ADDS     r0,r0,#1              ;15
-                  |L1.14|
-00000e  f5b06ffa          CMP      r0,#0x7d0             ;15
-000012  dbfa              BLT      |L1.10|
-;;;18     	}
-;;;19     	
-;;;20     	//for later use
-;;;21     	//int  posistion = QEIPositionGet(QEI0_BASE);
-;;;22     	//int direction = QEIDirectionGet(QEI0_BASE);
-;;;23     	
-;;;24     //Read encoder speed
+;;;21     	
+;;;22     double ReadEncoder(void)
+000000  b510              PUSH     {r4,lr}
+;;;23     	{		
+000002  ed2d8b02          VPUSH    {d8}
+;;;24     	//Read encoder speed
 ;;;25     	ticks = QEIVelocityGet(QEI0_BASE);
-000014  4812              LDR      r0,|L1.96|
-000016  f7fffffe          BL       QEIVelocityGet
-00001a  4605              MOV      r5,r0
-00001c  f7fffffe          BL       __aeabi_ui2d
-000020  4a10              LDR      r2,|L1.100|
-000022  c203              STM      r2!,{r0,r1}
+000006  4811              LDR      r0,|L1.76|
+000008  f7fffffe          BL       QEIVelocityGet
+00000c  4604              MOV      r4,r0
+00000e  f7fffffe          BL       __aeabi_ui2d
+000012  4a0f              LDR      r2,|L1.80|
+000014  c203              STM      r2!,{r0,r1}
 ;;;26     	
-;;;27     	//using a 2.5cm wheel, speed in cm per second
-;;;28     	Espeed = ticks / 19.2;
-000024  ed9f0b10          VLDR     d0,|L1.104|
-000028  ec532b10          VMOV     r2,r3,d0
-00002c  480d              LDR      r0,|L1.100|
-00002e  ed900b00          VLDR     d0,[r0,#0]
-000032  ec510b10          VMOV     r0,r1,d0
-000036  f7fffffe          BL       __aeabi_ddiv
-00003a  4a0d              LDR      r2,|L1.112|
-00003c  c203              STM      r2!,{r0,r1}
-;;;29     	
-;;;30     	printf("Speed is %.2f rps", Espeed);
-00003e  480c              LDR      r0,|L1.112|
-000040  ed900b00          VLDR     d0,[r0,#0]
-000044  ec532b10          VMOV     r2,r3,d0
-000048  a00a              ADR      r0,|L1.116|
-00004a  f7fffffe          BL       __2printf
-;;;31     ///This is only a test
-;;;32     	
-;;;33     return Espeed;	
-00004e  4808              LDR      r0,|L1.112|
-000050  ed900b00          VLDR     d0,[r0,#0]
-                  |L1.84|
-;;;34     }
-;;;35     	}
-000054  bd70              POP      {r4-r6,pc}
-                  |L1.86|
-000056  2cb4              CMP      r4,#0xb4              ;13
-000058  dbd5              BLT      |L1.6|
-00005a  bf00              NOP      
-00005c  e7fa              B        |L1.84|
+;;;27     	// speed in rad/seco	
+;;;28     	Espeed = ticks * 6.283185 / 19.2;
+000016  ed9f0b0f          VLDR     d0,|L1.84|
+00001a  ec532b10          VMOV     r2,r3,d0
+00001e  480c              LDR      r0,|L1.80|
+000020  ed900b00          VLDR     d0,[r0,#0]
+000024  ec510b10          VMOV     r0,r1,d0
+000028  f7fffffe          BL       __aeabi_dmul
+00002c  ec410b18          VMOV     d8,r0,r1
+000030  ed9f0b0a          VLDR     d0,|L1.92|
+000034  ec532b10          VMOV     r2,r3,d0
+000038  f7fffffe          BL       __aeabi_ddiv
+00003c  4a09              LDR      r2,|L1.100|
+00003e  c203              STM      r2!,{r0,r1}
+;;;29     	return Espeed;	
+000040  4808              LDR      r0,|L1.100|
+000042  ed900b00          VLDR     d0,[r0,#0]
+;;;30     	}
+000046  ecbd8b02          VPOP     {d8}
+00004a  bd10              POP      {r4,pc}
+;;;31     
                           ENDP
 
-00005e  0000              DCW      0x0000
-                  |L1.96|
+                  |L1.76|
                           DCD      0x4002c000
-                  |L1.100|
+                  |L1.80|
                           DCD      ticks
-                  |L1.104|
-000068  33333333          DCFD     0x4033333333333333 ; 19.199999999999999
-00006c  40333333
-                  |L1.112|
+                  |L1.84|
+000054  3fa6defc          DCFD     0x401921fb3fa6defc ; 6.2831849999999996
+000058  401921fb
+                  |L1.92|
+00005c  33333333          DCFD     0x4033333333333333 ; 19.199999999999999
+000060  40333333
+                  |L1.100|
                           DCD      Espeed
-                  |L1.116|
-000074  53706565          DCB      "Speed is %.2f rps",0
-000078  64206973
-00007c  20252e32
-000080  66207270
-000084  7300    
-000086  00                DCB      0
-000087  00                DCB      0
 
                           AREA ||.data||, DATA, ALIGN=3
 
-                  i
-                          %        8
                   ticks
                           %        8
                   Espeed
                           %        8
-                  x
-                          DCD      0x00000000

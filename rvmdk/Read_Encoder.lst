@@ -67153,8 +67153,8 @@ N
 L 17 "Read_Encoder.c" 2
 N#include "tm4c123gh6pm.h"	//Header file accesses registers in TMC123 microcontroller
 N
-N	double ticks;
-N	double Espeed;
+N	double ticks;		//Double used in the calulation for the encoder speed.
+N	double Espeed;	// Double used for the Speed read from the encoder.
 N	
 Ndouble ReadEncoder(void)
 N	{		

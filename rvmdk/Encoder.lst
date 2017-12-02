@@ -1,32 +1,19 @@
-L 1 "Float_Setup.c"
+L 1 "Encoder.c"
 N/*********************************************************************************************************************************
 N**
-N** Module Name:   Float_Setup.c
+N** Module Name:   Encoder.c
 N**
-N** Module Description: Set up for floating point
+N** Module Description: C file for the code that handles all of the Encoder functionality
 N**
 N**********************************************************************************************************************************
 N**
-N** Author(s):		Kodey Boreo, Phillip Tesolin 
+N** Author(s):		Kodey Boreo, Phillip Tesolin
 N**
 N**********************************************************************************************************************************/
 N
-N
-N#include "Float_Setup.h"
-L 1 "Float_Setup.h" 1
-N/*********************************************************************************************************************************
-N**
-N** Module Name:   Float_Setup.c
-N**
-N** Module Description: Set up for floating point
-N**
-N**********************************************************************************************************************************
-N**
-N** Author(s):		Kodey Boreo, Phillip Tesolin 
-N**
-N**********************************************************************************************************************************/
-N
-N
+N//Includes
+N#include "Encoder.h"
+L 1 "Encoder.h" 1
 N#include "driverlib/pin_map.h"
 L 1 "driverlib/pin_map.h" 1
 N//*****************************************************************************
@@ -20982,7 +20969,7 @@ S
 N#endif // PART_TM4C129XNCZAD
 N
 N#endif // __DRIVERLIB_PIN_MAP_H__
-L 15 "Float_Setup.h" 2
+L 2 "Encoder.h" 2
 N#include <stdint.h>
 L 1 "C:\Keil_v5\ARM\ARMCC\Bin\..\include\stdint.h" 1
 N/* Copyright (C) ARM Ltd., 1999,2014 */
@@ -21314,7 +21301,7 @@ N
 N#endif /* __stdint_h */
 N
 N/* end of stdint.h */
-L 16 "Float_Setup.h" 2
+L 3 "Encoder.h" 2
 N#include <stdio.h>
 L 1 "C:\Keil_v5\ARM\ARMCC\Bin\..\include\stdio.h" 1
 N/* stdio.h: ANSI 'C' (X3J11 Oct 88) library header, section 4.9 */
@@ -22427,7 +22414,7 @@ N#endif /* ndef __stdio_h */
 N
 N/* end of stdio.h */
 N
-L 17 "Float_Setup.h" 2
+L 4 "Encoder.h" 2
 N#include <stdbool.h>
 L 1 "C:\Keil_v5\ARM\ARMCC\Bin\..\include\stdbool.h" 1
 N/* stdbool.h: ISO/IEC 9899:1999 (C99), section 7.16 */
@@ -22457,7 +22444,7 @@ N  #endif
 N
 N#endif /* __bool_true_false_are_defined */
 N
-L 18 "Float_Setup.h" 2
+L 5 "Encoder.h" 2
 N#include <math.h>
 L 1 "C:\Keil_v5\ARM\ARMCC\Bin\..\include\math.h" 1
 N/*
@@ -24019,7 +24006,7 @@ N
 N#endif /* __math_h */
 N
 N/* end of math.h */
-L 19 "Float_Setup.h" 2
+L 6 "Encoder.h" 2
 N#include "inc/hw_gpio.h"
 L 1 "inc/hw_gpio.h" 1
 N//*****************************************************************************
@@ -24235,7 +24222,7 @@ N#define GPIO_PC_EDM2_S          4
 N#define GPIO_PC_EDM1_S          2
 N
 N#endif // __HW_GPIO_H__
-L 20 "Float_Setup.h" 2
+L 7 "Encoder.h" 2
 N#include "inc/hw_types.h"
 L 1 "inc/hw_types.h" 1
 N//*****************************************************************************
@@ -24398,7 +24385,7 @@ N#define CLASS_IS_SNOWFLAKE CLASS_IS_TM4C123
 N#endif
 N
 N#endif // __HW_TYPES_H__
-L 21 "Float_Setup.h" 2
+L 8 "Encoder.h" 2
 N#include "inc/hw_memmap.h"
 L 1 "inc/hw_memmap.h" 1
 N//*****************************************************************************
@@ -24552,7 +24539,7 @@ N#define NVIC_BASE               0xE000E000  // Nested Vectored Interrupt Ctrl
 N#define TPIU_BASE               0xE0040000  // Trace Port Interface Unit
 N
 N#endif // __HW_MEMMAP_H__
-L 22 "Float_Setup.h" 2
+L 9 "Encoder.h" 2
 N#include "driverlib/sysctl.h"
 L 1 "driverlib/sysctl.h" 1
 N//*****************************************************************************
@@ -25224,7 +25211,7 @@ S}
 N#endif
 N
 N#endif // __DRIVERLIB_SYSCTL_H__
-L 23 "Float_Setup.h" 2
+L 10 "Encoder.h" 2
 N#include "driverlib/pin_map.h"
 N#include "driverlib/gpio.h"
 L 1 "driverlib/gpio.h" 1
@@ -25433,7 +25420,7 @@ S}
 N#endif
 N
 N#endif // __DRIVERLIB_GPIO_H__
-L 25 "Float_Setup.h" 2
+L 12 "Encoder.h" 2
 N#include "driverlib/pwm.h"
 L 1 "driverlib/pwm.h" 1
 N//*****************************************************************************
@@ -25780,7 +25767,7 @@ S}
 N#endif
 N
 N#endif // __DRIVERLIB_PWM_H__
-L 26 "Float_Setup.h" 2
+L 13 "Encoder.h" 2
 N#include "driverlib/uart.h"
 L 1 "driverlib/uart.h" 1
 N//*****************************************************************************
@@ -26046,7 +26033,7 @@ S}
 N#endif
 N
 N#endif // __DRIVERLIB_UART_H__
-L 27 "Float_Setup.h" 2
+L 14 "Encoder.h" 2
 N#include "driverlib/qei.h"
 L 1 "driverlib/qei.h" 1
 N//*****************************************************************************
@@ -26205,7 +26192,7 @@ S}
 N#endif
 N
 N#endif // __DRIVERLIB_QEI_H__
-L 28 "Float_Setup.h" 2
+L 15 "Encoder.h" 2
 N#include <stdint.h>
 N#include <stdbool.h>
 N#include "driverlib/fpu.h"
@@ -26323,7 +26310,7 @@ S}
 N#endif
 N
 N#endif // __DRIVERLIB_FPU_H__
-L 31 "Float_Setup.h" 2
+L 18 "Encoder.h" 2
 N#include "sysctl.h"
 N#include "hw_memmap.h"
 N#include "tm4c123gh6pm.h"
@@ -39411,129 +39398,7 @@ N
 N#endif
 N
 N#endif // __TM4C123GH6PM_H__
-L 34 "Float_Setup.h" 2
-N#include "hw_types.h"
-W "Float_Setup.h" 35 25 last line of file ends without a newline
-N#include "Uart_helper.h"
-L 1 ".\src\Uart_helper.h" 1
-N/*********************************************************************************************************************************
-N**
-N** Module Name:   Uart_helper.h
-N**
-N** Module Description: Set up for Uart
-N**
-N**********************************************************************************************************************************
-N**
-N** Author(s):		Kodey Boreo, Phillip Tesolin 
-N**
-N**********************************************************************************************************************************/
-N
-N
-N#include <stdbool.h>
-N#include <stdint.h>
-N#include <stdio.h>
-N#include "sysctl.h"
-N#include "hw_memmap.h"
-N#include "gpio.h"
-N#include "uart.h"
-N#include "../inc/tm4c123gh6pm.h"
-N#include "pin_map.h"
-N
-N
-Nvoid UartSetup(void);		//sets up Uart for my configuration using library
-N
-N//redirect for printf.
-Nint fputc(int ch, FILE *f);
-N
-N//redirect input from serial port
-N//read info edit by: Sir Hutson
-Nint fgetc(FILE *f);
-N
-N
-N//MMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMM
-N//MMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMM
-N//MMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMM
-N//MMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMNNNNNNNMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMM
-N//MMMMMMMMMMMMMMMMMMMMMMMMMMMMMMM8O+++?7IIII7ZNMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMM
-N//MMMMMMMMMMMMMMMMMMMMMMMMMMMMMD+++II7IIIIIII7IIODMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMM
-N//MMMMMMMMMMMMMMMMMMMMMMMMMMMMN+?IIIIIIIIIIIIIIIIINMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMM
-N//MMMMMMMMMMMMMMMMMMMMMMMMMMN7IIIIIIIIIDIIIIIIIIII77NMMMMMMMMMMMMMMMMMMMMMMMMMMMMM
-N//MMMMMMMMMMMMMMMMMMMMDNZI7IIIIIIIIIIIID,.NZ7IIIIIIIZMMMMMMMMMMMMMMMMMMMMMMMMMMMMM
-N//MMMMMMMMMMMMMMMMMD77IIIIIIIIIIIIIIIDN.,DNNIIIIIIIIIDMMMMMMMMMMMMMMMMMMMMMMMMMMMM
-N//MMMMMMMMMMMMMMMMNOZOIIIIIIIIIIIIIIONNNNNNNOIIIIIIIIZMMMMMMMMMMMMMMMMMMMMMMMMMMMM
-N//MMMMMMMMMMMMMMMMDZZOZIIIIIIIIIIII7NNNNNNNDOIIIIIIIIINMMMMMMMMMMMMMMMMMMMMMMMMMMM
-N//MMMMMMMMMMMMMMMMN8888ZND7IIIIIIIINZNNNNDD,7IIIIIIIIIDMMMMMMMMMMMMMMMMMMMMMMMMMMM
-N//MMMMMMMMMMMMMMMMN88888888N$IIIIII7DOZZZZ+N7IIIIIIIIIMMMMMMMMMMMMMMMMMMMMMMMMMMMM
-N//MMMMMMMMMMMMMMMMMND88888888DZIIIIIII7ODN$77IIIIIIIINMMMMMMMMMMMMMMMMMMMMMMMMMMMM
-N//MMMMMMMMMMMMMMMMMMDD88888888O88IIIIIIIIIIIIIIIIIIIINMMMMMMMMMMMMMMM8MMO=MMMMMMMM
-N//MMMMMMMMMMMMMMMMMMMMMN888888D$$8IIIIIIIIIIIIIIIIII7MMMMMMMMMMMMMMMM7+++++MMMMMMM
-N//MMMMMMMMMMMMMMMMMMMMMMDN8O8O??$$$D8OIIIIIIIIIIIIIIOMMMMMMMMMMMMMMM$=+++=+7MMMMMM
-N//MMMMMMMMMMMMMNMMMMMMMMM88N?+???7$$8IIIIIIIIIIIIIIIDMMMMMMMMMMMMMMM=++++++=MMMMMM
-N//MMMMMMMMMMMMDIINMMMMMNN8D+?++??$NIIIIIIIIIIIIIIII7MMMMMMMMMMMMMMMM=+++++++=MMMMM
-N//MMMMMMMMMM8IIIIII?OMDD88O??O?IN7IIIIIIIIIIIIIIIIIDMMMMMMMMMMMMMN=+=+++777++OMMMM
-N//MMMMMMMMMMD7IIIIIII+NN887??D8IIIIIIIIIIIIIIIIIIIINM8DZ7IIIIIDMM=+++++?777777ZMMM
-N//MMMMMMMMM8$7IIIIIII7DZNND7IIIIIIIII77IIIIIII77NZ=+++IIIIIII$MMM++++++7777777MMMM
-N//MMMMMMMMMMMD7IIIIIIIIINN$III$ONNNO777IIII7ID=++++IIIIIIIIIIIIM$=+++++?77777ZMMMM
-N//MMMMMMMMMMMMM7IIIIIIIIIII77?N777777IIIIIID7I77IIIIIIIIIIIIIIDMM8=+???7777777MMMM
-N//MMMMMMMMMMMMMNIIIIIIIIIIII78NNNO77IIIIIIIIIIIIIIIIIIIIIIIIIZNMMM+=777777777ZMMMM
-N//MMMMMMMMMMMMMMM87IIIIIIIII$~~~~~=NIIIIIIIIIIIIIIIIIIIIIIIZNMMMMM?7$777I777$MMMMM
-N//MMMMMMMMMMMMMMMMD77IIIII$+~~~~~~~~I7IIIIIIIIIIIIIIIII77DMMMMMMMMMMMMN7ID7DMMMMMM
-N//MMMMMMMMMMMMMMMMMD$7III7=~~~~~~~~~~I7IIIIIIIIIIIII7788MMMMMMMMMMMMMMM7I$MMMMMMMM
-N//MMMMMMMMMMMMMMMMMMMN77IN~~~~~~~~~~~~87IIIIIIII777ONMMMMMMMMMMMMMMMMMM7IIMMMMMMMM
-N//MMMMMMMMMMMMMMMMMMMMMND~~~~~~~~~~~~~~ZIIIIIII8NO7I7MMMMMMMMMMMMMMMMMM7IINMMMMMMM
-N//MMMMMMMMMMMMMMMMMMMMMM:~~~~~~~~~~~~~~87IIIIIIIIIIIINMMMMMMMMMMMMMMMMN7I$NMMMMMMM
-N//MMMMMMMMMMMMMMMMMMMMMN~~~~~~~~~~~~~~~+IIIIIIIIIIIIINMMMMMMMMMMMMMMMMNII8NMMMMMMM
-N//MMMMMMMMMMMMMMMMMMMMM+~~~~~~~~~~~~~~~~Z7IIIIIIIIIIIOMMMMMMMMMMMMMMM87I7NNMMMMMMM
-N//MMMMMMMMMMMMMMMMMMMMD~~~~~~~~~~~~~~~~~NIIIIIIIIIIIIIDMMMMMMMMMMMMMNIII$~DMMMMMMM
-N//MMMMMMMMMMMMMMMMMMMMN~~~~~~~~~~~~~~~~~NIIIIIIIIIIIIINMMMMMMMMMMMMD$IIIN~MMMMMMMM
-N//MMMMMMMMMMMMMMMMMMMMN~~~~~~~~~~~~~~~~~NIIIIIIIIIIIIINMMMMMMMMMMMNIIII8~NMMMMMMMM
-N//MMMMMMMMMMMMMMMMMMMMN~~~~~~~~~~~~~~~~~Z7IIIIIIIIIIIIDMMMMMMMMMD$7III7?~DMMMMMMMM
-N//MMMMMMMMMMMMMN=+?IIIN~~~~~~~~~~~~~~~~=IIIIIIIIIIIIIIZMMMMMM8NIIIIIIID~NMMMMMMMMM
-N//MMMMMMMMMMMN7++IIIII7~~~~~~~~~~~~~~~~Z77IIIIIIIIIIII$NNN87IIIIIIII78~OMMMMMMMMMM
-N//MMMMMMMMMMM?++IIIIII7D~~~~~~~~~~~~~~~NIIIIIIIIIIIIII$7I7IIIIIIII7Z?+8MMMMMMMMMMM
-N//MMMMMMMMMMM+?IIIIII777~~~~~~~~~~~~~ZZIIIIIIIIIIIIIII87IIIIIIIII7D++NMMMMMMMMMMMM
-N//MMMMMMMMMM8IIIII777777D=~~~~~~~~~~D7IIIIIIIIIIIIIII7N777IIIIIID7+?DMMMMMMMMMMMMM
-N//NNNN777ONNNIII777777777O+~~~~~~~~NIIIIIIIIIIIIIIIII$Z7777778D+++ZDMMMMMMMMMMMMMM
-N//MD~,.7III7IZII7777777777O+++=~~~N7IIIIIIIIIIIIIIII7N7777ND++++=NMMMMMMMMMMMMMMMM
-N//MMMNNIIIIIIIII77777777777$D+++++Z777IIIIIIIIIIII777O$?++++++IDMMMMMMMMMMMMMMMMMM
-N//MMMMMNZ777777I777777777777Z8DI?+$777I7IIIIIIIII777O++++++?OMMMMMMMMMMMMMMMMMMMMM
-N//MMMMMMM877777777777777DNMMMMMMM8N777777IIIII777777O++?$NMMMMMMMMMMMMMMMMMMMMMMMM
-N//MMMMMMMMMN$77777777$NMMMMMMMMMMMM$777777777777777NNDMMMMMMMMMMMMMMMMMMMMMMMMMMMM
-N//MMMMMMMMMMMN$777777DMMMMMMMMMMMMMMD7777777777777DMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMM
-N//MMMMMMMMMMMMMN7777NMMMMMMMMMMMMMMMMN7777777777ODMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMM
-N//MMMMMMMMMMMMMMMMNDMMMMMMMMMMMMMMMMMMO$7777777DZMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMM
-N//MMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMD77777777777DMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMM
-N//MMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMM7NDN7DN87NND8MMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMM
-N//MMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMNN=O7?~I7?~NMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMM
-N//MMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMOMMM~DNN8MMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMM
-N//MMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMM
-N//MMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMM
-N//MMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMM
-N
-L 36 "Float_Setup.h" 2
-L 15 "Float_Setup.c" 2
-N#include "Encoder.h"
-L 1 "Encoder.h" 1
-N#include "driverlib/pin_map.h"
-N#include <stdint.h>
-N#include <stdio.h>
-N#include <stdbool.h>
-N#include <math.h>
-N#include "inc/hw_gpio.h"
-N#include "inc/hw_types.h"
-N#include "inc/hw_memmap.h"
-N#include "driverlib/sysctl.h"
-N#include "driverlib/pin_map.h"
-N#include "driverlib/gpio.h"
-N#include "driverlib/pwm.h"
-N#include "driverlib/uart.h"
-N#include "driverlib/qei.h"
-N#include <stdint.h>
-N#include <stdbool.h>
-N#include "driverlib/fpu.h"
-N#include "sysctl.h"
-N#include "hw_memmap.h"
-N#include "tm4c123gh6pm.h"
+L 21 "Encoder.h" 2
 N#include "hw_types.h"
 N#include "Uart_helper.h"
 L 1 ".\src\Uart_helper.h" 1
@@ -39777,19 +39642,92 @@ N
 N
 W "Encoder.h" 28 85 last line of file ends without a newline
 Nvoid QEIConfigure(uint32_t ui32Base, uint32_t ui32Config, uint32_t ui32MaxPosition);
-L 16 "Float_Setup.c" 2
-N#include "tm4c123gh6pm.h"
+L 15 "Encoder.c" 2
+N#include "tm4c123gh6pm.h"	//Header file accesses registers in TMC123 microcontroller
+N
+N//Defining variables to easily use for the rest of the project
+W "Encoder.c" 18 9 incompatible redefinition of macro "GPIO_PORTF_DATA_R"  (declared at line 701 of ".\inc\tm4c123gh6pm.h")
+N#define GPIO_PORTF_DATA_R       (*((volatile unsigned long *)0x400073FC))
+W "Encoder.c" 19 9 incompatible redefinition of macro "GPIO_PORTF_DIR_R"  (declared at line 702 of ".\inc\tm4c123gh6pm.h")
+N#define GPIO_PORTF_DIR_R        (*((volatile unsigned long *)0x40007400))
+W "Encoder.c" 20 9 incompatible redefinition of macro "GPIO_PORTF_AFSEL_R"  (declared at line 710 of ".\inc\tm4c123gh6pm.h")
+N#define GPIO_PORTF_AFSEL_R      (*((volatile unsigned long *)0x40007420))
+W "Encoder.c" 21 9 incompatible redefinition of macro "GPIO_PORTF_PUR_R"  (declared at line 715 of ".\inc\tm4c123gh6pm.h")
+N#define GPIO_PORTF_PUR_R        (*((volatile unsigned long *)0x40007510))
+W "Encoder.c" 22 9 incompatible redefinition of macro "GPIO_PORTF_DEN_R"  (declared at line 718 of ".\inc\tm4c123gh6pm.h")
+N#define GPIO_PORTF_DEN_R        (*((volatile unsigned long *)0x4000751C))
+W "Encoder.c" 23 9 incompatible redefinition of macro "GPIO_PORTF_LOCK_R"  (declared at line 719 of ".\inc\tm4c123gh6pm.h")
+N#define GPIO_PORTF_LOCK_R       (*((volatile unsigned long *)0x40007520))
+W "Encoder.c" 24 9 incompatible redefinition of macro "GPIO_PORTF_CR_R"  (declared at line 720 of ".\inc\tm4c123gh6pm.h")
+N#define GPIO_PORTF_CR_R         (*((volatile unsigned long *)0x40007524))
+W "Encoder.c" 25 9 incompatible redefinition of macro "GPIO_PORTF_AMSEL_R"  (declared at line 721 of ".\inc\tm4c123gh6pm.h")
+N#define GPIO_PORTF_AMSEL_R      (*((volatile unsigned long *)0x40007528))
+W "Encoder.c" 26 9 incompatible redefinition of macro "GPIO_PORTF_PCTL_R"  (declared at line 722 of ".\inc\tm4c123gh6pm.h")
+N#define GPIO_PORTF_PCTL_R       (*((volatile unsigned long *)0x4000752C))
+W "Encoder.c" 27 9 incompatible redefinition of macro "SYSCTL_RCGC2_R"  (declared at line 2059 of ".\inc\tm4c123gh6pm.h")
+N#define SYSCTL_RCGC2_R          (*((volatile unsigned long *)0x400FE108))
+W "Encoder.c" 28 9 incompatible redefinition of macro "SYSCTL_RCGCGPIO_R"  (declared at line 2113 of ".\inc\tm4c123gh6pm.h")
+N#define SYSCTL_RCGCGPIO_R				(*((volatile unsigned long *)0x400FE644))
 N
 N
-N//Variables
-Nuint32_t first_Test[13];
-Nuint32_t test[13];
-N 
-N //Function used to setup the use of floating point.
-Nvoid FloatSetup()
+N
+N
+N//Function that sets up the Encoder
+Nvoid setupENCODER(void)
 N{
-N	first_Test[12] = 1;
-N	test[2] = 2;
+N//	uint32_t i,ticks;
+N//	double w,speed;
+N	//enables peripheral QEI
+N  SysCtlPeripheralEnable(SYSCTL_PERIPH_GPIOD);
+X  SysCtlPeripheralEnable(0xf0000803);
+N  SysCtlPeripheralEnable(SYSCTL_PERIPH_QEI0);
+X  SysCtlPeripheralEnable(0xf0004400);
+N
+N	//Unlock GPIOD7 
+N	HWREG(GPIO_PORTD_BASE + GPIO_O_LOCK) = GPIO_LOCK_KEY; //(0x4C4F434B)
+X	(*((volatile uint32_t *)(0x40007000 + 0x00000520))) = 0x4C4F434B; 
+N	HWREG(GPIO_PORTD_BASE + GPIO_O_CR) |= 0x80;
+X	(*((volatile uint32_t *)(0x40007000 + 0x00000524))) |= 0x80;
+N	HWREG(GPIO_PORTD_BASE + GPIO_O_LOCK) = 0;
+X	(*((volatile uint32_t *)(0x40007000 + 0x00000520))) = 0;
+N
+N	//Set Pins to be PHA0 and PHB0
+N	GPIOPinConfigure(GPIO_PD6_PHA0);
+X	GPIOPinConfigure(0x00031806);
+N	GPIOPinConfigure(GPIO_PD7_PHB0);
+X	GPIOPinConfigure(0x00031C06);
+N
+N	//Set GPIO pins for QEI. PhA0 -> PD6, PhB0 ->PD7.
+N	GPIOPinTypeQEI(GPIO_PORTD_BASE, GPIO_PIN_6 | GPIO_PIN_7);
+X	GPIOPinTypeQEI(0x40007000, 0x00000040 | 0x00000080);
+N	GPIOPadConfigSet(GPIO_PORTD_BASE, GPIO_PIN_6 |  GPIO_PIN_7, GPIO_STRENGTH_2MA, GPIO_PIN_TYPE_STD); // change push pull gpio
+X	GPIOPadConfigSet(0x40007000, 0x00000040 |  0x00000080, 0x00000001, 0x00000008); 
+N
+N	//Disable peripheral and int before configuration
+N	QEIIntDisable(QEI0_BASE,QEI_INTERROR | QEI_INTDIR | QEI_INTTIMER | QEI_INTINDEX); 
+X	QEIIntDisable(0x4002C000,0x00000008 | 0x00000004 | 0x00000002 | 0x00000001); 
+N
+N	// Configure quadrature encoder
+N	QEIConfigure(QEI0_BASE, (QEI_CONFIG_CAPTURE_A_B  | QEI_CONFIG_NO_RESET 	| QEI_CONFIG_QUADRATURE | QEI_CONFIG_NO_SWAP), 1919);  //maxima posicion
+X	QEIConfigure(0x4002C000, (0x00000008  | 0x00000000 	| 0x00000000 | 0x00000000), 1919);  
+N
+N
+N	
+N	// Enable the quadrature encoder, filter and velocity capture
+N	// clock tick = .625x10^-9 seconds.. 
+N	QEIEnable(QEI0_BASE);
+X	QEIEnable(0x4002C000);
+N	QEIFilterEnable(QEI0_BASE);
+X	QEIFilterEnable(0x4002C000);
+N	QEIVelocityEnable(QEI0_BASE);
+X	QEIVelocityEnable(0x4002C000);
+N	QEIVelocityConfigure(QEI0_BASE, QEI_VELDIV_1, 160000);//capture velocity after .01 seconds
+X	QEIVelocityConfigure(0x4002C000, 0x00000000, 160000);
+N  //QEIFilterConfigure(QEI0_BASE, QEI_FILTCNT_2);
+N
+N
 N}
-W "Float_Setup.c" 29 2 last line of file ends without a newline
-N 
+N
+N
+W "Encoder.c" 75 2 last line of file ends without a newline
+N	

@@ -20,6 +20,7 @@
 uint32_t first_Test[13];
 uint32_t test[13];
  
+ //Function used to setup the use of floating point.
 void FloatSetup()
 {
 	first_Test[12] = 1;

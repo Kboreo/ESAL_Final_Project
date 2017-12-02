@@ -54,6 +54,7 @@ void setupPWM(void)
 	PWMOutputState(PWM1_BASE, PWM_OUT_6_BIT, true);
 }
 
+//Function to stop motor
 void stopmotor(void)
 {
 	PWMPulseWidthSet(PWM1_BASE, PWM_OUT_6, 10);

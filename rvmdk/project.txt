@@ -5,91 +5,211 @@
                           AREA ||i.SetupHardware||, CODE, READONLY, ALIGN=1
 
                   SetupHardware PROC
-;;;14     
-;;;15     void SetupHardware()
+;;;43     
+;;;44     void SetupHardware()
 000000  b510              PUSH     {r4,lr}
-;;;16     {
-;;;17     	UartSetup();
-000002  f7fffffe          BL       UartSetup
-;;;18     	FloatSetup();
-000006  f7fffffe          BL       FloatSetup
-;;;19     	setupENCODER();	
-00000a  f7fffffe          BL       setupENCODER
-;;;20     	setupPWM();
-00000e  f7fffffe          BL       setupPWM
-;;;21     	FPUEnable();
-000012  f7fffffe          BL       FPUEnable
-;;;22     	FPULazyStackingEnable();
-000016  f7fffffe          BL       FPULazyStackingEnable
-;;;23     }
-00001a  bd10              POP      {r4,pc}
-;;;24     
+;;;45     {
+;;;46     	setup_IO(); //setup for pins
+000002  f7fffffe          BL       setup_IO
+;;;47     	UartSetup(); //setup for user input
+000006  f7fffffe          BL       UartSetup
+;;;48     	FloatSetup(); //setup to allow floating point print 
+00000a  f7fffffe          BL       FloatSetup
+;;;49     	setupENCODER();	 //setup to read motor encoder
+00000e  f7fffffe          BL       setupENCODER
+;;;50     	setupPWM();	//setup PWM output
+000012  f7fffffe          BL       setupPWM
+;;;51     	FPUEnable();	//inable floating point
+000016  f7fffffe          BL       FPUEnable
+;;;52     	FPULazyStackingEnable(); //inable lazy stack for floating point
+00001a  f7fffffe          BL       FPULazyStackingEnable
+;;;53     	SetupADC(); //setup to read motor voltage 
+00001e  f7fffffe          BL       SetupADC
+;;;54     	
+;;;55     }
+000022  bd10              POP      {r4,pc}
+;;;56     
                           ENDP
 
 
                           AREA ||i.main||, CODE, READONLY, ALIGN=2
 
                   main PROC
-;;;29     
-;;;30     int  main(void)
+;;;61     
+;;;62     int  main(void)
 000000  f7fffffe          BL       SetupHardware
-;;;31     {	
-;;;32     	SetupHardware();  //Initializes all of the required HardWare for the project.			
-;;;33     	printf("Hardware setup complete\n\n");		
-000004  a00c              ADR      r0,|L2.56|
+;;;63     {	
+;;;64     	char ctemp; //Temp char used for UART
+;;;65     	SetupHardware();  //Initializes all of the required HardWare for the project.			
+;;;66     	printf("Hardware setup complete\n\n");		
+000004  a004              ADR      r0,|L2.24|
 000006  f7fffffe          BL       __2printf
-;;;34     	printf("PWM setup complete \n\n");
-00000a  a012              ADR      r0,|L2.84|
+;;;67     	printf("PWM setup complete \n\n");
+00000a  a00a              ADR      r0,|L2.52|
 00000c  f7fffffe          BL       __2printf
-;;;35     	
-;;;36     	while(1)
-000010  e011              B        |L2.54|
-                  |L2.18|
-;;;37     	{	
-;;;38     		uSpeed = GetUserSpeed();
-000012  f7fffffe          BL       GetUserSpeed
-000016  4815              LDR      r0,|L2.108|
-000018  ed800b00          VSTR     d0,[r0,#0]
-;;;39     		speed = ReadEncoder();
-00001c  f7fffffe          BL       ReadEncoder
-000020  4813              LDR      r0,|L2.112|
-000022  ed800b00          VSTR     d0,[r0,#0]
-;;;40     		Speed_Control(speed, uSpeed); 
-000026  4811              LDR      r0,|L2.108|
-000028  ed901b00          VLDR     d1,[r0,#0]
-00002c  4810              LDR      r0,|L2.112|
-00002e  ed900b00          VLDR     d0,[r0,#0]
-000032  f7fffffe          BL       Speed_Control
-                  |L2.54|
-000036  e7ec              B        |L2.18|
-;;;41     	}
-;;;42     }
-;;;43     
+;;;68     	
+;;;69     	//program menu options contained in mainMenu
+;;;70     	mainMenu(ctemp);
+000010  4620              MOV      r0,r4
+000012  f7fffffe          BL       mainMenu
+;;;71     }	
+;;;72     	
                           ENDP
 
-                  |L2.56|
-000038  48617264          DCB      "Hardware setup complete\n\n",0
-00003c  77617265
-000040  20736574
-000044  75702063
-000048  6f6d706c
-00004c  6574650a
-000050  0a00    
-000052  00                DCB      0
-000053  00                DCB      0
-                  |L2.84|
-000054  50574d20          DCB      "PWM setup complete \n\n",0
-000058  73657475
-00005c  7020636f
-000060  6d706c65
-000064  7465200a
-000068  0a00    
-00006a  00                DCB      0
-00006b  00                DCB      0
-                  |L2.108|
+000016  0000              DCW      0x0000
+                  |L2.24|
+000018  48617264          DCB      "Hardware setup complete\n\n",0
+00001c  77617265
+000020  20736574
+000024  75702063
+000028  6f6d706c
+00002c  6574650a
+000030  0a00    
+000032  00                DCB      0
+000033  00                DCB      0
+                  |L2.52|
+000034  50574d20          DCB      "PWM setup complete \n\n",0
+000038  73657475
+00003c  7020636f
+000040  6d706c65
+000044  7465200a
+000048  0a00    
+00004a  00                DCB      0
+00004b  00                DCB      0
+
+                          AREA ||i.mainMenu||, CODE, READONLY, ALIGN=2
+
+                          REQUIRE _printf_percent
+                          REQUIRE _printf_c
+                          REQUIRE _printf_str
+                  mainMenu PROC
+;;;73     //Main menu that displays to the UART terminal for a HMI	
+;;;74     void mainMenu(char ctemp)
+000000  4604              MOV      r4,r0
+;;;75     {	
+;;;76     	//While loop for main user menu	
+;;;77     	while (1)
+000002  e027              B        |L3.84|
+                  |L3.4|
+;;;78     	{
+;;;79     		printf("What function would you like to test?\n 1.Calibrate\n 2.Speed Control\n"); //Askes user what function they would like to use.
+000004  4814              LDR      r0,|L3.88|
+000006  f7fffffe          BL       __2printf
+;;;80     		ctemp = getc(stdin); //Gets a char from the terminal from the user.
+00000a  4814              LDR      r0,|L3.92|
+00000c  f7fffffe          BL       getc
+000010  b2c4              UXTB     r4,r0
+;;;81     		printf("You entered %c\n\n",ctemp); //Lets the user know what they have selected
+000012  4621              MOV      r1,r4
+000014  a012              ADR      r0,|L3.96|
+000016  f7fffffe          BL       __2printf
+;;;82     		
+;;;83     		//Switch statement that selects which function depending on the user input.	
+;;;84     		switch (ctemp)		
+00001a  2c31              CMP      r4,#0x31
+00001c  d002              BEQ      |L3.36|
+00001e  2c32              CMP      r4,#0x32
+000020  d113              BNE      |L3.74|
+000022  e002              B        |L3.42|
+                  |L3.36|
+;;;85     		{
+;;;86     			//Function to calibrate motor
+;;;87     			case '1':						
+;;;88     				Calibrate(); 
+000024  f7fffffe          BL       Calibrate
+;;;89     				break;	
+000028  e013              B        |L3.82|
+                  |L3.42|
+;;;90     			
+;;;91     			//Function for spped control
+;;;92     			case '2':	
+;;;93     				printf("Press SW2 to exit\n\n");
+00002a  a012              ADR      r0,|L3.116|
+00002c  f7fffffe          BL       __2printf
+;;;94     				uSpeed = GetUserSpeed();
+000030  f7fffffe          BL       GetUserSpeed
+000034  4814              LDR      r0,|L3.136|
+000036  ed800b00          VSTR     d0,[r0,#0]
+;;;95     				Speed_Control(speed, uSpeed); 		
+00003a  ed901b00          VLDR     d1,[r0,#0]
+00003e  4813              LDR      r0,|L3.140|
+000040  ed900b00          VLDR     d0,[r0,#0]
+000044  f7fffffe          BL       Speed_Control
+;;;96     				break;
+000048  e003              B        |L3.82|
+                  |L3.74|
+;;;97     					
+;;;98     			//Default case if user types anything other than the given options
+;;;99     			default:				
+;;;100    				printf("Ya done messed up, try again!\n\n");
+00004a  a011              ADR      r0,|L3.144|
+00004c  f7fffffe          BL       __2printf
+;;;101    				break;		
+000050  bf00              NOP      
+                  |L3.82|
+000052  bf00              NOP                            ;89
+                  |L3.84|
+000054  e7d6              B        |L3.4|
+;;;102    		}
+;;;103    	}	
+;;;104    }
+;;;105    
+                          ENDP
+
+000056  0000              DCW      0x0000
+                  |L3.88|
+                          DCD      ||.conststring||
+                  |L3.92|
+                          DCD      __stdin
+                  |L3.96|
+000060  596f7520          DCB      "You entered %c\n\n",0
+000064  656e7465
+000068  72656420
+00006c  25630a0a
+000070  00      
+000071  00                DCB      0
+000072  00                DCB      0
+000073  00                DCB      0
+                  |L3.116|
+000074  50726573          DCB      "Press SW2 to exit\n\n",0
+000078  73205357
+00007c  3220746f
+000080  20657869
+000084  740a0a00
+                  |L3.136|
                           DCD      uSpeed
-                  |L2.112|
+                  |L3.140|
                           DCD      speed
+                  |L3.144|
+000090  59612064          DCB      "Ya done messed up, try again!\n\n",0
+000094  6f6e6520
+000098  6d657373
+00009c  65642075
+0000a0  702c2074
+0000a4  72792061
+0000a8  6761696e
+0000ac  210a0a00
+
+                          AREA ||.conststring||, DATA, READONLY, MERGE=1, STRINGS, ALIGN=2
+
+000000  57686174          DCB      "What function would you like to test?\n 1.Calibrate\n 2"
+000004  2066756e
+000008  6374696f
+00000c  6e20776f
+000010  756c6420
+000014  796f7520
+000018  6c696b65
+00001c  20746f20
+000020  74657374
+000024  3f0a2031
+000028  2e43616c
+00002c  69627261
+000030  74650a20
+000034  32      
+000035  2e537065          DCB      ".Speed Control\n",0
+000039  65642043
+00003d  6f6e7472
+000041  6f6c0a00
 
                           AREA ||.data||, DATA, ALIGN=3
 

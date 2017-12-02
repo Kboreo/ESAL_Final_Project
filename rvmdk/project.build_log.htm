@@ -21,7 +21,7 @@ Target DLL:      lmidk-agdi.dll V???
 Dialog DLL:      TCM.DLL V1.32.0.0
  
 <h2>Project:</h2>
-C:\Users\baske\Desktop\ESAL_Final_Project\project.uvprojx
+C:\Users\baske\Documents\GitHub\ESAL_Final_Project\project.uvprojx
 Project File Date:  12/02/2017
 
 <h2>Output:</h2>
@@ -32,7 +32,7 @@ assembling startup_rvmdk.S...
 creating preprocessor file for Encoder.c...
 creating preprocessor file for myPWM.c...
 compiling myPWM.c...
-myPWM.c(70): warning:  #1-D: last line of file ends without a newline
+myPWM.c(71): warning:  #1-D: last line of file ends without a newline
   	
 myPWM.c: 1 warning, 0 errors
 creating preprocessor file for Float_Setup.c...
@@ -107,7 +107,7 @@ Read_Encoder.h(39): warning:  #1-D: last line of file ends without a newline
   double ReadEncoder(void);
 Encoder.h(28): warning:  #1-D: last line of file ends without a newline
   void QEIConfigure(uint32_t ui32Base, uint32_t ui32Config, uint32_t ui32MaxPosition);
-Float_Setup.c(28): warning:  #1-D: last line of file ends without a newline
+Float_Setup.c(29): warning:  #1-D: last line of file ends without a newline
    
 Float_Setup.c: 4 warnings, 0 errors
 compiling Uart_helper.c...
@@ -124,7 +124,6 @@ Get_Speed.c(26): warning:  #1-D: last line of file ends without a newline
 Get_Speed.c: 2 warnings, 0 errors
 creating preprocessor file for Calibrate.c...
 creating preprocessor file for HAL_ADC.c...
-creating preprocessor file for myGPIO.c...
 compiling Read_Encoder.c...
 Read_Encoder.h(39): warning:  #1-D: last line of file ends without a newline
   double ReadEncoder(void);
@@ -155,7 +154,7 @@ myGPIO.h(14): warning:  #1-D: last line of file ends without a newline
 Read_Encoder.c(34): warning:  #1-D: last line of file ends without a newline
   	//int direction = QEIDirectionGet(QEI0_BASE);
 Read_Encoder.c: 14 warnings, 0 errors
-compiling HAL_ADC.c...
+creating preprocessor file for myGPIO.c...
 compiling Speed_Control.c...
 Read_Encoder.h(39): warning:  #1-D: last line of file ends without a newline
   double ReadEncoder(void);
@@ -187,11 +186,12 @@ Read_Encoder.h(39): warning:  #1-D: last line of file ends without a newline
   double ReadEncoder(void);
 Speed_Control.h(38): warning:  #1-D: last line of file ends without a newline
   void Speed_Control(double Speed, double uSpeed);
-Speed_Control.c(54): warning:  #175-D: subscript out of range
+Speed_Control.c(55): warning:  #175-D: subscript out of range
   				Error[4]=Error[3];
 Speed_Control.c(90): warning:  #223-D: function "stopmotor" declared implicitly
   		stopmotor();
 Speed_Control.c: 17 warnings, 0 errors
+compiling HAL_ADC.c...
 compiling myGPIO.c...
 myGPIO.h(13): warning:  #1295-D: Deprecated declaration setup_IO - give arg types
   void setup_IO();

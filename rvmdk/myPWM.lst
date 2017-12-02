@@ -24529,6 +24529,7 @@ N	PWMOutputState(PWM1_BASE, PWM_OUT_6_BIT, true);
 X	PWMOutputState(0x40029000, 0x00000040, 1);
 N}
 N
+N//Function to stop motor
 Nvoid stopmotor(void)
 N{
 N	PWMPulseWidthSet(PWM1_BASE, PWM_OUT_6, 10);
@@ -24543,5 +24544,5 @@ N    SysCtlDelay((SysCtlClockGet()/(3*1000))*ms);
 N}
 N
 N
-W "myPWM.c" 70 2 last line of file ends without a newline
+W "myPWM.c" 71 2 last line of file ends without a newline
 N	

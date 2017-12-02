@@ -5,23 +5,20 @@
                           AREA ||i.FloatSetup||, CODE, READONLY, ALIGN=2
 
                   FloatSetup PROC
-;;;9       
-;;;10      void FloatSetup()
+;;;23      //Function used to setup the use of floating point.
+;;;24     void FloatSetup()
 000000  2001              MOVS     r0,#1
-;;;11      {
-;;;12     
-;;;13     
-;;;14     	 first_Test[12] = 1;
+;;;25     {
+;;;26     	first_Test[12] = 1;
 000002  4903              LDR      r1,|L1.16|
 000004  6308              STR      r0,[r1,#0x30]  ; first_Test
-;;;15     	 test[2] = 2;
+;;;27     	test[2] = 2;
 000006  2002              MOVS     r0,#2
 000008  4902              LDR      r1,|L1.20|
 00000a  6088              STR      r0,[r1,#8]  ; test
-;;;16      
-;;;17      }
+;;;28     }
 00000c  4770              BX       lr
-;;;18      
+;;;29      
                           ENDP
 
 00000e  0000              DCW      0x0000

@@ -3240,6 +3240,7 @@ void setupPWM(void)
 	PWMOutputState(0x40029000, 0x00000040, 1);
 }
 
+
 void stopmotor(void)
 {
 	PWMPulseWidthSet(0x40029000, 0x00000106, 10);
