@@ -55,26 +55,42 @@ C files added by users, special functions, important functions, software flow, e
 
 The file structure for this projects is as follows:
 
-<pre><code>├── project_template
+<pre><code>├── project
     |   ├── .gitignore                <em>(list of files to ignore in Repo)</em>
     |   ├── README.md                 <em>(a README file in markup language)</em>
     |   ├── project.uvprojx           <em>(the keil project file)</em>
-    |   ├── project.c                 <em>(your main c file)</em>
-    |   ├── project.h                 <em>(your main header)</em>
+    |   ├── project.c                 <em>(main c file)</em>
+    |   ├── project.h                 <em>(main header)</em>
     |   ├── project.sct               <em>(scatter file)</em>
     |   ├── startup_rvmdk.S           <em>(startup file in asm)</em>
-    |   ├── src                       <em>(Directory for your .c and .h )</em>
-            ├── *.c files             <em>(*.c , the meat of the code)</em>
-            ├── *.h files             <em>(*.h , the menu of the code)</em>
-    |       └── ...  
+    |   ├── src                       <em>(Directory .c and .h files)</em>
+            ├── Encoder.c             <em>(C file that handles all of the Encoder functionality)</em>
+            ├── Encoder.h             <em>(H file for Encoder functionality)</em>
+			├── myPWM.c  	          <em>(C file for PWM functionality)</em>
+			├── myPWM.h  	          <em>(H file for PWM functionality)</em>
+			├── Float_Setup.c  	      <em>(C file for setting up Floating Point)</em>
+			├── Float_Setup.h  	      <em>(H file for setting up Floating Point)</em>
+			├── Uart_helper.c  	      <em>(C file for setting up the Uart functionality)</em>
+			├── Uart_helper.h  	      <em>(H file for setting up the Uart functionality)</em>
+			├── Read_Encoder.c  	  <em>(C file for reading the current speed from the encoder)</em>
+			├── Read_Encoder.h  	  <em>(H file for reading the current speed from the encoder)</em>
+			├── Speed_Control.c  	  <em>(C file for Controlling the speed of the motor based on user input)</em>
+			├── Speed_Control.h  	  <em>(H file for Controlling the speed of the motor based on user input)</em>
+			├── Get_Speed.c  	  	  <em>(C file for getting speed from user)</em>
+			├── Get_Speed.h  	  	  <em>(H file for getting speed from user)</em>
+			├── Calibrate.c  	  	  <em>(C file that handles the calibration of a motor based on a step input)</em>
+			├── Calibrate.h  	  	  <em>(H file that handles the calibration of a motor based on a step input)</em>
+			├── HAL_ADC.c  	  	  	  <em>(C file that sets up the hardware that is used in ADC)</em>
+			├── HAL_ADC.h  	  	  	  <em>(H file that sets up the hardware that is used in ADC)</em>
+			├── myGPIO.c  	  	  	  <em>(C file that handles all of the general purpose IO for the project)</em>
+            ├── myGPIO.h  	  	  	  <em>(H file that handles all of the general purpose IO for the project)</em>
+	        └── ...  			
     |   ├── inc                       <em>(Directory for precompiled libraries and headers)</em>
     |       ├── *.h files             <em>(*.h , the menu for micro controller)</em>
     |       ├── *.lib files           <em>(*.lib ,precompiled libraries)</em>
     |       └── ...  
     |   ├── driverlib                 <em>(Directory for driver libraries source)</em>
-    |       ├── *.h files             
-    |       ├── *.c files
-    |       └── ...  
+	|       └── ...    |       
     └── </code></pre>
 
 ## Summary and Conclusions
