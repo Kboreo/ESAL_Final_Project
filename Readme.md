@@ -2,8 +2,12 @@
 Kodey Boreo and Phillip Tesolin 
    
 ## Design Overview
-It should explain what the project is, what it does, and how to set it up. Example:
-<em> This device is a tool used in the machining industry to control rotational speed of the shaft of a lathe.  The device consists of a motor to rotate the lathe, a dial to control the speed manual, an input port to control the speed via a computer terminal, a screen to display the rotational speed, an encoder to measure the rotation, and two emergency stop switches for safety. 
+The purpose of this project is to control the speed of a DC motor
+through the use of a properly tuned PID controller. Upon receiving a
+desired speed the controller will ramp the current motor speed past
+the set point then settle on it in a manner that will result in the distance
+traveled (if connected to a vehicle) will be equal to the distance
+traveled if the motor velocity response was instantaneous.
     
 ## Hardware List
 Motor - Pololu 30:1 Metal Gearmotor 37Dx68L MM with a 64 CPR Encoder  
