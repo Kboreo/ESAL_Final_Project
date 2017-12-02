@@ -24,6 +24,25 @@ The motor's natural response was improved using a root locus design and adding o
 ![schematic](https://github.com/Kboreo/ESAL_Final_Project/blob/master/images/natural_response.JPG)     
 **Natural Response Block Diagram**
 
+![schematic](https://github.com/Kboreo/ESAL_Final_Project/blob/master/images/root_locus.JPG)
+**Root Locus for Improved Step Response**
+
+![schematic](https://github.com/Kboreo/ESAL_Final_Project/blob/master/images/overshoot_step_response.JPG)
+**Step Response**      
+
+![schematic](https://github.com/Kboreo/ESAL_Final_Project/blob/master/images/root_locus_for_improved_transient_response.JPG}
+**Root Locus For Improved Transient Response**
+
+![schematic](https://github.com/Kboreo/ESAL_Final_Project/blob/master/images/root_locus_for_improved_transient_response2.JPG}
+**Root Locus**
+
+![schematic](https://github.com/Kboreo/ESAL_Final_Project/blob/master/images/improved_step_response_graph.JPG}
+**Graph for the Imptoved Step Response**
+
+![schematic](https://github.com/Kboreo/ESAL_Final_Project/blob/master/images/improved_block_diagram.JPG)
+**Block Diagram of Improved Transient Response**
+
+
 ## Software Description
 C files added by users, special functions, important functions, software flow, etc.   Flowcharts are also fine.  
 
