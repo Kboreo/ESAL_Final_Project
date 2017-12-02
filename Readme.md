@@ -96,8 +96,11 @@ This project was a good reminder of control systems and how important they are. 
 Here are some of the modules used in this project:
  
 **GPIO**
+
 **UART**
+
 **PWM**
+
 **ADC**
 
 Overall this project had a variety of different modules and was a great learning experience.  
