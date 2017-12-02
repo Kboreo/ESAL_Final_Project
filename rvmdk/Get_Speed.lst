@@ -1,4 +1,16 @@
 L 1 "Get_Speed.c"
+N/*********************************************************************************************************************************
+N**
+N** Module Name:   Get_Speed.c
+N**
+N** Module Description: Gets the users speed
+N**
+N**********************************************************************************************************************************
+N**
+N** Author(s):		Kodey Boreo, Phillip Tesolin 
+N**
+N**********************************************************************************************************************************/
+N
 N#include <stdio.h>
 L 1 "C:\Keil_v5\ARM\ARMCC\Bin\..\include\stdio.h" 1
 N/* stdio.h: ANSI 'C' (X3J11 Oct 88) library header, section 4.9 */
@@ -1111,7 +1123,7 @@ N#endif /* ndef __stdio_h */
 N
 N/* end of stdio.h */
 N
-L 2 "Get_Speed.c" 2
+L 14 "Get_Speed.c" 2
 N#include <stdint.h>
 L 1 "C:\Keil_v5\ARM\ARMCC\Bin\..\include\stdint.h" 1
 N/* Copyright (C) ARM Ltd., 1999,2014 */
@@ -1443,21 +1455,33 @@ N
 N#endif /* __stdint_h */
 N
 N/* end of stdint.h */
-L 3 "Get_Speed.c" 2
+L 15 "Get_Speed.c" 2
 N#include "Get_Speed.h"
 L 1 "Get_Speed.h" 1
-W "Get_Speed.h" 1 28 last line of file ends without a newline
+N /*********************************************************************************************************************************
+N**
+N** Module Name:   Get_Speed.h
+N**
+N** Module Description: Gets the users speed
+N**
+N**********************************************************************************************************************************
+N**
+N** Author(s):		Kodey Boreo, Phillip Tesolin 
+N**
+N**********************************************************************************************************************************/
+N
+W "Get_Speed.h" 13 28 last line of file ends without a newline
 N double GetUserSpeed(void);
-L 4 "Get_Speed.c" 2
+L 16 "Get_Speed.c" 2
 N
 Ndouble GetUserSpeed(void)
 N{
 N	volatile double userSpeed;	//variable for the user requested speed
 N	
-N	printf("Please type the speed you would like: \n"); //Ask to enter the speed they would like.
+N	printf("Please type the speed you would like: Between 2 and 31 radians/second \n"); //Ask to enter the speed they would like.
 N	//scanf("%la", &userSpeed);	//scans the whole line (alternative way)
 N	scanf("%lf", &userSpeed);	//scans the whole line
 N	printf("You entered %.3f\n\n",userSpeed); //Lets the user know what they have selected, using a precision of three places after the decimal. 
 N	return userSpeed;		//Returns "userSpeed"
-W "Get_Speed.c" 14 2 last line of file ends without a newline
+W "Get_Speed.c" 26 2 last line of file ends without a newline
 N}
