@@ -67472,9 +67472,17 @@ N				Ki = Error[1] + Error[2] + Error[3];
 N				Kd = (Error[2]-Error[1]) / .01;
 N				
 N				//speed corrections
+N				
+N				//Calculates error in rad/s
 N				Error[1] = uSpeed - Speed;
+N				
+N				//sets vol equal to the current voltage
 N				vol = DutyC/640*10;
-N				vol = vol + .035 * Error[1] + .00001247*Ki - .0000000000000000027691*Kd; 
+N				
+N				//sets vol equal to the current vol + error in volts from two errors ago + current error in volts * 1.247
+N				vol = vol + (Error[2]/640*10) + 1.247 * Error[1]/640*10;
+N				
+N				//sets duty cycle 
 N				DutyC = vol/10*640;	
 N	
 N				//sets limits for duty cycle
@@ -67502,6 +67510,6 @@ N					i = 0;
 N			}
 N	}
 N		//turns off motor before exiting 
-W "Speed_Control.c" 90 3 function "stopmotor" declared implicitly
+W "Speed_Control.c" 98 3 function "stopmotor" declared implicitly
 N		stopmotor();
 N}

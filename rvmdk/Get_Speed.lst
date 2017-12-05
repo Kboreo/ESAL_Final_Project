@@ -1474,6 +1474,7 @@ W "Get_Speed.h" 13 28 last line of file ends without a newline
 N double GetUserSpeed(void);
 L 16 "Get_Speed.c" 2
 N
+N//Function that gets the requested speed from the user
 Ndouble GetUserSpeed(void)
 N{
 N	volatile double userSpeed;	//variable for the user requested speed
@@ -1483,5 +1484,5 @@ N	//scanf("%la", &userSpeed);	//scans the whole line (alternative way)
 N	scanf("%lf", &userSpeed);	//scans the whole line
 N	printf("You entered %.3f\n\n",userSpeed); //Lets the user know what they have selected, using a precision of three places after the decimal. 
 N	return userSpeed;		//Returns "userSpeed"
-W "Get_Speed.c" 26 2 last line of file ends without a newline
+W "Get_Speed.c" 27 2 last line of file ends without a newline
 N}

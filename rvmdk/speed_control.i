@@ -20328,9 +20328,17 @@ void Speed_Control(double Speed, double uSpeed)
 				Kd = (Error[2]-Error[1]) / .01;
 				
 				
+				
+				
 				Error[1] = uSpeed - Speed;
+				
+				
 				vol = DutyC/640*10;
-				vol = vol + .035 * Error[1] + .00001247*Ki - .0000000000000000027691*Kd; 
+				
+				
+				vol = vol + (Error[2]/640*10) + 1.247 * Error[1]/640*10;
+				
+				
 				DutyC = vol/10*640;	
 	
 				

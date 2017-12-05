@@ -1184,6 +1184,7 @@ typedef unsigned     long long uintmax_t;
  double GetUserSpeed(void);
 #line 16 "Get_Speed.c"
 
+
 double GetUserSpeed(void)
 {
 	volatile double userSpeed;	
