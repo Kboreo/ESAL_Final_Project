@@ -19662,46 +19662,17 @@ double uSpeed;
 
 int  main(void)
 {	
-	char ctemp; 
 	SetupHardware();  
-	printf("Hardware setup complete\n\n");		
-	printf("PWM setup complete \n\n");
+	
+	uSpeed = GetUserSpeed();
+	
+	Speed_Control(speed, uSpeed);
 	
 	
-	mainMenu(ctemp);
+	
+
 }	
 	
 
-void mainMenu(char ctemp)
-{	
-	
-	while (1)
-	{
-		printf("What function would you like to test?\n 1.Calibrate\n 2.Speed Control\n"); 
-		ctemp = getc((& __stdin)); 
-		printf("You entered %c\n\n",ctemp); 
-		
-		
-		switch (ctemp)		
-		{
-			
-			case '1':						
-				Calibrate(); 
-				break;	
-			
-			
-			case '2':	
-				printf("Press SW2 to exit\n\n");
-				uSpeed = GetUserSpeed();
-				Speed_Control(speed, uSpeed); 		
-				break;
-					
-			
-			default:				
-				printf("Ya done messed up, try again!\n\n");
-				break;		
-		}
-	}	
-}
 
 

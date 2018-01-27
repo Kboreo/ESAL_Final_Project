@@ -20361,8 +20361,9 @@ void Speed_Control(double Speed, double uSpeed)
 		x = GPIOPinRead(0x40025000, 0x00000001); 
 			if ( x == 0){
 					i = 0;
+					stopmotor();	
 			}
 	}
 		
-		stopmotor();
+		
 }

@@ -92,8 +92,9 @@ void Speed_Control(double Speed, double uSpeed)
 		x = GPIOPinRead(GPIO_PORTF_BASE, GPIO_PIN_0); // set x equal to the output of button SW2 		
 			if ( x == 0){
 					i = 0;
+					stopmotor();	
 			}
 	}
 		//turns off motor before exiting 
-		stopmotor();
+		
 }

@@ -35,7 +35,6 @@ compiling myPWM.c...
 myPWM.c(71): warning:  #1-D: last line of file ends without a newline
   	
 myPWM.c: 1 warning, 0 errors
-creating preprocessor file for Float_Setup.c...
 compiling Encoder.c...
 Read_Encoder.h(39): warning:  #1-D: last line of file ends without a newline
   double ReadEncoder(void);
@@ -66,7 +65,6 @@ Encoder.c(28): warning:  #47-D: incompatible redefinition of macro "SYSCTL_RCGCG
 Encoder.c(75): warning:  #1-D: last line of file ends without a newline
   	
 Encoder.c: 14 warnings, 0 errors
-creating preprocessor file for Uart_helper.c...
 compiling project.c...
 driverlib/hibernate.h(229): warning:  #231-D: declaration is not visible outside of function
   extern void HibernateCalendarSet(struct tm *psTime);
@@ -94,11 +92,11 @@ project.c(49): warning:  #223-D: function "setupENCODER" declared implicitly
   	setupENCODER();	 //setup to read motor encoder
 project.c(50): warning:  #223-D: function "setupPWM" declared implicitly
   	setupPWM();	//setup PWM output
-project.c(88): warning:  #223-D: function "Calibrate" declared implicitly
-  				Calibrate(); 
-project.c(95): warning:  #223-D: function "Speed_Control" declared implicitly
-  				Speed_Control(speed, uSpeed); 		
-project.c: 15 warnings, 0 errors
+project.c(68): warning:  #223-D: function "Speed_Control" declared implicitly
+  	Speed_Control(speed, uSpeed);
+project.c: 14 warnings, 0 errors
+creating preprocessor file for Float_Setup.c...
+creating preprocessor file for Uart_helper.c...
 compiling Float_Setup.c...
 Float_Setup.h(35): warning:  #1-D: last line of file ends without a newline
   #include "Uart_helper.h"
@@ -109,11 +107,11 @@ Encoder.h(28): warning:  #1-D: last line of file ends without a newline
 Float_Setup.c(29): warning:  #1-D: last line of file ends without a newline
    
 Float_Setup.c: 4 warnings, 0 errors
+creating preprocessor file for Read_Encoder.c...
 compiling Uart_helper.c...
 src\Uart_helper.c(85): warning:  #1-D: last line of file ends without a newline
   }
 src\Uart_helper.c: 1 warning, 0 errors
-creating preprocessor file for Read_Encoder.c...
 creating preprocessor file for Speed_Control.c...
 creating preprocessor file for Get_Speed.c...
 compiling Get_Speed.c...
@@ -122,7 +120,6 @@ Get_Speed.h(13): warning:  #1-D: last line of file ends without a newline
 Get_Speed.c(27): warning:  #1-D: last line of file ends without a newline
   }
 Get_Speed.c: 2 warnings, 0 errors
-creating preprocessor file for Calibrate.c...
 compiling Read_Encoder.c...
 Read_Encoder.h(39): warning:  #1-D: last line of file ends without a newline
   double ReadEncoder(void);
@@ -153,7 +150,7 @@ myGPIO.h(14): warning:  #1-D: last line of file ends without a newline
 Read_Encoder.c(34): warning:  #1-D: last line of file ends without a newline
   	//int direction = QEIDirectionGet(QEI0_BASE);
 Read_Encoder.c: 14 warnings, 0 errors
-creating preprocessor file for HAL_ADC.c...
+creating preprocessor file for Calibrate.c...
 compiling Speed_Control.c...
 Read_Encoder.h(39): warning:  #1-D: last line of file ends without a newline
   double ReadEncoder(void);
@@ -187,9 +184,10 @@ Speed_Control.h(38): warning:  #1-D: last line of file ends without a newline
   void Speed_Control(double Speed, double uSpeed);
 Speed_Control.c(55): warning:  #175-D: subscript out of range
   				Error[4]=Error[3];
-Speed_Control.c(98): warning:  #223-D: function "stopmotor" declared implicitly
-  		stopmotor();
+Speed_Control.c(95): warning:  #223-D: function "stopmotor" declared implicitly
+  					stopmotor();	
 Speed_Control.c: 17 warnings, 0 errors
+creating preprocessor file for HAL_ADC.c...
 creating preprocessor file for myGPIO.c...
 compiling HAL_ADC.c...
 compiling Calibrate.c...
@@ -259,10 +257,10 @@ myGPIO.c(138): warning:  #1-D: last line of file ends without a newline
   	
 myGPIO.c: 13 warnings, 0 errors
 linking...
-Program Size: Code=15344 RO-data=1388 RW-data=388 ZI-data=452  
+Program Size: Code=10432 RO-data=1316 RW-data=108 ZI-data=396  
 FromELF: creating hex file...
 After Build - User command #1: fromelf --bin --output .\rvmdk\project.bin .\rvmdk\project.axf
-".\rvmdk\project.axf" - 0 Error(s), 99 Warning(s).
+".\rvmdk\project.axf" - 0 Error(s), 98 Warning(s).
 
 <h2>Software Packages used:</h2>
 
@@ -285,7 +283,7 @@ Package Vendor: Keil
 <h2>Collection of Component Files used:</h2>
 
    * Component: ARM::CMSIS:CORE:5.0.1
-Build Time Elapsed:  00:00:06
+Build Time Elapsed:  00:00:11
 </pre>
 </body>
 </html>

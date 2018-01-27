@@ -67507,9 +67507,10 @@ N		x = GPIOPinRead(GPIO_PORTF_BASE, GPIO_PIN_0); // set x equal to the output of
 X		x = GPIOPinRead(0x40025000, 0x00000001); 
 N			if ( x == 0){
 N					i = 0;
+W "Speed_Control.c" 95 6 function "stopmotor" declared implicitly
+N					stopmotor();	
 N			}
 N	}
 N		//turns off motor before exiting 
-W "Speed_Control.c" 98 3 function "stopmotor" declared implicitly
-N		stopmotor();
+N		
 N}

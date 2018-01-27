@@ -66799,49 +66799,18 @@ N
 N
 Nint  main(void)
 N{	
-N	char ctemp; //Temp char used for UART
 N	SetupHardware();  //Initializes all of the required HardWare for the project.			
-N	printf("Hardware setup complete\n\n");		
-N	printf("PWM setup complete \n\n");
 N	
-N	//program menu options contained in mainMenu
-N	mainMenu(ctemp);
+N	uSpeed = GetUserSpeed();
+N	
+W "project.c" 68 2 function "Speed_Control" declared implicitly
+N	Speed_Control(speed, uSpeed);
+N	
+N	
+N	
+N
 N}	
 N	
-N//Main menu that displays to the UART terminal for a HMI	
-Nvoid mainMenu(char ctemp)
-N{	
-N	//While loop for main user menu	
-N	while (1)
-N	{
-N		printf("What function would you like to test?\n 1.Calibrate\n 2.Speed Control\n"); //Askes user what function they would like to use.
-N		ctemp = getc(stdin); //Gets a char from the terminal from the user.
-X		ctemp = getc((& __stdin)); 
-N		printf("You entered %c\n\n",ctemp); //Lets the user know what they have selected
-N		
-N		//Switch statement that selects which function depending on the user input.	
-N		switch (ctemp)		
-N		{
-N			//Function to calibrate motor
-N			case '1':						
-W "project.c" 88 5 function "Calibrate" declared implicitly
-N				Calibrate(); 
-N				break;	
-N			
-N			//Function for spped control
-N			case '2':	
-N				printf("Press SW2 to exit\n\n");
-N				uSpeed = GetUserSpeed();
-W "project.c" 95 5 function "Speed_Control" declared implicitly
-N				Speed_Control(speed, uSpeed); 		
-N				break;
-N					
-N			//Default case if user types anything other than the given options
-N			default:				
-N				printf("Ya done messed up, try again!\n\n");
-N				break;		
-N		}
-N	}	
-N}
+N
 N
 N
