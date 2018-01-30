@@ -65,6 +65,7 @@ Encoder.c(28): warning:  #47-D: incompatible redefinition of macro "SYSCTL_RCGCG
 Encoder.c(75): warning:  #1-D: last line of file ends without a newline
   	
 Encoder.c: 14 warnings, 0 errors
+creating preprocessor file for Float_Setup.c...
 compiling project.c...
 driverlib/hibernate.h(229): warning:  #231-D: declaration is not visible outside of function
   extern void HibernateCalendarSet(struct tm *psTime);
@@ -92,10 +93,9 @@ project.c(49): warning:  #223-D: function "setupENCODER" declared implicitly
   	setupENCODER();	 //setup to read motor encoder
 project.c(50): warning:  #223-D: function "setupPWM" declared implicitly
   	setupPWM();	//setup PWM output
-project.c(68): warning:  #223-D: function "Speed_Control" declared implicitly
+project.c(71): warning:  #223-D: function "Speed_Control" declared implicitly
   	Speed_Control(speed, uSpeed);
 project.c: 14 warnings, 0 errors
-creating preprocessor file for Float_Setup.c...
 creating preprocessor file for Uart_helper.c...
 compiling Float_Setup.c...
 Float_Setup.h(35): warning:  #1-D: last line of file ends without a newline
@@ -257,7 +257,7 @@ myGPIO.c(138): warning:  #1-D: last line of file ends without a newline
   	
 myGPIO.c: 13 warnings, 0 errors
 linking...
-Program Size: Code=10432 RO-data=1316 RW-data=108 ZI-data=396  
+Program Size: Code=8304 RO-data=1180 RW-data=100 ZI-data=396  
 FromELF: creating hex file...
 After Build - User command #1: fromelf --bin --output .\rvmdk\project.bin .\rvmdk\project.axf
 ".\rvmdk\project.axf" - 0 Error(s), 98 Warning(s).
@@ -283,7 +283,7 @@ Package Vendor: Keil
 <h2>Collection of Component Files used:</h2>
 
    * Component: ARM::CMSIS:CORE:5.0.1
-Build Time Elapsed:  00:00:11
+Build Time Elapsed:  00:00:12
 </pre>
 </body>
 </html>

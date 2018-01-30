@@ -19663,14 +19663,19 @@ double uSpeed;
 int  main(void)
 {	
 	SetupHardware();  
+
+
+
 	
-	uSpeed = GetUserSpeed();
-	
+	uSpeed = 
+
 	Speed_Control(speed, uSpeed);
 	
+	speed = ReadEncoder(); 
 	
 	
-
+	
+	
 }	
 	
 
