@@ -79,7 +79,7 @@ void Speed_Control(double Speed, double uSpeed)
 				if (DutyC > 640){
 					DutyC = 640;
 					}
-
+ DutyC = 600;
 				//Set new PWM 
 				PWMPulseWidthSet(PWM1_BASE, PWM_OUT_6, DutyC);
 

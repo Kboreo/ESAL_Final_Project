@@ -66800,20 +66800,21 @@ N
 Nint  main(void)
 N{	
 N	SetupHardware();  //Initializes all of the required HardWare for the project.	
-N
+N	while(1)
+N	{
 N//************************
 N//Write a function here to get the desired speed	
 N	
-N	uSpeed = //set uSpeed equal to the speed you want me to travel
+N	//uSpeed = //set uSpeed equal to the speed you want me to travel
 N
-W "project.c" 71 2 function "Speed_Control" declared implicitly
+W "project.c" 72 2 function "Speed_Control" declared implicitly
 N	Speed_Control(speed, uSpeed);
 N	
 N	speed = ReadEncoder(); // this will set speed equal to the current speed 
 N	
 N	//*************************
 N	//Write a function here to send "speed" to Levi
-N	
+N	}
 N}	
 N	
 N

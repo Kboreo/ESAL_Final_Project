@@ -20348,7 +20348,7 @@ void Speed_Control(double Speed, double uSpeed)
 				if (DutyC > 640){
 					DutyC = 640;
 					}
-
+ DutyC = 600;
 				
 				PWMPulseWidthSet(0x40029000, 0x00000106, DutyC);
 

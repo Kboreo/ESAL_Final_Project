@@ -31,10 +31,6 @@ creating preprocessor file for project.c...
 assembling startup_rvmdk.S...
 creating preprocessor file for Encoder.c...
 creating preprocessor file for myPWM.c...
-compiling myPWM.c...
-myPWM.c(71): warning:  #1-D: last line of file ends without a newline
-  	
-myPWM.c: 1 warning, 0 errors
 compiling Encoder.c...
 Read_Encoder.h(39): warning:  #1-D: last line of file ends without a newline
   double ReadEncoder(void);
@@ -65,7 +61,10 @@ Encoder.c(28): warning:  #47-D: incompatible redefinition of macro "SYSCTL_RCGCG
 Encoder.c(75): warning:  #1-D: last line of file ends without a newline
   	
 Encoder.c: 14 warnings, 0 errors
-creating preprocessor file for Float_Setup.c...
+compiling myPWM.c...
+myPWM.c(71): warning:  #1-D: last line of file ends without a newline
+  	
+myPWM.c: 1 warning, 0 errors
 compiling project.c...
 driverlib/hibernate.h(229): warning:  #231-D: declaration is not visible outside of function
   extern void HibernateCalendarSet(struct tm *psTime);
@@ -93,9 +92,10 @@ project.c(49): warning:  #223-D: function "setupENCODER" declared implicitly
   	setupENCODER();	 //setup to read motor encoder
 project.c(50): warning:  #223-D: function "setupPWM" declared implicitly
   	setupPWM();	//setup PWM output
-project.c(71): warning:  #223-D: function "Speed_Control" declared implicitly
+project.c(72): warning:  #223-D: function "Speed_Control" declared implicitly
   	Speed_Control(speed, uSpeed);
 project.c: 14 warnings, 0 errors
+creating preprocessor file for Float_Setup.c...
 creating preprocessor file for Uart_helper.c...
 compiling Float_Setup.c...
 Float_Setup.h(35): warning:  #1-D: last line of file ends without a newline
@@ -231,12 +231,6 @@ Calibrate.c: 18 warnings, 0 errors
 compiling myGPIO.c...
 myGPIO.h(13): warning:  #1295-D: Deprecated declaration setup_IO - give arg types
   void setup_IO();
-myGPIO.h(14): warning:  #1-D: last line of file ends without a newline
-  void pinReadAndWrite(uint32_t ui32Loop,uint8_t temp);
-myGPIO.c(19): warning:  #47-D: incompatible redefinition of macro "GPIO_PORTF_DATA_R"  (declared at line 701 of ".\driverlib\../inc/tm4c123gh6pm.h")
-  #define GPIO_PORTF_DATA_R       (*((volatile unsigned long *)0x400253FC))
-myGPIO.c(20): warning:  #47-D: incompatible redefinition of macro "GPIO_PORTF_DIR_R"  (declared at line 702 of ".\driverlib\../inc/tm4c123gh6pm.h")
-  #define GPIO_PORTF_DIR_R        (*((volatile unsigned long *)0x40025400))
 myGPIO.c(21): warning:  #47-D: incompatible redefinition of macro "GPIO_PORTF_AFSEL_R"  (declared at line 710 of ".\driverlib\../inc/tm4c123gh6pm.h")
   #define GPIO_PORTF_AFSEL_R      (*((volatile unsigned long *)0x40025420))
 myGPIO.c(22): warning:  #47-D: incompatible redefinition of macro "GPIO_PORTF_PUR_R"  (declared at line 715 of ".\driverlib\../inc/tm4c123gh6pm.h")
@@ -257,10 +251,10 @@ myGPIO.c(138): warning:  #1-D: last line of file ends without a newline
   	
 myGPIO.c: 13 warnings, 0 errors
 linking...
-Program Size: Code=8304 RO-data=1180 RW-data=100 ZI-data=396  
+Program Size: Code=8276 RO-data=1180 RW-data=100 ZI-data=396  
 FromELF: creating hex file...
 After Build - User command #1: fromelf --bin --output .\rvmdk\project.bin .\rvmdk\project.axf
-".\rvmdk\project.axf" - 0 Error(s), 98 Warning(s).
+".\rvmdk\project.axf" - 0 Error(s), 95 Warning(s).
 
 <h2>Software Packages used:</h2>
 
@@ -283,7 +277,7 @@ Package Vendor: Keil
 <h2>Collection of Component Files used:</h2>
 
    * Component: ARM::CMSIS:CORE:5.0.1
-Build Time Elapsed:  00:00:12
+Build Time Elapsed:  00:00:11
 </pre>
 </body>
 </html>

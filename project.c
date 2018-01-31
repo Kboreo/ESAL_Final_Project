@@ -62,11 +62,12 @@ double uSpeed;	//Requested speed from the user
 int  main(void)
 {	
 	SetupHardware();  //Initializes all of the required HardWare for the project.	
-
+	while(1)
+	{
 //************************
 //Write a function here to get the desired speed	
 	
-	uSpeed = //set uSpeed equal to the speed you want me to travel
+	//uSpeed = //set uSpeed equal to the speed you want me to travel
 
 	Speed_Control(speed, uSpeed);
 	
@@ -74,7 +75,7 @@ int  main(void)
 	
 	//*************************
 	//Write a function here to send "speed" to Levi
-	
+	}
 }	
 	
 

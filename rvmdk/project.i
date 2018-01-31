@@ -19663,11 +19663,12 @@ double uSpeed;
 int  main(void)
 {	
 	SetupHardware();  
-
+	while(1)
+	{
 
 
 	
-	uSpeed = 
+	
 
 	Speed_Control(speed, uSpeed);
 	
@@ -19675,7 +19676,7 @@ int  main(void)
 	
 	
 	
-	
+	}
 }	
 	
 

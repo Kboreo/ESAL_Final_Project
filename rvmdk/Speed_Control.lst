@@ -67492,7 +67492,7 @@ N					}
 N				if (DutyC > 640){
 N					DutyC = 640;
 N					}
-N
+N DutyC = 600;
 N				//Set new PWM 
 N				PWMPulseWidthSet(PWM1_BASE, PWM_OUT_6, DutyC);
 X				PWMPulseWidthSet(0x40029000, 0x00000106, DutyC);
