@@ -1,32 +1,4 @@
-#line 1 "project.c"
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
- 
-
-
-
+#line 1 "i2c.c"
 #line 1 "project.h"
 #line 1 "C:\\Keil_v5\\ARM\\ARMCC\\Bin\\..\\include\\stdbool.h"
  
@@ -19635,76 +19607,125 @@ void pinReadAndWrite(uint32_t ui32Loop,uint8_t temp);
 #line 58 "project.h"
 
 
-#line 30 "project.c"
-#line 31 "project.c"
-#line 32 "project.c"
+#line 2 "i2c.c"
 
-_Bool TESTING = 1;  
 
-#line 41 "project.c"
 
-void mainMenu(char ctemp);
 
-void SetupHardware()
+void InitI2C0(void)
 {
-	setup_IO(); 
-	UartSetup(); 
-	FloatSetup(); 
-	setupENCODER();	 
-	setupPWM();	
-	FPUEnable();	
-	FPULazyStackingEnable(); 
-	SetupADC(); 
+    
+    SysCtlPeripheralEnable(0xf0002000);
+ 
+    
+    SysCtlPeripheralReset(0xf0002000);
+     
+    
+    SysCtlPeripheralEnable(0xf0000801);
+ 
+    
+    GPIOPinConfigure(0x00010803);
+    GPIOPinConfigure(0x00010C03);
+     
+    
+    GPIOPinTypeI2CSCL(0x40004000, 0x00000040);
+		GPIOPinTypeI2C(0x40004000, 0x00000080);
 	
+ 
+    
+    
+    
+    
+    I2CMasterInitExpClk(0x40020000, SysCtlClockGet(), 0);
+     
+    
+   
 }
 
 
-double speed; 	
-double uSpeed;	
-
-
-int  main(void)
-{	
-	char ctemp; 
-	SetupHardware();  
-	printf("Hardware setup complete\n\n");		
-	printf("PWM setup complete \n\n");
-	
-	
-	mainMenu(ctemp);
-}	
-	
-
-void mainMenu(char ctemp)
-{	
-	
-	while (1)
-	{
-		printf("What function would you like to test?\n 1.Calibrate\n 2.Speed Control\n"); 
-		ctemp = getc((& __stdin)); 
-		printf("You entered %c\n\n",ctemp); 
-		
-		
-		switch (ctemp)		
-		{
-			
-			case '1':						
-				Calibrate(); 
-				break;	
-			
-			
-			case '2':	
-				printf("Press SW2 to exit\n\n");
-				uSpeed = GetUserSpeed();
-				Speed_Control(speed, uSpeed); 		
-				break;
-					
-			
-			default:				
-				printf("Ya done messed up, try again!\n\n");
-				break;		
-		}
-	}	
+void I2CSendString(uint32_t slave_addr, char array[])
+{
+    
+    
+    I2CMasterSlaveAddrSet(0x40020000, slave_addr, 0);
+     
+    
+    I2CMasterDataPut(0x40020000, array[0]);
+     
+    
+    
+    if(array[1] == '\0')
+    {
+        
+        I2CMasterControl(0x40020000, 0x00000007);
+         
+        
+        while(I2CMasterBusy(0x40020000));
+    }
+     
+    
+    
+    else
+    {
+        
+        I2CMasterControl(0x40020000, 0x00000003);
+         
+        
+        while(I2CMasterBusy(0x40020000));
+         
+        
+        uint8_t i = 1;
+ 
+        
+        
+        while(array[i + 1] != '\0')
+        {
+            
+            I2CMasterDataPut(0x40020000, array[i++]);
+ 
+            
+            I2CMasterControl(0x40020000, 0x00000001);
+     
+            
+            while(I2CMasterBusy(0x40020000));
+        }
+     
+        
+        I2CMasterDataPut(0x40020000, array[i]);
+ 
+        
+        I2CMasterControl(0x40020000, 0x00000005);
+ 
+        
+        while(I2CMasterBusy(0x40020000));
+    }
 }
 
-
+uint32_t I2CReceive(uint32_t slave_addr, uint8_t reg)
+{
+    
+    
+    I2CMasterSlaveAddrSet(0x40020000, slave_addr, 0);
+ 
+    
+    I2CMasterDataPut(0x40020000, reg);
+ 
+    
+    I2CMasterControl(0x40020000, 0x00000003);
+     
+    
+    while(I2CMasterBusy(0x40020000));
+     
+    
+    I2CMasterSlaveAddrSet(0x40020000, slave_addr, 1);
+     
+    
+    
+    I2CMasterControl(0x40020000, 0x00000007);
+     
+    
+    while(I2CMasterBusy(0x40020000));
+     
+    
+    return I2CMasterDataGet(0x40020000);
+}

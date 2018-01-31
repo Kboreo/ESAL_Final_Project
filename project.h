@@ -54,4 +54,6 @@
 #include "Calibrate.h"
 #include "HAL_ADC.h"
 #include "myGPIO.h"
+#include "i2c.h"
+
 

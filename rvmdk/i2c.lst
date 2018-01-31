@@ -1,32 +1,4 @@
-L 1 "project.c"
-N/*********************************************************************************************************************************
-N**
-N** Module Name:   project.c
-N**
-N** Module Description: Main Project C file 
-N
-N**This program performs two main functions. The first is to calculate the first order transfer function of a motor based on a step
-N**input. When the Calibrate function is called and executed a step input sent to the motor with via a PWM signal with 100 percent 
-N**duty cycle. The voltage across the motor is reduced by a voltage divider then read into an ADC channel. The motor speed is read 
-N**every 10mS and stored in memory until the speed remains constant. Once the speed remains constant the time constant (t) for the 
-N**transfer function is calculated by finding the time the motor took to reach its steady state speed multiplied by (1-e^-1). The 
-N**gain (K) value is calculated by dividing its final speed by the input voltage. Once these values are known a first order transfer
-N**function can be derived in the form k/(ts+1).
-N**The second function asks the user for a desired speed then through PWM the microcontroller maintains that speed regardless of the 
-N**load placed on the motor. Every 10mS the encoder reads the motors current speed. The difference between the desired speed and the 
-N**actual speed is multiplied by a gain and adjusts the PWM signal to compensate for this load. In addition to compensating for the 
-N**error between current speed and desired speed the controller also adds compensation for small errors over long periods and 
-N**compensation for rate of change. 
-N
-N**
-N**********************************************************************************************************************************
-N**
-N** Author(s):		Kodey Boreo, Phillip Tesolin 
-N**
-N**********************************************************************************************************************************/
-N
-N
-N
+L 1 "i2c.c"
 N#include "project.h"
 L 1 "project.h" 1
 N#include <stdbool.h>
@@ -66764,88 +66736,154 @@ L 1 "i2c.h" 1
 L 58 "project.h" 2
 N
 N
-L 30 "project.c" 2
-N#include <stdio.h>
-N#include <stdint.h>
+L 2 "i2c.c" 2
 N
-Nbool TESTING = 1;  //bool used for debugging and testing features.
-X_Bool TESTING = 1;  
 N
-N#ifdef DEBUG
-Svoid
-S__error__(char *pcFilename, uint32_t ui32Line)
-S{
-S}
-N#endif
-N
-Nvoid mainMenu(char ctemp);
-N
-Nvoid SetupHardware()
+N//initialize I2C module 0
+N//Slightly modified version of TI's example code
+Nvoid InitI2C0(void)
 N{
-N	setup_IO(); //setup for pins
-N	UartSetup(); //setup for user input
-W "project.c" 48 2 function "FloatSetup" declared implicitly
-N	FloatSetup(); //setup to allow floating point print 
-W "project.c" 49 2 function "setupENCODER" declared implicitly
-N	setupENCODER();	 //setup to read motor encoder
-W "project.c" 50 2 function "setupPWM" declared implicitly
-N	setupPWM();	//setup PWM output
-N	FPUEnable();	//inable floating point
-N	FPULazyStackingEnable(); //inable lazy stack for floating point
-N	SetupADC(); //setup to read motor voltage 
+N    //enable I2C module 0
+N    SysCtlPeripheralEnable(SYSCTL_PERIPH_I2C0);
+X    SysCtlPeripheralEnable(0xf0002000);
+N 
+N    //reset module
+N    SysCtlPeripheralReset(SYSCTL_PERIPH_I2C0);
+X    SysCtlPeripheralReset(0xf0002000);
+N     
+N    //enable GPIO peripheral that contains I2C 0
+N    SysCtlPeripheralEnable(SYSCTL_PERIPH_GPIOB);
+X    SysCtlPeripheralEnable(0xf0000801);
+N 
+N    // Configure the pin muxing for I2C0 functions on port B2 and B3.
+N    GPIOPinConfigure(GPIO_PB2_I2C0SCL);
+X    GPIOPinConfigure(0x00010803);
+N    GPIOPinConfigure(GPIO_PB3_I2C0SDA);
+X    GPIOPinConfigure(0x00010C03);
+N     
+N    // Select the I2C function for these pins.
+N    GPIOPinTypeI2CSCL(GPIO_PORTA_BASE, GPIO_PIN_6);
+X    GPIOPinTypeI2CSCL(0x40004000, 0x00000040);
+N		GPIOPinTypeI2C(GPIO_PORTA_BASE, GPIO_PIN_7);
+X		GPIOPinTypeI2C(0x40004000, 0x00000080);
 N	
+N 
+N    // Enable and initialize the I2C0 master module.  Use the system clock for
+N    // the I2C0 module.  The last parameter sets the I2C data transfer rate.
+N    // If false the data rate is set to 100kbps and if true the data rate will
+N    // be set to 400kbps.
+N    I2CMasterInitExpClk(I2C0_BASE, SysCtlClockGet(), false);
+X    I2CMasterInitExpClk(0x40020000, SysCtlClockGet(), 0);
+N     
+N    //clear I2C FIFOs
+N   // HWREG(I2C0_BASE + I2C_O_FIFOCTL) = 80008000;
 N}
 N
-N
-Ndouble speed; 	//Speed read from encoder
-Ndouble uSpeed;	//Requested speed from the user
-N
-N
-Nint  main(void)
-N{	
-N	char ctemp; //Temp char used for UART
-N	SetupHardware();  //Initializes all of the required HardWare for the project.			
-N	printf("Hardware setup complete\n\n");		
-N	printf("PWM setup complete \n\n");
-N	
-N	//program menu options contained in mainMenu
-N	mainMenu(ctemp);
-N}	
-N	
-N//Main menu that displays to the UART terminal for a HMI	
-Nvoid mainMenu(char ctemp)
-N{	
-N	//While loop for main user menu	
-N	while (1)
-N	{
-N		printf("What function would you like to test?\n 1.Calibrate\n 2.Speed Control\n"); //Askes user what function they would like to use.
-N		ctemp = getc(stdin); //Gets a char from the terminal from the user.
-X		ctemp = getc((& __stdin)); 
-N		printf("You entered %c\n\n",ctemp); //Lets the user know what they have selected
-N		
-N		//Switch statement that selects which function depending on the user input.	
-N		switch (ctemp)		
-N		{
-N			//Function to calibrate motor
-N			case '1':						
-W "project.c" 88 5 function "Calibrate" declared implicitly
-N				Calibrate(); 
-N				break;	
-N			
-N			//Function for spped control
-N			case '2':	
-N				printf("Press SW2 to exit\n\n");
-N				uSpeed = GetUserSpeed();
-W "project.c" 95 5 function "Speed_Control" declared implicitly
-N				Speed_Control(speed, uSpeed); 		
-N				break;
-N					
-N			//Default case if user types anything other than the given options
-N			default:				
-N				printf("Ya done messed up, try again!\n\n");
-N				break;		
-N		}
-N	}	
+N//sends an array of data via I2C to the specified slave
+Nvoid I2CSendString(uint32_t slave_addr, char array[])
+N{
+N    // Tell the master module what address it will place on the bus when
+N    // communicating with the slave.
+N    I2CMasterSlaveAddrSet(I2C0_BASE, slave_addr, false);
+X    I2CMasterSlaveAddrSet(0x40020000, slave_addr, 0);
+N     
+N    //put data to be sent into FIFO
+N    I2CMasterDataPut(I2C0_BASE, array[0]);
+X    I2CMasterDataPut(0x40020000, array[0]);
+N     
+N    //if there is only one argument, we only need to use the
+N    //single send I2C function
+N    if(array[1] == '\0')
+N    {
+N        //Initiate send of data from the MCU
+N        I2CMasterControl(I2C0_BASE, I2C_MASTER_CMD_SINGLE_SEND);
+X        I2CMasterControl(0x40020000, 0x00000007);
+N         
+N        // Wait until MCU is done transferring.
+N        while(I2CMasterBusy(I2C0_BASE));
+X        while(I2CMasterBusy(0x40020000));
+N    }
+N     
+N    //otherwise, we start transmission of multiple bytes on the
+N    //I2C bus
+N    else
+N    {
+N        //Initiate send of data from the MCU
+N        I2CMasterControl(I2C0_BASE, I2C_MASTER_CMD_BURST_SEND_START);
+X        I2CMasterControl(0x40020000, 0x00000003);
+N         
+N        // Wait until MCU is done transferring.
+N        while(I2CMasterBusy(I2C0_BASE));
+X        while(I2CMasterBusy(0x40020000));
+N         
+N        //initialize index into array
+N        uint8_t i = 1;
+N 
+N        //send num_of_args-2 pieces of data, using the
+N        //BURST_SEND_CONT command of the I2C module
+N        while(array[i + 1] != '\0')
+N        {
+N            //put next piece of data into I2C FIFO
+N            I2CMasterDataPut(I2C0_BASE, array[i++]);
+X            I2CMasterDataPut(0x40020000, array[i++]);
+N 
+N            //send next data that was just placed into FIFO
+N            I2CMasterControl(I2C0_BASE, I2C_MASTER_CMD_BURST_SEND_CONT);
+X            I2CMasterControl(0x40020000, 0x00000001);
+N     
+N            // Wait until MCU is done transferring.
+N            while(I2CMasterBusy(I2C0_BASE));
+X            while(I2CMasterBusy(0x40020000));
+N        }
+N     
+N        //put last piece of data into I2C FIFO
+N        I2CMasterDataPut(I2C0_BASE, array[i]);
+X        I2CMasterDataPut(0x40020000, array[i]);
+N 
+N        //send next data that was just placed into FIFO
+N        I2CMasterControl(I2C0_BASE, I2C_MASTER_CMD_BURST_SEND_FINISH);
+X        I2CMasterControl(0x40020000, 0x00000005);
+N 
+N        // Wait until MCU is done transferring.
+N        while(I2CMasterBusy(I2C0_BASE));
+X        while(I2CMasterBusy(0x40020000));
+N    }
 N}
-N
-N
+N//read specified register on slave device
+Nuint32_t I2CReceive(uint32_t slave_addr, uint8_t reg)
+N{
+N    //specify that we are writing (a register address) to the
+N    //slave device
+N    I2CMasterSlaveAddrSet(I2C0_BASE, slave_addr, false);
+X    I2CMasterSlaveAddrSet(0x40020000, slave_addr, 0);
+N 
+N    //specify register to be read
+N    I2CMasterDataPut(I2C0_BASE, reg);
+X    I2CMasterDataPut(0x40020000, reg);
+N 
+N    //send control byte and register address byte to slave device
+N    I2CMasterControl(I2C0_BASE, I2C_MASTER_CMD_BURST_SEND_START);
+X    I2CMasterControl(0x40020000, 0x00000003);
+N     
+N    //wait for MCU to finish transaction
+N    while(I2CMasterBusy(I2C0_BASE));
+X    while(I2CMasterBusy(0x40020000));
+N     
+N    //specify that we are going to read from slave device
+N    I2CMasterSlaveAddrSet(I2C0_BASE, slave_addr, true);
+X    I2CMasterSlaveAddrSet(0x40020000, slave_addr, 1);
+N     
+N    //send control byte and read from the register we
+N    //specified
+N    I2CMasterControl(I2C0_BASE, I2C_MASTER_CMD_SINGLE_RECEIVE);
+X    I2CMasterControl(0x40020000, 0x00000007);
+N     
+N    //wait for MCU to finish transaction
+N    while(I2CMasterBusy(I2C0_BASE));
+X    while(I2CMasterBusy(0x40020000));
+N     
+N    //return data pulled from the specified register
+N    return I2CMasterDataGet(I2C0_BASE);
+X    return I2CMasterDataGet(0x40020000);
+W "i2c.c" 122 2 last line of file ends without a newline
+N}

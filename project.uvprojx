@@ -520,6 +520,11 @@
               <FileType>5</FileType>
               <FilePath>.\myGPIO.h</FilePath>
             </File>
+            <File>
+              <FileName>i2c.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>.\i2c.c</FilePath>
+            </File>
           </Files>
         </Group>
         <Group>
