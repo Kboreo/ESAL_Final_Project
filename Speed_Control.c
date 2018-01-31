@@ -64,13 +64,13 @@ void Speed_Control(double Speed, double uSpeed)
 				Error[1] = uSpeed - Speed;
 				
 				//sets vol equal to the current voltage
-				vol = DutyC/640*10;
+				vol = DutyC/640*6;
 				
 				//sets vol equal to the current vol + error in volts from two errors ago + current error in volts * 1.247
-				vol = vol + (Error[2]/640*10) + 1.247 * Error[1]/640*10;
+				vol = vol + (Error[1]/640*5); // + 1.047 * Error[1]/640*10;
 				
 				//sets duty cycle 
-				DutyC = vol/10*640;	
+				DutyC = vol/6*640;	
 	
 				//sets limits for duty cycle
 				if (DutyC < 4){
@@ -79,14 +79,15 @@ void Speed_Control(double Speed, double uSpeed)
 				if (DutyC > 640){
 					DutyC = 640;
 					}
- DutyC = 600;
+ //DutyC = 600;
 				//Set new PWM 
 				PWMPulseWidthSet(PWM1_BASE, PWM_OUT_6, DutyC);
 
 			}
 	
 		Speed = ReadEncoder(); //Set varible equal to the read speed from the "ReadEncoder" function.
-		printf("Speed is, IN CONTROL %.2f rps \n\n", Speed);
+		printf("Speed is, IN CONTROL %.2f mm/s \n\n", Speed);
+		printf("Duty C = %.2f \n\n", DutyC);
 	
 		//will exit GPIO when SW2 is pressed
 		x = GPIOPinRead(GPIO_PORTF_BASE, GPIO_PIN_0); // set x equal to the output of button SW2 		

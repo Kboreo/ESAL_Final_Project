@@ -20025,7 +20025,7 @@ double ReadEncoder(void)
 	ticks = QEIVelocityGet(0x4002C000);
 	
 	
-	Espeed = ticks * 6.283185 / 19.2;
+	Espeed = ticks * 8.888888;
 	return Espeed;	
 	}
 

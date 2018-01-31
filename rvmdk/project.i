@@ -19668,7 +19668,7 @@ int  main(void)
 
 
 	
-	
+	uSpeed = GetUserSpeed();
 
 	Speed_Control(speed, uSpeed);
 	

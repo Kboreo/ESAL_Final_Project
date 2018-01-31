@@ -67,7 +67,7 @@ int  main(void)
 //************************
 //Write a function here to get the desired speed	
 	
-	uSpeed = GetUserSpeed()//set uSpeed equal to the speed you want me to travel
+	uSpeed = GetUserSpeed();//set uSpeed equal to the speed you want me to travel
 
 	Speed_Control(speed, uSpeed);
 	

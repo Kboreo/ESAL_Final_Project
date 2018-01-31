@@ -20333,13 +20333,13 @@ void Speed_Control(double Speed, double uSpeed)
 				Error[1] = uSpeed - Speed;
 				
 				
-				vol = DutyC/640*10;
+				vol = DutyC/640*6;
 				
 				
-				vol = vol + (Error[2]/640*10) + 1.247 * Error[1]/640*10;
+				vol = vol + (Error[1]/640*5); 
 				
 				
-				DutyC = vol/10*640;	
+				DutyC = vol/6*640;	
 	
 				
 				if (DutyC < 4){
@@ -20348,14 +20348,15 @@ void Speed_Control(double Speed, double uSpeed)
 				if (DutyC > 640){
 					DutyC = 640;
 					}
- DutyC = 600;
+ 
 				
 				PWMPulseWidthSet(0x40029000, 0x00000106, DutyC);
 
 			}
 	
 		Speed = ReadEncoder(); 
-		printf("Speed is, IN CONTROL %.2f rps \n\n", Speed);
+		printf("Speed is, IN CONTROL %.2f mm/s \n\n", Speed);
+		printf("Duty C = %.2f \n\n", DutyC);
 	
 		
 		x = GPIOPinRead(0x40025000, 0x00000001); 

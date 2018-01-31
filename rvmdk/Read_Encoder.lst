@@ -67163,7 +67163,7 @@ N	ticks = QEIVelocityGet(QEI0_BASE);
 X	ticks = QEIVelocityGet(0x4002C000);
 N	
 N	// speed in rad/seco	
-N	Espeed = ticks * 6.283185 / 19.2;
+N	Espeed = ticks * 8.888888;
 N	return Espeed;	
 N	}
 N

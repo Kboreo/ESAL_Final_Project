@@ -67477,13 +67477,13 @@ N				//Calculates error in rad/s
 N				Error[1] = uSpeed - Speed;
 N				
 N				//sets vol equal to the current voltage
-N				vol = DutyC/640*10;
+N				vol = DutyC/640*6;
 N				
 N				//sets vol equal to the current vol + error in volts from two errors ago + current error in volts * 1.247
-N				vol = vol + (Error[2]/640*10) + 1.247 * Error[1]/640*10;
+N				vol = vol + (Error[1]/640*5); // + 1.047 * Error[1]/640*10;
 N				
 N				//sets duty cycle 
-N				DutyC = vol/10*640;	
+N				DutyC = vol/6*640;	
 N	
 N				//sets limits for duty cycle
 N				if (DutyC < 4){
@@ -67492,7 +67492,7 @@ N					}
 N				if (DutyC > 640){
 N					DutyC = 640;
 N					}
-N DutyC = 600;
+N //DutyC = 600;
 N				//Set new PWM 
 N				PWMPulseWidthSet(PWM1_BASE, PWM_OUT_6, DutyC);
 X				PWMPulseWidthSet(0x40029000, 0x00000106, DutyC);
@@ -67500,14 +67500,15 @@ N
 N			}
 N	
 N		Speed = ReadEncoder(); //Set varible equal to the read speed from the "ReadEncoder" function.
-N		printf("Speed is, IN CONTROL %.2f rps \n\n", Speed);
+N		printf("Speed is, IN CONTROL %.2f mm/s \n\n", Speed);
+N		printf("Duty C = %.2f \n\n", DutyC);
 N	
 N		//will exit GPIO when SW2 is pressed
 N		x = GPIOPinRead(GPIO_PORTF_BASE, GPIO_PIN_0); // set x equal to the output of button SW2 		
 X		x = GPIOPinRead(0x40025000, 0x00000001); 
 N			if ( x == 0){
 N					i = 0;
-W "Speed_Control.c" 95 6 function "stopmotor" declared implicitly
+W "Speed_Control.c" 96 6 function "stopmotor" declared implicitly
 N					stopmotor();	
 N			}
 N	}

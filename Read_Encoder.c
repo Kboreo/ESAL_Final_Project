@@ -25,7 +25,7 @@ double ReadEncoder(void)
 	ticks = QEIVelocityGet(QEI0_BASE);
 	
 	// speed in rad/seco	
-	Espeed = ticks * 6.283185 / 19.2;
+	Espeed = ticks * 8.888888;
 	return Espeed;	
 	}
 

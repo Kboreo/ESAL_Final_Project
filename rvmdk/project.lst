@@ -66805,7 +66805,7 @@ N	{
 N//************************
 N//Write a function here to get the desired speed	
 N	
-N	//uSpeed = //set uSpeed equal to the speed you want me to travel
+N	uSpeed = GetUserSpeed();//set uSpeed equal to the speed you want me to travel
 N
 W "project.c" 72 2 function "Speed_Control" declared implicitly
 N	Speed_Control(speed, uSpeed);
