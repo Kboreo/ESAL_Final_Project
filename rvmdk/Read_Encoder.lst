@@ -67150,6 +67150,7 @@ W "myGPIO.h" 14 54 last line of file ends without a newline
 Nvoid pinReadAndWrite(uint32_t ui32Loop,uint8_t temp);
 L 57 "project.h" 2
 N
+N
 L 17 "Read_Encoder.c" 2
 N#include "tm4c123gh6pm.h"	//Header file accesses registers in TMC123 microcontroller
 N

@@ -22,7 +22,7 @@ Dialog DLL:      TCM.DLL V1.32.0.0
  
 <h2>Project:</h2>
 C:\Users\ptesolin\Documents\GitHub\ADC\ESAL_Final_Project\project.uvprojx
-Project File Date:  12/01/2017
+Project File Date:  02/28/2018
 
 <h2>Output:</h2>
 *** Using Compiler 'V5.06 update 5 (build 528)', folder: 'C:\Keil_v5\ARM\ARMCC\Bin'
@@ -31,6 +31,10 @@ creating preprocessor file for project.c...
 assembling startup_rvmdk.S...
 creating preprocessor file for Encoder.c...
 creating preprocessor file for myPWM.c...
+compiling myPWM.c...
+myPWM.c(71): warning:  #1-D: last line of file ends without a newline
+  	
+myPWM.c: 1 warning, 0 errors
 compiling Encoder.c...
 Read_Encoder.h(39): warning:  #1-D: last line of file ends without a newline
   double ReadEncoder(void);
@@ -61,10 +65,6 @@ Encoder.c(28): warning:  #47-D: incompatible redefinition of macro "SYSCTL_RCGCG
 Encoder.c(75): warning:  #1-D: last line of file ends without a newline
   	
 Encoder.c: 14 warnings, 0 errors
-compiling myPWM.c...
-myPWM.c(71): warning:  #1-D: last line of file ends without a newline
-  	
-myPWM.c: 1 warning, 0 errors
 compiling project.c...
 driverlib/hibernate.h(229): warning:  #231-D: declaration is not visible outside of function
   extern void HibernateCalendarSet(struct tm *psTime);
@@ -92,21 +92,23 @@ project.c(49): warning:  #223-D: function "setupENCODER" declared implicitly
   	setupENCODER();	 //setup to read motor encoder
 project.c(50): warning:  #223-D: function "setupPWM" declared implicitly
   	setupPWM();	//setup PWM output
-project.c(72): warning:  #223-D: function "Speed_Control" declared implicitly
+project.c(141): warning:  #111-D: statement is unreachable
+  	uSpeed = GetUserSpeed();//set uSpeed equal to the speed you want me to travel
+project.c(143): warning:  #223-D: function "Speed_Control" declared implicitly
   	Speed_Control(speed, uSpeed);
-project.c: 14 warnings, 0 errors
+project.c: 15 warnings, 0 errors
 creating preprocessor file for Float_Setup.c...
 creating preprocessor file for Uart_helper.c...
 compiling Float_Setup.c...
 Float_Setup.h(35): warning:  #1-D: last line of file ends without a newline
   #include "Uart_helper.h"
-Float_Setup.c: 4 warnings, 0 errors
-#1-D: last line of file ends without a newline
+Read_Encoder.h(39): warning:  #1-D: last line of file ends without a newline
   double ReadEncoder(void);
 Encoder.h(28): warning:  #1-D: last line of file ends without a newline
   void QEIConfigure(uint32_t ui32Base, uint32_t ui32Config, uint32_t ui32MaxPosition);
 Float_Setup.c(29): warning:  #1-D: last line of file ends without a newline
    
+Float_Setup.c: 4 warnings, 0 errors
 creating preprocessor file for Read_Encoder.c...
 compiling Uart_helper.c...
 src\Uart_helper.c(85): warning:  #1-D: last line of file ends without a newline
@@ -228,6 +230,7 @@ Calibrate.h(45): warning:  #1-D: last line of file ends without a newline
 Calibrate.c(53): warning:  #223-D: function "stopmotor" declared implicitly
   	stopmotor();
 Calibrate.c: 18 warnings, 0 errors
+creating preprocessor file for i2c.c...
 compiling myGPIO.c...
 myGPIO.h(13): warning:  #1295-D: Deprecated declaration setup_IO - give arg types
   void setup_IO();
@@ -256,11 +259,12 @@ myGPIO.c(28): warning:  #47-D: incompatible redefinition of macro "SYSCTL_RCGC2_
 myGPIO.c(138): warning:  #1-D: last line of file ends without a newline
   	
 myGPIO.c: 13 warnings, 0 errors
+compiling i2c.c...
 linking...
-Program Size: Code=10368 RO-data=1316 RW-data=108 ZI-data=396  
+Program Size: Code=7204 RO-data=1448 RW-data=28 ZI-data=364  
 FromELF: creating hex file...
 After Build - User command #1: fromelf --bin --output .\rvmdk\project.bin .\rvmdk\project.axf
-".\rvmdk\project.axf" - 0 Error(s), 97 Warning(s).
+".\rvmdk\project.axf" - 0 Error(s), 99 Warning(s).
 
 <h2>Software Packages used:</h2>
 
@@ -283,7 +287,7 @@ Package Vendor: Keil
 <h2>Collection of Component Files used:</h2>
 
    * Component: ARM::CMSIS:CORE:5.0.1
-Build Time Elapsed:  00:00:12
+Build Time Elapsed:  00:00:11
 </pre>
 </body>
 </html>

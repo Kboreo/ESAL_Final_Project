@@ -20013,6 +20013,7 @@ void setup_IO();
 void pinReadAndWrite(uint32_t ui32Loop,uint8_t temp);
 #line 57 "project.h"
 
+
 #line 17 "Read_Encoder.c"
 #line 18 "Read_Encoder.c"
 

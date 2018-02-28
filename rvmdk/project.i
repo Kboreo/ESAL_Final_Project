@@ -19632,6 +19632,7 @@ void setup_IO();
 void pinReadAndWrite(uint32_t ui32Loop,uint8_t temp);
 #line 57 "project.h"
 
+
 #line 30 "project.c"
 #line 31 "project.c"
 #line 32 "project.c"
@@ -19651,9 +19652,53 @@ void SetupHardware()
 	setupPWM();	
 	FPUEnable();	
 	FPULazyStackingEnable(); 
-	SetupADC(); 
+	
 	
 }
+
+
+volatile uint32_t   result = 'V';
+
+void InitConsole(void)
+{
+    SysCtlPeripheralEnable(0xf0000800);
+
+    GPIOPinConfigure(0x00000001);
+    GPIOPinConfigure(0x00000401);
+
+    
+    
+    
+    
+}
+
+
+void I2C1_Slave_Init(void)
+{
+    SysCtlPeripheralEnable(0xf0000800);
+    while(!SysCtlPeripheralReady(0xf0000800));
+
+    SysCtlPeripheralEnable(0xf0002001);
+    SysCtlPeripheralReset(0xf0002001);
+
+    GPIOPinConfigure(0x00001803);
+    GPIOPinConfigure(0x00001C03);
+
+    GPIOPinTypeI2CSCL(0x40004000, 0x00000040);
+    GPIOPinTypeI2C(0x40004000, 0x00000080);
+
+    I2CSlaveEnable(0x40021000);
+    I2CSlaveInit(0x40021000, 0x3C);
+}
+
+void I2C1SlaveIntHandler(void)
+{
+    
+    I2CSlaveIntClear(0x40021000);
+    
+    result = I2CSlaveDataGet(0x40021000);
+}
+
 
 
 double speed; 	
@@ -19663,7 +19708,34 @@ double uSpeed;
 int  main(void)
 {	
 	SetupHardware();  
-	while(1)
+	
+	
+	
+	
+	InitConsole();
+    I2C1_Slave_Init();
+
+    
+    
+    
+
+    IntEnable(53);
+    I2CSlaveIntEnableEx(0x40021000, 0x00000001);
+    IntMasterEnable();
+
+    while(1)
+    {
+        I2CSlaveDataPut(0x40021000, result);
+        printf(" Slave receive: '%c' \n", result);
+        SysCtlDelay(SysCtlClockGet()/12);
+
+        
+
+        I2CSlaveDataPut(0x40021000, result);
+    }
+
+	
+	
 	{
 
 
