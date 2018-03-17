@@ -66759,6 +66759,9 @@ Nvoid setup_IO();
 W "myGPIO.h" 14 54 last line of file ends without a newline
 Nvoid pinReadAndWrite(uint32_t ui32Loop,uint8_t temp);
 L 57 "project.h" 2
+N#include "i2c.h"
+L 1 "i2c.h" 1
+L 58 "project.h" 2
 N
 N
 L 30 "project.c" 2
@@ -66789,68 +66792,12 @@ W "project.c" 50 2 function "setupPWM" declared implicitly
 N	setupPWM();	//setup PWM output
 N	FPUEnable();	//inable floating point
 N	FPULazyStackingEnable(); //inable lazy stack for floating point
+W "project.c" 53 2 function "InitI2C0" declared implicitly
+N	InitI2C0();
 N	//SetupADC(); //setup to read motor voltage 
 N	
 N}
-N//**************************************************
-N#define SLAVE_ADDRESS 0x3C
-Nvolatile uint32_t   result = 'V';
 N
-Nvoid InitConsole(void)
-N{
-N    SysCtlPeripheralEnable(SYSCTL_PERIPH_GPIOA);
-X    SysCtlPeripheralEnable(0xf0000800);
-N
-N    GPIOPinConfigure(GPIO_PA0_U0RX);
-X    GPIOPinConfigure(0x00000001);
-N    GPIOPinConfigure(GPIO_PA1_U0TX);
-X    GPIOPinConfigure(0x00000401);
-N
-N    //SysCtlPeripheralEnable(SYSCTL_PERIPH_UART0);
-N    //UARTClockSourceSet(UART0_BASE, UART_CLOCK_PIOSC);
-N    //GPIOPinTypeUART(GPIO_PORTA_BASE, GPIO_PIN_0 | GPIO_PIN_1);
-N    //UARTStdioConfig(0, 115200, 16000000);
-N}
-N
-N
-Nvoid I2C1_Slave_Init(void)
-N{
-N    SysCtlPeripheralEnable(SYSCTL_PERIPH_GPIOA);
-X    SysCtlPeripheralEnable(0xf0000800);
-N    while(!SysCtlPeripheralReady(SYSCTL_PERIPH_GPIOA));
-X    while(!SysCtlPeripheralReady(0xf0000800));
-N
-N    SysCtlPeripheralEnable(SYSCTL_PERIPH_I2C1);
-X    SysCtlPeripheralEnable(0xf0002001);
-N    SysCtlPeripheralReset(SYSCTL_PERIPH_I2C1);
-X    SysCtlPeripheralReset(0xf0002001);
-N
-N    GPIOPinConfigure(GPIO_PA6_I2C1SCL);
-X    GPIOPinConfigure(0x00001803);
-N    GPIOPinConfigure(GPIO_PA7_I2C1SDA);
-X    GPIOPinConfigure(0x00001C03);
-N
-N    GPIOPinTypeI2CSCL(GPIO_PORTA_BASE, GPIO_PIN_6);
-X    GPIOPinTypeI2CSCL(0x40004000, 0x00000040);
-N    GPIOPinTypeI2C(GPIO_PORTA_BASE, GPIO_PIN_7);
-X    GPIOPinTypeI2C(0x40004000, 0x00000080);
-N
-N    I2CSlaveEnable(I2C1_BASE);
-X    I2CSlaveEnable(0x40021000);
-N    I2CSlaveInit(I2C1_BASE, SLAVE_ADDRESS);
-X    I2CSlaveInit(0x40021000, 0x3C);
-N}
-N
-Nvoid I2C1SlaveIntHandler(void)
-N{
-N    // Clear the I2C0 interrupt flag.
-N    I2CSlaveIntClear(I2C1_BASE);
-X    I2CSlaveIntClear(0x40021000);
-N    // Read the data from the slave.
-N    result = I2CSlaveDataGet(I2C1_BASE);
-X    result = I2CSlaveDataGet(0x40021000);
-N}
-N//*****************************************************
 N
 N
 Ndouble speed; 	//Speed read from encoder
@@ -66861,45 +66808,13 @@ Nint  main(void)
 N{	
 N	SetupHardware();  //Initializes all of the required HardWare for the project.	
 N	
-N	
-N	//************************************************************************
-N	
-N	InitConsole();
-N    I2C1_Slave_Init();
+N	//I2CSend();
 N
-N    //SysCtlPeripheralEnable(SYSCTL_PERIPH_GPIOF);
-N    //GPIOPinTypeGPIOOutput(GPIO_PORTA_BASE, GPIO_PIN_6|GPIO_PIN_7|GPIO_PIN_3);
-N    //GPIOPinWrite(GPIO_PORTF_BASE, GPIO_PIN_1|GPIO_PIN_2|GPIO_PIN_3, 0);
-N
-N    IntEnable(INT_I2C1);
-X    IntEnable(53);
-N    I2CSlaveIntEnableEx(I2C1_BASE, I2C_SLAVE_INT_DATA);
-X    I2CSlaveIntEnableEx(0x40021000, 0x00000001);
-N    IntMasterEnable();
-N
-N    while(1)
-N    {
-N        I2CSlaveDataPut(I2C1_BASE, result);
-X        I2CSlaveDataPut(0x40021000, result);
-N        printf(" Slave receive: '%c' \n", result);
-N        SysCtlDelay(SysCtlClockGet()/12);
-N
-N        //while(!(I2CSlaveStatus(I2C1_BASE) & I2C_SLAVE_ACT_TREQ));
-N
-N        I2CSlaveDataPut(I2C1_BASE, result);
-X        I2CSlaveDataPut(0x40021000, result);
-N    }
-N
-N	//*********************************************************************
-N	
-N	{
-N//************************
 N//Write a function here to get the desired speed	
 N	
-W "project.c" 141 2 statement is unreachable
 N	uSpeed = GetUserSpeed();//set uSpeed equal to the speed you want me to travel
 N
-W "project.c" 143 2 function "Speed_Control" declared implicitly
+W "project.c" 74 2 function "Speed_Control" declared implicitly
 N	Speed_Control(speed, uSpeed);
 N	
 N	speed = ReadEncoder(); // this will set speed equal to the current speed 
@@ -66907,7 +66822,7 @@ N
 N	//*************************
 N	//Write a function here to send "speed" to Levi
 N	}
-N}	
+N	
 N	
 N
 N

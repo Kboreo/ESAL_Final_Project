@@ -22,7 +22,7 @@ Dialog DLL:      TCM.DLL V1.32.0.0
  
 <h2>Project:</h2>
 C:\Users\ptesolin\Documents\GitHub\ADC\ESAL_Final_Project\project.uvprojx
-Project File Date:  02/28/2018
+Project File Date:  03/17/2018
 
 <h2>Output:</h2>
 *** Using Compiler 'V5.06 update 5 (build 528)', folder: 'C:\Keil_v5\ARM\ARMCC\Bin'
@@ -92,9 +92,9 @@ project.c(49): warning:  #223-D: function "setupENCODER" declared implicitly
   	setupENCODER();	 //setup to read motor encoder
 project.c(50): warning:  #223-D: function "setupPWM" declared implicitly
   	setupPWM();	//setup PWM output
-project.c(141): warning:  #111-D: statement is unreachable
-  	uSpeed = GetUserSpeed();//set uSpeed equal to the speed you want me to travel
-project.c(143): warning:  #223-D: function "Speed_Control" declared implicitly
+project.c(53): warning:  #223-D: function "InitI2C0" declared implicitly
+  	InitI2C0();
+project.c(74): warning:  #223-D: function "Speed_Control" declared implicitly
   	Speed_Control(speed, uSpeed);
 project.c: 15 warnings, 0 errors
 creating preprocessor file for Float_Setup.c...
@@ -170,12 +170,6 @@ driverlib/hibernate.h(232): warning:  #231-D: declaration is not visible outside
   extern void HibernateCalendarMatchGet(uint32_t ui32Index, struct tm *psTime);
 Read_Encoder.h(39): warning:  #1-D: last line of file ends without a newline
   double ReadEncoder(void);
-Get_Speed.h(13): warning:  #1-D: last line of file ends without a newline
-   double GetUserSpeed(void);
-Read_Encoder.h(39): warning:  #1-D: last line of file ends without a newline
-  double ReadEncoder(void);
-Calibrate.h(45): warning:  #1-D: last line of file ends without a newline
-  void initialize_aandw(void);
 myGPIO.h(13): warning:  #1295-D: Deprecated declaration setup_IO - give arg types
   void setup_IO();
 myGPIO.h(14): warning:  #1-D: last line of file ends without a newline
@@ -260,11 +254,14 @@ myGPIO.c(138): warning:  #1-D: last line of file ends without a newline
   	
 myGPIO.c: 13 warnings, 0 errors
 compiling i2c.c...
+i2c.c(161): warning:  #1-D: last line of file ends without a newline
+  //}
+i2c.c: 1 warning, 0 errors
 linking...
-Program Size: Code=7204 RO-data=1448 RW-data=28 ZI-data=364  
+Program Size: Code=10064 RO-data=1316 RW-data=108 ZI-data=396  
 FromELF: creating hex file...
 After Build - User command #1: fromelf --bin --output .\rvmdk\project.bin .\rvmdk\project.axf
-".\rvmdk\project.axf" - 0 Error(s), 99 Warning(s).
+".\rvmdk\project.axf" - 0 Error(s), 97 Warning(s).
 
 <h2>Software Packages used:</h2>
 

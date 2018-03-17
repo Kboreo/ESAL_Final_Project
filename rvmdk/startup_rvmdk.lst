@@ -485,7 +485,8 @@ ARM Macro Assembler    Page 8
                        ot be included
   271 0000026C         ; in this project.
   272 0000026C         ;
-  273 0000026C F64E 5088       MOVW             R0, #0xED88
+  273 0000026C F64E 5088 
+                       40      MOVW             R0, #0xED88
   274 00000270 F2CE 0000       MOVT             R0, #0xE000
   275 00000274 6801            LDR              R1, [R0]
   276 00000276 F441 0170       ORR              R1, #0x00F00000
@@ -517,13 +518,13 @@ ARM Macro Assembler    Page 8
   296 00000284         NmiSR
   297 00000284 E7FE            B                NmiSR
   298 00000286         
-  299 00000286         ;*******************************************************
 
 
 
 ARM Macro Assembler    Page 9 
 
 
+  299 00000286         ;*******************************************************
                        ***********************
   300 00000286         ;
   301 00000286         ; This is the code that gets called when the processor r
@@ -582,13 +583,13 @@ ARM Macro Assembler    Page 9
   338 00000000         ; the location of the stack and heap.
   339 00000000         ;
   340 00000000         ;*******************************************************
-                       ***********************
 
 
 
 ARM Macro Assembler    Page 10 
 
 
+                       ***********************
   341 00000000                 IF               :DEF: __MICROLIB
   342 00000000                 EXPORT           __initial_sp
   343 00000000                 EXPORT           __heap_base

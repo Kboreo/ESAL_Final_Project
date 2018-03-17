@@ -50,53 +50,11 @@ void SetupHardware()
 	setupPWM();	//setup PWM output
 	FPUEnable();	//inable floating point
 	FPULazyStackingEnable(); //inable lazy stack for floating point
+	InitI2C0();
 	//SetupADC(); //setup to read motor voltage 
 	
 }
-//**************************************************
-#define SLAVE_ADDRESS 0x3C
-volatile uint32_t   result = 'V';
 
-void InitConsole(void)
-{
-    SysCtlPeripheralEnable(SYSCTL_PERIPH_GPIOA);
-
-    GPIOPinConfigure(GPIO_PA0_U0RX);
-    GPIOPinConfigure(GPIO_PA1_U0TX);
-
-    //SysCtlPeripheralEnable(SYSCTL_PERIPH_UART0);
-    //UARTClockSourceSet(UART0_BASE, UART_CLOCK_PIOSC);
-    //GPIOPinTypeUART(GPIO_PORTA_BASE, GPIO_PIN_0 | GPIO_PIN_1);
-    //UARTStdioConfig(0, 115200, 16000000);
-}
-
-
-void I2C1_Slave_Init(void)
-{
-    SysCtlPeripheralEnable(SYSCTL_PERIPH_GPIOA);
-    while(!SysCtlPeripheralReady(SYSCTL_PERIPH_GPIOA));
-
-    SysCtlPeripheralEnable(SYSCTL_PERIPH_I2C1);
-    SysCtlPeripheralReset(SYSCTL_PERIPH_I2C1);
-
-    GPIOPinConfigure(GPIO_PA6_I2C1SCL);
-    GPIOPinConfigure(GPIO_PA7_I2C1SDA);
-
-    GPIOPinTypeI2CSCL(GPIO_PORTA_BASE, GPIO_PIN_6);
-    GPIOPinTypeI2C(GPIO_PORTA_BASE, GPIO_PIN_7);
-
-    I2CSlaveEnable(I2C1_BASE);
-    I2CSlaveInit(I2C1_BASE, SLAVE_ADDRESS);
-}
-
-void I2C1SlaveIntHandler(void)
-{
-    // Clear the I2C0 interrupt flag.
-    I2CSlaveIntClear(I2C1_BASE);
-    // Read the data from the slave.
-    result = I2CSlaveDataGet(I2C1_BASE);
-}
-//*****************************************************
 
 
 double speed; 	//Speed read from encoder
@@ -107,35 +65,8 @@ int  main(void)
 {	
 	SetupHardware();  //Initializes all of the required HardWare for the project.	
 	
-	
-	//************************************************************************
-	
-	InitConsole();
-    I2C1_Slave_Init();
+	//I2CSend();
 
-    //SysCtlPeripheralEnable(SYSCTL_PERIPH_GPIOF);
-    //GPIOPinTypeGPIOOutput(GPIO_PORTA_BASE, GPIO_PIN_6|GPIO_PIN_7|GPIO_PIN_3);
-    //GPIOPinWrite(GPIO_PORTF_BASE, GPIO_PIN_1|GPIO_PIN_2|GPIO_PIN_3, 0);
-
-    IntEnable(INT_I2C1);
-    I2CSlaveIntEnableEx(I2C1_BASE, I2C_SLAVE_INT_DATA);
-    IntMasterEnable();
-
-    while(1)
-    {
-        I2CSlaveDataPut(I2C1_BASE, result);
-        printf(" Slave receive: '%c' \n", result);
-        SysCtlDelay(SysCtlClockGet()/12);
-
-        //while(!(I2CSlaveStatus(I2C1_BASE) & I2C_SLAVE_ACT_TREQ));
-
-        I2CSlaveDataPut(I2C1_BASE, result);
-    }
-
-	//*********************************************************************
-	
-	{
-//************************
 //Write a function here to get the desired speed	
 	
 	uSpeed = GetUserSpeed();//set uSpeed equal to the speed you want me to travel
@@ -147,7 +78,7 @@ int  main(void)
 	//*************************
 	//Write a function here to send "speed" to Levi
 	}
-}	
+	
 	
 
 
