@@ -110,7 +110,7 @@ I2CMasterSlaveAddrSet(I2C0_BASE, 0x3c, false);
 //
 // Place the character to be sent in the data register
 //
-I2CMasterDataPut(I2C0_BASE, 54);
+I2CMasterDataPut(I2C0_BASE, 81);
 //
 // Initiate send of character from Master to Slave
 //
@@ -138,46 +138,34 @@ return 0;
 		//read specified register on slave device
 int I2CReceive(void)
 {
-//	    SysCtlClockSet(SYSCTL_SYSDIV_1| SYSCTL_USE_OSC| SYSCTL_OSC_MAIN| SYSCTL_XTAL_16MHZ);
-
-//    InitConsole();
-//    I2C0_Master_Init();
-
-//    IntEnable(INT_I2C0);
-//    I2CMasterIntEnableEx(I2C0_BASE, I2C_MASTER_INT_DATA);
-//    IntMasterEnable();
-	//**************************8
-	//printf("we got to i2c master\n\n");
 	
-    //specify that we are writing (a register address) to the
-    //slave device
-    I2CMasterSlaveAddrSet(I2C0_BASE, 0x3c, true);
- 
-    //specify register to be read
-    I2CMasterDataPut(I2C0_BASE, 0xfc);
- 
-    //send control byte and register address byte to slave device
-    I2CMasterControl(I2C0_BASE, I2C_MASTER_CMD_BURST_SEND_START);
-     
-    //wait for MCU to finish transaction
-    while(I2CMasterBusy(I2C0_BASE));
-     
-    //specify that we are going to read from slave device
-    I2CMasterSlaveAddrSet(I2C0_BASE, 0x3c, true);
-     
-    //send control byte and read from the register we
-    //specified
-    I2CMasterControl(I2C0_BASE, I2C_MASTER_CMD_SINGLE_RECEIVE);
-     
-    //wait for MCU to finish transaction
-    while(I2CMasterBusy(I2C0_BASE));
-     
-    //return data pulled from the specified register
-   dspeed = I2CMasterDataGet(I2C0_BASE);
-	 //	printf("we got to the end of i2c master\n\n");
-	 
-	 return dspeed;
-}
+	
+
+   //specify that we want to communicate to device address with an intended write to bus
+   I2CMasterSlaveAddrSet(I2C0_BASE, 0x3c, false);
+
+   //the register to be read
+   I2CMasterDataPut(I2C0_BASE, 0xfc);
+
+   //send control byte and register address byte to slave device
+   I2CMasterControl(I2C0_BASE, I2C_MASTER_CMD_SINGLE_SEND);
+
+   //wait for MCU to complete send transaction
+   while(I2CMasterBusy(I2C0_BASE));
+
+   //read from the specified slave device
+   I2CMasterSlaveAddrSet(I2C0_BASE, 0x3c, true);
+
+   //send control byte and read from the register from the MCU
+   I2CMasterControl(I2C0_BASE, I2C_MASTER_CMD_SINGLE_RECEIVE);
+
+   //wait while checking for MCU to complete the transaction
+   while(I2CMasterBusy(I2C0_BASE));
+
+   //Get the data from the MCU register and return to caller
+   return( I2CMasterDataGet(I2C0_BASE));
+ }
+
 		
 		
 

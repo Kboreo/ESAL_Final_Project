@@ -131,13 +131,7 @@ src\Uart_helper.c(85): warning:  #1-D: last line of file ends without a newline
   }
 src\Uart_helper.c: 1 warning, 0 errors
 creating preprocessor file for Speed_Control.c...
-creating preprocessor file for Get_Speed.c...
-compiling Get_Speed.c...
-Get_Speed.h(13): warning:  #1-D: last line of file ends without a newline
-   double GetUserSpeed(void);
-Get_Speed.c(27): warning:  #1-D: last line of file ends without a newline
-  }
-Get_Speed.c: 2 warnings, 0 errors
+creating preprocessor file for i2c_master.c...
 compiling Read_Encoder.c...
 Read_Encoder.h(39): warning:  #1-D: last line of file ends without a newline
   double ReadEncoder(void);
@@ -182,7 +176,7 @@ i2c_master.h(74): warning:  #1-D: last line of file ends without a newline
 Read_Encoder.c(34): warning:  #1-D: last line of file ends without a newline
   	//int direction = QEIDirectionGet(QEI0_BASE);
 Read_Encoder.c: 21 warnings, 0 errors
-creating preprocessor file for Calibrate.c...
+creating preprocessor file for Get_Speed.c...
 compiling Speed_Control.c...
 Read_Encoder.h(39): warning:  #1-D: last line of file ends without a newline
   double ReadEncoder(void);
@@ -235,90 +229,13 @@ Speed_Control.c(96): warning:  #223-D: function "stopmotor" declared implicitly
 Speed_Control.c(32): warning:  #177-D: variable "i"  was declared but never referenced
   	int i = 1;
 Speed_Control.c: 25 warnings, 0 errors
-creating preprocessor file for HAL_ADC.c...
-creating preprocessor file for myGPIO.c...
-compiling HAL_ADC.c...
-compiling Calibrate.c...
-Read_Encoder.h(39): warning:  #1-D: last line of file ends without a newline
-  double ReadEncoder(void);
-Read_Encoder.h(39): warning:  #1-D: last line of file ends without a newline
-  double ReadEncoder(void);
-Encoder.h(28): warning:  #1-D: last line of file ends without a newline
-  void QEIConfigure(uint32_t ui32Base, uint32_t ui32Config, uint32_t ui32MaxPosition);
-driverlib/hibernate.h(229): warning:  #231-D: declaration is not visible outside of function
-  extern void HibernateCalendarSet(struct tm *psTime);
-driverlib/hibernate.h(230): warning:  #231-D: declaration is not visible outside of function
-  extern int HibernateCalendarGet(struct tm *psTime);
-driverlib/hibernate.h(231): warning:  #231-D: declaration is not visible outside of function
-  extern void HibernateCalendarMatchSet(uint32_t ui32Index, struct tm *psTime);
-driverlib/hibernate.h(232): warning:  #231-D: declaration is not visible outside of function
-  extern void HibernateCalendarMatchGet(uint32_t ui32Index, struct tm *psTime);
-Read_Encoder.h(39): warning:  #1-D: last line of file ends without a newline
-  double ReadEncoder(void);
+compiling Get_Speed.c...
 Get_Speed.h(13): warning:  #1-D: last line of file ends without a newline
    double GetUserSpeed(void);
-Read_Encoder.h(39): warning:  #1-D: last line of file ends without a newline
-  double ReadEncoder(void);
-Calibrate.h(45): warning:  #1-D: last line of file ends without a newline
-  void initialize_aandw(void);
-myGPIO.h(13): warning:  #1295-D: Deprecated declaration setup_IO - give arg types
-  void setup_IO();
-myGPIO.h(14): warning:  #1-D: last line of file ends without a newline
-  void pinReadAndWrite(uint32_t ui32Loop,uint8_t temp);
-Read_Encoder.h(39): warning:  #1-D: last line of file ends without a newline
-  double ReadEncoder(void);
-Get_Speed.h(13): warning:  #1-D: last line of file ends without a newline
-   double GetUserSpeed(void);
-Read_Encoder.h(39): warning:  #1-D: last line of file ends without a newline
-  double ReadEncoder(void);
-Calibrate.h(45): warning:  #1-D: last line of file ends without a newline
-  void initialize_aandw(void);
-myGPIO.h(13): warning:  #1295-D: Deprecated declaration setup_IO - give arg types
-  void setup_IO();
-myGPIO.h(14): warning:  #1-D: last line of file ends without a newline
-  void pinReadAndWrite(uint32_t ui32Loop,uint8_t temp);
-i2c_master.h(74): warning:  #1-D: last line of file ends without a newline
-  int I2CReceive(void);
-Read_Encoder.h(39): warning:  #1-D: last line of file ends without a newline
-  double ReadEncoder(void);
-Speed_Control.h(38): warning:  #1-D: last line of file ends without a newline
-  void Speed_Control(double Speed, double uSpeed);
-Read_Encoder.h(39): warning:  #1-D: last line of file ends without a newline
-  double ReadEncoder(void);
-Calibrate.h(45): warning:  #1-D: last line of file ends without a newline
-  void initialize_aandw(void);
-Calibrate.c(53): warning:  #223-D: function "stopmotor" declared implicitly
-  	stopmotor();
-Calibrate.c: 25 warnings, 0 errors
-compiling myGPIO.c...
-myGPIO.h(13): warning:  #1295-D: Deprecated declaration setup_IO - give arg types
-  void setup_IO();
-myGPIO.h(14): warning:  #1-D: last line of file ends without a newline
-  void pinReadAndWrite(uint32_t ui32Loop,uint8_t temp);
-myGPIO.c(19): warning:  #47-D: incompatible redefinition of macro "GPIO_PORTF_DATA_R"  (declared at line 701 of ".\driverlib\../inc/tm4c123gh6pm.h")
-  #define GPIO_PORTF_DATA_R       (*((volatile unsigned long *)0x400253FC))
-myGPIO.c(20): warning:  #47-D: incompatible redefinition of macro "GPIO_PORTF_DIR_R"  (declared at line 702 of ".\driverlib\../inc/tm4c123gh6pm.h")
-  #define GPIO_PORTF_DIR_R        (*((volatile unsigned long *)0x40025400))
-myGPIO.c(21): warning:  #47-D: incompatible redefinition of macro "GPIO_PORTF_AFSEL_R"  (declared at line 710 of ".\driverlib\../inc/tm4c123gh6pm.h")
-  #define GPIO_PORTF_AFSEL_R      (*((volatile unsigned long *)0x40025420))
-myGPIO.c(22): warning:  #47-D: incompatible redefinition of macro "GPIO_PORTF_PUR_R"  (declared at line 715 of ".\driverlib\../inc/tm4c123gh6pm.h")
-  #define GPIO_PORTF_PUR_R        (*((volatile unsigned long *)0x40025510))
-myGPIO.c(23): warning:  #47-D: incompatible redefinition of macro "GPIO_PORTF_DEN_R"  (declared at line 718 of ".\driverlib\../inc/tm4c123gh6pm.h")
-  #define GPIO_PORTF_DEN_R        (*((volatile unsigned long *)0x4002551C))
-myGPIO.c(24): warning:  #47-D: incompatible redefinition of macro "GPIO_PORTF_LOCK_R"  (declared at line 719 of ".\driverlib\../inc/tm4c123gh6pm.h")
-  #define GPIO_PORTF_LOCK_R       (*((volatile unsigned long *)0x40025520))
-myGPIO.c(25): warning:  #47-D: incompatible redefinition of macro "GPIO_PORTF_CR_R"  (declared at line 720 of ".\driverlib\../inc/tm4c123gh6pm.h")
-  #define GPIO_PORTF_CR_R         (*((volatile unsigned long *)0x40025524))
-myGPIO.c(26): warning:  #47-D: incompatible redefinition of macro "GPIO_PORTF_AMSEL_R"  (declared at line 721 of ".\driverlib\../inc/tm4c123gh6pm.h")
-  #define GPIO_PORTF_AMSEL_R      (*((volatile unsigned long *)0x40025528))
-myGPIO.c(27): warning:  #47-D: incompatible redefinition of macro "GPIO_PORTF_PCTL_R"  (declared at line 722 of ".\driverlib\../inc/tm4c123gh6pm.h")
-  #define GPIO_PORTF_PCTL_R       (*((volatile unsigned long *)0x4002552C))
-myGPIO.c(28): warning:  #47-D: incompatible redefinition of macro "SYSCTL_RCGC2_R"  (declared at line 2059 of ".\driverlib\../inc/tm4c123gh6pm.h")
-  #define SYSCTL_RCGC2_R          (*((volatile unsigned long *)0x400FE108))
-myGPIO.c(138): warning:  #1-D: last line of file ends without a newline
-  	
-myGPIO.c: 13 warnings, 0 errors
-creating preprocessor file for i2c_master.c...
+Get_Speed.c(27): warning:  #1-D: last line of file ends without a newline
+  }
+Get_Speed.c: 2 warnings, 0 errors
+creating preprocessor file for Calibrate.c...
 compiling i2c_master.c...
 driverlib/hibernate.h(229): warning:  #231-D: declaration is not visible outside of function
   extern void HibernateCalendarSet(struct tm *psTime);
@@ -498,11 +415,94 @@ inc/hw_ints.h(473): warning:  #47-D: incompatible redefinition of macro "INT_WTI
   #define INT_WTIMER5A            INT_CONCAT(INT_WTIMER5A_, INT_DEVICE_CLASS)
 inc/hw_ints.h(474): warning:  #47-D: incompatible redefinition of macro "INT_WTIMER5B"  (declared at line 120 of ".\inc\tm4c123gh6pm.h")
   #define INT_WTIMER5B            INT_CONCAT(INT_WTIMER5B_, INT_DEVICE_CLASS)
-i2c_master.c(184): warning:  #1-D: last line of file ends without a newline
+i2c_master.c(172): warning:  #1-D: last line of file ends without a newline
   		
 i2c_master.c: 90 warnings, 0 errors
+creating preprocessor file for HAL_ADC.c...
+creating preprocessor file for myGPIO.c...
+compiling HAL_ADC.c...
+compiling myGPIO.c...
+myGPIO.h(13): warning:  #1295-D: Deprecated declaration setup_IO - give arg types
+  void setup_IO();
+myGPIO.h(14): warning:  #1-D: last line of file ends without a newline
+  void pinReadAndWrite(uint32_t ui32Loop,uint8_t temp);
+myGPIO.c(19): warning:  #47-D: incompatible redefinition of macro "GPIO_PORTF_DATA_R"  (declared at line 701 of ".\driverlib\../inc/tm4c123gh6pm.h")
+  #define GPIO_PORTF_DATA_R       (*((volatile unsigned long *)0x400253FC))
+myGPIO.c(20): warning:  #47-D: incompatible redefinition of macro "GPIO_PORTF_DIR_R"  (declared at line 702 of ".\driverlib\../inc/tm4c123gh6pm.h")
+  #define GPIO_PORTF_DIR_R        (*((volatile unsigned long *)0x40025400))
+myGPIO.c(21): warning:  #47-D: incompatible redefinition of macro "GPIO_PORTF_AFSEL_R"  (declared at line 710 of ".\driverlib\../inc/tm4c123gh6pm.h")
+  #define GPIO_PORTF_AFSEL_R      (*((volatile unsigned long *)0x40025420))
+myGPIO.c(22): warning:  #47-D: incompatible redefinition of macro "GPIO_PORTF_PUR_R"  (declared at line 715 of ".\driverlib\../inc/tm4c123gh6pm.h")
+  #define GPIO_PORTF_PUR_R        (*((volatile unsigned long *)0x40025510))
+myGPIO.c(23): warning:  #47-D: incompatible redefinition of macro "GPIO_PORTF_DEN_R"  (declared at line 718 of ".\driverlib\../inc/tm4c123gh6pm.h")
+  #define GPIO_PORTF_DEN_R        (*((volatile unsigned long *)0x4002551C))
+myGPIO.c(24): warning:  #47-D: incompatible redefinition of macro "GPIO_PORTF_LOCK_R"  (declared at line 719 of ".\driverlib\../inc/tm4c123gh6pm.h")
+  #define GPIO_PORTF_LOCK_R       (*((volatile unsigned long *)0x40025520))
+myGPIO.c(25): warning:  #47-D: incompatible redefinition of macro "GPIO_PORTF_CR_R"  (declared at line 720 of ".\driverlib\../inc/tm4c123gh6pm.h")
+  #define GPIO_PORTF_CR_R         (*((volatile unsigned long *)0x40025524))
+myGPIO.c(26): warning:  #47-D: incompatible redefinition of macro "GPIO_PORTF_AMSEL_R"  (declared at line 721 of ".\driverlib\../inc/tm4c123gh6pm.h")
+  #define GPIO_PORTF_AMSEL_R      (*((volatile unsigned long *)0x40025528))
+myGPIO.c(27): warning:  #47-D: incompatible redefinition of macro "GPIO_PORTF_PCTL_R"  (declared at line 722 of ".\driverlib\../inc/tm4c123gh6pm.h")
+  #define GPIO_PORTF_PCTL_R       (*((volatile unsigned long *)0x4002552C))
+myGPIO.c(28): warning:  #47-D: incompatible redefinition of macro "SYSCTL_RCGC2_R"  (declared at line 2059 of ".\driverlib\../inc/tm4c123gh6pm.h")
+  #define SYSCTL_RCGC2_R          (*((volatile unsigned long *)0x400FE108))
+myGPIO.c(138): warning:  #1-D: last line of file ends without a newline
+  	
+myGPIO.c: 13 warnings, 0 errors
+compiling Calibrate.c...
+Read_Encoder.h(39): warning:  #1-D: last line of file ends without a newline
+  double ReadEncoder(void);
+Read_Encoder.h(39): warning:  #1-D: last line of file ends without a newline
+  double ReadEncoder(void);
+Encoder.h(28): warning:  #1-D: last line of file ends without a newline
+  void QEIConfigure(uint32_t ui32Base, uint32_t ui32Config, uint32_t ui32MaxPosition);
+driverlib/hibernate.h(229): warning:  #231-D: declaration is not visible outside of function
+  extern void HibernateCalendarSet(struct tm *psTime);
+driverlib/hibernate.h(230): warning:  #231-D: declaration is not visible outside of function
+  extern int HibernateCalendarGet(struct tm *psTime);
+driverlib/hibernate.h(231): warning:  #231-D: declaration is not visible outside of function
+  extern void HibernateCalendarMatchSet(uint32_t ui32Index, struct tm *psTime);
+driverlib/hibernate.h(232): warning:  #231-D: declaration is not visible outside of function
+  extern void HibernateCalendarMatchGet(uint32_t ui32Index, struct tm *psTime);
+Read_Encoder.h(39): warning:  #1-D: last line of file ends without a newline
+  double ReadEncoder(void);
+Get_Speed.h(13): warning:  #1-D: last line of file ends without a newline
+   double GetUserSpeed(void);
+Read_Encoder.h(39): warning:  #1-D: last line of file ends without a newline
+  double ReadEncoder(void);
+Calibrate.h(45): warning:  #1-D: last line of file ends without a newline
+  void initialize_aandw(void);
+myGPIO.h(13): warning:  #1295-D: Deprecated declaration setup_IO - give arg types
+  void setup_IO();
+myGPIO.h(14): warning:  #1-D: last line of file ends without a newline
+  void pinReadAndWrite(uint32_t ui32Loop,uint8_t temp);
+Read_Encoder.h(39): warning:  #1-D: last line of file ends without a newline
+  double ReadEncoder(void);
+Get_Speed.h(13): warning:  #1-D: last line of file ends without a newline
+   double GetUserSpeed(void);
+Read_Encoder.h(39): warning:  #1-D: last line of file ends without a newline
+  double ReadEncoder(void);
+Calibrate.h(45): warning:  #1-D: last line of file ends without a newline
+  void initialize_aandw(void);
+myGPIO.h(13): warning:  #1295-D: Deprecated declaration setup_IO - give arg types
+  void setup_IO();
+myGPIO.h(14): warning:  #1-D: last line of file ends without a newline
+  void pinReadAndWrite(uint32_t ui32Loop,uint8_t temp);
+i2c_master.h(74): warning:  #1-D: last line of file ends without a newline
+  int I2CReceive(void);
+Read_Encoder.h(39): warning:  #1-D: last line of file ends without a newline
+  double ReadEncoder(void);
+Speed_Control.h(38): warning:  #1-D: last line of file ends without a newline
+  void Speed_Control(double Speed, double uSpeed);
+Read_Encoder.h(39): warning:  #1-D: last line of file ends without a newline
+  double ReadEncoder(void);
+Calibrate.h(45): warning:  #1-D: last line of file ends without a newline
+  void initialize_aandw(void);
+Calibrate.c(53): warning:  #223-D: function "stopmotor" declared implicitly
+  	stopmotor();
+Calibrate.c: 25 warnings, 0 errors
 linking...
-Program Size: Code=8516 RO-data=1448 RW-data=116 ZI-data=396  
+Program Size: Code=8424 RO-data=1448 RW-data=100 ZI-data=396  
 FromELF: creating hex file...
 After Build - User command #1: fromelf --bin --output .\rvmdk\project.bin .\rvmdk\project.axf
 ".\rvmdk\project.axf" - 0 Error(s), 219 Warning(s).
@@ -528,7 +528,7 @@ Package Vendor: Keil
 <h2>Collection of Component Files used:</h2>
 
    * Component: ARM::CMSIS:CORE:5.0.1
-Build Time Elapsed:  00:00:12
+Build Time Elapsed:  00:00:10
 </pre>
 </body>
 </html>

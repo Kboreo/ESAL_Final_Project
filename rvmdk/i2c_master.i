@@ -20212,7 +20212,7 @@ I2CMasterSlaveAddrSet(0x40020000, 0x3c, 0);
 
 
 
-I2CMasterDataPut(0x40020000, 54);
+I2CMasterDataPut(0x40020000, 81);
 
 
 
@@ -20240,46 +20240,34 @@ return 0;
 		
 int I2CReceive(void)
 {
-
-
-
-
-
-
-
-
 	
 	
-	
-    
-    
-    I2CMasterSlaveAddrSet(0x40020000, 0x3c, 1);
- 
-    
-    I2CMasterDataPut(0x40020000, 0xfc);
- 
-    
-    I2CMasterControl(0x40020000, 0x00000003);
-     
-    
-    while(I2CMasterBusy(0x40020000));
-     
-    
-    I2CMasterSlaveAddrSet(0x40020000, 0x3c, 1);
-     
-    
-    
-    I2CMasterControl(0x40020000, 0x00000007);
-     
-    
-    while(I2CMasterBusy(0x40020000));
-     
-    
-   dspeed = I2CMasterDataGet(0x40020000);
-	 
-	 
-	 return dspeed;
-}
+
+   
+   I2CMasterSlaveAddrSet(0x40020000, 0x3c, 0);
+
+   
+   I2CMasterDataPut(0x40020000, 0xfc);
+
+   
+   I2CMasterControl(0x40020000, 0x00000007);
+
+   
+   while(I2CMasterBusy(0x40020000));
+
+   
+   I2CMasterSlaveAddrSet(0x40020000, 0x3c, 1);
+
+   
+   I2CMasterControl(0x40020000, 0x00000007);
+
+   
+   while(I2CMasterBusy(0x40020000));
+
+   
+   return( I2CMasterDataGet(0x40020000));
+ }
+
 		
 		
 
