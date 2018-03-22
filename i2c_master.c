@@ -82,7 +82,7 @@ int i2c_send_rec(void)
     I2CMasterIntEnableEx(I2C0_BASE, I2C_MASTER_INT_DATA);
     IntMasterEnable();
 
-    printf("Master --> Slave \n");
+   // printf("Master --> Slave \n");
 
 //    while(1)
 //    {
@@ -133,31 +133,5 @@ return 0;
 //}
 		
 		
-uint8_t readI2C0(uint16_t device_address, uint16_t device_register)
-{
-   //specify that we want to communicate to device address with an intended write to bus
-   I2CMasterSlaveAddrSet(I2C0_BASE, device_address, false);
 
-   //the register to be read
-   I2CMasterDataPut(I2C0_BASE, device_register);
-
-   //send control byte and register address byte to slave device
-   I2CMasterControl(I2C0_BASE, I2C_MASTER_CMD_SINGLE_SEND);
-
-   //wait for MCU to complete send transaction
-  // while(I2CMasterBusy(I2C0_BASE));
-
-   //read from the specified slave device
-   I2CMasterSlaveAddrSet(I2C0_BASE, device_address, true);
-
-   //send control byte and read from the register from the MCU
-   I2CMasterControl(I2C0_BASE, I2C_MASTER_CMD_SINGLE_RECEIVE);
-
-   //wait while checking for MCU to complete the transaction
-   while(I2CMasterBusy(I2C0_BASE));
-
-   //Get the data from the MCU register and return to caller
-   return( I2CMasterDataGet(I2C0_BASE));
-	 
- }
 		

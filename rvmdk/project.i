@@ -19644,6 +19644,8 @@ void pinReadAndWrite(uint32_t ui32Loop,uint8_t temp);
 #line 10 "i2c_master.h"
 #line 11 "i2c_master.h"
 #line 12 "i2c_master.h"
+
+double readI2C0(void);
 #line 59 "project.h"
 
 
@@ -19694,14 +19696,14 @@ int  main(void)
 	
 	
 	
-	printf("uSpeed in Project.c = %i \n\n", uSpeed);
+
 	
 
 	Speed_Control(speed, uSpeed);
 	
 	speed = ReadEncoder(); 
 
-	printf("speed read by encoder = %i \n\n", speed);
+
 	
 	
 	
@@ -19709,8 +19711,8 @@ int  main(void)
 	
 		
 		i2c_send_rec();
-		speed = readI2C0(0x3C, 0xFF);
-		printf("rec is = %i", speed);
+		
+		
 	}
 }
 	

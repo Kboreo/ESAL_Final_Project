@@ -9,3 +9,5 @@
 #include "hw_gpio.h"
 #include "hw_types.h"
 #include <stdio.h>
+
+double readI2C0(void);

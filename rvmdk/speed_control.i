@@ -20025,6 +20025,8 @@ void pinReadAndWrite(uint32_t ui32Loop,uint8_t temp);
 #line 10 "i2c_master.h"
 #line 11 "i2c_master.h"
 #line 12 "i2c_master.h"
+
+double readI2C0(void);
 #line 59 "project.h"
 
 

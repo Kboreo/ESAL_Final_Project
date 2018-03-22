@@ -66772,8 +66772,10 @@ N#include "uart.h"
 N#include "tm4c123gh6pm.h"
 N#include "hw_gpio.h"
 N#include "hw_types.h"
-W "i2c_master.h" 11 19 last line of file ends without a newline
 N#include <stdio.h>
+N
+W "i2c_master.h" 13 23 last line of file ends without a newline
+Ndouble readI2C0(void);
 L 59 "project.h" 2
 N//#include "i2c_slave.h"
 N//#incldue "i2c_doc.h"
@@ -66833,8 +66835,7 @@ N	{
 N	//uSpeed = GetUserSpeed();//set uSpeed equal to the speed you want me to travel
 N	
 N	//uSpeed = I2CGET();
-W "project.c" 79 42 argument is incompatible with corresponding format string conversion
-N	printf("uSpeed in Project.c = %i \n\n", uSpeed);
+N//	printf("uSpeed in Project.c = %i \n\n", uSpeed);
 N	
 N
 W "project.c" 82 2 function "Speed_Control" declared implicitly
@@ -66842,8 +66843,7 @@ N	Speed_Control(speed, uSpeed);
 N	
 N	speed = ReadEncoder(); // this will set speed equal to the current speed
 N
-W "project.c" 86 44 argument is incompatible with corresponding format string conversion
-N	printf("speed read by encoder = %i \n\n", speed);
+N//	printf("speed read by encoder = %i \n\n", speed);
 N	
 N	//I2CSend(speed); //sends speed, i2c slave
 N	
@@ -66852,10 +66852,8 @@ N	//Write a function here to send "speed" to Levi
 N		
 W "project.c" 93 3 function "i2c_send_rec" declared implicitly
 N		i2c_send_rec();
-W "project.c" 94 11 function "readI2C0" declared implicitly
-N		speed = readI2C0(0x3C, 0xFF);
-W "project.c" 95 25 argument is incompatible with corresponding format string conversion
-N		printf("rec is = %i", speed);
+N		//readI2C0();
+N		//printf("rec is = %i", speed);
 N	}
 N}
 N	

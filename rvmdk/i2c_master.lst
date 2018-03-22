@@ -15474,7 +15474,6 @@ N#endif
 N
 N#endif // __HW_TYPES_H__
 L 11 "i2c_master.h" 2
-W "i2c_master.h" 11 19 last line of file ends without a newline
 N#include <stdio.h>
 L 1 "C:\Keil_v5\ARM\ARMCC\Bin\..\include\stdio.h" 1
 N/* stdio.h: ANSI 'C' (X3J11 Oct 88) library header, section 4.9 */
@@ -16588,6 +16587,9 @@ N
 N/* end of stdio.h */
 N
 L 12 "i2c_master.h" 2
+N
+W "i2c_master.h" 13 23 last line of file ends without a newline
+Ndouble readI2C0(void);
 L 2 "i2c_master.c" 2
 N
 N#include <stdint.h>
@@ -39218,7 +39220,7 @@ N    I2CMasterIntEnableEx(I2C0_BASE, I2C_MASTER_INT_DATA);
 X    I2CMasterIntEnableEx(0x40020000, 0x00000001);
 N    IntMasterEnable();
 N
-N    printf("Master --> Slave \n");
+N   // printf("Master --> Slave \n");
 N
 N//    while(1)
 N//    {
@@ -39276,39 +39278,6 @@ N    }
 N//}
 N		
 N		
-Nuint8_t readI2C0(uint16_t device_address, uint16_t device_register)
-N{
-N   //specify that we want to communicate to device address with an intended write to bus
-N   I2CMasterSlaveAddrSet(I2C0_BASE, device_address, false);
-X   I2CMasterSlaveAddrSet(0x40020000, device_address, 0);
 N
-N   //the register to be read
-N   I2CMasterDataPut(I2C0_BASE, device_register);
-X   I2CMasterDataPut(0x40020000, device_register);
-N
-N   //send control byte and register address byte to slave device
-N   I2CMasterControl(I2C0_BASE, I2C_MASTER_CMD_SINGLE_SEND);
-X   I2CMasterControl(0x40020000, 0x00000007);
-N
-N   //wait for MCU to complete send transaction
-N  // while(I2CMasterBusy(I2C0_BASE));
-N
-N   //read from the specified slave device
-N   I2CMasterSlaveAddrSet(I2C0_BASE, device_address, true);
-X   I2CMasterSlaveAddrSet(0x40020000, device_address, 1);
-N
-N   //send control byte and read from the register from the MCU
-N   I2CMasterControl(I2C0_BASE, I2C_MASTER_CMD_SINGLE_RECEIVE);
-X   I2CMasterControl(0x40020000, 0x00000007);
-N
-N   //wait while checking for MCU to complete the transaction
-N   while(I2CMasterBusy(I2C0_BASE));
-X   while(I2CMasterBusy(0x40020000));
-N
-N   //Get the data from the MCU register and return to caller
-N   return( I2CMasterDataGet(I2C0_BASE));
-X   return( I2CMasterDataGet(0x40020000));
-N	 
-N }
-W "i2c_master.c" 163 3 last line of file ends without a newline
+W "i2c_master.c" 137 3 last line of file ends without a newline
 N		

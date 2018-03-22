@@ -76,14 +76,14 @@ int  main(void)
 	//uSpeed = GetUserSpeed();//set uSpeed equal to the speed you want me to travel
 	
 	//uSpeed = I2CGET();
-	printf("uSpeed in Project.c = %i \n\n", uSpeed);
+//	printf("uSpeed in Project.c = %i \n\n", uSpeed);
 	
 
 	Speed_Control(speed, uSpeed);
 	
 	speed = ReadEncoder(); // this will set speed equal to the current speed
 
-	printf("speed read by encoder = %i \n\n", speed);
+//	printf("speed read by encoder = %i \n\n", speed);
 	
 	//I2CSend(speed); //sends speed, i2c slave
 	
@@ -91,8 +91,8 @@ int  main(void)
 	//Write a function here to send "speed" to Levi
 		
 		i2c_send_rec();
-		speed = readI2C0(0x3C, 0xFF);
-		printf("rec is = %i", speed);
+		//readI2C0();
+		//printf("rec is = %i", speed);
 	}
 }
 	
