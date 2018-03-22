@@ -540,16 +540,6 @@
               <FileType>5</FileType>
               <FilePath>.\i2c_slave.h</FilePath>
             </File>
-            <File>
-              <FileName>i2c_doc.c</FileName>
-              <FileType>1</FileType>
-              <FilePath>.\i2c_doc.c</FilePath>
-            </File>
-            <File>
-              <FileName>i2c_doc.h</FileName>
-              <FileType>5</FileType>
-              <FilePath>.\i2c_doc.h</FilePath>
-            </File>
           </Files>
         </Group>
         <Group>
