@@ -20025,32 +20025,9 @@ void pinReadAndWrite(uint32_t ui32Loop,uint8_t temp);
 
 
 #line 58 "project.h"
-#line 1 "i2c_master.h"
 
 
 
-
-
-
-
-
-
-
-
-#line 59 "project.h"
-#line 1 "i2c_slave.h"
-#line 2 "i2c_slave.h"
-#line 3 "i2c_slave.h"
-#line 4 "i2c_slave.h"
-#line 5 "i2c_slave.h"
-#line 6 "i2c_slave.h"
-#line 7 "i2c_slave.h"
-#line 8 "i2c_slave.h"
-#line 9 "i2c_slave.h"
-#line 10 "i2c_slave.h"
-#line 11 "i2c_slave.h"
-#line 12 "i2c_slave.h"
-#line 60 "project.h"
 
 
 #line 17 "Read_Encoder.c"

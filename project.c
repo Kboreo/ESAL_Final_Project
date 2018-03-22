@@ -50,8 +50,9 @@ void SetupHardware()
 	setupPWM();	//setup PWM output
 	FPUEnable();	//inable floating point
 	FPULazyStackingEnable(); //inable lazy stack for floating point
-	InitI2C0();
-	//SetupADC(); //setup to read motor voltage 
+	//InitI2C0();
+	//SetupADC(); //setup to read motor voltage
+	I2C1_Slave_Init();
 	
 }
 
@@ -69,17 +70,27 @@ int  main(void)
 
 //Write a function here to get the desired speed
 
-	uSpeed = 
+
+	while(1)
+	{
+	//uSpeed = GetUserSpeed();//set uSpeed equal to the speed you want me to travel
 	
-	uSpeed = GetUserSpeed();//set uSpeed equal to the speed you want me to travel
+	uSpeed = I2CGET();
+	printf("uSpeed in Project.c = %i \n\n", uSpeed);
+	
 
 	Speed_Control(speed, uSpeed);
 	
-	speed = ReadEncoder(); // this will set speed equal to the current speed 
+	speed = ReadEncoder(); // this will set speed equal to the current speed
+
+	printf("speed read by encoder = %i \n\n", speed);
+	
+	I2CSend(speed); //sends speed, i2c slave
 	
 	//*************************
 	//Write a function here to send "speed" to Levi
 	}
+}
 	
 	
 

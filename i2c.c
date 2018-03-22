@@ -32,6 +32,9 @@
 //    // Select the I2C function for these pins.
 //    GPIOPinTypeI2CSCL(GPIO_PORTB_BASE, GPIO_PIN_2);
 //    GPIOPinTypeI2C(GPIO_PORTB_BASE, GPIO_PIN_3);
+//	
+//		GPIOPadConfigSet(GPIO_PORTB_BASE,GPIO_PIN_2|GPIO_PIN_3,GPIO_STRENGTH_2MA, GPIO_PIN_TYPE_OD);//GPIO_PIN_TYPE_STD_WPU);//set internal pullup R for pin 0 and 4
+//    //GPIOPadConfigSet(GPIO_PORTB_BASE, GPIO_PIN_2 | GPIO_PIN_3, GPIO_STRENGTH_2MA, GPIO_PIN_TYPE_OD);
 // 
 //    // Enable and initialize the I2C0 master module.  Use the system clock for
 //    // the I2C0 module.  The last parameter sets the I2C data transfer rate.

@@ -20025,32 +20025,9 @@ void pinReadAndWrite(uint32_t ui32Loop,uint8_t temp);
 
 
 #line 58 "project.h"
-#line 1 "i2c_master.h"
 
 
 
-
-
-
-
-
-
-
-
-#line 59 "project.h"
-#line 1 "i2c_slave.h"
-#line 2 "i2c_slave.h"
-#line 3 "i2c_slave.h"
-#line 4 "i2c_slave.h"
-#line 5 "i2c_slave.h"
-#line 6 "i2c_slave.h"
-#line 7 "i2c_slave.h"
-#line 8 "i2c_slave.h"
-#line 9 "i2c_slave.h"
-#line 10 "i2c_slave.h"
-#line 11 "i2c_slave.h"
-#line 12 "i2c_slave.h"
-#line 60 "project.h"
 
 
 #line 17 "Speed_Control.c"
@@ -20342,7 +20319,7 @@ void Speed_Control(double Speed, double uSpeed)
 	int x; 
 	int a = 0;
 	
-	while (i == 1)
+	for(int i =1; i < 3; i++)
 	{				
 		
 		for (int i = 0; i<10;i++)
@@ -20395,8 +20372,8 @@ void Speed_Control(double Speed, double uSpeed)
 			}
 	
 		Speed = ReadEncoder(); 
-		printf("Speed is, IN CONTROL %.2f mm/s \n\n", Speed);
-		printf("Duty C = %.2f \n\n", DutyC);
+	
+	
 	
 		
 		x = GPIOPinRead(0x40025000, 0x00000001); 

@@ -33,7 +33,7 @@ void Speed_Control(double Speed, double uSpeed)
 	int x; 
 	int a = 0;
 	
-	while (i == 1)
+	for(int i =1; i < 3; i++)
 	{				
 		//adjusts speed 10 times before printing speed
 		for (int i = 0; i<10;i++)
@@ -86,8 +86,8 @@ void Speed_Control(double Speed, double uSpeed)
 			}
 	
 		Speed = ReadEncoder(); //Set varible equal to the read speed from the "ReadEncoder" function.
-		printf("Speed is, IN CONTROL %.2f mm/s \n\n", Speed);
-		printf("Duty C = %.2f \n\n", DutyC);
+	//	printf("Speed is, IN CONTROL %.2f mm/s \n\n", Speed);
+	//	printf("Duty C = %.2f \n\n", DutyC);
 	
 		//will exit GPIO when SW2 is pressed
 		x = GPIOPinRead(GPIO_PORTF_BASE, GPIO_PIN_0); // set x equal to the output of button SW2 		

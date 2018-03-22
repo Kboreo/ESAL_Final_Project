@@ -1,0 +1,36 @@
+L 1 "i2c_doc.c"
+N//#include "i2c_doc.h"
+N//#include <stdarg.h>
+N//#include <stdbool.h>
+N//#include <stdint.h>
+N//#include "inc/hw_i2c.h"
+N//#include "inc/hw_memmap.h"
+N//#include "inc/hw_types.h"
+N//#include "inc/hw_gpio.h"
+N//#include "driverlib/i2c.h"
+N//#include "driverlib/sysctl.h"
+N//#include "driverlib/gpio.h"
+N//#include "driverlib/pin_map.h"
+N////
+N////Enable GPIO for Configuring the I2C Interface Pins
+N//SysCtlPeripheralEnable(SYSCTL_PERIPH_GPIOL);
+N//SysCtlPeripheralEnable(SYSCTL_PERIPH_GPIOK);
+N////
+N//// Wait for the Peripheral to be ready for programming
+N////
+N//while(!SysCtlPeripheralReady(SYSCTL_PERIPH_GPIOL)
+N//|| !SysCtlPeripheralReady(SYSCTL_PERIPH_GPIOK));
+N////
+N//// Configure Pins for I2C2 Master Interface
+N////
+N//GPIOPinConfigure(GPIO_PL1_I2C2SCL);
+N//GPIOPinConfigure(GPIO_PL0_I2C2SDA);
+N//GPIOPinTypeI2C(GPIO_PORTL_BASE, GPIO_PIN_0);
+N//GPIOPinTypeI2CSCL(GPIO_PORTL_BASE, GPIO_PIN_1);
+N////
+N//// Configure Pins for I2C3 Slave Interface
+N////
+N//GPIOPinConfigure(GPIO_PK4_I2C3SCL);
+N//GPIOPinConfigure(GPIO_PK5_I2C3SDA);
+N//GPIOPinTypeI2C(GPIO_PORTK_BASE, GPIO_PIN_5);
+N//GPIOPinTypeI2CSCL(GPIO_PORTL_BASE, GPIO_PIN_4);

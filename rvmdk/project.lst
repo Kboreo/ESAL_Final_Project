@@ -66774,36 +66774,9 @@ N//#include "hw_types.h"
 W "i2c.h" 11 21 last line of file ends without a newline
 N//#include <stdio.h>
 L 58 "project.h" 2
-N#include "i2c_master.h"
-L 1 "i2c_master.h" 1
-N//#include <stdbool.h>
-N//#include <stdint.h>
-N//#include "sysctl.h"
-N//#include "hw_memmap.h"
-N//#include "gpio.h"
-N//#include "adc.h"
-N//#include "uart.h"
-N//#include "tm4c123gh6pm.h"
-N//#include "hw_gpio.h"
-N//#include "hw_types.h"
-W "i2c_master.h" 11 21 last line of file ends without a newline
-N//#include <stdio.h>
-L 59 "project.h" 2
-N#include "i2c_slave.h"
-L 1 "i2c_slave.h" 1
-N#include <stdbool.h>
-N#include <stdint.h>
-N#include "sysctl.h"
-N#include "hw_memmap.h"
-N#include "gpio.h"
-N#include "adc.h"
-N#include "uart.h"
-N#include "tm4c123gh6pm.h"
-N#include "hw_gpio.h"
-N#include "hw_types.h"
-W "i2c_slave.h" 11 19 last line of file ends without a newline
-N#include <stdio.h>
-L 60 "project.h" 2
+N//#include "i2c_master.h"
+N//#include "i2c_slave.h"
+N//#incldue "i2c_doc.h"
 N
 N
 L 30 "project.c" 2
@@ -66834,9 +66807,10 @@ W "project.c" 50 2 function "setupPWM" declared implicitly
 N	setupPWM();	//setup PWM output
 N	FPUEnable();	//inable floating point
 N	FPULazyStackingEnable(); //inable lazy stack for floating point
-W "project.c" 53 2 function "InitI2C0" declared implicitly
-N	InitI2C0();
-N	//SetupADC(); //setup to read motor voltage 
+N	//InitI2C0();
+N	//SetupADC(); //setup to read motor voltage
+W "project.c" 55 2 function "I2C1_Slave_Init" declared implicitly
+N	I2C1_Slave_Init();
 N	
 N}
 N
@@ -66854,18 +66828,32 @@ N	//I2CSend();
 N
 N//Write a function here to get the desired speed
 N
-N	uSpeed = 
-N	
-N	uSpeed = GetUserSpeed();//set uSpeed equal to the speed you want me to travel
 N
-W "project.c" 76 2 function "Speed_Control" declared implicitly
+N	while(1)
+N	{
+N	//uSpeed = GetUserSpeed();//set uSpeed equal to the speed you want me to travel
+N	
+W "project.c" 78 11 function "I2CGET" declared implicitly
+N	uSpeed = I2CGET();
+W "project.c" 79 42 argument is incompatible with corresponding format string conversion
+N	printf("uSpeed in Project.c = %i \n\n", uSpeed);
+N	
+N
+W "project.c" 82 2 function "Speed_Control" declared implicitly
 N	Speed_Control(speed, uSpeed);
 N	
-N	speed = ReadEncoder(); // this will set speed equal to the current speed 
+N	speed = ReadEncoder(); // this will set speed equal to the current speed
+N
+W "project.c" 86 44 argument is incompatible with corresponding format string conversion
+N	printf("speed read by encoder = %i \n\n", speed);
+N	
+W "project.c" 88 2 function "I2CSend" declared implicitly
+N	I2CSend(speed); //sends speed, i2c slave
 N	
 N	//*************************
 N	//Write a function here to send "speed" to Levi
 N	}
+N}
 N	
 N	
 N

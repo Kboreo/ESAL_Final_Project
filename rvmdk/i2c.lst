@@ -33,6 +33,9 @@ N//
 N//    // Select the I2C function for these pins.
 N//    GPIOPinTypeI2CSCL(GPIO_PORTB_BASE, GPIO_PIN_2);
 N//    GPIOPinTypeI2C(GPIO_PORTB_BASE, GPIO_PIN_3);
+N//	
+N//		GPIOPadConfigSet(GPIO_PORTB_BASE,GPIO_PIN_2|GPIO_PIN_3,GPIO_STRENGTH_2MA, GPIO_PIN_TYPE_OD);//GPIO_PIN_TYPE_STD_WPU);//set internal pullup R for pin 0 and 4
+N//    //GPIOPadConfigSet(GPIO_PORTB_BASE, GPIO_PIN_2 | GPIO_PIN_3, GPIO_STRENGTH_2MA, GPIO_PIN_TYPE_OD);
 N// 
 N//    // Enable and initialize the I2C0 master module.  Use the system clock for
 N//    // the I2C0 module.  The last parameter sets the I2C data transfer rate.
@@ -142,5 +145,5 @@ N//    while(I2CMasterBusy(I2C0_BASE));
 N//     
 N//    //return data pulled from the specified register
 N//    return I2CMasterDataGet(I2C0_BASE);
-W "i2c.c" 144 4 last line of file ends without a newline
+W "i2c.c" 147 4 last line of file ends without a newline
 N//}

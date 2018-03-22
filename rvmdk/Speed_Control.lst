@@ -67164,36 +67164,9 @@ N//#include "hw_types.h"
 W "i2c.h" 11 21 last line of file ends without a newline
 N//#include <stdio.h>
 L 58 "project.h" 2
-N#include "i2c_master.h"
-L 1 "i2c_master.h" 1
-N//#include <stdbool.h>
-N//#include <stdint.h>
-N//#include "sysctl.h"
-N//#include "hw_memmap.h"
-N//#include "gpio.h"
-N//#include "adc.h"
-N//#include "uart.h"
-N//#include "tm4c123gh6pm.h"
-N//#include "hw_gpio.h"
-N//#include "hw_types.h"
-W "i2c_master.h" 11 21 last line of file ends without a newline
-N//#include <stdio.h>
-L 59 "project.h" 2
-N#include "i2c_slave.h"
-L 1 "i2c_slave.h" 1
-N#include <stdbool.h>
-N#include <stdint.h>
-N#include "sysctl.h"
-N#include "hw_memmap.h"
-N#include "gpio.h"
-N#include "adc.h"
-N#include "uart.h"
-N#include "tm4c123gh6pm.h"
-N#include "hw_gpio.h"
-N#include "hw_types.h"
-W "i2c_slave.h" 11 19 last line of file ends without a newline
-N#include <stdio.h>
-L 60 "project.h" 2
+N//#include "i2c_master.h"
+N//#include "i2c_slave.h"
+N//#incldue "i2c_doc.h"
 N
 N
 L 17 "Speed_Control.c" 2
@@ -67491,7 +67464,7 @@ N	int i = 1;
 N	int x; 
 N	int a = 0;
 N	
-N	while (i == 1)
+N	for(int i =1; i < 3; i++)
 N	{				
 N		//adjusts speed 10 times before printing speed
 N		for (int i = 0; i<10;i++)
@@ -67546,8 +67519,8 @@ N
 N			}
 N	
 N		Speed = ReadEncoder(); //Set varible equal to the read speed from the "ReadEncoder" function.
-N		printf("Speed is, IN CONTROL %.2f mm/s \n\n", Speed);
-N		printf("Duty C = %.2f \n\n", DutyC);
+N	//	printf("Speed is, IN CONTROL %.2f mm/s \n\n", Speed);
+N	//	printf("Duty C = %.2f \n\n", DutyC);
 N	
 N		//will exit GPIO when SW2 is pressed
 N		x = GPIOPinRead(GPIO_PORTF_BASE, GPIO_PIN_0); // set x equal to the output of button SW2 		
@@ -67560,4 +67533,5 @@ N			}
 N	}
 N		//turns off motor before exiting 
 N		
+W "Speed_Control.c" 32 6 variable "i"  was declared but never referenced
 N}

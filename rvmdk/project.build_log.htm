@@ -31,10 +31,6 @@ creating preprocessor file for project.c...
 assembling startup_rvmdk.S...
 creating preprocessor file for Encoder.c...
 creating preprocessor file for myPWM.c...
-compiling myPWM.c...
-myPWM.c(71): warning:  #1-D: last line of file ends without a newline
-  	
-myPWM.c: 1 warning, 0 errors
 compiling Encoder.c...
 Read_Encoder.h(39): warning:  #1-D: last line of file ends without a newline
   double ReadEncoder(void);
@@ -65,6 +61,10 @@ Encoder.c(28): warning:  #47-D: incompatible redefinition of macro "SYSCTL_RCGCG
 Encoder.c(75): warning:  #1-D: last line of file ends without a newline
   	
 Encoder.c: 14 warnings, 0 errors
+compiling myPWM.c...
+myPWM.c(71): warning:  #1-D: last line of file ends without a newline
+  	
+myPWM.c: 1 warning, 0 errors
 compiling project.c...
 driverlib/hibernate.h(229): warning:  #231-D: declaration is not visible outside of function
   extern void HibernateCalendarSet(struct tm *psTime);
@@ -88,21 +88,25 @@ myGPIO.h(14): warning:  #1-D: last line of file ends without a newline
   void pinReadAndWrite(uint32_t ui32Loop,uint8_t temp);
 i2c.h(11): warning:  #1-D: last line of file ends without a newline
   //#include <stdio.h>
-i2c_master.h(11): warning:  #1-D: last line of file ends without a newline
-  //#include <stdio.h>
-i2c_slave.h(11): warning:  #1-D: last line of file ends without a newline
-  #include <stdio.h>
 project.c(48): warning:  #223-D: function "FloatSetup" declared implicitly
   	FloatSetup(); //setup to allow floating point print 
 project.c(49): warning:  #223-D: function "setupENCODER" declared implicitly
   	setupENCODER();	 //setup to read motor encoder
 project.c(50): warning:  #223-D: function "setupPWM" declared implicitly
   	setupPWM();	//setup PWM output
-project.c(53): warning:  #223-D: function "InitI2C0" declared implicitly
-  	InitI2C0();
-project.c(76): warning:  #223-D: function "Speed_Control" declared implicitly
+project.c(55): warning:  #223-D: function "I2C1_Slave_Init" declared implicitly
+  	I2C1_Slave_Init();
+project.c(78): warning:  #223-D: function "I2CGET" declared implicitly
+  	uSpeed = I2CGET();
+project.c(79): warning:  #181-D: argument is incompatible with corresponding format string conversion
+  	printf("uSpeed in Project.c = %i \n\n", uSpeed);
+project.c(82): warning:  #223-D: function "Speed_Control" declared implicitly
   	Speed_Control(speed, uSpeed);
-project.c: 18 warnings, 0 errors
+project.c(86): warning:  #181-D: argument is incompatible with corresponding format string conversion
+  	printf("speed read by encoder = %i \n\n", speed);
+project.c(88): warning:  #223-D: function "I2CSend" declared implicitly
+  	I2CSend(speed); //sends speed, i2c slave
+project.c: 20 warnings, 0 errors
 creating preprocessor file for Float_Setup.c...
 creating preprocessor file for Uart_helper.c...
 compiling Float_Setup.c...
@@ -157,13 +161,9 @@ myGPIO.h(14): warning:  #1-D: last line of file ends without a newline
   void pinReadAndWrite(uint32_t ui32Loop,uint8_t temp);
 i2c.h(11): warning:  #1-D: last line of file ends without a newline
   //#include <stdio.h>
-i2c_master.h(11): warning:  #1-D: last line of file ends without a newline
-  //#include <stdio.h>
-i2c_slave.h(11): warning:  #1-D: last line of file ends without a newline
-  #include <stdio.h>
 Read_Encoder.c(34): warning:  #1-D: last line of file ends without a newline
   	//int direction = QEIDirectionGet(QEI0_BASE);
-Read_Encoder.c: 17 warnings, 0 errors
+Read_Encoder.c: 15 warnings, 0 errors
 creating preprocessor file for Calibrate.c...
 compiling Speed_Control.c...
 Read_Encoder.h(39): warning:  #1-D: last line of file ends without a newline
@@ -194,66 +194,20 @@ myGPIO.h(14): warning:  #1-D: last line of file ends without a newline
   void pinReadAndWrite(uint32_t ui32Loop,uint8_t temp);
 i2c.h(11): warning:  #1-D: last line of file ends without a newline
   //#include <stdio.h>
-i2c_master.h(11): warning:  #1-D: last line of file ends without a newline
-  //#include <stdio.h>
-i2c_slave.h(11): warning:  #1-D: last line of file ends without a newline
-  #include <stdio.h>
 Read_Encoder.h(39): warning:  #1-D: last line of file ends without a newline
   double ReadEncoder(void);
-Speed_Control.h(38): warning:  #1-D: last line of file ends without a newline
+Speed_Control.c: 19 warnings, 0 errors
+-D: last line of file ends without a newline
   void Speed_Control(double Speed, double uSpeed);
 Speed_Control.c(55): warning:  #175-D: subscript out of range
   				Error[4]=Error[3];
 Speed_Control.c(96): warning:  #223-D: function "stopmotor" declared implicitly
   					stopmotor();	
-Speed_Control.c: 20 warnings, 0 errors
+Speed_Control.c(32): warning:  #177-D: variable "i"  was declared but never referenced
+  	int i = 1;
 creating preprocessor file for HAL_ADC.c...
 creating preprocessor file for myGPIO.c...
 compiling HAL_ADC.c...
-compiling Calibrate.c...
-Read_Encoder.h(39): warning:  #1-D: last line of file ends without a newline
-  double ReadEncoder(void);
-Read_Encoder.h(39): warning:  #1-D: last line of file ends without a newline
-  double ReadEncoder(void);
-Encoder.h(28): warning:  #1-D: last line of file ends without a newline
-  void QEIConfigure(uint32_t ui32Base, uint32_t ui32Config, uint32_t ui32MaxPosition);
-driverlib/hibernate.h(229): warning:  #231-D: declaration is not visible outside of function
-  extern void HibernateCalendarSet(struct tm *psTime);
-driverlib/hibernate.h(230): warning:  #231-D: declaration is not visible outside of function
-  extern int HibernateCalendarGet(struct tm *psTime);
-driverlib/hibernate.h(231): warning:  #231-D: declaration is not visible outside of function
-  extern void HibernateCalendarMatchSet(uint32_t ui32Index, struct tm *psTime);
-driverlib/hibernate.h(232): warning:  #231-D: declaration is not visible outside of function
-  extern void HibernateCalendarMatchGet(uint32_t ui32Index, struct tm *psTime);
-Read_Encoder.h(39): warning:  #1-D: last line of file ends without a newline
-  double ReadEncoder(void);
-Get_Speed.h(13): warning:  #1-D: last line of file ends without a newline
-   double GetUserSpeed(void);
-Read_Encoder.h(39): warning:  #1-D: last line of file ends without a newline
-  double ReadEncoder(void);
-Calibrate.h(45): warning:  #1-D: last line of file ends without a newline
-  void initialize_aandw(void);
-myGPIO.h(13): warning:  #1295-D: Deprecated declaration setup_IO - give arg types
-  void setup_IO();
-myGPIO.h(14): warning:  #1-D: last line of file ends without a newline
-  void pinReadAndWrite(uint32_t ui32Loop,uint8_t temp);
-i2c.h(11): warning:  #1-D: last line of file ends without a newline
-  //#include <stdio.h>
-i2c_master.h(11): warning:  #1-D: last line of file ends without a newline
-  //#include <stdio.h>
-i2c_slave.h(11): warning:  #1-D: last line of file ends without a newline
-  #include <stdio.h>
-Read_Encoder.h(39): warning:  #1-D: last line of file ends without a newline
-  double ReadEncoder(void);
-Speed_Control.h(38): warning:  #1-D: last line of file ends without a newline
-  void Speed_Control(double Speed, double uSpeed);
-Read_Encoder.h(39): warning:  #1-D: last line of file ends without a newline
-  double ReadEncoder(void);
-Calibrate.h(45): warning:  #1-D: last line of file ends without a newline
-  void initialize_aandw(void);
-Calibrate.c(53): warning:  #223-D: function "stopmotor" declared implicitly
-  	stopmotor();
-Calibrate.c: 21 warnings, 0 errors
 creating preprocessor file for i2c.c...
 compiling myGPIO.c...
 myGPIO.h(13): warning:  #1295-D: Deprecated declaration setup_IO - give arg types
@@ -283,19 +237,93 @@ myGPIO.c(28): warning:  #47-D: incompatible redefinition of macro "SYSCTL_RCGC2_
 myGPIO.c(138): warning:  #1-D: last line of file ends without a newline
   	
 myGPIO.c: 13 warnings, 0 errors
+compiling Calibrate.c...
+Read_Encoder.h(39): warning:  #1-D: last line of file ends without a newline
+  double ReadEncoder(void);
+Read_Encoder.h(39): warning:  #1-D: last line of file ends without a newline
+  double ReadEncoder(void);
+Encoder.h(28): warning:  #1-D: last line of file ends without a newline
+  void QEIConfigure(uint32_t ui32Base, uint32_t ui32Config, uint32_t ui32MaxPosition);
+driverlib/hibernate.h(229): warning:  #231-D: declaration is not visible outside of function
+  extern void HibernateCalendarSet(struct tm *psTime);
+driverlib/hibernate.h(230): warning:  #231-D: declaration is not visible outside of function
+  extern int HibernateCalendarGet(struct tm *psTime);
+driverlib/hibernate.h(231): warning:  #231-D: declaration is not visible outside of function
+  extern void HibernateCalendarMatchSet(uint32_t ui32Index, struct tm *psTime);
+driverlib/hibernate.h(232): warning:  #231-D: declaration is not visible outside of function
+  extern void HibernateCalendarMatchGet(uint32_t ui32Index, struct tm *psTime);
+Read_Encoder.h(39): warning:  #1-D: last line of file ends without a newline
+  double ReadEncoder(void);
+Get_Speed.h(13): warning:  #1-D: last line of file ends without a newline
+   double GetUserSpeed(void);
+Read_Encoder.h(39): warning:  #1-D: last line of file ends without a newline
+  double ReadEncoder(void);
+Calibrate.h(45): warning:  #1-D: last line of file ends without a newline
+  void initialize_aandw(void);
+myGPIO.h(13): warning:  #1295-D: Deprecated declaration setup_IO - give arg types
+  void setup_IO();
+myGPIO.h(14): warning:  #1-D: last line of file ends without a newline
+  void pinReadAndWrite(uint32_t ui32Loop,uint8_t temp);
+i2c.h(11): warning:  #1-D: last line of file ends without a newline
+  //#include <stdio.h>
+Read_Encoder.h(39): warning:  #1-D: last line of file ends without a newline
+  double ReadEncoder(void);
+Speed_Control.h(38): warning:  #1-D: last line of file ends without a newline
+  void Speed_Control(double Speed, double uSpeed);
+Read_Encoder.h(39): warning:  #1-D: last line of file ends without a newline
+  double ReadEncoder(void);
+Calibrate.h(45): warning:  #1-D: last line of file ends without a newline
+  void initialize_aandw(void);
+Calibrate.c(53): warning:  #223-D: function "stopmotor" declared implicitly
+  	stopmotor();
+Calibrate.c: 19 warnings, 0 errors
+creating preprocessor file for i2c_master.c...
 compiling i2c.c...
-i2c.c(144): warning:  #1-D: last line of file ends without a newline
+i2c.c(147): warning:  #1-D: last line of file ends without a newline
   //}
 i2c.c: 1 warning, 0 errors
-creating preprocessor file for i2c_master.c...
 compiling i2c_master.c...
 i2c_master.c(98): warning:  #1-D: last line of file ends without a newline
   //}
 i2c_master.c: 1 warning, 0 errors
 creating preprocessor file for i2c_slave.c...
+creating preprocessor file for i2c_doc.c...
+compiling i2c_doc.c...
 compiling i2c_slave.c...
-i2c_slave.h(11): warning:  #1-D: last line of file ends without a newline
-  #include <stdio.h>
+Read_Encoder.h(39): warning:  #1-D: last line of file ends without a newline
+  double ReadEncoder(void);
+Read_Encoder.h(39): warning:  #1-D: last line of file ends without a newline
+  double ReadEncoder(void);
+Encoder.h(28): warning:  #1-D: last line of file ends without a newline
+  void QEIConfigure(uint32_t ui32Base, uint32_t ui32Config, uint32_t ui32MaxPosition);
+driverlib/hibernate.h(229): warning:  #231-D: declaration is not visible outside of function
+  extern void HibernateCalendarSet(struct tm *psTime);
+driverlib/hibernate.h(230): warning:  #231-D: declaration is not visible outside of function
+  extern int HibernateCalendarGet(struct tm *psTime);
+driverlib/hibernate.h(231): warning:  #231-D: declaration is not visible outside of function
+  extern void HibernateCalendarMatchSet(uint32_t ui32Index, struct tm *psTime);
+driverlib/hibernate.h(232): warning:  #231-D: declaration is not visible outside of function
+  extern void HibernateCalendarMatchGet(uint32_t ui32Index, struct tm *psTime);
+Read_Encoder.h(39): warning:  #1-D: last line of file ends without a newline
+  double ReadEncoder(void);
+Get_Speed.h(13): warning:  #1-D: last line of file ends without a newline
+   double GetUserSpeed(void);
+Read_Encoder.h(39): warning:  #1-D: last line of file ends without a newline
+  double ReadEncoder(void);
+Calibrate.h(45): warning:  #1-D: last line of file ends without a newline
+  void initialize_aandw(void);
+myGPIO.h(13): warning:  #1295-D: Deprecated declaration setup_IO - give arg types
+  void setup_IO();
+myGPIO.h(14): warning:  #1-D: last line of file ends without a newline
+  void pinReadAndWrite(uint32_t ui32Loop,uint8_t temp);
+i2c.h(11): warning:  #1-D: last line of file ends without a newline
+  //#include <stdio.h>
+i2c_slave.h(17): warning:  #1-D: last line of file ends without a newline
+  #include "Speed_Control.h"
+Read_Encoder.h(39): warning:  #1-D: last line of file ends without a newline
+  double ReadEncoder(void);
+Speed_Control.h(38): warning:  #1-D: last line of file ends without a newline
+  void Speed_Control(double Speed, double uSpeed);
 inc/hw_ints.h(352): warning:  #47-D: incompatible redefinition of macro "INT_ADC0SS0"  (declared at line 62 of ".\inc\tm4c123gh6pm.h")
   #define INT_ADC0SS0             INT_CONCAT(INT_ADC0SS0_, INT_DEVICE_CLASS)
 inc/hw_ints.h(353): warning:  #47-D: incompatible redefinition of macro "INT_ADC0SS1"  (declared at line 63 of ".\inc\tm4c123gh6pm.h")
@@ -452,19 +480,22 @@ inc/hw_ints.h(473): warning:  #47-D: incompatible redefinition of macro "INT_WTI
   #define INT_WTIMER5A            INT_CONCAT(INT_WTIMER5A_, INT_DEVICE_CLASS)
 inc/hw_ints.h(474): warning:  #47-D: incompatible redefinition of macro "INT_WTIMER5B"  (declared at line 120 of ".\inc\tm4c123gh6pm.h")
   #define INT_WTIMER5B            INT_CONCAT(INT_WTIMER5B_, INT_DEVICE_CLASS)
-i2c_slave.c(32): warning:  #223-D: function "UARTStdioConfig" declared implicitly
-      UARTStdioConfig(0, 115200, 16000000);
-i2c_slave.c: 82 warnings, 0 errors
-          UARTprintf(" Slave receive: '%c' \n", result);
-i2c_slave.c(87): warning:  #1-D: last line of file ends without a newline
-  }
+i2c_slave.c(62): warning:  #1294-D: Old-style function I2CSend
+  int I2CSend(speed)
+i2c_slave.c(62): warning:  #1079-D: standard requires that parameter "speed"  be given a type by a subsequent declaration ("int" assumed)
+  int I2CSend(speed)
+i2c_slave.c(86): warning:  #940-D: missing return statement at end of non-void function "I2CSend" 
+      }
+i2c_slave.c(87): warning:  #1294-D: Old-style function I2CGET
+  int I2CGET(uSpeed)
+i2c_slave.c(87): warning:  #1079-D: standard requires that parameter "uSpeed"  be given a type by a subsequent declaration ("int" assumed)
+  int I2CGET(uSpeed)
+i2c_slave.c: 100 warnings, 0 errors
 linking...
-.\rvmdk\project.axf: Error: L6200E: Symbol __ARM_use_no_argv multiply defined (by i2c_slave.o and project.o).
-.\rvmdk\project.axf: Error: L6200E: Symbol main multiply defined (by i2c_slave.o and project.o).
-Not enough information to list image symbols.
-Not enough information to list load addresses in the image map.
-Finished: 2 information, 0 warning and 2 error messages.
-".\rvmdk\project.axf" - 2 Error(s), 194 Warning(s).
+Program Size: Code=8020 RO-data=1180 RW-data=100 ZI-data=396  
+FromELF: creating hex file...
+After Build - User command #1: fromelf --bin --output .\rvmdk\project.bin .\rvmdk\project.axf
+".\rvmdk\project.axf" - 0 Error(s), 209 Warning(s).
 
 <h2>Software Packages used:</h2>
 
@@ -487,8 +518,7 @@ Package Vendor: Keil
 <h2>Collection of Component Files used:</h2>
 
    * Component: ARM::CMSIS:CORE:5.0.1
-Target not created.
-Build Time Elapsed:  00:00:10
+Build Time Elapsed:  00:00:14
 </pre>
 </body>
 </html>
