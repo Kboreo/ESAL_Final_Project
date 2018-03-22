@@ -19660,48 +19660,855 @@ double speed;
 double uSpeed;	
 
 
-int  main(void)
-{	
-	char ctemp; 
-	SetupHardware();  
-	printf("Hardware setup complete\n\n");		
-	printf("PWM setup complete \n\n");
-	
-	
-	mainMenu(ctemp);
-}	
-	
 
-void mainMenu(char ctemp)
-{	
-	
-	while (1)
-	{
-		printf("What function would you like to test?\n 1.Calibrate\n 2.Speed Control\n"); 
-		ctemp = getc((& __stdin)); 
-		printf("You entered %c\n\n",ctemp); 
-		
-		
-		switch (ctemp)		
-		{
-			
-			case '1':						
-				Calibrate(); 
-				break;	
-			
-			
-			case '2':	
-				printf("Press SW2 to exit\n\n");
-				uSpeed = GetUserSpeed();
-				Speed_Control(speed, uSpeed); 		
-				break;
-					
-			
-			default:				
-				printf("Ya done messed up, try again!\n\n");
-				break;		
-		}
-	}	
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+#line 104 "project.c"
+#line 105 "project.c"
+#line 1 "inc/hw_i2c.h"
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+#line 55 "inc/hw_i2c.h"
+                                            
+
+
+
+                                            
+#line 70 "inc/hw_i2c.h"
+                                            
+#line 79 "inc/hw_i2c.h"
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+#line 111 "inc/hw_i2c.h"
+
+
+
+
+
+
+
+                                            
+
+
+
+
+
+
+
+#line 138 "inc/hw_i2c.h"
+
+
+
+
+
+
+
+
+                                            
+
+                                            
+
+                                            
+#line 159 "inc/hw_i2c.h"
+
+
+
+
+
+
+
+                                            
+
+                                            
+
+                                            
+
+                                            
+
+                                            
+
+                                            
+
+                                            
+
+                                            
+
+                                            
+
+
+                                            
+
+
+
+
+
+
+
+
+
+                                            
+
+                                            
+#line 206 "inc/hw_i2c.h"
+                                            
+
+
+
+
+
+
+
+
+                                            
+
+                                            
+
+                                            
+
+                                            
+
+
+
+
+                                            
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+#line 288 "inc/hw_i2c.h"
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+#line 313 "inc/hw_i2c.h"
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+                                            
+
+                                            
+
+                                            
+
+
+
+
+
+
+
+
+
+
+
+
+                                            
+
+                                            
+
+                                            
+
+                                            
+
+                                            
+
+
+                                            
+
+                                            
+
+
+
+
+
+
+
+
+
+                                            
+
+                                            
+
+                                            
+
+                                            
+
+                                            
+
+                                            
+
+                                            
+
+
+
+
+
+
+
+
+
+                                            
+#line 399 "inc/hw_i2c.h"
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+#line 440 "inc/hw_i2c.h"
+
+
+
+
+
+
+
+#line 455 "inc/hw_i2c.h"
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+#line 106 "project.c"
+#line 1 "inc/hw_ints.h"
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+#line 58 "inc/hw_ints.h"
+
+
+
+
+
+
+#line 94 "inc/hw_ints.h"
+                                            
+#line 170 "inc/hw_ints.h"
+
+
+
+
+
+
+#line 244 "inc/hw_ints.h"
+                                            
+#line 283 "inc/hw_ints.h"
+
+
+
+
+
+
+#line 318 "inc/hw_ints.h"
+
+
+
+
+
+
+#line 339 "inc/hw_ints.h"
+
+
+
+
+
+
+
+
+
+
+
+
+
+#line 475 "inc/hw_ints.h"
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+#line 107 "project.c"
+#line 108 "project.c"
+#line 109 "project.c"
+#line 110 "project.c"
+#line 111 "project.c"
+#line 112 "project.c"
+#line 113 "project.c"
+#line 114 "project.c"
+#line 115 "project.c"
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+static uint32_t g_ui32DataRx;
+
+
+
+
+
+
+
+static _Bool g_bIntFlag = 0;
+
+
+
+
+
+
+
+void
+InitConsole(void)
+{
+    
+    
+    
+    
+    SysCtlPeripheralEnable(0xf0000800);
+
+    
+    
+    
+    
+    
+    GPIOPinConfigure(0x00000001);
+    GPIOPinConfigure(0x00000401);
+
+    
+    
+    
+    SysCtlPeripheralEnable(0xf0001800);
+
+    
+    
+    
+    UARTClockSourceSet(0x4000C000, 0x00000005);
+
+    
+    
+    
+    
+    GPIOPinTypeUART(0x40004000, 0x00000001 | 0x00000002);
+
+    
+    
+    
+    
 }
+
+
+
+
+
+
+void
+I2C0SlaveIntHandler(void)
+{
+    
+    
+    
+    I2CSlaveIntClear(0x40020000);
+
+    
+    
+    
+    g_ui32DataRx = I2CSlaveDataGet(0x40020000);
+
+    
+    
+    
+    g_bIntFlag = 1;
+}
+
+
+
+
+
+
+int
+main(void)
+{
+
+
+
+
+
+    uint32_t ui32DataTx;
+
+    
+    
+    
+    
+    
+#line 274 "project.c"
+    SysCtlClockSet(0x07800000 | 0x00003800 | 0x00000000 |
+                   0x00000540);
+
+
+    
+    
+    
+    SysCtlPeripheralEnable(0xf0002000);
+
+    
+    
+    
+    
+    
+    
+    
+    SysCtlPeripheralEnable(0xf0000801);
+
+    
+    
+    
+    
+    
+    GPIOPinConfigure(0x00010803);
+    GPIOPinConfigure(0x00010C03);
+
+    
+    
+    
+    
+    
+    
+    
+    GPIOPinTypeI2CSCL(0x40005000, 0x00000004);
+    GPIOPinTypeI2C(0x40005000, 0x00000008);
+
+    
+    
+    
+    
+    
+    
+    
+    
+    (*((volatile uint32_t *)(0x40020000 + 0x00000020))) |= 0x01;
+
+    
+    
+    
+    IntEnable(24);
+
+    
+    
+    
+    
+    
+    I2CSlaveIntEnableEx(0x40020000, 0x00000001);
+
+    
+    
+    
+    
+    
+    
+
+
+
+
+
+    I2CMasterInitExpClk(0x40020000, SysCtlClockGet(), 0);
+
+
+    
+    
+    
+    I2CSlaveEnable(0x40020000);
+
+    
+    
+    
+    
+    
+    I2CSlaveInit(0x40020000, 0x3C);
+
+    
+    
+    
+    
+    
+    
+    
+    
+    I2CMasterSlaveAddrSet(0x40020000, 0x3C, 0);
+
+    
+    
+    
+    
+    
+
+    
+    
+    
+    IntMasterEnable();
+
+    
+    
+    
+    printf("I2C Slave Interrupt Example ->");
+    printf("\n   Module = I2C0");
+    printf("\n   Mode = Receive interrupt on the Slave module");
+    printf("\n   Rate = 100kbps\n\n");
+
+    
+    
+    
+    ui32DataTx = 'I';
+
+    
+    
+    
+    printf("Transferring from: Master -> Slave\n");
+
+    
+    
+    
+    printf("  Sending: '%c'", ui32DataTx);
+
+    
+    
+    
+    I2CMasterDataPut(0x40020000, ui32DataTx);
+
+    
+    
+    
+    
+    
+    I2CMasterControl(0x40020000, 0x00000007);
+
+    
+    
+    
+    while(!g_bIntFlag)
+    {
+    }
+
+    
+    
+    
+   printf("\n  Slave Interrupt Received!\n");
+
+    
+    
+    
+    printf("  Received: '%c'\n\n", g_ui32DataRx);
+
+    
+    
+    
+    while(1)
+    {
+    }
+}
+
 
 

@@ -66797,51 +66797,1459 @@ Ndouble speed; 	//Speed read from encoder
 Ndouble uSpeed;	//Requested speed from the user
 N
 N
-Nint  main(void)
-N{	
-N	char ctemp; //Temp char used for UART
-N	SetupHardware();  //Initializes all of the required HardWare for the project.			
-N	printf("Hardware setup complete\n\n");		
-N	printf("PWM setup complete \n\n");
-N	
-N	//program menu options contained in mainMenu
-N	mainMenu(ctemp);
-N}	
-N	
-N//Main menu that displays to the UART terminal for a HMI	
-Nvoid mainMenu(char ctemp)
-N{	
-N	//While loop for main user menu	
-N	while (1)
-N	{
-N		printf("What function would you like to test?\n 1.Calibrate\n 2.Speed Control\n"); //Askes user what function they would like to use.
-N		ctemp = getc(stdin); //Gets a char from the terminal from the user.
-X		ctemp = getc((& __stdin)); 
-N		printf("You entered %c\n\n",ctemp); //Lets the user know what they have selected
-N		
-N		//Switch statement that selects which function depending on the user input.	
-N		switch (ctemp)		
-N		{
-N			//Function to calibrate motor
-N			case '1':						
-W "project.c" 88 5 function "Calibrate" declared implicitly
-N				Calibrate(); 
-N				break;	
-N			
-N			//Function for spped control
-N			case '2':	
-N				printf("Press SW2 to exit\n\n");
-N				uSpeed = GetUserSpeed();
-W "project.c" 95 5 function "Speed_Control" declared implicitly
-N				Speed_Control(speed, uSpeed); 		
-N				break;
-N					
-N			//Default case if user types anything other than the given options
-N			default:				
-N				printf("Ya done messed up, try again!\n\n");
-N				break;		
-N		}
-N	}	
+N//*****************************************************************************
+N//
+N// slave_receive_int.c - Example demonstrating a simple I2C master message
+N//                       transmission using a slave interrupt when data is
+N//                       received.
+N//
+N// Copyright (c) 2010-2017 Texas Instruments Incorporated.  All rights reserved.
+N// Software License Agreement
+N// 
+N//   Redistribution and use in source and binary forms, with or without
+N//   modification, are permitted provided that the following conditions
+N//   are met:
+N// 
+N//   Redistributions of source code must retain the above copyright
+N//   notice, this list of conditions and the following disclaimer.
+N// 
+N//   Redistributions in binary form must reproduce the above copyright
+N//   notice, this list of conditions and the following disclaimer in the
+N//   documentation and/or other materials provided with the  
+N//   distribution.
+N// 
+N//   Neither the name of Texas Instruments Incorporated nor the names of
+N//   its contributors may be used to endorse or promote products derived
+N//   from this software without specific prior written permission.
+N// 
+N// THIS SOFTWARE IS PROVIDED BY THE COPYRIGHT HOLDERS AND CONTRIBUTORS
+N// "AS IS" AND ANY EXPRESS OR IMPLIED WARRANTIES, INCLUDING, BUT NOT
+N// LIMITED TO, THE IMPLIED WARRANTIES OF MERCHANTABILITY AND FITNESS FOR
+N// A PARTICULAR PURPOSE ARE DISCLAIMED. IN NO EVENT SHALL THE COPYRIGHT
+N// OWNER OR CONTRIBUTORS BE LIABLE FOR ANY DIRECT, INDIRECT, INCIDENTAL,
+N// SPECIAL, EXEMPLARY, OR CONSEQUENTIAL DAMAGES (INCLUDING, BUT NOT
+N// LIMITED TO, PROCUREMENT OF SUBSTITUTE GOODS OR SERVICES; LOSS OF USE,
+N// DATA, OR PROFITS; OR BUSINESS INTERRUPTION) HOWEVER CAUSED AND ON ANY
+N// THEORY OF LIABILITY, WHETHER IN CONTRACT, STRICT LIABILITY, OR TORT
+N// (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE
+N// OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
+N// 
+N// This is part of revision 2.1.4.178 of the Tiva Firmware Development Package.
+N//
+N//*****************************************************************************
+N
+N#include <stdbool.h>
+N#include <stdint.h>
+N#include "inc/hw_i2c.h"
+L 1 "inc/hw_i2c.h" 1
+N//*****************************************************************************
+N//
+N// hw_i2c.h - Macros used when accessing the I2C master and slave hardware.
+N//
+N// Copyright (c) 2005-2017 Texas Instruments Incorporated.  All rights reserved.
+N// Software License Agreement
+N// 
+N//   Redistribution and use in source and binary forms, with or without
+N//   modification, are permitted provided that the following conditions
+N//   are met:
+N// 
+N//   Redistributions of source code must retain the above copyright
+N//   notice, this list of conditions and the following disclaimer.
+N// 
+N//   Redistributions in binary form must reproduce the above copyright
+N//   notice, this list of conditions and the following disclaimer in the
+N//   documentation and/or other materials provided with the  
+N//   distribution.
+N// 
+N//   Neither the name of Texas Instruments Incorporated nor the names of
+N//   its contributors may be used to endorse or promote products derived
+N//   from this software without specific prior written permission.
+N// 
+N// THIS SOFTWARE IS PROVIDED BY THE COPYRIGHT HOLDERS AND CONTRIBUTORS
+N// "AS IS" AND ANY EXPRESS OR IMPLIED WARRANTIES, INCLUDING, BUT NOT
+N// LIMITED TO, THE IMPLIED WARRANTIES OF MERCHANTABILITY AND FITNESS FOR
+N// A PARTICULAR PURPOSE ARE DISCLAIMED. IN NO EVENT SHALL THE COPYRIGHT
+N// OWNER OR CONTRIBUTORS BE LIABLE FOR ANY DIRECT, INDIRECT, INCIDENTAL,
+N// SPECIAL, EXEMPLARY, OR CONSEQUENTIAL DAMAGES (INCLUDING, BUT NOT
+N// LIMITED TO, PROCUREMENT OF SUBSTITUTE GOODS OR SERVICES; LOSS OF USE,
+N// DATA, OR PROFITS; OR BUSINESS INTERRUPTION) HOWEVER CAUSED AND ON ANY
+N// THEORY OF LIABILITY, WHETHER IN CONTRACT, STRICT LIABILITY, OR TORT
+N// (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE
+N// OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
+N// 
+N// This is part of revision 2.1.4.178 of the Tiva Firmware Development Package.
+N//
+N//*****************************************************************************
+N
+N#ifndef __HW_I2C_H__
+N#define __HW_I2C_H__
+N
+N//*****************************************************************************
+N//
+N// The following are defines for the I2C register offsets.
+N//
+N//*****************************************************************************
+N#define I2C_O_MSA               0x00000000  // I2C Master Slave Address
+N#define I2C_O_MCS               0x00000004  // I2C Master Control/Status
+N#define I2C_O_MDR               0x00000008  // I2C Master Data
+N#define I2C_O_MTPR              0x0000000C  // I2C Master Timer Period
+N#define I2C_O_MIMR              0x00000010  // I2C Master Interrupt Mask
+N#define I2C_O_MRIS              0x00000014  // I2C Master Raw Interrupt Status
+N#define I2C_O_MMIS              0x00000018  // I2C Master Masked Interrupt
+N                                            // Status
+N#define I2C_O_MICR              0x0000001C  // I2C Master Interrupt Clear
+N#define I2C_O_MCR               0x00000020  // I2C Master Configuration
+N#define I2C_O_MCLKOCNT          0x00000024  // I2C Master Clock Low Timeout
+N                                            // Count
+N#define I2C_O_MBMON             0x0000002C  // I2C Master Bus Monitor
+N#define I2C_O_MBLEN             0x00000030  // I2C Master Burst Length
+N#define I2C_O_MBCNT             0x00000034  // I2C Master Burst Count
+N#define I2C_O_MCR2              0x00000038  // I2C Master Configuration 2
+N#define I2C_O_SOAR              0x00000800  // I2C Slave Own Address
+N#define I2C_O_SCSR              0x00000804  // I2C Slave Control/Status
+N#define I2C_O_SDR               0x00000808  // I2C Slave Data
+N#define I2C_O_SIMR              0x0000080C  // I2C Slave Interrupt Mask
+N#define I2C_O_SRIS              0x00000810  // I2C Slave Raw Interrupt Status
+N#define I2C_O_SMIS              0x00000814  // I2C Slave Masked Interrupt
+N                                            // Status
+N#define I2C_O_SICR              0x00000818  // I2C Slave Interrupt Clear
+N#define I2C_O_SOAR2             0x0000081C  // I2C Slave Own Address 2
+N#define I2C_O_SACKCTL           0x00000820  // I2C Slave ACK Control
+N#define I2C_O_FIFODATA          0x00000F00  // I2C FIFO Data
+N#define I2C_O_FIFOCTL           0x00000F04  // I2C FIFO Control
+N#define I2C_O_FIFOSTATUS        0x00000F08  // I2C FIFO Status
+N#define I2C_O_PP                0x00000FC0  // I2C Peripheral Properties
+N#define I2C_O_PC                0x00000FC4  // I2C Peripheral Configuration
+N
+N//*****************************************************************************
+N//
+N// The following are defines for the bit fields in the I2C_O_MSA register.
+N//
+N//*****************************************************************************
+N#define I2C_MSA_SA_M            0x000000FE  // I2C Slave Address
+N#define I2C_MSA_RS              0x00000001  // Receive not send
+N#define I2C_MSA_SA_S            1
+N
+N//*****************************************************************************
+N//
+N// The following are defines for the bit fields in the I2C_O_MCS register.
+N//
+N//*****************************************************************************
+N#define I2C_MCS_ACTDMARX        0x80000000  // DMA RX Active Status
+N#define I2C_MCS_ACTDMATX        0x40000000  // DMA TX Active Status
+N#define I2C_MCS_CLKTO           0x00000080  // Clock Timeout Error
+N#define I2C_MCS_BURST           0x00000040  // Burst Enable
+N#define I2C_MCS_BUSBSY          0x00000040  // Bus Busy
+N#define I2C_MCS_IDLE            0x00000020  // I2C Idle
+N#define I2C_MCS_QCMD            0x00000020  // Quick Command
+N#define I2C_MCS_ARBLST          0x00000010  // Arbitration Lost
+N#define I2C_MCS_HS              0x00000010  // High-Speed Enable
+N#define I2C_MCS_ACK             0x00000008  // Data Acknowledge Enable
+N#define I2C_MCS_DATACK          0x00000008  // Acknowledge Data
+N#define I2C_MCS_ADRACK          0x00000004  // Acknowledge Address
+N#define I2C_MCS_STOP            0x00000004  // Generate STOP
+N#define I2C_MCS_ERROR           0x00000002  // Error
+N#define I2C_MCS_START           0x00000002  // Generate START
+N#define I2C_MCS_RUN             0x00000001  // I2C Master Enable
+N#define I2C_MCS_BUSY            0x00000001  // I2C Busy
+N
+N//*****************************************************************************
+N//
+N// The following are defines for the bit fields in the I2C_O_MDR register.
+N//
+N//*****************************************************************************
+N#define I2C_MDR_DATA_M          0x000000FF  // This byte contains the data
+N                                            // transferred during a transaction
+N#define I2C_MDR_DATA_S          0
+N
+N//*****************************************************************************
+N//
+N// The following are defines for the bit fields in the I2C_O_MTPR register.
+N//
+N//*****************************************************************************
+N#define I2C_MTPR_PULSEL_M       0x00070000  // Glitch Suppression Pulse Width
+N#define I2C_MTPR_PULSEL_BYPASS  0x00000000  // Bypass
+N#define I2C_MTPR_PULSEL_1       0x00010000  // 1 clock
+N#define I2C_MTPR_PULSEL_2       0x00020000  // 2 clocks
+N#define I2C_MTPR_PULSEL_3       0x00030000  // 3 clocks
+N#define I2C_MTPR_PULSEL_4       0x00040000  // 4 clocks
+N#define I2C_MTPR_PULSEL_8       0x00050000  // 8 clocks
+N#define I2C_MTPR_PULSEL_16      0x00060000  // 16 clocks
+N#define I2C_MTPR_PULSEL_31      0x00070000  // 31 clocks
+N#define I2C_MTPR_HS             0x00000080  // High-Speed Enable
+N#define I2C_MTPR_TPR_M          0x0000007F  // Timer Period
+N#define I2C_MTPR_TPR_S          0
+N
+N//*****************************************************************************
+N//
+N// The following are defines for the bit fields in the I2C_O_MIMR register.
+N//
+N//*****************************************************************************
+N#define I2C_MIMR_RXFFIM         0x00000800  // Receive FIFO Full Interrupt Mask
+N#define I2C_MIMR_TXFEIM         0x00000400  // Transmit FIFO Empty Interrupt
+N                                            // Mask
+N#define I2C_MIMR_RXIM           0x00000200  // Receive FIFO Request Interrupt
+N                                            // Mask
+N#define I2C_MIMR_TXIM           0x00000100  // Transmit FIFO Request Interrupt
+N                                            // Mask
+N#define I2C_MIMR_ARBLOSTIM      0x00000080  // Arbitration Lost Interrupt Mask
+N#define I2C_MIMR_STOPIM         0x00000040  // STOP Detection Interrupt Mask
+N#define I2C_MIMR_STARTIM        0x00000020  // START Detection Interrupt Mask
+N#define I2C_MIMR_NACKIM         0x00000010  // Address/Data NACK Interrupt Mask
+N#define I2C_MIMR_DMATXIM        0x00000008  // Transmit DMA Interrupt Mask
+N#define I2C_MIMR_DMARXIM        0x00000004  // Receive DMA Interrupt Mask
+N#define I2C_MIMR_CLKIM          0x00000002  // Clock Timeout Interrupt Mask
+N#define I2C_MIMR_IM             0x00000001  // Master Interrupt Mask
+N
+N//*****************************************************************************
+N//
+N// The following are defines for the bit fields in the I2C_O_MRIS register.
+N//
+N//*****************************************************************************
+N#define I2C_MRIS_RXFFRIS        0x00000800  // Receive FIFO Full Raw Interrupt
+N                                            // Status
+N#define I2C_MRIS_TXFERIS        0x00000400  // Transmit FIFO Empty Raw
+N                                            // Interrupt Status
+N#define I2C_MRIS_RXRIS          0x00000200  // Receive FIFO Request Raw
+N                                            // Interrupt Status
+N#define I2C_MRIS_TXRIS          0x00000100  // Transmit Request Raw Interrupt
+N                                            // Status
+N#define I2C_MRIS_ARBLOSTRIS     0x00000080  // Arbitration Lost Raw Interrupt
+N                                            // Status
+N#define I2C_MRIS_STOPRIS        0x00000040  // STOP Detection Raw Interrupt
+N                                            // Status
+N#define I2C_MRIS_STARTRIS       0x00000020  // START Detection Raw Interrupt
+N                                            // Status
+N#define I2C_MRIS_NACKRIS        0x00000010  // Address/Data NACK Raw Interrupt
+N                                            // Status
+N#define I2C_MRIS_DMATXRIS       0x00000008  // Transmit DMA Raw Interrupt
+N                                            // Status
+N#define I2C_MRIS_DMARXRIS       0x00000004  // Receive DMA Raw Interrupt Status
+N#define I2C_MRIS_CLKRIS         0x00000002  // Clock Timeout Raw Interrupt
+N                                            // Status
+N#define I2C_MRIS_RIS            0x00000001  // Master Raw Interrupt Status
+N
+N//*****************************************************************************
+N//
+N// The following are defines for the bit fields in the I2C_O_MMIS register.
+N//
+N//*****************************************************************************
+N#define I2C_MMIS_RXFFMIS        0x00000800  // Receive FIFO Full Interrupt Mask
+N#define I2C_MMIS_TXFEMIS        0x00000400  // Transmit FIFO Empty Interrupt
+N                                            // Mask
+N#define I2C_MMIS_RXMIS          0x00000200  // Receive FIFO Request Interrupt
+N                                            // Mask
+N#define I2C_MMIS_TXMIS          0x00000100  // Transmit Request Interrupt Mask
+N#define I2C_MMIS_ARBLOSTMIS     0x00000080  // Arbitration Lost Interrupt Mask
+N#define I2C_MMIS_STOPMIS        0x00000040  // STOP Detection Interrupt Mask
+N#define I2C_MMIS_STARTMIS       0x00000020  // START Detection Interrupt Mask
+N#define I2C_MMIS_NACKMIS        0x00000010  // Address/Data NACK Interrupt Mask
+N#define I2C_MMIS_DMATXMIS       0x00000008  // Transmit DMA Interrupt Status
+N#define I2C_MMIS_DMARXMIS       0x00000004  // Receive DMA Interrupt Status
+N#define I2C_MMIS_CLKMIS         0x00000002  // Clock Timeout Masked Interrupt
+N                                            // Status
+N#define I2C_MMIS_MIS            0x00000001  // Masked Interrupt Status
+N
+N//*****************************************************************************
+N//
+N// The following are defines for the bit fields in the I2C_O_MICR register.
+N//
+N//*****************************************************************************
+N#define I2C_MICR_RXFFIC         0x00000800  // Receive FIFO Full Interrupt
+N                                            // Clear
+N#define I2C_MICR_TXFEIC         0x00000400  // Transmit FIFO Empty Interrupt
+N                                            // Clear
+N#define I2C_MICR_RXIC           0x00000200  // Receive FIFO Request Interrupt
+N                                            // Clear
+N#define I2C_MICR_TXIC           0x00000100  // Transmit FIFO Request Interrupt
+N                                            // Clear
+N#define I2C_MICR_ARBLOSTIC      0x00000080  // Arbitration Lost Interrupt Clear
+N#define I2C_MICR_STOPIC         0x00000040  // STOP Detection Interrupt Clear
+N#define I2C_MICR_STARTIC        0x00000020  // START Detection Interrupt Clear
+N#define I2C_MICR_NACKIC         0x00000010  // Address/Data NACK Interrupt
+N                                            // Clear
+N#define I2C_MICR_DMATXIC        0x00000008  // Transmit DMA Interrupt Clear
+N#define I2C_MICR_DMARXIC        0x00000004  // Receive DMA Interrupt Clear
+N#define I2C_MICR_CLKIC          0x00000002  // Clock Timeout Interrupt Clear
+N#define I2C_MICR_IC             0x00000001  // Master Interrupt Clear
+N
+N//*****************************************************************************
+N//
+N// The following are defines for the bit fields in the I2C_O_MCR register.
+N//
+N//*****************************************************************************
+N#define I2C_MCR_GFE             0x00000040  // I2C Glitch Filter Enable
+N#define I2C_MCR_SFE             0x00000020  // I2C Slave Function Enable
+N#define I2C_MCR_MFE             0x00000010  // I2C Master Function Enable
+N#define I2C_MCR_LPBK            0x00000001  // I2C Loopback
+N
+N//*****************************************************************************
+N//
+N// The following are defines for the bit fields in the I2C_O_MCLKOCNT register.
+N//
+N//*****************************************************************************
+N#define I2C_MCLKOCNT_CNTL_M     0x000000FF  // I2C Master Count
+N#define I2C_MCLKOCNT_CNTL_S     0
+N
+N//*****************************************************************************
+N//
+N// The following are defines for the bit fields in the I2C_O_MBMON register.
+N//
+N//*****************************************************************************
+N#define I2C_MBMON_SDA           0x00000002  // I2C SDA Status
+N#define I2C_MBMON_SCL           0x00000001  // I2C SCL Status
+N
+N//*****************************************************************************
+N//
+N// The following are defines for the bit fields in the I2C_O_MBLEN register.
+N//
+N//*****************************************************************************
+N#define I2C_MBLEN_CNTL_M        0x000000FF  // I2C Burst Length
+N#define I2C_MBLEN_CNTL_S        0
+N
+N//*****************************************************************************
+N//
+N// The following are defines for the bit fields in the I2C_O_MBCNT register.
+N//
+N//*****************************************************************************
+N#define I2C_MBCNT_CNTL_M        0x000000FF  // I2C Master Burst Count
+N#define I2C_MBCNT_CNTL_S        0
+N
+N//*****************************************************************************
+N//
+N// The following are defines for the bit fields in the I2C_O_MCR2 register.
+N//
+N//*****************************************************************************
+N#define I2C_MCR2_GFPW_M         0x00000070  // I2C Glitch Filter Pulse Width
+N#define I2C_MCR2_GFPW_BYPASS    0x00000000  // Bypass
+N#define I2C_MCR2_GFPW_1         0x00000010  // 1 clock
+N#define I2C_MCR2_GFPW_2         0x00000020  // 2 clocks
+N#define I2C_MCR2_GFPW_3         0x00000030  // 3 clocks
+N#define I2C_MCR2_GFPW_4         0x00000040  // 4 clocks
+N#define I2C_MCR2_GFPW_8         0x00000050  // 8 clocks
+N#define I2C_MCR2_GFPW_16        0x00000060  // 16 clocks
+N#define I2C_MCR2_GFPW_31        0x00000070  // 31 clocks
+N
+N//*****************************************************************************
+N//
+N// The following are defines for the bit fields in the I2C_O_SOAR register.
+N//
+N//*****************************************************************************
+N#define I2C_SOAR_OAR_M          0x0000007F  // I2C Slave Own Address
+N#define I2C_SOAR_OAR_S          0
+N
+N//*****************************************************************************
+N//
+N// The following are defines for the bit fields in the I2C_O_SCSR register.
+N//
+N//*****************************************************************************
+N#define I2C_SCSR_ACTDMARX       0x80000000  // DMA RX Active Status
+N#define I2C_SCSR_ACTDMATX       0x40000000  // DMA TX Active Status
+N#define I2C_SCSR_QCMDRW         0x00000020  // Quick Command Read / Write
+N#define I2C_SCSR_QCMDST         0x00000010  // Quick Command Status
+N#define I2C_SCSR_OAR2SEL        0x00000008  // OAR2 Address Matched
+N#define I2C_SCSR_FBR            0x00000004  // First Byte Received
+N#define I2C_SCSR_RXFIFO         0x00000004  // RX FIFO Enable
+N#define I2C_SCSR_TXFIFO         0x00000002  // TX FIFO Enable
+N#define I2C_SCSR_TREQ           0x00000002  // Transmit Request
+N#define I2C_SCSR_DA             0x00000001  // Device Active
+N#define I2C_SCSR_RREQ           0x00000001  // Receive Request
+N
+N//*****************************************************************************
+N//
+N// The following are defines for the bit fields in the I2C_O_SDR register.
+N//
+N//*****************************************************************************
+N#define I2C_SDR_DATA_M          0x000000FF  // Data for Transfer
+N#define I2C_SDR_DATA_S          0
+N
+N//*****************************************************************************
+N//
+N// The following are defines for the bit fields in the I2C_O_SIMR register.
+N//
+N//*****************************************************************************
+N#define I2C_SIMR_RXFFIM         0x00000100  // Receive FIFO Full Interrupt Mask
+N#define I2C_SIMR_TXFEIM         0x00000080  // Transmit FIFO Empty Interrupt
+N                                            // Mask
+N#define I2C_SIMR_RXIM           0x00000040  // Receive FIFO Request Interrupt
+N                                            // Mask
+N#define I2C_SIMR_TXIM           0x00000020  // Transmit FIFO Request Interrupt
+N                                            // Mask
+N#define I2C_SIMR_DMATXIM        0x00000010  // Transmit DMA Interrupt Mask
+N#define I2C_SIMR_DMARXIM        0x00000008  // Receive DMA Interrupt Mask
+N#define I2C_SIMR_STOPIM         0x00000004  // Stop Condition Interrupt Mask
+N#define I2C_SIMR_STARTIM        0x00000002  // Start Condition Interrupt Mask
+N#define I2C_SIMR_DATAIM         0x00000001  // Data Interrupt Mask
+N
+N//*****************************************************************************
+N//
+N// The following are defines for the bit fields in the I2C_O_SRIS register.
+N//
+N//*****************************************************************************
+N#define I2C_SRIS_RXFFRIS        0x00000100  // Receive FIFO Full Raw Interrupt
+N                                            // Status
+N#define I2C_SRIS_TXFERIS        0x00000080  // Transmit FIFO Empty Raw
+N                                            // Interrupt Status
+N#define I2C_SRIS_RXRIS          0x00000040  // Receive FIFO Request Raw
+N                                            // Interrupt Status
+N#define I2C_SRIS_TXRIS          0x00000020  // Transmit Request Raw Interrupt
+N                                            // Status
+N#define I2C_SRIS_DMATXRIS       0x00000010  // Transmit DMA Raw Interrupt
+N                                            // Status
+N#define I2C_SRIS_DMARXRIS       0x00000008  // Receive DMA Raw Interrupt Status
+N#define I2C_SRIS_STOPRIS        0x00000004  // Stop Condition Raw Interrupt
+N                                            // Status
+N#define I2C_SRIS_STARTRIS       0x00000002  // Start Condition Raw Interrupt
+N                                            // Status
+N#define I2C_SRIS_DATARIS        0x00000001  // Data Raw Interrupt Status
+N
+N//*****************************************************************************
+N//
+N// The following are defines for the bit fields in the I2C_O_SMIS register.
+N//
+N//*****************************************************************************
+N#define I2C_SMIS_RXFFMIS        0x00000100  // Receive FIFO Full Interrupt Mask
+N#define I2C_SMIS_TXFEMIS        0x00000080  // Transmit FIFO Empty Interrupt
+N                                            // Mask
+N#define I2C_SMIS_RXMIS          0x00000040  // Receive FIFO Request Interrupt
+N                                            // Mask
+N#define I2C_SMIS_TXMIS          0x00000020  // Transmit FIFO Request Interrupt
+N                                            // Mask
+N#define I2C_SMIS_DMATXMIS       0x00000010  // Transmit DMA Masked Interrupt
+N                                            // Status
+N#define I2C_SMIS_DMARXMIS       0x00000008  // Receive DMA Masked Interrupt
+N                                            // Status
+N#define I2C_SMIS_STOPMIS        0x00000004  // Stop Condition Masked Interrupt
+N                                            // Status
+N#define I2C_SMIS_STARTMIS       0x00000002  // Start Condition Masked Interrupt
+N                                            // Status
+N#define I2C_SMIS_DATAMIS        0x00000001  // Data Masked Interrupt Status
+N
+N//*****************************************************************************
+N//
+N// The following are defines for the bit fields in the I2C_O_SICR register.
+N//
+N//*****************************************************************************
+N#define I2C_SICR_RXFFIC         0x00000100  // Receive FIFO Full Interrupt Mask
+N#define I2C_SICR_TXFEIC         0x00000080  // Transmit FIFO Empty Interrupt
+N                                            // Mask
+N#define I2C_SICR_RXIC           0x00000040  // Receive Request Interrupt Mask
+N#define I2C_SICR_TXIC           0x00000020  // Transmit Request Interrupt Mask
+N#define I2C_SICR_DMATXIC        0x00000010  // Transmit DMA Interrupt Clear
+N#define I2C_SICR_DMARXIC        0x00000008  // Receive DMA Interrupt Clear
+N#define I2C_SICR_STOPIC         0x00000004  // Stop Condition Interrupt Clear
+N#define I2C_SICR_STARTIC        0x00000002  // Start Condition Interrupt Clear
+N#define I2C_SICR_DATAIC         0x00000001  // Data Interrupt Clear
+N
+N//*****************************************************************************
+N//
+N// The following are defines for the bit fields in the I2C_O_SOAR2 register.
+N//
+N//*****************************************************************************
+N#define I2C_SOAR2_OAR2EN        0x00000080  // I2C Slave Own Address 2 Enable
+N#define I2C_SOAR2_OAR2_M        0x0000007F  // I2C Slave Own Address 2
+N#define I2C_SOAR2_OAR2_S        0
+N
+N//*****************************************************************************
+N//
+N// The following are defines for the bit fields in the I2C_O_SACKCTL register.
+N//
+N//*****************************************************************************
+N#define I2C_SACKCTL_ACKOVAL     0x00000002  // I2C Slave ACK Override Value
+N#define I2C_SACKCTL_ACKOEN      0x00000001  // I2C Slave ACK Override Enable
+N
+N//*****************************************************************************
+N//
+N// The following are defines for the bit fields in the I2C_O_FIFODATA register.
+N//
+N//*****************************************************************************
+N#define I2C_FIFODATA_DATA_M     0x000000FF  // I2C TX FIFO Write Data Byte
+N#define I2C_FIFODATA_DATA_S     0
+N
+N//*****************************************************************************
+N//
+N// The following are defines for the bit fields in the I2C_O_FIFOCTL register.
+N//
+N//*****************************************************************************
+N#define I2C_FIFOCTL_RXASGNMT    0x80000000  // RX Control Assignment
+N#define I2C_FIFOCTL_RXFLUSH     0x40000000  // RX FIFO Flush
+N#define I2C_FIFOCTL_DMARXENA    0x20000000  // DMA RX Channel Enable
+N#define I2C_FIFOCTL_RXTRIG_M    0x00070000  // RX FIFO Trigger
+N#define I2C_FIFOCTL_TXASGNMT    0x00008000  // TX Control Assignment
+N#define I2C_FIFOCTL_TXFLUSH     0x00004000  // TX FIFO Flush
+N#define I2C_FIFOCTL_DMATXENA    0x00002000  // DMA TX Channel Enable
+N#define I2C_FIFOCTL_TXTRIG_M    0x00000007  // TX FIFO Trigger
+N#define I2C_FIFOCTL_RXTRIG_S    16
+N#define I2C_FIFOCTL_TXTRIG_S    0
+N
+N//*****************************************************************************
+N//
+N// The following are defines for the bit fields in the I2C_O_FIFOSTATUS
+N// register.
+N//
+N//*****************************************************************************
+N#define I2C_FIFOSTATUS_RXABVTRIG                                              \
+N                                0x00040000  // RX FIFO Above Trigger Level
+X#define I2C_FIFOSTATUS_RXABVTRIG                                                                              0x00040000  
+N#define I2C_FIFOSTATUS_RXFF     0x00020000  // RX FIFO Full
+N#define I2C_FIFOSTATUS_RXFE     0x00010000  // RX FIFO Empty
+N#define I2C_FIFOSTATUS_TXBLWTRIG                                              \
+N                                0x00000004  // TX FIFO Below Trigger Level
+X#define I2C_FIFOSTATUS_TXBLWTRIG                                                                              0x00000004  
+N#define I2C_FIFOSTATUS_TXFF     0x00000002  // TX FIFO Full
+N#define I2C_FIFOSTATUS_TXFE     0x00000001  // TX FIFO Empty
+N
+N//*****************************************************************************
+N//
+N// The following are defines for the bit fields in the I2C_O_PP register.
+N//
+N//*****************************************************************************
+N#define I2C_PP_HS               0x00000001  // High-Speed Capable
+N
+N//*****************************************************************************
+N//
+N// The following are defines for the bit fields in the I2C_O_PC register.
+N//
+N//*****************************************************************************
+N#define I2C_PC_HS               0x00000001  // High-Speed Capable
+N
+N#endif // __HW_I2C_H__
+L 106 "project.c" 2
+N#include "inc/hw_ints.h"
+L 1 "inc/hw_ints.h" 1
+N//*****************************************************************************
+N//
+N// hw_ints.h - Macros that define the interrupt assignment on Tiva C Series
+N// MCUs.
+N//
+N// Copyright (c) 2005-2017 Texas Instruments Incorporated.  All rights reserved.
+N// Software License Agreement
+N// 
+N//   Redistribution and use in source and binary forms, with or without
+N//   modification, are permitted provided that the following conditions
+N//   are met:
+N// 
+N//   Redistributions of source code must retain the above copyright
+N//   notice, this list of conditions and the following disclaimer.
+N// 
+N//   Redistributions in binary form must reproduce the above copyright
+N//   notice, this list of conditions and the following disclaimer in the
+N//   documentation and/or other materials provided with the  
+N//   distribution.
+N// 
+N//   Neither the name of Texas Instruments Incorporated nor the names of
+N//   its contributors may be used to endorse or promote products derived
+N//   from this software without specific prior written permission.
+N// 
+N// THIS SOFTWARE IS PROVIDED BY THE COPYRIGHT HOLDERS AND CONTRIBUTORS
+N// "AS IS" AND ANY EXPRESS OR IMPLIED WARRANTIES, INCLUDING, BUT NOT
+N// LIMITED TO, THE IMPLIED WARRANTIES OF MERCHANTABILITY AND FITNESS FOR
+N// A PARTICULAR PURPOSE ARE DISCLAIMED. IN NO EVENT SHALL THE COPYRIGHT
+N// OWNER OR CONTRIBUTORS BE LIABLE FOR ANY DIRECT, INDIRECT, INCIDENTAL,
+N// SPECIAL, EXEMPLARY, OR CONSEQUENTIAL DAMAGES (INCLUDING, BUT NOT
+N// LIMITED TO, PROCUREMENT OF SUBSTITUTE GOODS OR SERVICES; LOSS OF USE,
+N// DATA, OR PROFITS; OR BUSINESS INTERRUPTION) HOWEVER CAUSED AND ON ANY
+N// THEORY OF LIABILITY, WHETHER IN CONTRACT, STRICT LIABILITY, OR TORT
+N// (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE
+N// OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
+N// 
+N// This is part of revision 2.1.4.178 of the Tiva Firmware Development Package.
+N//
+N//*****************************************************************************
+N
+N#ifndef __HW_INTS_H__
+N#define __HW_INTS_H__
+N
+N//*****************************************************************************
+N//
+N// The following are defines for the fault assignments.
+N//
+N//*****************************************************************************
+N#define FAULT_NMI               2           // NMI fault
+N#define FAULT_HARD              3           // Hard fault
+N#define FAULT_MPU               4           // MPU fault
+N#define FAULT_BUS               5           // Bus fault
+N#define FAULT_USAGE             6           // Usage fault
+N#define FAULT_SVCALL            11          // SVCall
+N#define FAULT_DEBUG             12          // Debug monitor
+N#define FAULT_PENDSV            14          // PendSV
+N#define FAULT_SYSTICK           15          // System Tick
+N
+N//*****************************************************************************
+N//
+N// TM4C123 Class Interrupts
+N//
+N//*****************************************************************************
+N#define INT_GPIOA_TM4C123       16          // GPIO Port A
+N#define INT_GPIOB_TM4C123       17          // GPIO Port B
+N#define INT_GPIOC_TM4C123       18          // GPIO Port C
+N#define INT_GPIOD_TM4C123       19          // GPIO Port D
+N#define INT_GPIOE_TM4C123       20          // GPIO Port E
+N#define INT_UART0_TM4C123       21          // UART0
+N#define INT_UART1_TM4C123       22          // UART1
+N#define INT_SSI0_TM4C123        23          // SSI0
+N#define INT_I2C0_TM4C123        24          // I2C0
+N#define INT_PWM0_FAULT_TM4C123  25          // PWM0 Fault
+N#define INT_PWM0_0_TM4C123      26          // PWM0 Generator 0
+N#define INT_PWM0_1_TM4C123      27          // PWM0 Generator 1
+N#define INT_PWM0_2_TM4C123      28          // PWM0 Generator 2
+N#define INT_QEI0_TM4C123        29          // QEI0
+N#define INT_ADC0SS0_TM4C123     30          // ADC0 Sequence 0
+N#define INT_ADC0SS1_TM4C123     31          // ADC0 Sequence 1
+N#define INT_ADC0SS2_TM4C123     32          // ADC0 Sequence 2
+N#define INT_ADC0SS3_TM4C123     33          // ADC0 Sequence 3
+N#define INT_WATCHDOG_TM4C123    34          // Watchdog Timers 0 and 1
+N#define INT_TIMER0A_TM4C123     35          // 16/32-Bit Timer 0A
+N#define INT_TIMER0B_TM4C123     36          // 16/32-Bit Timer 0B
+N#define INT_TIMER1A_TM4C123     37          // 16/32-Bit Timer 1A
+N#define INT_TIMER1B_TM4C123     38          // 16/32-Bit Timer 1B
+N#define INT_TIMER2A_TM4C123     39          // 16/32-Bit Timer 2A
+N#define INT_TIMER2B_TM4C123     40          // 16/32-Bit Timer 2B
+N#define INT_COMP0_TM4C123       41          // Analog Comparator 0
+N#define INT_COMP1_TM4C123       42          // Analog Comparator 1
+N#define INT_COMP2_TM4C123       43          // Analog Comparator 2
+N#define INT_SYSCTL_TM4C123      44          // System Control
+N#define INT_FLASH_TM4C123       45          // Flash Memory Control and EEPROM
+N                                            // Control
+N#define INT_GPIOF_TM4C123       46          // GPIO Port F
+N#define INT_GPIOG_TM4C123       47          // GPIO Port G
+N#define INT_GPIOH_TM4C123       48          // GPIO Port H
+N#define INT_UART2_TM4C123       49          // UART2
+N#define INT_SSI1_TM4C123        50          // SSI1
+N#define INT_TIMER3A_TM4C123     51          // 16/32-Bit Timer 3A
+N#define INT_TIMER3B_TM4C123     52          // Timer 3B
+N#define INT_I2C1_TM4C123        53          // I2C1
+N#define INT_QEI1_TM4C123        54          // QEI1
+N#define INT_CAN0_TM4C123        55          // CAN0
+N#define INT_CAN1_TM4C123        56          // CAN1
+N#define INT_HIBERNATE_TM4C123   59          // Hibernation Module
+N#define INT_USB0_TM4C123        60          // USB
+N#define INT_PWM0_3_TM4C123      61          // PWM Generator 3
+N#define INT_UDMA_TM4C123        62          // uDMA Software
+N#define INT_UDMAERR_TM4C123     63          // uDMA Error
+N#define INT_ADC1SS0_TM4C123     64          // ADC1 Sequence 0
+N#define INT_ADC1SS1_TM4C123     65          // ADC1 Sequence 1
+N#define INT_ADC1SS2_TM4C123     66          // ADC1 Sequence 2
+N#define INT_ADC1SS3_TM4C123     67          // ADC1 Sequence 3
+N#define INT_GPIOJ_TM4C123       70          // GPIO Port J
+N#define INT_GPIOK_TM4C123       71          // GPIO Port K
+N#define INT_GPIOL_TM4C123       72          // GPIO Port L
+N#define INT_SSI2_TM4C123        73          // SSI2
+N#define INT_SSI3_TM4C123        74          // SSI3
+N#define INT_UART3_TM4C123       75          // UART3
+N#define INT_UART4_TM4C123       76          // UART4
+N#define INT_UART5_TM4C123       77          // UART5
+N#define INT_UART6_TM4C123       78          // UART6
+N#define INT_UART7_TM4C123       79          // UART7
+N#define INT_I2C2_TM4C123        84          // I2C2
+N#define INT_I2C3_TM4C123        85          // I2C3
+N#define INT_TIMER4A_TM4C123     86          // 16/32-Bit Timer 4A
+N#define INT_TIMER4B_TM4C123     87          // 16/32-Bit Timer 4B
+N#define INT_TIMER5A_TM4C123     108         // 16/32-Bit Timer 5A
+N#define INT_TIMER5B_TM4C123     109         // 16/32-Bit Timer 5B
+N#define INT_WTIMER0A_TM4C123    110         // 32/64-Bit Timer 0A
+N#define INT_WTIMER0B_TM4C123    111         // 32/64-Bit Timer 0B
+N#define INT_WTIMER1A_TM4C123    112         // 32/64-Bit Timer 1A
+N#define INT_WTIMER1B_TM4C123    113         // 32/64-Bit Timer 1B
+N#define INT_WTIMER2A_TM4C123    114         // 32/64-Bit Timer 2A
+N#define INT_WTIMER2B_TM4C123    115         // 32/64-Bit Timer 2B
+N#define INT_WTIMER3A_TM4C123    116         // 32/64-Bit Timer 3A
+N#define INT_WTIMER3B_TM4C123    117         // 32/64-Bit Timer 3B
+N#define INT_WTIMER4A_TM4C123    118         // 32/64-Bit Timer 4A
+N#define INT_WTIMER4B_TM4C123    119         // 32/64-Bit Timer 4B
+N#define INT_WTIMER5A_TM4C123    120         // 32/64-Bit Timer 5A
+N#define INT_WTIMER5B_TM4C123    121         // 32/64-Bit Timer 5B
+N#define INT_SYSEXC_TM4C123      122         // System Exception (imprecise)
+N#define INT_I2C4_TM4C123        125         // I2C4
+N#define INT_I2C5_TM4C123        126         // I2C5
+N#define INT_GPIOM_TM4C123       127         // GPIO Port M
+N#define INT_GPION_TM4C123       128         // GPIO Port N
+N#define INT_GPIOP0_TM4C123      132         // GPIO Port P (Summary or P0)
+N#define INT_GPIOP1_TM4C123      133         // GPIO Port P1
+N#define INT_GPIOP2_TM4C123      134         // GPIO Port P2
+N#define INT_GPIOP3_TM4C123      135         // GPIO Port P3
+N#define INT_GPIOP4_TM4C123      136         // GPIO Port P4
+N#define INT_GPIOP5_TM4C123      137         // GPIO Port P5
+N#define INT_GPIOP6_TM4C123      138         // GPIO Port P6
+N#define INT_GPIOP7_TM4C123      139         // GPIO Port P7
+N#define INT_GPIOQ0_TM4C123      140         // GPIO Port Q (Summary or Q0)
+N#define INT_GPIOQ1_TM4C123      141         // GPIO Port Q1
+N#define INT_GPIOQ2_TM4C123      142         // GPIO Port Q2
+N#define INT_GPIOQ3_TM4C123      143         // GPIO Port Q3
+N#define INT_GPIOQ4_TM4C123      144         // GPIO Port Q4
+N#define INT_GPIOQ5_TM4C123      145         // GPIO Port Q5
+N#define INT_GPIOQ6_TM4C123      146         // GPIO Port Q6
+N#define INT_GPIOQ7_TM4C123      147         // GPIO Port Q7
+N#define INT_PWM1_0_TM4C123      150         // PWM1 Generator 0
+N#define INT_PWM1_1_TM4C123      151         // PWM1 Generator 1
+N#define INT_PWM1_2_TM4C123      152         // PWM1 Generator 2
+N#define INT_PWM1_3_TM4C123      153         // PWM1 Generator 3
+N#define INT_PWM1_FAULT_TM4C123  154         // PWM1 Fault
+N#define NUM_INTERRUPTS_TM4C123  155
+N
+N//*****************************************************************************
+N//
+N// TM4C129 Class Interrupts
+N//
+N//*****************************************************************************
+N#define INT_GPIOA_TM4C129       16          // GPIO Port A
+N#define INT_GPIOB_TM4C129       17          // GPIO Port B
+N#define INT_GPIOC_TM4C129       18          // GPIO Port C
+N#define INT_GPIOD_TM4C129       19          // GPIO Port D
+N#define INT_GPIOE_TM4C129       20          // GPIO Port E
+N#define INT_UART0_TM4C129       21          // UART0
+N#define INT_UART1_TM4C129       22          // UART1
+N#define INT_SSI0_TM4C129        23          // SSI0
+N#define INT_I2C0_TM4C129        24          // I2C0
+N#define INT_PWM0_FAULT_TM4C129  25          // PWM Fault
+N#define INT_PWM0_0_TM4C129      26          // PWM Generator 0
+N#define INT_PWM0_1_TM4C129      27          // PWM Generator 1
+N#define INT_PWM0_2_TM4C129      28          // PWM Generator 2
+N#define INT_QEI0_TM4C129        29          // QEI0
+N#define INT_ADC0SS0_TM4C129     30          // ADC0 Sequence 0
+N#define INT_ADC0SS1_TM4C129     31          // ADC0 Sequence 1
+N#define INT_ADC0SS2_TM4C129     32          // ADC0 Sequence 2
+N#define INT_ADC0SS3_TM4C129     33          // ADC0 Sequence 3
+N#define INT_WATCHDOG_TM4C129    34          // Watchdog Timers 0 and 1
+N#define INT_TIMER0A_TM4C129     35          // 16/32-Bit Timer 0A
+N#define INT_TIMER0B_TM4C129     36          // 16/32-Bit Timer 0B
+N#define INT_TIMER1A_TM4C129     37          // 16/32-Bit Timer 1A
+N#define INT_TIMER1B_TM4C129     38          // 16/32-Bit Timer 1B
+N#define INT_TIMER2A_TM4C129     39          // 16/32-Bit Timer 2A
+N#define INT_TIMER2B_TM4C129     40          // 16/32-Bit Timer 2B
+N#define INT_COMP0_TM4C129       41          // Analog Comparator 0
+N#define INT_COMP1_TM4C129       42          // Analog Comparator 1
+N#define INT_COMP2_TM4C129       43          // Analog Comparator 2
+N#define INT_SYSCTL_TM4C129      44          // System Control
+N#define INT_FLASH_TM4C129       45          // Flash Memory Control
+N#define INT_GPIOF_TM4C129       46          // GPIO Port F
+N#define INT_GPIOG_TM4C129       47          // GPIO Port G
+N#define INT_GPIOH_TM4C129       48          // GPIO Port H
+N#define INT_UART2_TM4C129       49          // UART2
+N#define INT_SSI1_TM4C129        50          // SSI1
+N#define INT_TIMER3A_TM4C129     51          // 16/32-Bit Timer 3A
+N#define INT_TIMER3B_TM4C129     52          // 16/32-Bit Timer 3B
+N#define INT_I2C1_TM4C129        53          // I2C1
+N#define INT_CAN0_TM4C129        54          // CAN 0
+N#define INT_CAN1_TM4C129        55          // CAN1
+N#define INT_EMAC0_TM4C129       56          // Ethernet MAC
+N#define INT_HIBERNATE_TM4C129   57          // HIB
+N#define INT_USB0_TM4C129        58          // USB MAC
+N#define INT_PWM0_3_TM4C129      59          // PWM Generator 3
+N#define INT_UDMA_TM4C129        60          // uDMA 0 Software
+N#define INT_UDMAERR_TM4C129     61          // uDMA 0 Error
+N#define INT_ADC1SS0_TM4C129     62          // ADC1 Sequence 0
+N#define INT_ADC1SS1_TM4C129     63          // ADC1 Sequence 1
+N#define INT_ADC1SS2_TM4C129     64          // ADC1 Sequence 2
+N#define INT_ADC1SS3_TM4C129     65          // ADC1 Sequence 3
+N#define INT_EPI0_TM4C129        66          // EPI 0
+N#define INT_GPIOJ_TM4C129       67          // GPIO Port J
+N#define INT_GPIOK_TM4C129       68          // GPIO Port K
+N#define INT_GPIOL_TM4C129       69          // GPIO Port L
+N#define INT_SSI2_TM4C129        70          // SSI 2
+N#define INT_SSI3_TM4C129        71          // SSI 3
+N#define INT_UART3_TM4C129       72          // UART 3
+N#define INT_UART4_TM4C129       73          // UART 4
+N#define INT_UART5_TM4C129       74          // UART 5
+N#define INT_UART6_TM4C129       75          // UART 6
+N#define INT_UART7_TM4C129       76          // UART 7
+N#define INT_I2C2_TM4C129        77          // I2C 2
+N#define INT_I2C3_TM4C129        78          // I2C 3
+N#define INT_TIMER4A_TM4C129     79          // Timer 4A
+N#define INT_TIMER4B_TM4C129     80          // Timer 4B
+N#define INT_TIMER5A_TM4C129     81          // Timer 5A
+N#define INT_TIMER5B_TM4C129     82          // Timer 5B
+N#define INT_SYSEXC_TM4C129      83          // Floating-Point Exception
+N                                            // (imprecise)
+N#define INT_I2C4_TM4C129        86          // I2C 4
+N#define INT_I2C5_TM4C129        87          // I2C 5
+N#define INT_GPIOM_TM4C129       88          // GPIO Port M
+N#define INT_GPION_TM4C129       89          // GPIO Port N
+N#define INT_TAMPER0_TM4C129     91          // Tamper
+N#define INT_GPIOP0_TM4C129      92          // GPIO Port P (Summary or P0)
+N#define INT_GPIOP1_TM4C129      93          // GPIO Port P1
+N#define INT_GPIOP2_TM4C129      94          // GPIO Port P2
+N#define INT_GPIOP3_TM4C129      95          // GPIO Port P3
+N#define INT_GPIOP4_TM4C129      96          // GPIO Port P4
+N#define INT_GPIOP5_TM4C129      97          // GPIO Port P5
+N#define INT_GPIOP6_TM4C129      98          // GPIO Port P6
+N#define INT_GPIOP7_TM4C129      99          // GPIO Port P7
+N#define INT_GPIOQ0_TM4C129      100         // GPIO Port Q (Summary or Q0)
+N#define INT_GPIOQ1_TM4C129      101         // GPIO Port Q1
+N#define INT_GPIOQ2_TM4C129      102         // GPIO Port Q2
+N#define INT_GPIOQ3_TM4C129      103         // GPIO Port Q3
+N#define INT_GPIOQ4_TM4C129      104         // GPIO Port Q4
+N#define INT_GPIOQ5_TM4C129      105         // GPIO Port Q5
+N#define INT_GPIOQ6_TM4C129      106         // GPIO Port Q6
+N#define INT_GPIOQ7_TM4C129      107         // GPIO Port Q7
+N#define INT_GPIOR_TM4C129       108         // GPIO Port R
+N#define INT_GPIOS_TM4C129       109         // GPIO Port S
+N#define INT_SHA0_TM4C129        110         // SHA/MD5
+N#define INT_AES0_TM4C129        111         // AES
+N#define INT_DES0_TM4C129        112         // DES
+N#define INT_LCD0_TM4C129        113         // LCD
+N#define INT_TIMER6A_TM4C129     114         // 16/32-Bit Timer 6A
+N#define INT_TIMER6B_TM4C129     115         // 16/32-Bit Timer 6B
+N#define INT_TIMER7A_TM4C129     116         // 16/32-Bit Timer 7A
+N#define INT_TIMER7B_TM4C129     117         // 16/32-Bit Timer 7B
+N#define INT_I2C6_TM4C129        118         // I2C 6
+N#define INT_I2C7_TM4C129        119         // I2C 7
+N#define INT_ONEWIRE0_TM4C129    121         // 1-Wire
+N#define INT_I2C8_TM4C129        125         // I2C 8
+N#define INT_I2C9_TM4C129        126         // I2C 9
+N#define INT_GPIOT_TM4C129       127         // GPIO T
+N#define NUM_INTERRUPTS_TM4C129  129
+N
+N//*****************************************************************************
+N//
+N// TM4C123 Interrupt Class Definition
+N//
+N//*****************************************************************************
+N#if defined(TARGET_IS_TM4C123_RA1) || defined(TARGET_IS_TM4C123_RA2) || \
+N    defined(TARGET_IS_TM4C123_RA3) || defined(TARGET_IS_TM4C123_RB0) || \
+N    defined(TARGET_IS_TM4C123_RB1) || defined(PART_TM4C1230C3PM) || \
+N    defined(PART_TM4C1230D5PM) || defined(PART_TM4C1230E6PM) || \
+N    defined(PART_TM4C1230H6PM) || defined(PART_TM4C1231C3PM) || \
+N    defined(PART_TM4C1231D5PM) || defined(PART_TM4C1231D5PZ) || \
+N    defined(PART_TM4C1231E6PM) || defined(PART_TM4C1231E6PZ) || \
+N    defined(PART_TM4C1231H6PM) || defined(PART_TM4C1231H6PZ) || \
+N    defined(PART_TM4C1232C3PM) || defined(PART_TM4C1232D5PM) || \
+N    defined(PART_TM4C1232E6PM) || defined(PART_TM4C1232H6PM) || \
+N    defined(PART_TM4C1233C3PM) || defined(PART_TM4C1233D5PM) || \
+N    defined(PART_TM4C1233D5PZ) || defined(PART_TM4C1233E6PM) || \
+N    defined(PART_TM4C1233E6PZ) || defined(PART_TM4C1233H6PM) || \
+N    defined(PART_TM4C1233H6PZ) || defined(PART_TM4C1236D5PM) || \
+N    defined(PART_TM4C1236E6PM) || defined(PART_TM4C1236H6PM) || \
+N    defined(PART_TM4C1237D5PM) || defined(PART_TM4C1237D5PZ) || \
+N    defined(PART_TM4C1237E6PM) || defined(PART_TM4C1237E6PZ) || \
+N    defined(PART_TM4C1237H6PM) || defined(PART_TM4C1237H6PZ) || \
+N    defined(PART_TM4C123AE6PM) || defined(PART_TM4C123AH6PM) || \
+N    defined(PART_TM4C123BE6PM) || defined(PART_TM4C123BE6PZ) || \
+N    defined(PART_TM4C123BH6PM) || defined(PART_TM4C123BH6PZ) || \
+N    defined(PART_TM4C123FE6PM) || defined(PART_TM4C123FH6PM) || \
+N    defined(PART_TM4C123GE6PM) || defined(PART_TM4C123GE6PZ) || \
+N    defined(PART_TM4C123GH6PM) || defined(PART_TM4C123GH6PZ) || \
+N    defined(PART_TM4C1231H6PGE) || defined(PART_TM4C1233H6PGE) || \
+N    defined(PART_TM4C1237H6PGE) || defined(PART_TM4C123BH6PGE) || \
+N    defined(PART_TM4C123BH6ZRB) || defined(PART_TM4C123GH6PGE) || \
+N    defined(PART_TM4C123GH6ZRB) || defined(PART_TM4C123GH6ZXR)
+X#if 0L || 0L ||     0L || 0L ||     1L || 0L ||     0L || 0L ||     0L || 0L ||     0L || 0L ||     0L || 0L ||     0L || 0L ||     0L || 0L ||     0L || 0L ||     0L || 0L ||     0L || 0L ||     0L || 0L ||     0L || 0L ||     0L || 0L ||     0L || 0L ||     0L || 0L ||     0L || 0L ||     0L || 0L ||     0L || 0L ||     0L || 0L ||     0L || 0L ||     0L || 0L ||     1L || 0L ||     0L || 0L ||     0L || 0L ||     0L || 0L ||     0L || 0L
+N#define INT_RESOLVE(intname, class) intname##TM4C123
+N
+N//*****************************************************************************
+N//
+N// TM4C129 Interrupt Class Definition
+N//
+N//*****************************************************************************
+N#elif defined(TARGET_IS_TM4C129_RA0) || defined(PART_TM4C1290NCPDT) || \
+N    defined(PART_TM4C1290NCZAD) || defined(PART_TM4C1292NCPDT) || \
+N    defined(PART_TM4C1292NCZAD) || defined(PART_TM4C1294KCPDT) || \
+N    defined(PART_TM4C1294NCPDT) || defined(PART_TM4C1294NCZAD) || \
+N    defined(PART_TM4C1297NCZAD) || defined(PART_TM4C1299KCZAD) || \
+N    defined(PART_TM4C1299NCZAD) || defined(PART_TM4C129CNCPDT) || \
+N    defined(PART_TM4C129CNCZAD) || defined(PART_TM4C129DNCPDT) || \
+N    defined(PART_TM4C129DNCZAD) || defined(PART_TM4C129EKCPDT) || \
+N    defined(PART_TM4C129ENCPDT) || defined(PART_TM4C129ENCZAD) || \
+N    defined(PART_TM4C129LNCZAD) || defined(PART_TM4C129XKCZAD) || \
+N    defined(PART_TM4C129XNCZAD)
+X#elif defined(TARGET_IS_TM4C129_RA0) || defined(PART_TM4C1290NCPDT) ||     defined(PART_TM4C1290NCZAD) || defined(PART_TM4C1292NCPDT) ||     defined(PART_TM4C1292NCZAD) || defined(PART_TM4C1294KCPDT) ||     defined(PART_TM4C1294NCPDT) || defined(PART_TM4C1294NCZAD) ||     defined(PART_TM4C1297NCZAD) || defined(PART_TM4C1299KCZAD) ||     defined(PART_TM4C1299NCZAD) || defined(PART_TM4C129CNCPDT) ||     defined(PART_TM4C129CNCZAD) || defined(PART_TM4C129DNCPDT) ||     defined(PART_TM4C129DNCZAD) || defined(PART_TM4C129EKCPDT) ||     defined(PART_TM4C129ENCPDT) || defined(PART_TM4C129ENCZAD) ||     defined(PART_TM4C129LNCZAD) || defined(PART_TM4C129XKCZAD) ||     defined(PART_TM4C129XNCZAD)
+S#define INT_RESOLVE(intname, class) intname##TM4C129
+S#else
+S#define INT_DEVICE_CLASS        "UNKNOWN"
+N#endif
+N
+N//*****************************************************************************
+N//
+N// Macros to resolve the INT_PERIPH_CLASS name to a common INT_PERIPH name.
+N//
+N//*****************************************************************************
+N#define INT_CONCAT(intname, class)  INT_RESOLVE(intname, class)
+N
+N//*****************************************************************************
+N//
+N// The following are defines for the interrupt assignments.
+N//
+N//*****************************************************************************
+W "inc/hw_ints.h" 352 9 incompatible redefinition of macro "INT_ADC0SS0"  (declared at line 62 of ".\inc\tm4c123gh6pm.h")
+N#define INT_ADC0SS0             INT_CONCAT(INT_ADC0SS0_, INT_DEVICE_CLASS)
+W "inc/hw_ints.h" 353 9 incompatible redefinition of macro "INT_ADC0SS1"  (declared at line 63 of ".\inc\tm4c123gh6pm.h")
+N#define INT_ADC0SS1             INT_CONCAT(INT_ADC0SS1_, INT_DEVICE_CLASS)
+W "inc/hw_ints.h" 354 9 incompatible redefinition of macro "INT_ADC0SS2"  (declared at line 64 of ".\inc\tm4c123gh6pm.h")
+N#define INT_ADC0SS2             INT_CONCAT(INT_ADC0SS2_, INT_DEVICE_CLASS)
+W "inc/hw_ints.h" 355 9 incompatible redefinition of macro "INT_ADC0SS3"  (declared at line 65 of ".\inc\tm4c123gh6pm.h")
+N#define INT_ADC0SS3             INT_CONCAT(INT_ADC0SS3_, INT_DEVICE_CLASS)
+W "inc/hw_ints.h" 356 9 incompatible redefinition of macro "INT_ADC1SS0"  (declared at line 92 of ".\inc\tm4c123gh6pm.h")
+N#define INT_ADC1SS0             INT_CONCAT(INT_ADC1SS0_, INT_DEVICE_CLASS)
+W "inc/hw_ints.h" 357 9 incompatible redefinition of macro "INT_ADC1SS1"  (declared at line 93 of ".\inc\tm4c123gh6pm.h")
+N#define INT_ADC1SS1             INT_CONCAT(INT_ADC1SS1_, INT_DEVICE_CLASS)
+W "inc/hw_ints.h" 358 9 incompatible redefinition of macro "INT_ADC1SS2"  (declared at line 94 of ".\inc\tm4c123gh6pm.h")
+N#define INT_ADC1SS2             INT_CONCAT(INT_ADC1SS2_, INT_DEVICE_CLASS)
+W "inc/hw_ints.h" 359 9 incompatible redefinition of macro "INT_ADC1SS3"  (declared at line 95 of ".\inc\tm4c123gh6pm.h")
+N#define INT_ADC1SS3             INT_CONCAT(INT_ADC1SS3_, INT_DEVICE_CLASS)
+N#define INT_AES0                INT_CONCAT(INT_AES0_, INT_DEVICE_CLASS)
+W "inc/hw_ints.h" 361 9 incompatible redefinition of macro "INT_CAN0"  (declared at line 85 of ".\inc\tm4c123gh6pm.h")
+N#define INT_CAN0                INT_CONCAT(INT_CAN0_, INT_DEVICE_CLASS)
+W "inc/hw_ints.h" 362 9 incompatible redefinition of macro "INT_CAN1"  (declared at line 86 of ".\inc\tm4c123gh6pm.h")
+N#define INT_CAN1                INT_CONCAT(INT_CAN1_, INT_DEVICE_CLASS)
+W "inc/hw_ints.h" 363 9 incompatible redefinition of macro "INT_COMP0"  (declared at line 73 of ".\inc\tm4c123gh6pm.h")
+N#define INT_COMP0               INT_CONCAT(INT_COMP0_, INT_DEVICE_CLASS)
+W "inc/hw_ints.h" 364 9 incompatible redefinition of macro "INT_COMP1"  (declared at line 74 of ".\inc\tm4c123gh6pm.h")
+N#define INT_COMP1               INT_CONCAT(INT_COMP1_, INT_DEVICE_CLASS)
+N#define INT_COMP2               INT_CONCAT(INT_COMP2_, INT_DEVICE_CLASS)
+N#define INT_DES0                INT_CONCAT(INT_DES0_, INT_DEVICE_CLASS)
+N#define INT_EMAC0               INT_CONCAT(INT_EMAC0_, INT_DEVICE_CLASS)
+N#define INT_EPI0                INT_CONCAT(INT_EPI0_, INT_DEVICE_CLASS)
+W "inc/hw_ints.h" 369 9 incompatible redefinition of macro "INT_FLASH"  (declared at line 76 of ".\inc\tm4c123gh6pm.h")
+N#define INT_FLASH               INT_CONCAT(INT_FLASH_, INT_DEVICE_CLASS)
+W "inc/hw_ints.h" 370 9 incompatible redefinition of macro "INT_GPIOA"  (declared at line 48 of ".\inc\tm4c123gh6pm.h")
+N#define INT_GPIOA               INT_CONCAT(INT_GPIOA_, INT_DEVICE_CLASS)
+W "inc/hw_ints.h" 371 9 incompatible redefinition of macro "INT_GPIOB"  (declared at line 49 of ".\inc\tm4c123gh6pm.h")
+N#define INT_GPIOB               INT_CONCAT(INT_GPIOB_, INT_DEVICE_CLASS)
+W "inc/hw_ints.h" 372 9 incompatible redefinition of macro "INT_GPIOC"  (declared at line 50 of ".\inc\tm4c123gh6pm.h")
+N#define INT_GPIOC               INT_CONCAT(INT_GPIOC_, INT_DEVICE_CLASS)
+W "inc/hw_ints.h" 373 9 incompatible redefinition of macro "INT_GPIOD"  (declared at line 51 of ".\inc\tm4c123gh6pm.h")
+N#define INT_GPIOD               INT_CONCAT(INT_GPIOD_, INT_DEVICE_CLASS)
+W "inc/hw_ints.h" 374 9 incompatible redefinition of macro "INT_GPIOE"  (declared at line 52 of ".\inc\tm4c123gh6pm.h")
+N#define INT_GPIOE               INT_CONCAT(INT_GPIOE_, INT_DEVICE_CLASS)
+W "inc/hw_ints.h" 375 9 incompatible redefinition of macro "INT_GPIOF"  (declared at line 78 of ".\inc\tm4c123gh6pm.h")
+N#define INT_GPIOF               INT_CONCAT(INT_GPIOF_, INT_DEVICE_CLASS)
+N#define INT_GPIOG               INT_CONCAT(INT_GPIOG_, INT_DEVICE_CLASS)
+N#define INT_GPIOH               INT_CONCAT(INT_GPIOH_, INT_DEVICE_CLASS)
+N#define INT_GPIOJ               INT_CONCAT(INT_GPIOJ_, INT_DEVICE_CLASS)
+N#define INT_GPIOK               INT_CONCAT(INT_GPIOK_, INT_DEVICE_CLASS)
+N#define INT_GPIOL               INT_CONCAT(INT_GPIOL_, INT_DEVICE_CLASS)
+N#define INT_GPIOM               INT_CONCAT(INT_GPIOM_, INT_DEVICE_CLASS)
+N#define INT_GPION               INT_CONCAT(INT_GPION_, INT_DEVICE_CLASS)
+N#define INT_GPIOP0              INT_CONCAT(INT_GPIOP0_, INT_DEVICE_CLASS)
+N#define INT_GPIOP1              INT_CONCAT(INT_GPIOP1_, INT_DEVICE_CLASS)
+N#define INT_GPIOP2              INT_CONCAT(INT_GPIOP2_, INT_DEVICE_CLASS)
+N#define INT_GPIOP3              INT_CONCAT(INT_GPIOP3_, INT_DEVICE_CLASS)
+N#define INT_GPIOP4              INT_CONCAT(INT_GPIOP4_, INT_DEVICE_CLASS)
+N#define INT_GPIOP5              INT_CONCAT(INT_GPIOP5_, INT_DEVICE_CLASS)
+N#define INT_GPIOP6              INT_CONCAT(INT_GPIOP6_, INT_DEVICE_CLASS)
+N#define INT_GPIOP7              INT_CONCAT(INT_GPIOP7_, INT_DEVICE_CLASS)
+N#define INT_GPIOQ0              INT_CONCAT(INT_GPIOQ0_, INT_DEVICE_CLASS)
+N#define INT_GPIOQ1              INT_CONCAT(INT_GPIOQ1_, INT_DEVICE_CLASS)
+N#define INT_GPIOQ2              INT_CONCAT(INT_GPIOQ2_, INT_DEVICE_CLASS)
+N#define INT_GPIOQ3              INT_CONCAT(INT_GPIOQ3_, INT_DEVICE_CLASS)
+N#define INT_GPIOQ4              INT_CONCAT(INT_GPIOQ4_, INT_DEVICE_CLASS)
+N#define INT_GPIOQ5              INT_CONCAT(INT_GPIOQ5_, INT_DEVICE_CLASS)
+N#define INT_GPIOQ6              INT_CONCAT(INT_GPIOQ6_, INT_DEVICE_CLASS)
+N#define INT_GPIOQ7              INT_CONCAT(INT_GPIOQ7_, INT_DEVICE_CLASS)
+N#define INT_GPIOR               INT_CONCAT(INT_GPIOR_, INT_DEVICE_CLASS)
+N#define INT_GPIOS               INT_CONCAT(INT_GPIOS_, INT_DEVICE_CLASS)
+N#define INT_GPIOT               INT_CONCAT(INT_GPIOT_, INT_DEVICE_CLASS)
+W "inc/hw_ints.h" 402 9 incompatible redefinition of macro "INT_HIBERNATE"  (declared at line 87 of ".\inc\tm4c123gh6pm.h")
+N#define INT_HIBERNATE           INT_CONCAT(INT_HIBERNATE_, INT_DEVICE_CLASS)
+W "inc/hw_ints.h" 403 9 incompatible redefinition of macro "INT_I2C0"  (declared at line 56 of ".\inc\tm4c123gh6pm.h")
+N#define INT_I2C0                INT_CONCAT(INT_I2C0_, INT_DEVICE_CLASS)
+W "inc/hw_ints.h" 404 9 incompatible redefinition of macro "INT_I2C1"  (declared at line 83 of ".\inc\tm4c123gh6pm.h")
+N#define INT_I2C1                INT_CONCAT(INT_I2C1_, INT_DEVICE_CLASS)
+W "inc/hw_ints.h" 405 9 incompatible redefinition of macro "INT_I2C2"  (declared at line 103 of ".\inc\tm4c123gh6pm.h")
+N#define INT_I2C2                INT_CONCAT(INT_I2C2_, INT_DEVICE_CLASS)
+W "inc/hw_ints.h" 406 9 incompatible redefinition of macro "INT_I2C3"  (declared at line 104 of ".\inc\tm4c123gh6pm.h")
+N#define INT_I2C3                INT_CONCAT(INT_I2C3_, INT_DEVICE_CLASS)
+N#define INT_I2C4                INT_CONCAT(INT_I2C4_, INT_DEVICE_CLASS)
+N#define INT_I2C5                INT_CONCAT(INT_I2C5_, INT_DEVICE_CLASS)
+N#define INT_I2C6                INT_CONCAT(INT_I2C6_, INT_DEVICE_CLASS)
+N#define INT_I2C7                INT_CONCAT(INT_I2C7_, INT_DEVICE_CLASS)
+N#define INT_I2C8                INT_CONCAT(INT_I2C8_, INT_DEVICE_CLASS)
+N#define INT_I2C9                INT_CONCAT(INT_I2C9_, INT_DEVICE_CLASS)
+N#define INT_LCD0                INT_CONCAT(INT_LCD0_, INT_DEVICE_CLASS)
+N#define INT_ONEWIRE0            INT_CONCAT(INT_ONEWIRE0_, INT_DEVICE_CLASS)
+W "inc/hw_ints.h" 415 9 incompatible redefinition of macro "INT_PWM0_0"  (declared at line 58 of ".\inc\tm4c123gh6pm.h")
+N#define INT_PWM0_0              INT_CONCAT(INT_PWM0_0_, INT_DEVICE_CLASS)
+W "inc/hw_ints.h" 416 9 incompatible redefinition of macro "INT_PWM0_1"  (declared at line 59 of ".\inc\tm4c123gh6pm.h")
+N#define INT_PWM0_1              INT_CONCAT(INT_PWM0_1_, INT_DEVICE_CLASS)
+W "inc/hw_ints.h" 417 9 incompatible redefinition of macro "INT_PWM0_2"  (declared at line 60 of ".\inc\tm4c123gh6pm.h")
+N#define INT_PWM0_2              INT_CONCAT(INT_PWM0_2_, INT_DEVICE_CLASS)
+W "inc/hw_ints.h" 418 9 incompatible redefinition of macro "INT_PWM0_3"  (declared at line 89 of ".\inc\tm4c123gh6pm.h")
+N#define INT_PWM0_3              INT_CONCAT(INT_PWM0_3_, INT_DEVICE_CLASS)
+W "inc/hw_ints.h" 419 9 incompatible redefinition of macro "INT_PWM0_FAULT"  (declared at line 57 of ".\inc\tm4c123gh6pm.h")
+N#define INT_PWM0_FAULT          INT_CONCAT(INT_PWM0_FAULT_, INT_DEVICE_CLASS)
+W "inc/hw_ints.h" 420 9 incompatible redefinition of macro "INT_PWM1_0"  (declared at line 122 of ".\inc\tm4c123gh6pm.h")
+N#define INT_PWM1_0              INT_CONCAT(INT_PWM1_0_, INT_DEVICE_CLASS)
+W "inc/hw_ints.h" 421 9 incompatible redefinition of macro "INT_PWM1_1"  (declared at line 123 of ".\inc\tm4c123gh6pm.h")
+N#define INT_PWM1_1              INT_CONCAT(INT_PWM1_1_, INT_DEVICE_CLASS)
+W "inc/hw_ints.h" 422 9 incompatible redefinition of macro "INT_PWM1_2"  (declared at line 124 of ".\inc\tm4c123gh6pm.h")
+N#define INT_PWM1_2              INT_CONCAT(INT_PWM1_2_, INT_DEVICE_CLASS)
+W "inc/hw_ints.h" 423 9 incompatible redefinition of macro "INT_PWM1_3"  (declared at line 125 of ".\inc\tm4c123gh6pm.h")
+N#define INT_PWM1_3              INT_CONCAT(INT_PWM1_3_, INT_DEVICE_CLASS)
+W "inc/hw_ints.h" 424 9 incompatible redefinition of macro "INT_PWM1_FAULT"  (declared at line 126 of ".\inc\tm4c123gh6pm.h")
+N#define INT_PWM1_FAULT          INT_CONCAT(INT_PWM1_FAULT_, INT_DEVICE_CLASS)
+W "inc/hw_ints.h" 425 9 incompatible redefinition of macro "INT_QEI0"  (declared at line 61 of ".\inc\tm4c123gh6pm.h")
+N#define INT_QEI0                INT_CONCAT(INT_QEI0_, INT_DEVICE_CLASS)
+W "inc/hw_ints.h" 426 9 incompatible redefinition of macro "INT_QEI1"  (declared at line 84 of ".\inc\tm4c123gh6pm.h")
+N#define INT_QEI1                INT_CONCAT(INT_QEI1_, INT_DEVICE_CLASS)
+N#define INT_SHA0                INT_CONCAT(INT_SHA0_, INT_DEVICE_CLASS)
+W "inc/hw_ints.h" 428 9 incompatible redefinition of macro "INT_SSI0"  (declared at line 55 of ".\inc\tm4c123gh6pm.h")
+N#define INT_SSI0                INT_CONCAT(INT_SSI0_, INT_DEVICE_CLASS)
+W "inc/hw_ints.h" 429 9 incompatible redefinition of macro "INT_SSI1"  (declared at line 80 of ".\inc\tm4c123gh6pm.h")
+N#define INT_SSI1                INT_CONCAT(INT_SSI1_, INT_DEVICE_CLASS)
+W "inc/hw_ints.h" 430 9 incompatible redefinition of macro "INT_SSI2"  (declared at line 96 of ".\inc\tm4c123gh6pm.h")
+N#define INT_SSI2                INT_CONCAT(INT_SSI2_, INT_DEVICE_CLASS)
+W "inc/hw_ints.h" 431 9 incompatible redefinition of macro "INT_SSI3"  (declared at line 97 of ".\inc\tm4c123gh6pm.h")
+N#define INT_SSI3                INT_CONCAT(INT_SSI3_, INT_DEVICE_CLASS)
+W "inc/hw_ints.h" 432 9 incompatible redefinition of macro "INT_SYSCTL"  (declared at line 75 of ".\inc\tm4c123gh6pm.h")
+N#define INT_SYSCTL              INT_CONCAT(INT_SYSCTL_, INT_DEVICE_CLASS)
+W "inc/hw_ints.h" 433 9 incompatible redefinition of macro "INT_SYSEXC"  (declared at line 121 of ".\inc\tm4c123gh6pm.h")
+N#define INT_SYSEXC              INT_CONCAT(INT_SYSEXC_, INT_DEVICE_CLASS)
+N#define INT_TAMPER0             INT_CONCAT(INT_TAMPER0_, INT_DEVICE_CLASS)
+W "inc/hw_ints.h" 435 9 incompatible redefinition of macro "INT_TIMER0A"  (declared at line 67 of ".\inc\tm4c123gh6pm.h")
+N#define INT_TIMER0A             INT_CONCAT(INT_TIMER0A_, INT_DEVICE_CLASS)
+W "inc/hw_ints.h" 436 9 incompatible redefinition of macro "INT_TIMER0B"  (declared at line 68 of ".\inc\tm4c123gh6pm.h")
+N#define INT_TIMER0B             INT_CONCAT(INT_TIMER0B_, INT_DEVICE_CLASS)
+W "inc/hw_ints.h" 437 9 incompatible redefinition of macro "INT_TIMER1A"  (declared at line 69 of ".\inc\tm4c123gh6pm.h")
+N#define INT_TIMER1A             INT_CONCAT(INT_TIMER1A_, INT_DEVICE_CLASS)
+W "inc/hw_ints.h" 438 9 incompatible redefinition of macro "INT_TIMER1B"  (declared at line 70 of ".\inc\tm4c123gh6pm.h")
+N#define INT_TIMER1B             INT_CONCAT(INT_TIMER1B_, INT_DEVICE_CLASS)
+W "inc/hw_ints.h" 439 9 incompatible redefinition of macro "INT_TIMER2A"  (declared at line 71 of ".\inc\tm4c123gh6pm.h")
+N#define INT_TIMER2A             INT_CONCAT(INT_TIMER2A_, INT_DEVICE_CLASS)
+W "inc/hw_ints.h" 440 9 incompatible redefinition of macro "INT_TIMER2B"  (declared at line 72 of ".\inc\tm4c123gh6pm.h")
+N#define INT_TIMER2B             INT_CONCAT(INT_TIMER2B_, INT_DEVICE_CLASS)
+W "inc/hw_ints.h" 441 9 incompatible redefinition of macro "INT_TIMER3A"  (declared at line 81 of ".\inc\tm4c123gh6pm.h")
+N#define INT_TIMER3A             INT_CONCAT(INT_TIMER3A_, INT_DEVICE_CLASS)
+W "inc/hw_ints.h" 442 9 incompatible redefinition of macro "INT_TIMER3B"  (declared at line 82 of ".\inc\tm4c123gh6pm.h")
+N#define INT_TIMER3B             INT_CONCAT(INT_TIMER3B_, INT_DEVICE_CLASS)
+W "inc/hw_ints.h" 443 9 incompatible redefinition of macro "INT_TIMER4A"  (declared at line 105 of ".\inc\tm4c123gh6pm.h")
+N#define INT_TIMER4A             INT_CONCAT(INT_TIMER4A_, INT_DEVICE_CLASS)
+W "inc/hw_ints.h" 444 9 incompatible redefinition of macro "INT_TIMER4B"  (declared at line 106 of ".\inc\tm4c123gh6pm.h")
+N#define INT_TIMER4B             INT_CONCAT(INT_TIMER4B_, INT_DEVICE_CLASS)
+W "inc/hw_ints.h" 445 9 incompatible redefinition of macro "INT_TIMER5A"  (declared at line 107 of ".\inc\tm4c123gh6pm.h")
+N#define INT_TIMER5A             INT_CONCAT(INT_TIMER5A_, INT_DEVICE_CLASS)
+W "inc/hw_ints.h" 446 9 incompatible redefinition of macro "INT_TIMER5B"  (declared at line 108 of ".\inc\tm4c123gh6pm.h")
+N#define INT_TIMER5B             INT_CONCAT(INT_TIMER5B_, INT_DEVICE_CLASS)
+N#define INT_TIMER6A             INT_CONCAT(INT_TIMER6A_, INT_DEVICE_CLASS)
+N#define INT_TIMER6B             INT_CONCAT(INT_TIMER6B_, INT_DEVICE_CLASS)
+N#define INT_TIMER7A             INT_CONCAT(INT_TIMER7A_, INT_DEVICE_CLASS)
+N#define INT_TIMER7B             INT_CONCAT(INT_TIMER7B_, INT_DEVICE_CLASS)
+W "inc/hw_ints.h" 451 9 incompatible redefinition of macro "INT_UART0"  (declared at line 53 of ".\inc\tm4c123gh6pm.h")
+N#define INT_UART0               INT_CONCAT(INT_UART0_, INT_DEVICE_CLASS)
+W "inc/hw_ints.h" 452 9 incompatible redefinition of macro "INT_UART1"  (declared at line 54 of ".\inc\tm4c123gh6pm.h")
+N#define INT_UART1               INT_CONCAT(INT_UART1_, INT_DEVICE_CLASS)
+W "inc/hw_ints.h" 453 9 incompatible redefinition of macro "INT_UART2"  (declared at line 79 of ".\inc\tm4c123gh6pm.h")
+N#define INT_UART2               INT_CONCAT(INT_UART2_, INT_DEVICE_CLASS)
+W "inc/hw_ints.h" 454 9 incompatible redefinition of macro "INT_UART3"  (declared at line 98 of ".\inc\tm4c123gh6pm.h")
+N#define INT_UART3               INT_CONCAT(INT_UART3_, INT_DEVICE_CLASS)
+W "inc/hw_ints.h" 455 9 incompatible redefinition of macro "INT_UART4"  (declared at line 99 of ".\inc\tm4c123gh6pm.h")
+N#define INT_UART4               INT_CONCAT(INT_UART4_, INT_DEVICE_CLASS)
+W "inc/hw_ints.h" 456 9 incompatible redefinition of macro "INT_UART5"  (declared at line 100 of ".\inc\tm4c123gh6pm.h")
+N#define INT_UART5               INT_CONCAT(INT_UART5_, INT_DEVICE_CLASS)
+W "inc/hw_ints.h" 457 9 incompatible redefinition of macro "INT_UART6"  (declared at line 101 of ".\inc\tm4c123gh6pm.h")
+N#define INT_UART6               INT_CONCAT(INT_UART6_, INT_DEVICE_CLASS)
+W "inc/hw_ints.h" 458 9 incompatible redefinition of macro "INT_UART7"  (declared at line 102 of ".\inc\tm4c123gh6pm.h")
+N#define INT_UART7               INT_CONCAT(INT_UART7_, INT_DEVICE_CLASS)
+W "inc/hw_ints.h" 459 9 incompatible redefinition of macro "INT_UDMA"  (declared at line 90 of ".\inc\tm4c123gh6pm.h")
+N#define INT_UDMA                INT_CONCAT(INT_UDMA_, INT_DEVICE_CLASS)
+W "inc/hw_ints.h" 460 9 incompatible redefinition of macro "INT_UDMAERR"  (declared at line 91 of ".\inc\tm4c123gh6pm.h")
+N#define INT_UDMAERR             INT_CONCAT(INT_UDMAERR_, INT_DEVICE_CLASS)
+W "inc/hw_ints.h" 461 9 incompatible redefinition of macro "INT_USB0"  (declared at line 88 of ".\inc\tm4c123gh6pm.h")
+N#define INT_USB0                INT_CONCAT(INT_USB0_, INT_DEVICE_CLASS)
+W "inc/hw_ints.h" 462 9 incompatible redefinition of macro "INT_WATCHDOG"  (declared at line 66 of ".\inc\tm4c123gh6pm.h")
+N#define INT_WATCHDOG            INT_CONCAT(INT_WATCHDOG_, INT_DEVICE_CLASS)
+W "inc/hw_ints.h" 463 9 incompatible redefinition of macro "INT_WTIMER0A"  (declared at line 109 of ".\inc\tm4c123gh6pm.h")
+N#define INT_WTIMER0A            INT_CONCAT(INT_WTIMER0A_, INT_DEVICE_CLASS)
+W "inc/hw_ints.h" 464 9 incompatible redefinition of macro "INT_WTIMER0B"  (declared at line 110 of ".\inc\tm4c123gh6pm.h")
+N#define INT_WTIMER0B            INT_CONCAT(INT_WTIMER0B_, INT_DEVICE_CLASS)
+W "inc/hw_ints.h" 465 9 incompatible redefinition of macro "INT_WTIMER1A"  (declared at line 111 of ".\inc\tm4c123gh6pm.h")
+N#define INT_WTIMER1A            INT_CONCAT(INT_WTIMER1A_, INT_DEVICE_CLASS)
+W "inc/hw_ints.h" 466 9 incompatible redefinition of macro "INT_WTIMER1B"  (declared at line 112 of ".\inc\tm4c123gh6pm.h")
+N#define INT_WTIMER1B            INT_CONCAT(INT_WTIMER1B_, INT_DEVICE_CLASS)
+W "inc/hw_ints.h" 467 9 incompatible redefinition of macro "INT_WTIMER2A"  (declared at line 113 of ".\inc\tm4c123gh6pm.h")
+N#define INT_WTIMER2A            INT_CONCAT(INT_WTIMER2A_, INT_DEVICE_CLASS)
+W "inc/hw_ints.h" 468 9 incompatible redefinition of macro "INT_WTIMER2B"  (declared at line 114 of ".\inc\tm4c123gh6pm.h")
+N#define INT_WTIMER2B            INT_CONCAT(INT_WTIMER2B_, INT_DEVICE_CLASS)
+W "inc/hw_ints.h" 469 9 incompatible redefinition of macro "INT_WTIMER3A"  (declared at line 115 of ".\inc\tm4c123gh6pm.h")
+N#define INT_WTIMER3A            INT_CONCAT(INT_WTIMER3A_, INT_DEVICE_CLASS)
+W "inc/hw_ints.h" 470 9 incompatible redefinition of macro "INT_WTIMER3B"  (declared at line 116 of ".\inc\tm4c123gh6pm.h")
+N#define INT_WTIMER3B            INT_CONCAT(INT_WTIMER3B_, INT_DEVICE_CLASS)
+W "inc/hw_ints.h" 471 9 incompatible redefinition of macro "INT_WTIMER4A"  (declared at line 117 of ".\inc\tm4c123gh6pm.h")
+N#define INT_WTIMER4A            INT_CONCAT(INT_WTIMER4A_, INT_DEVICE_CLASS)
+W "inc/hw_ints.h" 472 9 incompatible redefinition of macro "INT_WTIMER4B"  (declared at line 118 of ".\inc\tm4c123gh6pm.h")
+N#define INT_WTIMER4B            INT_CONCAT(INT_WTIMER4B_, INT_DEVICE_CLASS)
+W "inc/hw_ints.h" 473 9 incompatible redefinition of macro "INT_WTIMER5A"  (declared at line 119 of ".\inc\tm4c123gh6pm.h")
+N#define INT_WTIMER5A            INT_CONCAT(INT_WTIMER5A_, INT_DEVICE_CLASS)
+W "inc/hw_ints.h" 474 9 incompatible redefinition of macro "INT_WTIMER5B"  (declared at line 120 of ".\inc\tm4c123gh6pm.h")
+N#define INT_WTIMER5B            INT_CONCAT(INT_WTIMER5B_, INT_DEVICE_CLASS)
+N
+N//*****************************************************************************
+N//
+N// The following are defines for the total number of interrupts.
+N//
+N//*****************************************************************************
+N#define NUM_INTERRUPTS          INT_CONCAT(NUM_INTERRUPTS_, INT_DEVICE_CLASS)
+N
+N//*****************************************************************************
+N//
+N// The following are defines for the total number of priority levels.
+N//
+N//*****************************************************************************
+N#define NUM_PRIORITY            8
+N#define NUM_PRIORITY_BITS       3
+N
+N#endif // __HW_INTS_H__
+L 107 "project.c" 2
+N#include "inc/hw_memmap.h"
+N#include "inc/hw_types.h"
+N#include "driverlib/gpio.h"
+N#include "driverlib/i2c.h"
+N#include "driverlib/interrupt.h"
+N#include "driverlib/pin_map.h"
+N#include "driverlib/sysctl.h"
+N#include "driverlib/uart.h"
+N//#include "utils/uartstdio.h"
+N
+N//*****************************************************************************
+N//
+N//! \addtogroup i2c_examples_list
+N//! <h1>Slave Receive Interrupt (slave_receive_int)</h1>
+N//!
+N//! This example shows how to configure a receive interrupt on the slave
+N//! module.  This includes setting up the I2C0 module for loopback mode as well
+N//! as configuring the master and slave modules.  Loopback mode internally
+N//! connects the master and slave data and clock lines together.  The address
+N//! of the slave module is set to a value so it can receive data from the
+N//! master.
+N//!
+N//! This example uses the following peripherals and I/O signals.  You must
+N//! review these and change as needed for your own board:
+N//! - I2C0 peripheral
+N//! - GPIO Port B peripheral (for I2C0 pins)
+N//! - I2C0SCL - PB2
+N//! - I2C0SDA - PB3
+N//!
+N//! The following UART signals are configured only for displaying console
+N//! messages for this example.  These are not required for operation of I2C.
+N//! - UART0 peripheral
+N//! - GPIO Port A peripheral (for UART0 pins)
+N//! - UART0RX - PA0
+N//! - UART0TX - PA1
+N//!
+N//! This example uses the following interrupt handlers.  To use this example
+N//! in your own application you must add these interrupt handlers to your
+N//! vector table.
+N//! - INT_I2C0 - I2C0SlaveIntHandler
+N//
+N//*****************************************************************************
+N
+N//*****************************************************************************
+N//
+N// Set the address for slave module. This is a 7-bit address sent in the
+N// following format:
+N//                      [A6:A5:A4:A3:A2:A1:A0:RS]
+N//
+N// A zero in the R/S position of the first byte means that the master
+N// transmits (sends) data to the selected slave, and a one in this position
+N// means that the master receives data from the slave.
+N//
+N//*****************************************************************************
+N#define SLAVE_ADDRESS           0x3C
+N
+N//*****************************************************************************
+N//
+N// Global variable to hold the I2C data that has been received.
+N//
+N//*****************************************************************************
+Nstatic uint32_t g_ui32DataRx;
+N
+N//*****************************************************************************
+N//
+N// This is a flag that gets set in the interrupt handler to indicate that an
+N// interrupt occurred.
+N//
+N//*****************************************************************************
+Nstatic bool g_bIntFlag = false;
+Xstatic _Bool g_bIntFlag = 0;
+N
+N//*****************************************************************************
+N//
+N// This function sets up UART0 to be used for a console to display information
+N// as the example is running.
+N//
+N//*****************************************************************************
+Nvoid
+NInitConsole(void)
+N{
+N    //
+N    // Enable GPIO port A which is used for UART0 pins.
+N    // TODO: change this to whichever GPIO port you are using.
+N    //
+N    SysCtlPeripheralEnable(SYSCTL_PERIPH_GPIOA);
+X    SysCtlPeripheralEnable(0xf0000800);
+N
+N    //
+N    // Configure the pin muxing for UART0 functions on port A0 and A1.
+N    // This step is not necessary if your part does not support pin muxing.
+N    // TODO: change this to select the port/pin you are using.
+N    //
+N    GPIOPinConfigure(GPIO_PA0_U0RX);
+X    GPIOPinConfigure(0x00000001);
+N    GPIOPinConfigure(GPIO_PA1_U0TX);
+X    GPIOPinConfigure(0x00000401);
+N
+N    //
+N    // Enable UART0 so that we can configure the clock.
+N    //
+N    SysCtlPeripheralEnable(SYSCTL_PERIPH_UART0);
+X    SysCtlPeripheralEnable(0xf0001800);
+N
+N    //
+N    // Use the internal 16MHz oscillator as the UART clock source.
+N    //
+N    UARTClockSourceSet(UART0_BASE, UART_CLOCK_PIOSC);
+X    UARTClockSourceSet(0x4000C000, 0x00000005);
+N
+N    //
+N    // Select the alternate (UART) function for these pins.
+N    // TODO: change this to select the port/pin you are using.
+N    //
+N    GPIOPinTypeUART(GPIO_PORTA_BASE, GPIO_PIN_0 | GPIO_PIN_1);
+X    GPIOPinTypeUART(0x40004000, 0x00000001 | 0x00000002);
+N
+N    //
+N    // Initialize the UART for console I/O.
+N    //
+N    //UARTStdioConfig(0, 115200, 16000000);
 N}
+N
+N//*****************************************************************************
+N//
+N// The interrupt handler for the for I2C0 data slave interrupt.
+N//
+N//*****************************************************************************
+Nvoid
+NI2C0SlaveIntHandler(void)
+N{
+N    //
+N    // Clear the I2C0 interrupt flag.
+N    //
+N    I2CSlaveIntClear(I2C0_BASE);
+X    I2CSlaveIntClear(0x40020000);
+N
+N    //
+N    // Read the data from the slave.
+N    //
+N    g_ui32DataRx = I2CSlaveDataGet(I2C0_BASE);
+X    g_ui32DataRx = I2CSlaveDataGet(0x40020000);
+N
+N    //
+N    // Set a flag to indicate that the interrupt occurred.
+N    //
+N    g_bIntFlag = true;
+X    g_bIntFlag = 1;
+N}
+N
+N//*****************************************************************************
+N//
+N// Configure the I2C0 master and slave and connect them using loopback mode.
+N//
+N//*****************************************************************************
+Nint
+Nmain(void)
+N{
+N#if defined(TARGET_IS_TM4C129_RA0) ||                                         \
+N    defined(TARGET_IS_TM4C129_RA1) ||                                         \
+N    defined(TARGET_IS_TM4C129_RA2)
+X#if 0L ||                                             0L ||                                             0L
+S    uint32_t ui32SysClock;
+N#endif
+N    uint32_t ui32DataTx;
+N
+N    //
+N    // Set the clocking to run directly from the external crystal/oscillator.
+N    // TODO: The SYSCTL_XTAL_ value must be changed to match the value of the
+N    // crystal on your board.
+N    //
+N#if defined(TARGET_IS_TM4C129_RA0) ||                                         \
+N    defined(TARGET_IS_TM4C129_RA1) ||                                         \
+N    defined(TARGET_IS_TM4C129_RA2)
+X#if 0L ||                                             0L ||                                             0L
+S    ui32SysClock = SysCtlClockFreqSet((SYSCTL_XTAL_25MHZ |
+S                                       SYSCTL_OSC_MAIN |
+S                                       SYSCTL_USE_PLL), 25000000);
+N#else
+N    SysCtlClockSet(SYSCTL_SYSDIV_1 | SYSCTL_USE_OSC | SYSCTL_OSC_MAIN |
+X    SysCtlClockSet(0x07800000 | 0x00003800 | 0x00000000 |
+N                   SYSCTL_XTAL_16MHZ);
+X                   0x00000540);
+N#endif
+N
+N    //
+N    // The I2C0 peripheral must be enabled before use.
+N    //
+N    SysCtlPeripheralEnable(SYSCTL_PERIPH_I2C0);
+X    SysCtlPeripheralEnable(0xf0002000);
+N
+N    //
+N    // For this example I2C0 is used with PortB[3:2].  The actual port and
+N    // pins used may be different on your part, consult the data sheet for
+N    // more information.  GPIO port B needs to be enabled so these pins can
+N    // be used.
+N    // TODO: change this to whichever GPIO port you are using.
+N    //
+N    SysCtlPeripheralEnable(SYSCTL_PERIPH_GPIOB);
+X    SysCtlPeripheralEnable(0xf0000801);
+N
+N    //
+N    // Configure the pin muxing for I2C0 functions on port B2 and B3.
+N    // This step is not necessary if your part does not support pin muxing.
+N    // TODO: change this to select the port/pin you are using.
+N    //
+N    GPIOPinConfigure(GPIO_PB2_I2C0SCL);
+X    GPIOPinConfigure(0x00010803);
+N    GPIOPinConfigure(GPIO_PB3_I2C0SDA);
+X    GPIOPinConfigure(0x00010C03);
+N
+N    //
+N    // Select the I2C function for these pins.  This function will also
+N    // configure the GPIO pins pins for I2C operation, setting them to
+N    // open-drain operation with weak pull-ups.  Consult the data sheet
+N    // to see which functions are allocated per pin.
+N    // TODO: change this to select the port/pin you are using.
+N    //
+N    GPIOPinTypeI2CSCL(GPIO_PORTB_BASE, GPIO_PIN_2);
+X    GPIOPinTypeI2CSCL(0x40005000, 0x00000004);
+N    GPIOPinTypeI2C(GPIO_PORTB_BASE, GPIO_PIN_3);
+X    GPIOPinTypeI2C(0x40005000, 0x00000008);
+N
+N    //
+N    // Enable loopback mode.  Loopback mode is a built in feature that helps
+N    // for debug the I2Cx module.  It internally connects the I2C master and
+N    // slave terminals, which effectively lets you send data as a master and
+N    // receive data as a slave.  NOTE: For external I2C operation you will need
+N    // to use external pull-ups that are faster than the internal pull-ups.
+N    // Refer to the datasheet for more information.
+N    //
+N    HWREG(I2C0_BASE + I2C_O_MCR) |= 0x01;
+X    (*((volatile uint32_t *)(0x40020000 + 0x00000020))) |= 0x01;
+N
+N    //
+N    // Enable the I2C0 interrupt on the processor (NVIC).
+N    //
+N    IntEnable(INT_I2C0);
+X    IntEnable(24);
+N
+N    //
+N    // Configure and turn on the I2C0 slave interrupt.  The I2CSlaveIntEnableEx()
+N    // gives you the ability to only enable specific interrupts.  For this case
+N    // we are only interrupting when the slave device receives data.
+N    //
+N    I2CSlaveIntEnableEx(I2C0_BASE, I2C_SLAVE_INT_DATA);
+X    I2CSlaveIntEnableEx(0x40020000, 0x00000001);
+N
+N    //
+N    // Enable and initialize the I2C0 master module.  Use the system clock for
+N    // the I2C0 module.  The last parameter sets the I2C data transfer rate.
+N    // If false the data rate is set to 100kbps and if true the data rate will
+N    // be set to 400kbps.  For this example we will use a data rate of 100kbps.
+N    //
+N#if defined(TARGET_IS_TM4C129_RA0) ||                                         \
+N    defined(TARGET_IS_TM4C129_RA1) ||                                         \
+N    defined(TARGET_IS_TM4C129_RA2)
+X#if 0L ||                                             0L ||                                             0L
+S    I2CMasterInitExpClk(I2C0_BASE, ui32SysClock, false);
+N#else
+N    I2CMasterInitExpClk(I2C0_BASE, SysCtlClockGet(), false);
+X    I2CMasterInitExpClk(0x40020000, SysCtlClockGet(), 0);
+N#endif
+N
+N    //
+N    // Enable the I2C0 slave module.
+N    //
+N    I2CSlaveEnable(I2C0_BASE);
+X    I2CSlaveEnable(0x40020000);
+N
+N    //
+N    // Set the slave address to SLAVE_ADDRESS.  In loopback mode, it's an
+N    // arbitrary 7-bit number (set in a macro above) that is sent to the
+N    // I2CMasterSlaveAddrSet function.
+N    //
+N    I2CSlaveInit(I2C0_BASE, SLAVE_ADDRESS);
+X    I2CSlaveInit(0x40020000, 0x3C);
+N
+N    //
+N    // Tell the master module what address it will place on the bus when
+N    // communicating with the slave.  Set the address to SLAVE_ADDRESS
+N    // (as set in the slave module).  The receive parameter is set to false
+N    // which indicates the I2C Master is initiating a writes to the slave.  If
+N    // true, that would indicate that the I2C Master is initiating reads from
+N    // the slave.
+N    //
+N    I2CMasterSlaveAddrSet(I2C0_BASE, SLAVE_ADDRESS, false);
+X    I2CMasterSlaveAddrSet(0x40020000, 0x3C, 0);
+N
+N    //
+N    // Set up the serial console to use for displaying messages.  This is just
+N    // for this example program and is not needed for proper I2C operation.
+N    //
+N    //InitConsole();
+N
+N    //
+N    // Enable interrupts to the processor.
+N    //
+N    IntMasterEnable();
+N
+N    //
+N    // Display the example setup on the console.
+N    //
+N    printf("I2C Slave Interrupt Example ->");
+N    printf("\n   Module = I2C0");
+N    printf("\n   Mode = Receive interrupt on the Slave module");
+N    printf("\n   Rate = 100kbps\n\n");
+N
+N    //
+N    // Initialize the data to send.
+N    //
+N    ui32DataTx = 'I';
+N
+N    //
+N    // Indicate the direction of the data.
+N    //
+N    printf("Transferring from: Master -> Slave\n");
+N
+N    //
+N    // Display the data that I2C0 is transferring.
+N    //
+N    printf("  Sending: '%c'", ui32DataTx);
+N
+N    //
+N    // Place the data to be sent in the data register.
+N    //
+N    I2CMasterDataPut(I2C0_BASE, ui32DataTx);
+X    I2CMasterDataPut(0x40020000, ui32DataTx);
+N
+N    //
+N    // Initiate send of single piece of data from the master.  Since the
+N    // loopback mode is enabled, the Master and Slave units are connected
+N    // allowing us to receive the same data that we sent out.
+N    //
+N    I2CMasterControl(I2C0_BASE, I2C_MASTER_CMD_SINGLE_SEND);
+X    I2CMasterControl(0x40020000, 0x00000007);
+N
+N    //
+N    // Wait for interrupt to occur.
+N    //
+N    while(!g_bIntFlag)
+N    {
+N    }
+N
+N    //
+N    // Display that interrupt was received.
+N    //
+N   printf("\n  Slave Interrupt Received!\n");
+N
+N    //
+N    // Display the data that the slave has received.
+N    //
+N    printf("  Received: '%c'\n\n", g_ui32DataRx);
+N
+N    //
+N    // Loop forever.
+N    //
+N    while(1)
+N    {
+N    }
+N}
+N
 N
 N
