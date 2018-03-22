@@ -20,7 +20,7 @@
 volatile uint32_t   read;
 volatile uint32_t receive;
 
-double dspeed;
+int dspeed;
 
 void I2C0MasterIntHandler(void)
 {
@@ -168,10 +168,11 @@ int I2CReceive(void)
    while(I2CMasterBusy(I2C0_BASE));
 
    //Get the data from the MCU register and return to caller
-   return( I2CMasterDataGet(I2C0_BASE));
+   //return( I2CMasterDataGet(I2C0_BASE));
 	 
-	 double dspeed 
-	 
+	 dspeed = I2CMasterDataGet(I2C0_BASE);
+	 printf("dspeed is = %i\n\n", dspeed);
+	 return dspeed; 
  }
 
 		

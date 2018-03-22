@@ -67601,8 +67601,7 @@ N		speed = ReadEncoder();
 N		
 N		uSpeed = I2CReceive();
 N		
-W "project.c" 102 25 argument is incompatible with corresponding format string conversion
-N		printf("rec is = %i", uSpeed);
+N	//	printf("rec is = %i", uSpeed);
 N	}
 N}
 N	

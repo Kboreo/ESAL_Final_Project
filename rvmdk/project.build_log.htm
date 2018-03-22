@@ -110,9 +110,7 @@ project.c(94): warning:  #223-D: function "i2c_send" declared implicitly
   		i2c_send();
 project.c(96): warning:  #223-D: function "Speed_Control" declared implicitly
   		Speed_Control(speed, uSpeed);	
-project.c(102): warning:  #181-D: argument is incompatible with corresponding format string conversion
-  		printf("rec is = %i", uSpeed);
-project.c: 23 warnings, 0 errors
+project.c: 22 warnings, 0 errors
 creating preprocessor file for Float_Setup.c...
 creating preprocessor file for Uart_helper.c...
 compiling Float_Setup.c...
@@ -498,14 +496,14 @@ inc/hw_ints.h(473): warning:  #47-D: incompatible redefinition of macro "INT_WTI
   #define INT_WTIMER5A            INT_CONCAT(INT_WTIMER5A_, INT_DEVICE_CLASS)
 inc/hw_ints.h(474): warning:  #47-D: incompatible redefinition of macro "INT_WTIMER5B"  (declared at line 120 of ".\inc\tm4c123gh6pm.h")
   #define INT_WTIMER5B            INT_CONCAT(INT_WTIMER5B_, INT_DEVICE_CLASS)
-i2c_master.c(178): warning:  #1-D: last line of file ends without a newline
+i2c_master.c(181): warning:  #1-D: last line of file ends without a newline
   		
 i2c_master.c: 90 warnings, 0 errors
 linking...
-Program Size: Code=8296 RO-data=1180 RW-data=116 ZI-data=396  
+Program Size: Code=8308 RO-data=1180 RW-data=112 ZI-data=392  
 FromELF: creating hex file...
 After Build - User command #1: fromelf --bin --output .\rvmdk\project.bin .\rvmdk\project.axf
-".\rvmdk\project.axf" - 0 Error(s), 219 Warning(s).
+".\rvmdk\project.axf" - 0 Error(s), 218 Warning(s).
 
 <h2>Software Packages used:</h2>
 

@@ -99,7 +99,7 @@ int  main(void)
 		
 		uSpeed = I2CReceive();
 		
-		printf("rec is = %i", uSpeed);
+	//	printf("rec is = %i", uSpeed);
 	}
 }
 	
