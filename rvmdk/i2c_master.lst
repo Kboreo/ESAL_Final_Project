@@ -1,0 +1,100 @@
+L 1 "i2c_master.c"
+N//#include "i2c_master.h"
+N
+N//#include <stdint.h>
+N//#include <stdbool.h>
+N//#include "inc/hw_ints.h"
+N//#include "inc/hw_i2c.h"
+N//#include "inc/hw_memmap.h"
+N//#include "inc/hw_types.h"
+N//#include "inc/hw_gpio.h"
+N//#include "driverlib/interrupt.h"
+N//#include "driverlib/i2c.h"
+N//#include "driverlib/sysctl.h"
+N//#include "driverlib/gpio.h"
+N//#include "driverlib/pin_map.h"
+N//#include "driverlib/uart.h"
+N////#include "utils/uartstdio.h"
+N////#include "utils/uartstdio.c"
+N
+N//#define SLAVE_ADDRESS 0x3C
+N//volatile uint32_t   read;
+N//volatile uint32_t receive;
+N
+N//void I2C0MasterIntHandler(void)
+N//{
+N//    // Clear the I2C0 interrupt flag.
+N//    I2CMasterIntClear(I2C0_BASE);
+N//    // Read the data from the slave.
+N//    receive = I2CMasterDataGet(I2C0_BASE);
+N//}
+N
+N//void InitConsole(void)
+N//{
+N//    SysCtlPeripheralEnable(SYSCTL_PERIPH_GPIOA);
+N
+N//    GPIOPinConfigure(GPIO_PA0_U0RX);
+N//    GPIOPinConfigure(GPIO_PA1_U0TX);
+N
+N//    SysCtlPeripheralEnable(SYSCTL_PERIPH_UART0);
+N//    UARTClockSourceSet(UART0_BASE, UART_CLOCK_PIOSC);
+N//    GPIOPinTypeUART(GPIO_PORTA_BASE, GPIO_PIN_0 | GPIO_PIN_1);
+N//    UARTStdioConfig(0, 115200, 16000000);
+N//}
+N
+N//void I2C0_Master_Init(void)
+N//{
+N//    //enable GPIO peripheral that contains I2C 0
+N//    SysCtlPeripheralEnable(SYSCTL_PERIPH_GPIOB);
+N//    while(!SysCtlPeripheralReady(SYSCTL_PERIPH_GPIOB));
+N
+N//    //enable I2C module 0
+N//    SysCtlPeripheralEnable(SYSCTL_PERIPH_I2C0);
+N//    //reset module
+N//    SysCtlPeripheralReset(SYSCTL_PERIPH_I2C0);
+N
+N//    // Configure the pin muxing for I2C0 functions on port B2 and B3.
+N//    GPIOPinConfigure(GPIO_PB2_I2C0SCL);
+N//    GPIOPinConfigure(GPIO_PB3_I2C0SDA);
+N
+N//    // Select the I2C function for these pins.
+N//    GPIOPinTypeI2CSCL(GPIO_PORTB_BASE, GPIO_PIN_2);
+N//    GPIOPinTypeI2C(GPIO_PORTB_BASE, GPIO_PIN_3);
+N
+N//    // Enable and initialize the I2C0 master module.  Use the system clock for
+N//    // the I2C0 module.  The last parameter sets the I2C data transfer rate.
+N//    // If false the data rate is set to 100kbps and if true the data rate will
+N//    // be set to 400kbps.
+N//    I2CMasterInitExpClk(I2C0_BASE, SysCtlClockGet(), false);
+N
+N//    //clear I2C FIFOs
+N//    // HWREG(I2C0_BASE + I2C_O_FIFOCTL) = 80008000;
+N
+N//}
+N
+N//int main(void)
+N//{
+N//    SysCtlClockSet(SYSCTL_SYSDIV_1| SYSCTL_USE_OSC| SYSCTL_OSC_MAIN| SYSCTL_XTAL_16MHZ);
+N
+N//    InitConsole();
+N//    I2C0_Master_Init();
+N
+N//    IntEnable(INT_I2C0);
+N//    I2CMasterIntEnableEx(I2C0_BASE, I2C_MASTER_INT_DATA);
+N//    IntMasterEnable();
+N
+N//    UARTprintf("Master --> Slave \n");
+N
+N//    while(1)
+N//    {
+N//        I2CMasterSlaveAddrSet(I2C0_BASE, SLAVE_ADDRESS, true);
+N//        I2CMasterControl(I2C0_BASE, I2C_MASTER_CMD_SINGLE_RECEIVE);
+N//        while(I2CMasterBusy(I2C0_BASE));
+N
+N//        UARTprintf("Received: %d \n", receive);
+N//        UARTprintf("received: '%c' \n", receive);
+N
+N//        SysCtlDelay(SysCtlClockGet()/6);
+N//    }
+W "i2c_master.c" 98 4 last line of file ends without a newline
+N//}

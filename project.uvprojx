@@ -530,6 +530,26 @@
               <FileType>1</FileType>
               <FilePath>.\i2c.c</FilePath>
             </File>
+            <File>
+              <FileName>i2c_master.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>.\i2c_master.c</FilePath>
+            </File>
+            <File>
+              <FileName>i2c_master.h</FileName>
+              <FileType>5</FileType>
+              <FilePath>.\i2c_master.h</FilePath>
+            </File>
+            <File>
+              <FileName>i2c_slave.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>.\i2c_slave.c</FilePath>
+            </File>
+            <File>
+              <FileName>i2c_slave.h</FileName>
+              <FileType>5</FileType>
+              <FilePath>.\i2c_slave.h</FilePath>
+            </File>
           </Files>
         </Group>
         <Group>

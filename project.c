@@ -67,7 +67,9 @@ int  main(void)
 	
 	//I2CSend();
 
-//Write a function here to get the desired speed	
+//Write a function here to get the desired speed
+
+	uSpeed = 
 	
 	uSpeed = GetUserSpeed();//set uSpeed equal to the speed you want me to travel
 

@@ -55,5 +55,7 @@
 #include "HAL_ADC.h"
 #include "myGPIO.h"
 #include "i2c.h"
+#include "i2c_master.h"
+#include "i2c_slave.h"
 
 

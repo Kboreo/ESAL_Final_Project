@@ -66761,7 +66761,49 @@ Nvoid pinReadAndWrite(uint32_t ui32Loop,uint8_t temp);
 L 57 "project.h" 2
 N#include "i2c.h"
 L 1 "i2c.h" 1
+N//#include <stdbool.h>
+N//#include <stdint.h>
+N//#include "sysctl.h"
+N//#include "hw_memmap.h"
+N//#include "gpio.h"
+N//#include "adc.h"
+N//#include "uart.h"
+N//#include "tm4c123gh6pm.h"
+N//#include "hw_gpio.h"
+N//#include "hw_types.h"
+W "i2c.h" 11 21 last line of file ends without a newline
+N//#include <stdio.h>
 L 58 "project.h" 2
+N#include "i2c_master.h"
+L 1 "i2c_master.h" 1
+N//#include <stdbool.h>
+N//#include <stdint.h>
+N//#include "sysctl.h"
+N//#include "hw_memmap.h"
+N//#include "gpio.h"
+N//#include "adc.h"
+N//#include "uart.h"
+N//#include "tm4c123gh6pm.h"
+N//#include "hw_gpio.h"
+N//#include "hw_types.h"
+W "i2c_master.h" 11 21 last line of file ends without a newline
+N//#include <stdio.h>
+L 59 "project.h" 2
+N#include "i2c_slave.h"
+L 1 "i2c_slave.h" 1
+N#include <stdbool.h>
+N#include <stdint.h>
+N#include "sysctl.h"
+N#include "hw_memmap.h"
+N#include "gpio.h"
+N#include "adc.h"
+N#include "uart.h"
+N#include "tm4c123gh6pm.h"
+N#include "hw_gpio.h"
+N#include "hw_types.h"
+W "i2c_slave.h" 11 19 last line of file ends without a newline
+N#include <stdio.h>
+L 60 "project.h" 2
 N
 N
 L 30 "project.c" 2
@@ -66810,11 +66852,13 @@ N	SetupHardware();  //Initializes all of the required HardWare for the project.
 N	
 N	//I2CSend();
 N
-N//Write a function here to get the desired speed	
+N//Write a function here to get the desired speed
+N
+N	uSpeed = 
 N	
 N	uSpeed = GetUserSpeed();//set uSpeed equal to the speed you want me to travel
 N
-W "project.c" 74 2 function "Speed_Control" declared implicitly
+W "project.c" 76 2 function "Speed_Control" declared implicitly
 N	Speed_Control(speed, uSpeed);
 N	
 N	speed = ReadEncoder(); // this will set speed equal to the current speed 
