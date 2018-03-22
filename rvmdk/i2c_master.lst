@@ -67819,6 +67819,8 @@ N#define SLAVE_ADDRESS 0x3C
 Nvolatile uint32_t   read;
 Nvolatile uint32_t receive;
 N
+Ndouble dspeed;
+N
 Nvoid I2C0MasterIntHandler(void)
 N{
 N    // Clear the I2C0 interrupt flag.
@@ -68004,14 +68006,14 @@ N    while(I2CMasterBusy(I2C0_BASE));
 X    while(I2CMasterBusy(0x40020000));
 N     
 N    //return data pulled from the specified register
-N   int dspeed = I2CMasterDataGet(I2C0_BASE);
-X   int dspeed = I2CMasterDataGet(0x40020000);
-N	 	printf("we got to the end of i2c master\n\n");
+N   dspeed = I2CMasterDataGet(I2C0_BASE);
+X   dspeed = I2CMasterDataGet(0x40020000);
+N	 //	printf("we got to the end of i2c master\n\n");
 N	 
 N	 return dspeed;
 N}
 N		
 N		
 N
-W "i2c_master.c" 182 3 last line of file ends without a newline
+W "i2c_master.c" 184 3 last line of file ends without a newline
 N		

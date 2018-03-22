@@ -20,6 +20,8 @@
 volatile uint32_t   read;
 volatile uint32_t receive;
 
+double dspeed;
+
 void I2C0MasterIntHandler(void)
 {
     // Clear the I2C0 interrupt flag.
@@ -171,8 +173,8 @@ int I2CReceive(void)
     while(I2CMasterBusy(I2C0_BASE));
      
     //return data pulled from the specified register
-   int dspeed = I2CMasterDataGet(I2C0_BASE);
-	 	printf("we got to the end of i2c master\n\n");
+   dspeed = I2CMasterDataGet(I2C0_BASE);
+	 //	printf("we got to the end of i2c master\n\n");
 	 
 	 return dspeed;
 }
