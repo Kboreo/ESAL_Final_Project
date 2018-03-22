@@ -66852,8 +66852,8 @@ N	//Write a function here to send "speed" to Levi
 N		
 W "project.c" 93 3 function "i2c_send_rec" declared implicitly
 N		i2c_send_rec();
-W "project.c" 94 11 function "I2CReceive" declared implicitly
-N		speed = I2CReceive(0x3C, 0xFF);
+W "project.c" 94 11 function "readI2C0" declared implicitly
+N		speed = readI2C0(0x3C, 0xFF);
 W "project.c" 95 25 argument is incompatible with corresponding format string conversion
 N		printf("rec is = %i", speed);
 N	}

@@ -12136,36 +12136,31 @@ return 0;
 
 		
 		
-		
-uint32_t I2CReceive(uint32_t slave_addr, uint8_t reg)
+uint8_t readI2C0(uint16_t device_address, uint16_t device_register)
 {
-    
-    
-    I2CMasterSlaveAddrSet(0x40020000, slave_addr, 0);
- 
-    
-    I2CMasterDataPut(0x40020000, reg);
- 
-    
-    I2CMasterControl(0x40020000, 0x00000003);
-     
-    
-    while(I2CMasterBusy(0x40020000));
-     
-    
-    I2CMasterSlaveAddrSet(0x40020000, slave_addr, 1);
-     
-    
-    
-    I2CMasterControl(0x40020000, 0x00000007);
-     
-    
-    while(I2CMasterBusy(0x40020000));
-     
-    
-   double uSpeed2 = I2CMasterDataGet(0x40020000);
+   
+   I2CMasterSlaveAddrSet(0x40020000, device_address, 0);
+
+   
+   I2CMasterDataPut(0x40020000, device_register);
+
+   
+   I2CMasterControl(0x40020000, 0x00000007);
+
+   
+  
+
+   
+   I2CMasterSlaveAddrSet(0x40020000, device_address, 1);
+
+   
+   I2CMasterControl(0x40020000, 0x00000007);
+
+   
+   while(I2CMasterBusy(0x40020000));
+
+   
+   return( I2CMasterDataGet(0x40020000));
 	 
-	 return uSpeed2;
-}
-		
+ }
 		

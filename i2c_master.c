@@ -133,36 +133,31 @@ return 0;
 //}
 		
 		
-		//read specified register on slave device
-uint32_t I2CReceive(uint32_t slave_addr, uint8_t reg)
+uint8_t readI2C0(uint16_t device_address, uint16_t device_register)
 {
-    //specify that we are writing (a register address) to the
-    //slave device
-    I2CMasterSlaveAddrSet(I2C0_BASE, slave_addr, false);
- 
-    //specify register to be read
-    I2CMasterDataPut(I2C0_BASE, reg);
- 
-    //send control byte and register address byte to slave device
-    I2CMasterControl(I2C0_BASE, I2C_MASTER_CMD_BURST_SEND_START);
-     
-    //wait for MCU to finish transaction
-    while(I2CMasterBusy(I2C0_BASE));
-     
-    //specify that we are going to read from slave device
-    I2CMasterSlaveAddrSet(I2C0_BASE, slave_addr, true);
-     
-    //send control byte and read from the register we
-    //specified
-    I2CMasterControl(I2C0_BASE, I2C_MASTER_CMD_SINGLE_RECEIVE);
-     
-    //wait for MCU to finish transaction
-    while(I2CMasterBusy(I2C0_BASE));
-     
-    //return data pulled from the specified register
-   double uSpeed2 = I2CMasterDataGet(I2C0_BASE);
+   //specify that we want to communicate to device address with an intended write to bus
+   I2CMasterSlaveAddrSet(I2C0_BASE, device_address, false);
+
+   //the register to be read
+   I2CMasterDataPut(I2C0_BASE, device_register);
+
+   //send control byte and register address byte to slave device
+   I2CMasterControl(I2C0_BASE, I2C_MASTER_CMD_SINGLE_SEND);
+
+   //wait for MCU to complete send transaction
+  // while(I2CMasterBusy(I2C0_BASE));
+
+   //read from the specified slave device
+   I2CMasterSlaveAddrSet(I2C0_BASE, device_address, true);
+
+   //send control byte and read from the register from the MCU
+   I2CMasterControl(I2C0_BASE, I2C_MASTER_CMD_SINGLE_RECEIVE);
+
+   //wait while checking for MCU to complete the transaction
+   while(I2CMasterBusy(I2C0_BASE));
+
+   //Get the data from the MCU register and return to caller
+   return( I2CMasterDataGet(I2C0_BASE));
 	 
-	 return uSpeed2;
-}
-		
+ }
 		

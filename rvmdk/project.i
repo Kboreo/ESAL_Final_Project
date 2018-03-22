@@ -19709,7 +19709,7 @@ int  main(void)
 	
 		
 		i2c_send_rec();
-		speed = I2CReceive(0x3C, 0xFF);
+		speed = readI2C0(0x3C, 0xFF);
 		printf("rec is = %i", speed);
 	}
 }

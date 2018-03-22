@@ -102,8 +102,8 @@ project.c(86): warning:  #181-D: argument is incompatible with corresponding for
   	printf("speed read by encoder = %i \n\n", speed);
 project.c(93): warning:  #223-D: function "i2c_send_rec" declared implicitly
   		i2c_send_rec();
-project.c(94): warning:  #223-D: function "I2CReceive" declared implicitly
-  		speed = I2CReceive(0x3C, 0xFF);
+project.c(94): warning:  #223-D: function "readI2C0" declared implicitly
+  		speed = readI2C0(0x3C, 0xFF);
 project.c(95): warning:  #181-D: argument is incompatible with corresponding format string conversion
   		printf("rec is = %i", speed);
 project.c: 20 warnings, 0 errors
@@ -208,6 +208,35 @@ Speed_Control.c: 19 warnings, 0 errors
 creating preprocessor file for HAL_ADC.c...
 creating preprocessor file for myGPIO.c...
 compiling HAL_ADC.c...
+creating preprocessor file for i2c_master.c...
+compiling myGPIO.c...
+myGPIO.h(13): warning:  #1295-D: Deprecated declaration setup_IO - give arg types
+  void setup_IO();
+myGPIO.h(14): warning:  #1-D: last line of file ends without a newline
+  void pinReadAndWrite(uint32_t ui32Loop,uint8_t temp);
+myGPIO.c(19): warning:  #47-D: incompatible redefinition of macro "GPIO_PORTF_DATA_R"  (declared at line 701 of ".\driverlib\../inc/tm4c123gh6pm.h")
+  #define GPIO_PORTF_DATA_R       (*((volatile unsigned long *)0x400253FC))
+myGPIO.c(20): warning:  #47-D: incompatible redefinition of macro "GPIO_PORTF_DIR_R"  (declared at line 702 of ".\driverlib\../inc/tm4c123gh6pm.h")
+  #define GPIO_PORTF_DIR_R        (*((volatile unsigned long *)0x40025400))
+myGPIO.c(21): warning:  #47-D: incompatible redefinition of macro "GPIO_PORTF_AFSEL_R"  (declared at line 710 of ".\driverlib\../inc/tm4c123gh6pm.h")
+  #define GPIO_PORTF_AFSEL_R      (*((volatile unsigned long *)0x40025420))
+myGPIO.c(22): warning:  #47-D: incompatible redefinition of macro "GPIO_PORTF_PUR_R"  (declared at line 715 of ".\driverlib\../inc/tm4c123gh6pm.h")
+  #define GPIO_PORTF_PUR_R        (*((volatile unsigned long *)0x40025510))
+myGPIO.c(23): warning:  #47-D: incompatible redefinition of macro "GPIO_PORTF_DEN_R"  (declared at line 718 of ".\driverlib\../inc/tm4c123gh6pm.h")
+  #define GPIO_PORTF_DEN_R        (*((volatile unsigned long *)0x4002551C))
+myGPIO.c(24): warning:  #47-D: incompatible redefinition of macro "GPIO_PORTF_LOCK_R"  (declared at line 719 of ".\driverlib\../inc/tm4c123gh6pm.h")
+  #define GPIO_PORTF_LOCK_R       (*((volatile unsigned long *)0x40025520))
+myGPIO.c(25): warning:  #47-D: incompatible redefinition of macro "GPIO_PORTF_CR_R"  (declared at line 720 of ".\driverlib\../inc/tm4c123gh6pm.h")
+  #define GPIO_PORTF_CR_R         (*((volatile unsigned long *)0x40025524))
+myGPIO.c(26): warning:  #47-D: incompatible redefinition of macro "GPIO_PORTF_AMSEL_R"  (declared at line 721 of ".\driverlib\../inc/tm4c123gh6pm.h")
+  #define GPIO_PORTF_AMSEL_R      (*((volatile unsigned long *)0x40025528))
+myGPIO.c(27): warning:  #47-D: incompatible redefinition of macro "GPIO_PORTF_PCTL_R"  (declared at line 722 of ".\driverlib\../inc/tm4c123gh6pm.h")
+  #define GPIO_PORTF_PCTL_R       (*((volatile unsigned long *)0x4002552C))
+myGPIO.c(28): warning:  #47-D: incompatible redefinition of macro "SYSCTL_RCGC2_R"  (declared at line 2059 of ".\driverlib\../inc/tm4c123gh6pm.h")
+  #define SYSCTL_RCGC2_R          (*((volatile unsigned long *)0x400FE108))
+myGPIO.c(138): warning:  #1-D: last line of file ends without a newline
+  	
+myGPIO.c: 13 warnings, 0 errors
 compiling Calibrate.c...
 Read_Encoder.h(39): warning:  #1-D: last line of file ends without a newline
   double ReadEncoder(void);
@@ -248,35 +277,6 @@ Calibrate.h(45): warning:  #1-D: last line of file ends without a newline
 Calibrate.c(53): warning:  #223-D: function "stopmotor" declared implicitly
   	stopmotor();
 Calibrate.c: 19 warnings, 0 errors
-compiling myGPIO.c...
-myGPIO.h(13): warning:  #1295-D: Deprecated declaration setup_IO - give arg types
-  void setup_IO();
-myGPIO.h(14): warning:  #1-D: last line of file ends without a newline
-  void pinReadAndWrite(uint32_t ui32Loop,uint8_t temp);
-myGPIO.c(19): warning:  #47-D: incompatible redefinition of macro "GPIO_PORTF_DATA_R"  (declared at line 701 of ".\driverlib\../inc/tm4c123gh6pm.h")
-  #define GPIO_PORTF_DATA_R       (*((volatile unsigned long *)0x400253FC))
-myGPIO.c(20): warning:  #47-D: incompatible redefinition of macro "GPIO_PORTF_DIR_R"  (declared at line 702 of ".\driverlib\../inc/tm4c123gh6pm.h")
-  #define GPIO_PORTF_DIR_R        (*((volatile unsigned long *)0x40025400))
-myGPIO.c(21): warning:  #47-D: incompatible redefinition of macro "GPIO_PORTF_AFSEL_R"  (declared at line 710 of ".\driverlib\../inc/tm4c123gh6pm.h")
-  #define GPIO_PORTF_AFSEL_R      (*((volatile unsigned long *)0x40025420))
-myGPIO.c(22): warning:  #47-D: incompatible redefinition of macro "GPIO_PORTF_PUR_R"  (declared at line 715 of ".\driverlib\../inc/tm4c123gh6pm.h")
-  #define GPIO_PORTF_PUR_R        (*((volatile unsigned long *)0x40025510))
-myGPIO.c(23): warning:  #47-D: incompatible redefinition of macro "GPIO_PORTF_DEN_R"  (declared at line 718 of ".\driverlib\../inc/tm4c123gh6pm.h")
-  #define GPIO_PORTF_DEN_R        (*((volatile unsigned long *)0x4002551C))
-myGPIO.c(24): warning:  #47-D: incompatible redefinition of macro "GPIO_PORTF_LOCK_R"  (declared at line 719 of ".\driverlib\../inc/tm4c123gh6pm.h")
-  #define GPIO_PORTF_LOCK_R       (*((volatile unsigned long *)0x40025520))
-myGPIO.c(25): warning:  #47-D: incompatible redefinition of macro "GPIO_PORTF_CR_R"  (declared at line 720 of ".\driverlib\../inc/tm4c123gh6pm.h")
-  #define GPIO_PORTF_CR_R         (*((volatile unsigned long *)0x40025524))
-myGPIO.c(26): warning:  #47-D: incompatible redefinition of macro "GPIO_PORTF_AMSEL_R"  (declared at line 721 of ".\driverlib\../inc/tm4c123gh6pm.h")
-  #define GPIO_PORTF_AMSEL_R      (*((volatile unsigned long *)0x40025528))
-myGPIO.c(27): warning:  #47-D: incompatible redefinition of macro "GPIO_PORTF_PCTL_R"  (declared at line 722 of ".\driverlib\../inc/tm4c123gh6pm.h")
-  #define GPIO_PORTF_PCTL_R       (*((volatile unsigned long *)0x4002552C))
-myGPIO.c(28): warning:  #47-D: incompatible redefinition of macro "SYSCTL_RCGC2_R"  (declared at line 2059 of ".\driverlib\../inc/tm4c123gh6pm.h")
-  #define SYSCTL_RCGC2_R          (*((volatile unsigned long *)0x400FE108))
-myGPIO.c(138): warning:  #1-D: last line of file ends without a newline
-  	
-myGPIO.c: 13 warnings, 0 errors
-creating preprocessor file for i2c_master.c...
 compiling i2c_master.c...
 i2c_master.h(11): warning:  #1-D: last line of file ends without a newline
   #include <stdio.h>
@@ -436,11 +436,11 @@ inc/hw_ints.h(473): warning:  #47-D: incompatible redefinition of macro "INT_WTI
   #define INT_WTIMER5A            INT_CONCAT(INT_WTIMER5A_, INT_DEVICE_CLASS)
 inc/hw_ints.h(474): warning:  #47-D: incompatible redefinition of macro "INT_WTIMER5B"  (declared at line 120 of ".\inc\tm4c123gh6pm.h")
   #define INT_WTIMER5B            INT_CONCAT(INT_WTIMER5B_, INT_DEVICE_CLASS)
-i2c_master.c(168): warning:  #1-D: last line of file ends without a newline
+i2c_master.c(163): warning:  #1-D: last line of file ends without a newline
   		
 i2c_master.c: 80 warnings, 0 errors
 linking...
-Program Size: Code=8576 RO-data=1448 RW-data=100 ZI-data=396  
+Program Size: Code=8540 RO-data=1448 RW-data=100 ZI-data=396  
 FromELF: creating hex file...
 After Build - User command #1: fromelf --bin --output .\rvmdk\project.bin .\rvmdk\project.axf
 ".\rvmdk\project.axf" - 0 Error(s), 188 Warning(s).
@@ -466,7 +466,7 @@ Package Vendor: Keil
 <h2>Collection of Component Files used:</h2>
 
    * Component: ARM::CMSIS:CORE:5.0.1
-Build Time Elapsed:  00:00:12
+Build Time Elapsed:  00:00:10
 </pre>
 </body>
 </html>
