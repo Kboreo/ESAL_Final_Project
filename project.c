@@ -52,7 +52,7 @@ void SetupHardware()
 	FPULazyStackingEnable(); //inable lazy stack for floating point
 	//InitI2C0();
 	//SetupADC(); //setup to read motor voltage
-	I2C1_Slave_Init();
+	//I2C1_Slave_Init();
 	
 }
 
@@ -75,7 +75,7 @@ int  main(void)
 	{
 	//uSpeed = GetUserSpeed();//set uSpeed equal to the speed you want me to travel
 	
-	uSpeed = I2CGET();
+	//uSpeed = I2CGET();
 	printf("uSpeed in Project.c = %i \n\n", uSpeed);
 	
 
@@ -85,10 +85,13 @@ int  main(void)
 
 	printf("speed read by encoder = %i \n\n", speed);
 	
-	I2CSend(speed); //sends speed, i2c slave
+	//I2CSend(speed); //sends speed, i2c slave
 	
 	//*************************
 	//Write a function here to send "speed" to Levi
+		
+		 i2c_send_rec();
+		
 	}
 }
 	

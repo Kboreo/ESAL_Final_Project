@@ -19644,7 +19644,19 @@ void pinReadAndWrite(uint32_t ui32Loop,uint8_t temp);
 
 
 #line 58 "project.h"
-
+#line 1 "i2c_master.h"
+#line 2 "i2c_master.h"
+#line 3 "i2c_master.h"
+#line 4 "i2c_master.h"
+#line 5 "i2c_master.h"
+#line 6 "i2c_master.h"
+#line 7 "i2c_master.h"
+#line 8 "i2c_master.h"
+#line 9 "i2c_master.h"
+#line 10 "i2c_master.h"
+#line 11 "i2c_master.h"
+#line 12 "i2c_master.h"
+#line 59 "project.h"
 
 
 
@@ -19670,7 +19682,7 @@ void SetupHardware()
 	FPULazyStackingEnable(); 
 	
 	
-	I2C1_Slave_Init();
+	
 	
 }
 
@@ -19693,7 +19705,7 @@ int  main(void)
 	{
 	
 	
-	uSpeed = I2CGET();
+	
 	printf("uSpeed in Project.c = %i \n\n", uSpeed);
 	
 
@@ -19703,10 +19715,13 @@ int  main(void)
 
 	printf("speed read by encoder = %i \n\n", speed);
 	
-	I2CSend(speed); 
 	
 	
 	
+	
+		
+		 i2c_send_rec();
+		
 	}
 }
 	

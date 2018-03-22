@@ -66774,7 +66774,21 @@ N//#include "hw_types.h"
 W "i2c.h" 11 21 last line of file ends without a newline
 N//#include <stdio.h>
 L 58 "project.h" 2
-N//#include "i2c_master.h"
+N#include "i2c_master.h"
+L 1 "i2c_master.h" 1
+N#include <stdbool.h>
+N#include <stdint.h>
+N#include "sysctl.h"
+N#include "hw_memmap.h"
+N#include "gpio.h"
+N#include "adc.h"
+N#include "uart.h"
+N#include "tm4c123gh6pm.h"
+N#include "hw_gpio.h"
+N#include "hw_types.h"
+W "i2c_master.h" 11 19 last line of file ends without a newline
+N#include <stdio.h>
+L 59 "project.h" 2
 N//#include "i2c_slave.h"
 N//#incldue "i2c_doc.h"
 N
@@ -66809,8 +66823,7 @@ N	FPUEnable();	//inable floating point
 N	FPULazyStackingEnable(); //inable lazy stack for floating point
 N	//InitI2C0();
 N	//SetupADC(); //setup to read motor voltage
-W "project.c" 55 2 function "I2C1_Slave_Init" declared implicitly
-N	I2C1_Slave_Init();
+N	//I2C1_Slave_Init();
 N	
 N}
 N
@@ -66833,8 +66846,7 @@ N	while(1)
 N	{
 N	//uSpeed = GetUserSpeed();//set uSpeed equal to the speed you want me to travel
 N	
-W "project.c" 78 11 function "I2CGET" declared implicitly
-N	uSpeed = I2CGET();
+N	//uSpeed = I2CGET();
 W "project.c" 79 42 argument is incompatible with corresponding format string conversion
 N	printf("uSpeed in Project.c = %i \n\n", uSpeed);
 N	
@@ -66847,11 +66859,14 @@ N
 W "project.c" 86 44 argument is incompatible with corresponding format string conversion
 N	printf("speed read by encoder = %i \n\n", speed);
 N	
-W "project.c" 88 2 function "I2CSend" declared implicitly
-N	I2CSend(speed); //sends speed, i2c slave
+N	//I2CSend(speed); //sends speed, i2c slave
 N	
 N	//*************************
 N	//Write a function here to send "speed" to Levi
+N		
+W "project.c" 93 4 function "i2c_send_rec" declared implicitly
+N		 i2c_send_rec();
+N		
 N	}
 N}
 N	

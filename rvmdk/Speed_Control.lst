@@ -67164,7 +67164,21 @@ N//#include "hw_types.h"
 W "i2c.h" 11 21 last line of file ends without a newline
 N//#include <stdio.h>
 L 58 "project.h" 2
-N//#include "i2c_master.h"
+N#include "i2c_master.h"
+L 1 "i2c_master.h" 1
+N#include <stdbool.h>
+N#include <stdint.h>
+N#include "sysctl.h"
+N#include "hw_memmap.h"
+N#include "gpio.h"
+N#include "adc.h"
+N#include "uart.h"
+N#include "tm4c123gh6pm.h"
+N#include "hw_gpio.h"
+N#include "hw_types.h"
+W "i2c_master.h" 11 19 last line of file ends without a newline
+N#include <stdio.h>
+L 59 "project.h" 2
 N//#include "i2c_slave.h"
 N//#incldue "i2c_doc.h"
 N
