@@ -73,16 +73,17 @@ void I2C0_Master_Init(void)
 
 }
 
-int i2c_send_rec(void)
+int i2c_send(void)
 {
-    SysCtlClockSet(SYSCTL_SYSDIV_1| SYSCTL_USE_OSC| SYSCTL_OSC_MAIN| SYSCTL_XTAL_16MHZ);
+    //SysCtlClockSet(SYSCTL_SYSDIV_1| SYSCTL_USE_OSC| SYSCTL_OSC_MAIN| SYSCTL_XTAL_16MHZ);
 
-    InitConsole();
-    I2C0_Master_Init();
+			InitConsole();
+			I2C0_Master_Init();
+	
 
-    IntEnable(INT_I2C0);
-    I2CMasterIntEnableEx(I2C0_BASE, I2C_MASTER_INT_DATA);
-    IntMasterEnable();
+//    IntEnable(INT_I2C0);
+//    I2CMasterIntEnableEx(I2C0_BASE, I2C_MASTER_INT_DATA);
+//    IntMasterEnable();
 
    // printf("Master --> Slave \n");
 
@@ -139,13 +140,17 @@ return 0;
 int I2CReceive(void)
 {
 	
+	InitConsole();
+	I2C0_Master_Init();
+
 	
+	I2C0MasterIntHandler();
 
    //specify that we want to communicate to device address with an intended write to bus
-   I2CMasterSlaveAddrSet(I2C0_BASE, 0x3c, false);
+   I2CMasterSlaveAddrSet(I2C0_BASE, 0x3c, true);
 
    //the register to be read
-   I2CMasterDataPut(I2C0_BASE, 0xfc);
+   I2CMasterDataPut(I2C0_BASE, 0xfb);
 
    //send control byte and register address byte to slave device
    I2CMasterControl(I2C0_BASE, I2C_MASTER_CMD_SINGLE_SEND);
@@ -164,6 +169,9 @@ int I2CReceive(void)
 
    //Get the data from the MCU register and return to caller
    return( I2CMasterDataGet(I2C0_BASE));
+	 
+	 double dspeed 
+	 
  }
 
 		

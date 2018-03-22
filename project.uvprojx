@@ -476,11 +476,6 @@
               <FilePath>.\Speed_Control.c</FilePath>
             </File>
             <File>
-              <FileName>i2c_master.c</FileName>
-              <FileType>1</FileType>
-              <FilePath>.\i2c_master.c</FilePath>
-            </File>
-            <File>
               <FileName>Speed_Control.h</FileName>
               <FileType>5</FileType>
               <FilePath>.\Speed_Control.h</FilePath>
@@ -524,6 +519,11 @@
               <FileName>myGPIO.h</FileName>
               <FileType>5</FileType>
               <FilePath>.\myGPIO.h</FilePath>
+            </File>
+            <File>
+              <FileName>i2c_master.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>.\i2c_master.c</FilePath>
             </File>
             <File>
               <FileName>i2c_master.h</FileName>

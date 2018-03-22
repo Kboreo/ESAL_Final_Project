@@ -67579,10 +67579,9 @@ N	//uSpeed = I2CGET();
 N//	printf("uSpeed in Project.c = %i \n\n", uSpeed);
 N	
 N
-W "project.c" 82 2 function "Speed_Control" declared implicitly
-N	Speed_Control(speed, uSpeed);
 N	
-N	speed = ReadEncoder(); // this will set speed equal to the current speed
+N	
+N // this will set speed equal to the current speed
 N
 N//	printf("speed read by encoder = %i \n\n", speed);
 N	
@@ -67590,12 +67589,20 @@ N	//I2CSend(speed); //sends speed, i2c slave
 N	
 N	//*************************
 N	//Write a function here to send "speed" to Levi
+N		speed = ReadEncoder();	
 N		
-W "project.c" 93 3 function "i2c_send_rec" declared implicitly
-N		i2c_send_rec();
+W "project.c" 94 3 function "i2c_send" declared implicitly
+N		i2c_send();
+N	
+W "project.c" 96 3 function "Speed_Control" declared implicitly
+N		Speed_Control(speed, uSpeed);	
+N		
+N		speed = ReadEncoder();
+N		
 N		uSpeed = I2CReceive();
-W "project.c" 95 25 argument is incompatible with corresponding format string conversion
-N		printf("rec is = %d", uSpeed);
+N		
+W "project.c" 102 25 argument is incompatible with corresponding format string conversion
+N		printf("rec is = %i", uSpeed);
 N	}
 N}
 N	

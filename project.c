@@ -79,9 +79,9 @@ int  main(void)
 //	printf("uSpeed in Project.c = %i \n\n", uSpeed);
 	
 
-	Speed_Control(speed, uSpeed);
 	
-	speed = ReadEncoder(); // this will set speed equal to the current speed
+	
+ // this will set speed equal to the current speed
 
 //	printf("speed read by encoder = %i \n\n", speed);
 	
@@ -89,10 +89,17 @@ int  main(void)
 	
 	//*************************
 	//Write a function here to send "speed" to Levi
+		speed = ReadEncoder();	
 		
-		i2c_send_rec();
+		i2c_send();
+	
+		Speed_Control(speed, uSpeed);	
+		
+		speed = ReadEncoder();
+		
 		uSpeed = I2CReceive();
-		printf("rec is = %d", uSpeed);
+		
+		printf("rec is = %i", uSpeed);
 	}
 }
 	

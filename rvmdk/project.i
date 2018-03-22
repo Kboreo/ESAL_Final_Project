@@ -20422,9 +20422,9 @@ int  main(void)
 
 	
 
-	Speed_Control(speed, uSpeed);
 	
-	speed = ReadEncoder(); 
+	
+ 
 
 
 	
@@ -20432,10 +20432,17 @@ int  main(void)
 	
 	
 	
+		speed = ReadEncoder();	
 		
-		i2c_send_rec();
+		i2c_send();
+	
+		Speed_Control(speed, uSpeed);	
+		
+		speed = ReadEncoder();
+		
 		uSpeed = I2CReceive();
-		printf("rec is = %d", uSpeed);
+		
+		printf("rec is = %i", uSpeed);
 	}
 }
 	

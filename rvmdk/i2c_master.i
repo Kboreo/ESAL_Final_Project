@@ -20175,16 +20175,17 @@ void I2C0_Master_Init(void)
 
 }
 
-int i2c_send_rec(void)
+int i2c_send(void)
 {
-    SysCtlClockSet(0x07800000| 0x00003800| 0x00000000| 0x00000540);
+    
 
-    InitConsole();
-    I2C0_Master_Init();
+			InitConsole();
+			I2C0_Master_Init();
+	
 
-    IntEnable(24);
-    I2CMasterIntEnableEx(0x40020000, 0x00000001);
-    IntMasterEnable();
+
+
+
 
    
 
@@ -20241,13 +20242,17 @@ return 0;
 int I2CReceive(void)
 {
 	
+	InitConsole();
+	I2C0_Master_Init();
+
 	
+	I2C0MasterIntHandler();
 
    
-   I2CMasterSlaveAddrSet(0x40020000, 0x3c, 0);
+   I2CMasterSlaveAddrSet(0x40020000, 0x3c, 1);
 
    
-   I2CMasterDataPut(0x40020000, 0xfc);
+   I2CMasterDataPut(0x40020000, 0xfb);
 
    
    I2CMasterControl(0x40020000, 0x00000007);
@@ -20266,6 +20271,7 @@ int I2CReceive(void)
 
    
    return( I2CMasterDataGet(0x40020000));
+	 
  }
 
 		
