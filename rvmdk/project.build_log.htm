@@ -26,9 +26,441 @@ Project File Date:  03/22/2018
 
 <h2>Output:</h2>
 *** Using Compiler 'V5.06 update 5 (build 528)', folder: 'C:\Keil_v5\ARM\ARMCC\Bin'
-Build target 'project'
+Rebuild target 'project'
+creating preprocessor file for project.c...
+assembling startup_rvmdk.S...
+creating preprocessor file for Encoder.c...
+creating preprocessor file for myPWM.c...
+compiling myPWM.c...
+myPWM.c(71): warning:  #1-D: last line of file ends without a newline
+  	
+myPWM.c: 1 warning, 0 errors
+compiling Encoder.c...
+Read_Encoder.h(39): warning:  #1-D: last line of file ends without a newline
+  double ReadEncoder(void);
+Encoder.h(28): warning:  #1-D: last line of file ends without a newline
+  void QEIConfigure(uint32_t ui32Base, uint32_t ui32Config, uint32_t ui32MaxPosition);
+Encoder.c(18): warning:  #47-D: incompatible redefinition of macro "GPIO_PORTF_DATA_R"  (declared at line 701 of ".\inc\tm4c123gh6pm.h")
+  #define GPIO_PORTF_DATA_R       (*((volatile unsigned long *)0x400073FC))
+Encoder.c(19): warning:  #47-D: incompatible redefinition of macro "GPIO_PORTF_DIR_R"  (declared at line 702 of ".\inc\tm4c123gh6pm.h")
+  #define GPIO_PORTF_DIR_R        (*((volatile unsigned long *)0x40007400))
+Encoder.c(20): warning:  #47-D: incompatible redefinition of macro "GPIO_PORTF_AFSEL_R"  (declared at line 710 of ".\inc\tm4c123gh6pm.h")
+  #define GPIO_PORTF_AFSEL_R      (*((volatile unsigned long *)0x40007420))
+Encoder.c(21): warning:  #47-D: incompatible redefinition of macro "GPIO_PORTF_PUR_R"  (declared at line 715 of ".\inc\tm4c123gh6pm.h")
+  #define GPIO_PORTF_PUR_R        (*((volatile unsigned long *)0x40007510))
+Encoder.c(22): warning:  #47-D: incompatible redefinition of macro "GPIO_PORTF_DEN_R"  (declared at line 718 of ".\inc\tm4c123gh6pm.h")
+  #define GPIO_PORTF_DEN_R        (*((volatile unsigned long *)0x4000751C))
+Encoder.c(23): warning:  #47-D: incompatible redefinition of macro "GPIO_PORTF_LOCK_R"  (declared at line 719 of ".\inc\tm4c123gh6pm.h")
+  #define GPIO_PORTF_LOCK_R       (*((volatile unsigned long *)0x40007520))
+Encoder.c(24): warning:  #47-D: incompatible redefinition of macro "GPIO_PORTF_CR_R"  (declared at line 720 of ".\inc\tm4c123gh6pm.h")
+  #define GPIO_PORTF_CR_R         (*((volatile unsigned long *)0x40007524))
+Encoder.c(25): warning:  #47-D: incompatible redefinition of macro "GPIO_PORTF_AMSEL_R"  (declared at line 721 of ".\inc\tm4c123gh6pm.h")
+  #define GPIO_PORTF_AMSEL_R      (*((volatile unsigned long *)0x40007528))
+Encoder.c(26): warning:  #47-D: incompatible redefinition of macro "GPIO_PORTF_PCTL_R"  (declared at line 722 of ".\inc\tm4c123gh6pm.h")
+  #define GPIO_PORTF_PCTL_R       (*((volatile unsigned long *)0x4000752C))
+Encoder.c(27): warning:  #47-D: incompatible redefinition of macro "SYSCTL_RCGC2_R"  (declared at line 2059 of ".\inc\tm4c123gh6pm.h")
+  #define SYSCTL_RCGC2_R          (*((volatile unsigned long *)0x400FE108))
+Encoder.c(28): warning:  #47-D: incompatible redefinition of macro "SYSCTL_RCGCGPIO_R"  (declared at line 2113 of ".\inc\tm4c123gh6pm.h")
+  #define SYSCTL_RCGCGPIO_R				(*((volatile unsigned long *)0x400FE644))
+Encoder.c(75): warning:  #1-D: last line of file ends without a newline
+  	
+Encoder.c: 14 warnings, 0 errors
+compiling project.c...
+driverlib/hibernate.h(229): warning:  #231-D: declaration is not visible outside of function
+  extern void HibernateCalendarSet(struct tm *psTime);
+driverlib/hibernate.h(230): warning:  #231-D: declaration is not visible outside of function
+  extern int HibernateCalendarGet(struct tm *psTime);
+driverlib/hibernate.h(231): warning:  #231-D: declaration is not visible outside of function
+  extern void HibernateCalendarMatchSet(uint32_t ui32Index, struct tm *psTime);
+driverlib/hibernate.h(232): warning:  #231-D: declaration is not visible outside of function
+  extern void HibernateCalendarMatchGet(uint32_t ui32Index, struct tm *psTime);
+Read_Encoder.h(39): warning:  #1-D: last line of file ends without a newline
+  double ReadEncoder(void);
+Get_Speed.h(13): warning:  #1-D: last line of file ends without a newline
+   double GetUserSpeed(void);
+Read_Encoder.h(39): warning:  #1-D: last line of file ends without a newline
+  double ReadEncoder(void);
+Calibrate.h(45): warning:  #1-D: last line of file ends without a newline
+  void initialize_aandw(void);
+myGPIO.h(13): warning:  #1295-D: Deprecated declaration setup_IO - give arg types
+  void setup_IO();
+myGPIO.h(14): warning:  #1-D: last line of file ends without a newline
+  void pinReadAndWrite(uint32_t ui32Loop,uint8_t temp);
+i2c.h(11): warning:  #1-D: last line of file ends without a newline
+  //#include <stdio.h>
+i2c_master.h(11): warning:  #1-D: last line of file ends without a newline
+  #include <stdio.h>
+project.c(48): warning:  #223-D: function "FloatSetup" declared implicitly
+  	FloatSetup(); //setup to allow floating point print 
+project.c(49): warning:  #223-D: function "setupENCODER" declared implicitly
+  	setupENCODER();	 //setup to read motor encoder
+project.c(50): warning:  #223-D: function "setupPWM" declared implicitly
+  	setupPWM();	//setup PWM output
+project.c(79): warning:  #181-D: argument is incompatible with corresponding format string conversion
+  	printf("uSpeed in Project.c = %i \n\n", uSpeed);
+project.c(82): warning:  #223-D: function "Speed_Control" declared implicitly
+  	Speed_Control(speed, uSpeed);
+project.c(86): warning:  #181-D: argument is incompatible with corresponding format string conversion
+  	printf("speed read by encoder = %i \n\n", speed);
+project.c(93): warning:  #223-D: function "i2c_send_rec" declared implicitly
+  		i2c_send_rec();
+project.c(94): warning:  #223-D: function "I2CReceive" declared implicitly
+  		speed = I2CReceive(0x3C, 0xFF);
+project.c(95): warning:  #181-D: argument is incompatible with corresponding format string conversion
+  		printf("rec is = %i", speed);
+project.c: 21 warnings, 0 errors
+creating preprocessor file for Float_Setup.c...
+creating preprocessor file for Uart_helper.c...
+compiling Float_Setup.c...
+Float_Setup.h(35): warning:  #1-D: last line of file ends without a newline
+  #include "Uart_helper.h"
+Read_Encoder.h(39): warning:  #1-D: last line of file ends without a newline
+  double ReadEncoder(void);
+Encoder.h(28): warning:  #1-D: last line of file ends without a newline
+  void QEIConfigure(uint32_t ui32Base, uint32_t ui32Config, uint32_t ui32MaxPosition);
+Float_Setup.c(29): warning:  #1-D: last line of file ends without a newline
+   
+Float_Setup.c: 4 warnings, 0 errors
+creating preprocessor file for Read_Encoder.c...
+compiling Uart_helper.c...
+src\Uart_helper.c(85): warning:  #1-D: last line of file ends without a newline
+  }
+src\Uart_helper.c: 1 warning, 0 errors
+creating preprocessor file for Speed_Control.c...
+creating preprocessor file for Get_Speed.c...
+compiling Get_Speed.c...
+Get_Speed.h(13): warning:  #1-D: last line of file ends without a newline
+   double GetUserSpeed(void);
+Get_Speed.c(27): warning:  #1-D: last line of file ends without a newline
+  }
+Get_Speed.c: 2 warnings, 0 errors
+compiling Read_Encoder.c...
+Read_Encoder.h(39): warning:  #1-D: last line of file ends without a newline
+  double ReadEncoder(void);
+Read_Encoder.h(39): warning:  #1-D: last line of file ends without a newline
+  double ReadEncoder(void);
+Encoder.h(28): warning:  #1-D: last line of file ends without a newline
+  void QEIConfigure(uint32_t ui32Base, uint32_t ui32Config, uint32_t ui32MaxPosition);
+driverlib/hibernate.h(229): warning:  #231-D: declaration is not visible outside of function
+  extern void HibernateCalendarSet(struct tm *psTime);
+driverlib/hibernate.h(230): warning:  #231-D: declaration is not visible outside of function
+  extern int HibernateCalendarGet(struct tm *psTime);
+driverlib/hibernate.h(231): warning:  #231-D: declaration is not visible outside of function
+  extern void HibernateCalendarMatchSet(uint32_t ui32Index, struct tm *psTime);
+driverlib/hibernate.h(232): warning:  #231-D: declaration is not visible outside of function
+  extern void HibernateCalendarMatchGet(uint32_t ui32Index, struct tm *psTime);
+Read_Encoder.h(39): warning:  #1-D: last line of file ends without a newline
+  double ReadEncoder(void);
+Get_Speed.h(13): warning:  #1-D: last line of file ends without a newline
+   double GetUserSpeed(void);
+Read_Encoder.h(39): warning:  #1-D: last line of file ends without a newline
+  double ReadEncoder(void);
+Calibrate.h(45): warning:  #1-D: last line of file ends without a newline
+  void initialize_aandw(void);
+myGPIO.h(13): warning:  #1295-D: Deprecated declaration setup_IO - give arg types
+  void setup_IO();
+myGPIO.h(14): warning:  #1-D: last line of file ends without a newline
+  void pinReadAndWrite(uint32_t ui32Loop,uint8_t temp);
+i2c.h(11): warning:  #1-D: last line of file ends without a newline
+  //#include <stdio.h>
+i2c_master.h(11): warning:  #1-D: last line of file ends without a newline
+  #include <stdio.h>
+Read_Encoder.c(34): warning:  #1-D: last line of file ends without a newline
+  	//int direction = QEIDirectionGet(QEI0_BASE);
+Read_Encoder.c: 16 warnings, 0 errors
+creating preprocessor file for Calibrate.c...
+compiling Speed_Control.c...
+Read_Encoder.h(39): warning:  #1-D: last line of file ends without a newline
+  double ReadEncoder(void);
+Read_Encoder.h(39): warning:  #1-D: last line of file ends without a newline
+  double ReadEncoder(void);
+Encoder.h(28): warning:  #1-D: last line of file ends without a newline
+  void QEIConfigure(uint32_t ui32Base, uint32_t ui32Config, uint32_t ui32MaxPosition);
+driverlib/hibernate.h(229): warning:  #231-D: declaration is not visible outside of function
+  extern void HibernateCalendarSet(struct tm *psTime);
+driverlib/hibernate.h(230): warning:  #231-D: declaration is not visible outside of function
+  extern int HibernateCalendarGet(struct tm *psTime);
+driverlib/hibernate.h(231): warning:  #231-D: declaration is not visible outside of function
+  extern void HibernateCalendarMatchSet(uint32_t ui32Index, struct tm *psTime);
+driverlib/hibernate.h(232): warning:  #231-D: declaration is not visible outside of function
+  extern void HibernateCalendarMatchGet(uint32_t ui32Index, struct tm *psTime);
+Read_Encoder.h(39): warning:  #1-D: last line of file ends without a newline
+  double ReadEncoder(void);
+Get_Speed.h(13): warning:  #1-D: last line of file ends without a newline
+   double GetUserSpeed(void);
+Read_Encoder.h(39): warning:  #1-D: last line of file ends without a newline
+  double ReadEncoder(void);
+Calibrate.h(45): warning:  #1-D: last line of file ends without a newline
+  void initialize_aandw(void);
+myGPIO.h(13): warning:  #1295-D: Deprecated declaration setup_IO - give arg types
+  void setup_IO();
+myGPIO.h(14): warning:  #1-D: last line of file ends without a newline
+  void pinReadAndWrite(uint32_t ui32Loop,uint8_t temp);
+i2c.h(11): warning:  #1-D: last line of file ends without a newline
+  //#include <stdio.h>
+i2c_master.h(11): warning:  #1-D: last line of file ends without a newline
+  #include <stdio.h>
+Read_Encoder.h(39): warning:  #1-D: last line of file ends without a newline
+  double ReadEncoder(void);
+Speed_Control.h(38): warning:  #1-D: last line of file ends without a newline
+  void Speed_Control(double Speed, double uSpeed);
+Speed_Control.c(55): warning:  #175-D: subscript out of range
+  				Error[4]=Error[3];
+Speed_Control.c(96): warning:  #223-D: function "stopmotor" declared implicitly
+  					stopmotor();	
+Speed_Control.c(32): warning:  #177-D: variable "i"  was declared but never referenced
+  	int i = 1;
+Speed_Control.c: 20 warnings, 0 errors
+creating preprocessor file for HAL_ADC.c...
+creating preprocessor file for myGPIO.c...
+compiling HAL_ADC.c...
+creating preprocessor file for i2c.c...
+compiling Calibrate.c...
+Read_Encoder.h(39): warning:  #1-D: last line of file ends without a newline
+  double ReadEncoder(void);
+Read_Encoder.h(39): warning:  #1-D: last line of file ends without a newline
+  double ReadEncoder(void);
+Encoder.h(28): warning:  #1-D: last line of file ends without a newline
+  void QEIConfigure(uint32_t ui32Base, uint32_t ui32Config, uint32_t ui32MaxPosition);
+driverlib/hibernate.h(229): warning:  #231-D: declaration is not visible outside of function
+  extern void HibernateCalendarSet(struct tm *psTime);
+driverlib/hibernate.h(230): warning:  #231-D: declaration is not visible outside of function
+  extern int HibernateCalendarGet(struct tm *psTime);
+driverlib/hibernate.h(231): warning:  #231-D: declaration is not visible outside of function
+  extern void HibernateCalendarMatchSet(uint32_t ui32Index, struct tm *psTime);
+driverlib/hibernate.h(232): warning:  #231-D: declaration is not visible outside of function
+  extern void HibernateCalendarMatchGet(uint32_t ui32Index, struct tm *psTime);
+Read_Encoder.h(39): warning:  #1-D: last line of file ends without a newline
+  double ReadEncoder(void);
+Get_Speed.h(13): warning:  #1-D: last line of file ends without a newline
+   double GetUserSpeed(void);
+Read_Encoder.h(39): warning:  #1-D: last line of file ends without a newline
+  double ReadEncoder(void);
+Calibrate.h(45): warning:  #1-D: last line of file ends without a newline
+  void initialize_aandw(void);
+myGPIO.h(13): warning:  #1295-D: Deprecated declaration setup_IO - give arg types
+  void setup_IO();
+myGPIO.h(14): warning:  #1-D: last line of file ends without a newline
+  void pinReadAndWrite(uint32_t ui32Loop,uint8_t temp);
+i2c.h(11): warning:  #1-D: last line of file ends without a newline
+  //#include <stdio.h>
+i2c_master.h(11): warning:  #1-D: last line of file ends without a newline
+  #include <stdio.h>
+Read_Encoder.h(39): warning:  #1-D: last line of file ends without a newline
+  double ReadEncoder(void);
+Speed_Control.h(38): warning:  #1-D: last line of file ends without a newline
+  void Speed_Control(double Speed, double uSpeed);
+Read_Encoder.h(39): warning:  #1-D: last line of file ends without a newline
+  double ReadEncoder(void);
+Calibrate.h(45): warning:  #1-D: last line of file ends without a newline
+  void initialize_aandw(void);
+Calibrate.c(53): warning:  #223-D: function "stopmotor" declared implicitly
+  	stopmotor();
+Calibrate.c: 20 warnings, 0 errors
+compiling myGPIO.c...
+myGPIO.h(13): warning:  #1295-D: Deprecated declaration setup_IO - give arg types
+  void setup_IO();
+myGPIO.h(14): warning:  #1-D: last line of file ends without a newline
+  void pinReadAndWrite(uint32_t ui32Loop,uint8_t temp);
+myGPIO.c(19): warning:  #47-D: incompatible redefinition of macro "GPIO_PORTF_DATA_R"  (declared at line 701 of ".\driverlib\../inc/tm4c123gh6pm.h")
+  #define GPIO_PORTF_DATA_R       (*((volatile unsigned long *)0x400253FC))
+myGPIO.c(20): warning:  #47-D: incompatible redefinition of macro "GPIO_PORTF_DIR_R"  (declared at line 702 of ".\driverlib\../inc/tm4c123gh6pm.h")
+  #define GPIO_PORTF_DIR_R        (*((volatile unsigned long *)0x40025400))
+myGPIO.c(21): warning:  #47-D: incompatible redefinition of macro "GPIO_PORTF_AFSEL_R"  (declared at line 710 of ".\driverlib\../inc/tm4c123gh6pm.h")
+  #define GPIO_PORTF_AFSEL_R      (*((volatile unsigned long *)0x40025420))
+myGPIO.c(22): warning:  #47-D: incompatible redefinition of macro "GPIO_PORTF_PUR_R"  (declared at line 715 of ".\driverlib\../inc/tm4c123gh6pm.h")
+  #define GPIO_PORTF_PUR_R        (*((volatile unsigned long *)0x40025510))
+myGPIO.c(23): warning:  #47-D: incompatible redefinition of macro "GPIO_PORTF_DEN_R"  (declared at line 718 of ".\driverlib\../inc/tm4c123gh6pm.h")
+  #define GPIO_PORTF_DEN_R        (*((volatile unsigned long *)0x4002551C))
+myGPIO.c(24): warning:  #47-D: incompatible redefinition of macro "GPIO_PORTF_LOCK_R"  (declared at line 719 of ".\driverlib\../inc/tm4c123gh6pm.h")
+  #define GPIO_PORTF_LOCK_R       (*((volatile unsigned long *)0x40025520))
+myGPIO.c(25): warning:  #47-D: incompatible redefinition of macro "GPIO_PORTF_CR_R"  (declared at line 720 of ".\driverlib\../inc/tm4c123gh6pm.h")
+  #define GPIO_PORTF_CR_R         (*((volatile unsigned long *)0x40025524))
+myGPIO.c(26): warning:  #47-D: incompatible redefinition of macro "GPIO_PORTF_AMSEL_R"  (declared at line 721 of ".\driverlib\../inc/tm4c123gh6pm.h")
+  #define GPIO_PORTF_AMSEL_R      (*((volatile unsigned long *)0x40025528))
+myGPIO.c(27): warning:  #47-D: incompatible redefinition of macro "GPIO_PORTF_PCTL_R"  (declared at line 722 of ".\driverlib\../inc/tm4c123gh6pm.h")
+  #define GPIO_PORTF_PCTL_R       (*((volatile unsigned long *)0x4002552C))
+myGPIO.c(28): warning:  #47-D: incompatible redefinition of macro "SYSCTL_RCGC2_R"  (declared at line 2059 of ".\driverlib\../inc/tm4c123gh6pm.h")
+  #define SYSCTL_RCGC2_R          (*((volatile unsigned long *)0x400FE108))
+myGPIO.c(138): warning:  #1-D: last line of file ends without a newline
+  	
+myGPIO.c: 13 warnings, 0 errors
+compiling i2c.c...
+i2c.c(147): warning:  #1-D: last line of file ends without a newline
+  //}
+i2c.c: 1 warning, 0 errors
+creating preprocessor file for i2c_master.c...
+creating preprocessor file for i2c_slave.c...
+compiling i2c_slave.c...
+creating preprocessor file for i2c_doc.c...
+compiling i2c_master.c...
+i2c_master.h(11): warning:  #1-D: last line of file ends without a newline
+  #include <stdio.h>
+inc/hw_ints.h(352): warning:  #47-D: incompatible redefinition of macro "INT_ADC0SS0"  (declared at line 62 of ".\inc\tm4c123gh6pm.h")
+  #define INT_ADC0SS0             INT_CONCAT(INT_ADC0SS0_, INT_DEVICE_CLASS)
+inc/hw_ints.h(353): warning:  #47-D: incompatible redefinition of macro "INT_ADC0SS1"  (declared at line 63 of ".\inc\tm4c123gh6pm.h")
+  #define INT_ADC0SS1             INT_CONCAT(INT_ADC0SS1_, INT_DEVICE_CLASS)
+inc/hw_ints.h(354): warning:  #47-D: incompatible redefinition of macro "INT_ADC0SS2"  (declared at line 64 of ".\inc\tm4c123gh6pm.h")
+  #define INT_ADC0SS2             INT_CONCAT(INT_ADC0SS2_, INT_DEVICE_CLASS)
+inc/hw_ints.h(355): warning:  #47-D: incompatible redefinition of macro "INT_ADC0SS3"  (declared at line 65 of ".\inc\tm4c123gh6pm.h")
+  #define INT_ADC0SS3             INT_CONCAT(INT_ADC0SS3_, INT_DEVICE_CLASS)
+inc/hw_ints.h(356): warning:  #47-D: incompatible redefinition of macro "INT_ADC1SS0"  (declared at line 92 of ".\inc\tm4c123gh6pm.h")
+  #define INT_ADC1SS0             INT_CONCAT(INT_ADC1SS0_, INT_DEVICE_CLASS)
+inc/hw_ints.h(357): warning:  #47-D: incompatible redefinition of macro "INT_ADC1SS1"  (declared at line 93 of ".\inc\tm4c123gh6pm.h")
+  #define INT_ADC1SS1             INT_CONCAT(INT_ADC1SS1_, INT_DEVICE_CLASS)
+inc/hw_ints.h(358): warning:  #47-D: incompatible redefinition of macro "INT_ADC1SS2"  (declared at line 94 of ".\inc\tm4c123gh6pm.h")
+  #define INT_ADC1SS2             INT_CONCAT(INT_ADC1SS2_, INT_DEVICE_CLASS)
+inc/hw_ints.h(359): warning:  #47-D: incompatible redefinition of macro "INT_ADC1SS3"  (declared at line 95 of ".\inc\tm4c123gh6pm.h")
+  #define INT_ADC1SS3             INT_CONCAT(INT_ADC1SS3_, INT_DEVICE_CLASS)
+inc/hw_ints.h(361): warning:  #47-D: incompatible redefinition of macro "INT_CAN0"  (declared at line 85 of ".\inc\tm4c123gh6pm.h")
+  #define INT_CAN0                INT_CONCAT(INT_CAN0_, INT_DEVICE_CLASS)
+inc/hw_ints.h(362): warning:  #47-D: incompatible redefinition of macro "INT_CAN1"  (declared at line 86 of ".\inc\tm4c123gh6pm.h")
+  #define INT_CAN1                INT_CONCAT(INT_CAN1_, INT_DEVICE_CLASS)
+inc/hw_ints.h(363): warning:  #47-D: incompatible redefinition of macro "INT_COMP0"  (declared at line 73 of ".\inc\tm4c123gh6pm.h")
+  #define INT_COMP0               INT_CONCAT(INT_COMP0_, INT_DEVICE_CLASS)
+inc/hw_ints.h(364): warning:  #47-D: incompatible redefinition of macro "INT_COMP1"  (declared at line 74 of ".\inc\tm4c123gh6pm.h")
+  #define INT_COMP1               INT_CONCAT(INT_COMP1_, INT_DEVICE_CLASS)
+inc/hw_ints.h(369): warning:  #47-D: incompatible redefinition of macro "INT_FLASH"  (declared at line 76 of ".\inc\tm4c123gh6pm.h")
+  #define INT_FLASH               INT_CONCAT(INT_FLASH_, INT_DEVICE_CLASS)
+inc/hw_ints.h(370): warning:  #47-D: incompatible redefinition of macro "INT_GPIOA"  (declared at line 48 of ".\inc\tm4c123gh6pm.h")
+  #define INT_GPIOA               INT_CONCAT(INT_GPIOA_, INT_DEVICE_CLASS)
+inc/hw_ints.h(371): warning:  #47-D: incompatible redefinition of macro "INT_GPIOB"  (declared at line 49 of ".\inc\tm4c123gh6pm.h")
+  #define INT_GPIOB               INT_CONCAT(INT_GPIOB_, INT_DEVICE_CLASS)
+inc/hw_ints.h(372): warning:  #47-D: incompatible redefinition of macro "INT_GPIOC"  (declared at line 50 of ".\inc\tm4c123gh6pm.h")
+  #define INT_GPIOC               INT_CONCAT(INT_GPIOC_, INT_DEVICE_CLASS)
+inc/hw_ints.h(373): warning:  #47-D: incompatible redefinition of macro "INT_GPIOD"  (declared at line 51 of ".\inc\tm4c123gh6pm.h")
+  #define INT_GPIOD               INT_CONCAT(INT_GPIOD_, INT_DEVICE_CLASS)
+inc/hw_ints.h(374): warning:  #47-D: incompatible redefinition of macro "INT_GPIOE"  (declared at line 52 of ".\inc\tm4c123gh6pm.h")
+  #define INT_GPIOE               INT_CONCAT(INT_GPIOE_, INT_DEVICE_CLASS)
+inc/hw_ints.h(375): warning:  #47-D: incompatible redefinition of macro "INT_GPIOF"  (declared at line 78 of ".\inc\tm4c123gh6pm.h")
+  #define INT_GPIOF               INT_CONCAT(INT_GPIOF_, INT_DEVICE_CLASS)
+inc/hw_ints.h(402): warning:  #47-D: incompatible redefinition of macro "INT_HIBERNATE"  (declared at line 87 of ".\inc\tm4c123gh6pm.h")
+  #define INT_HIBERNATE           INT_CONCAT(INT_HIBERNATE_, INT_DEVICE_CLASS)
+inc/hw_ints.h(403): warning:  #47-D: incompatible redefinition of macro "INT_I2C0"  (declared at line 56 of ".\inc\tm4c123gh6pm.h")
+  #define INT_I2C0                INT_CONCAT(INT_I2C0_, INT_DEVICE_CLASS)
+inc/hw_ints.h(404): warning:  #47-D: incompatible redefinition of macro "INT_I2C1"  (declared at line 83 of ".\inc\tm4c123gh6pm.h")
+  #define INT_I2C1                INT_CONCAT(INT_I2C1_, INT_DEVICE_CLASS)
+inc/hw_ints.h(405): warning:  #47-D: incompatible redefinition of macro "INT_I2C2"  (declared at line 103 of ".\inc\tm4c123gh6pm.h")
+  #define INT_I2C2                INT_CONCAT(INT_I2C2_, INT_DEVICE_CLASS)
+inc/hw_ints.h(406): warning:  #47-D: incompatible redefinition of macro "INT_I2C3"  (declared at line 104 of ".\inc\tm4c123gh6pm.h")
+  #define INT_I2C3                INT_CONCAT(INT_I2C3_, INT_DEVICE_CLASS)
+inc/hw_ints.h(415): warning:  #47-D: incompatible redefinition of macro "INT_PWM0_0"  (declared at line 58 of ".\inc\tm4c123gh6pm.h")
+  #define INT_PWM0_0              INT_CONCAT(INT_PWM0_0_, INT_DEVICE_CLASS)
+inc/hw_ints.h(416): warning:  #47-D: incompatible redefinition of macro "INT_PWM0_1"  (declared at line 59 of ".\inc\tm4c123gh6pm.h")
+  #define INT_PWM0_1              INT_CONCAT(INT_PWM0_1_, INT_DEVICE_CLASS)
+inc/hw_ints.h(417): warning:  #47-D: incompatible redefinition of macro "INT_PWM0_2"  (declared at line 60 of ".\inc\tm4c123gh6pm.h")
+  #define INT_PWM0_2              INT_CONCAT(INT_PWM0_2_, INT_DEVICE_CLASS)
+inc/hw_ints.h(418): warning:  #47-D: incompatible redefinition of macro "INT_PWM0_3"  (declared at line 89 of ".\inc\tm4c123gh6pm.h")
+  #define INT_PWM0_3              INT_CONCAT(INT_PWM0_3_, INT_DEVICE_CLASS)
+inc/hw_ints.h(419): warning:  #47-D: incompatible redefinition of macro "INT_PWM0_FAULT"  (declared at line 57 of ".\inc\tm4c123gh6pm.h")
+  #define INT_PWM0_FAULT          INT_CONCAT(INT_PWM0_FAULT_, INT_DEVICE_CLASS)
+inc/hw_ints.h(420): warning:  #47-D: incompatible redefinition of macro "INT_PWM1_0"  (declared at line 122 of ".\inc\tm4c123gh6pm.h")
+  #define INT_PWM1_0              INT_CONCAT(INT_PWM1_0_, INT_DEVICE_CLASS)
+inc/hw_ints.h(421): warning:  #47-D: incompatible redefinition of macro "INT_PWM1_1"  (declared at line 123 of ".\inc\tm4c123gh6pm.h")
+  #define INT_PWM1_1              INT_CONCAT(INT_PWM1_1_, INT_DEVICE_CLASS)
+inc/hw_ints.h(422): warning:  #47-D: incompatible redefinition of macro "INT_PWM1_2"  (declared at line 124 of ".\inc\tm4c123gh6pm.h")
+  #define INT_PWM1_2              INT_CONCAT(INT_PWM1_2_, INT_DEVICE_CLASS)
+inc/hw_ints.h(423): warning:  #47-D: incompatible redefinition of macro "INT_PWM1_3"  (declared at line 125 of ".\inc\tm4c123gh6pm.h")
+  #define INT_PWM1_3              INT_CONCAT(INT_PWM1_3_, INT_DEVICE_CLASS)
+inc/hw_ints.h(424): warning:  #47-D: incompatible redefinition of macro "INT_PWM1_FAULT"  (declared at line 126 of ".\inc\tm4c123gh6pm.h")
+  #define INT_PWM1_FAULT          INT_CONCAT(INT_PWM1_FAULT_, INT_DEVICE_CLASS)
+inc/hw_ints.h(425): warning:  #47-D: incompatible redefinition of macro "INT_QEI0"  (declared at line 61 of ".\inc\tm4c123gh6pm.h")
+  #define INT_QEI0                INT_CONCAT(INT_QEI0_, INT_DEVICE_CLASS)
+inc/hw_ints.h(426): warning:  #47-D: incompatible redefinition of macro "INT_QEI1"  (declared at line 84 of ".\inc\tm4c123gh6pm.h")
+  #define INT_QEI1                INT_CONCAT(INT_QEI1_, INT_DEVICE_CLASS)
+inc/hw_ints.h(428): warning:  #47-D: incompatible redefinition of macro "INT_SSI0"  (declared at line 55 of ".\inc\tm4c123gh6pm.h")
+  #define INT_SSI0                INT_CONCAT(INT_SSI0_, INT_DEVICE_CLASS)
+inc/hw_ints.h(429): warning:  #47-D: incompatible redefinition of macro "INT_SSI1"  (declared at line 80 of ".\inc\tm4c123gh6pm.h")
+  #define INT_SSI1                INT_CONCAT(INT_SSI1_, INT_DEVICE_CLASS)
+inc/hw_ints.h(430): warning:  #47-D: incompatible redefinition of macro "INT_SSI2"  (declared at line 96 of ".\inc\tm4c123gh6pm.h")
+  #define INT_SSI2                INT_CONCAT(INT_SSI2_, INT_DEVICE_CLASS)
+inc/hw_ints.h(431): warning:  #47-D: incompatible redefinition of macro "INT_SSI3"  (declared at line 97 of ".\inc\tm4c123gh6pm.h")
+  #define INT_SSI3                INT_CONCAT(INT_SSI3_, INT_DEVICE_CLASS)
+inc/hw_ints.h(432): warning:  #47-D: incompatible redefinition of macro "INT_SYSCTL"  (declared at line 75 of ".\inc\tm4c123gh6pm.h")
+  #define INT_SYSCTL              INT_CONCAT(INT_SYSCTL_, INT_DEVICE_CLASS)
+inc/hw_ints.h(433): warning:  #47-D: incompatible redefinition of macro "INT_SYSEXC"  (declared at line 121 of ".\inc\tm4c123gh6pm.h")
+  #define INT_SYSEXC              INT_CONCAT(INT_SYSEXC_, INT_DEVICE_CLASS)
+inc/hw_ints.h(435): warning:  #47-D: incompatible redefinition of macro "INT_TIMER0A"  (declared at line 67 of ".\inc\tm4c123gh6pm.h")
+  #define INT_TIMER0A             INT_CONCAT(INT_TIMER0A_, INT_DEVICE_CLASS)
+inc/hw_ints.h(436): warning:  #47-D: incompatible redefinition of macro "INT_TIMER0B"  (declared at line 68 of ".\inc\tm4c123gh6pm.h")
+  #define INT_TIMER0B             INT_CONCAT(INT_TIMER0B_, INT_DEVICE_CLASS)
+inc/hw_ints.h(437): warning:  #47-D: incompatible redefinition of macro "INT_TIMER1A"  (declared at line 69 of ".\inc\tm4c123gh6pm.h")
+  #define INT_TIMER1A             INT_CONCAT(INT_TIMER1A_, INT_DEVICE_CLASS)
+inc/hw_ints.h(438): warning:  #47-D: incompatible redefinition of macro "INT_TIMER1B"  (declared at line 70 of ".\inc\tm4c123gh6pm.h")
+  #define INT_TIMER1B             INT_CONCAT(INT_TIMER1B_, INT_DEVICE_CLASS)
+inc/hw_ints.h(439): warning:  #47-D: incompatible redefinition of macro "INT_TIMER2A"  (declared at line 71 of ".\inc\tm4c123gh6pm.h")
+  #define INT_TIMER2A             INT_CONCAT(INT_TIMER2A_, INT_DEVICE_CLASS)
+inc/hw_ints.h(440): warning:  #47-D: incompatible redefinition of macro "INT_TIMER2B"  (declared at line 72 of ".\inc\tm4c123gh6pm.h")
+  #define INT_TIMER2B             INT_CONCAT(INT_TIMER2B_, INT_DEVICE_CLASS)
+inc/hw_ints.h(441): warning:  #47-D: incompatible redefinition of macro "INT_TIMER3A"  (declared at line 81 of ".\inc\tm4c123gh6pm.h")
+  #define INT_TIMER3A             INT_CONCAT(INT_TIMER3A_, INT_DEVICE_CLASS)
+inc/hw_ints.h(442): warning:  #47-D: incompatible redefinition of macro "INT_TIMER3B"  (declared at line 82 of ".\inc\tm4c123gh6pm.h")
+  #define INT_TIMER3B             INT_CONCAT(INT_TIMER3B_, INT_DEVICE_CLASS)
+inc/hw_ints.h(443): warning:  #47-D: incompatible redefinition of macro "INT_TIMER4A"  (declared at line 105 of ".\inc\tm4c123gh6pm.h")
+  #define INT_TIMER4A             INT_CONCAT(INT_TIMER4A_, INT_DEVICE_CLASS)
+inc/hw_ints.h(444): warning:  #47-D: incompatible redefinition of macro "INT_TIMER4B"  (declared at line 106 of ".\inc\tm4c123gh6pm.h")
+  #define INT_TIMER4B             INT_CONCAT(INT_TIMER4B_, INT_DEVICE_CLASS)
+inc/hw_ints.h(445): warning:  #47-D: incompatible redefinition of macro "INT_TIMER5A"  (declared at line 107 of ".\inc\tm4c123gh6pm.h")
+  #define INT_TIMER5A             INT_CONCAT(INT_TIMER5A_, INT_DEVICE_CLASS)
+inc/hw_ints.h(446): warning:  #47-D: incompatible redefinition of macro "INT_TIMER5B"  (declared at line 108 of ".\inc\tm4c123gh6pm.h")
+  #define INT_TIMER5B             INT_CONCAT(INT_TIMER5B_, INT_DEVICE_CLASS)
+inc/hw_ints.h(451): warning:  #47-D: incompatible redefinition of macro "INT_UART0"  (declared at line 53 of ".\inc\tm4c123gh6pm.h")
+  #define INT_UART0               INT_CONCAT(INT_UART0_, INT_DEVICE_CLASS)
+inc/hw_ints.h(452): warning:  #47-D: incompatible redefinition of macro "INT_UART1"  (declared at line 54 of ".\inc\tm4c123gh6pm.h")
+  #define INT_UART1               INT_CONCAT(INT_UART1_, INT_DEVICE_CLASS)
+inc/hw_ints.h(453): warning:  #47-D: incompatible redefinition of macro "INT_UART2"  (declared at line 79 of ".\inc\tm4c123gh6pm.h")
+  #define INT_UART2               INT_CONCAT(INT_UART2_, INT_DEVICE_CLASS)
+inc/hw_ints.h(454): warning:  #47-D: incompatible redefinition of macro "INT_UART3"  (declared at line 98 of ".\inc\tm4c123gh6pm.h")
+  #define INT_UART3               INT_CONCAT(INT_UART3_, INT_DEVICE_CLASS)
+inc/hw_ints.h(455): warning:  #47-D: incompatible redefinition of macro "INT_UART4"  (declared at line 99 of ".\inc\tm4c123gh6pm.h")
+  #define INT_UART4               INT_CONCAT(INT_UART4_, INT_DEVICE_CLASS)
+inc/hw_ints.h(456): warning:  #47-D: incompatible redefinition of macro "INT_UART5"  (declared at line 100 of ".\inc\tm4c123gh6pm.h")
+  #define INT_UART5               INT_CONCAT(INT_UART5_, INT_DEVICE_CLASS)
+inc/hw_ints.h(457): warning:  #47-D: incompatible redefinition of macro "INT_UART6"  (declared at line 101 of ".\inc\tm4c123gh6pm.h")
+  #define INT_UART6               INT_CONCAT(INT_UART6_, INT_DEVICE_CLASS)
+inc/hw_ints.h(458): warning:  #47-D: incompatible redefinition of macro "INT_UART7"  (declared at line 102 of ".\inc\tm4c123gh6pm.h")
+  #define INT_UART7               INT_CONCAT(INT_UART7_, INT_DEVICE_CLASS)
+inc/hw_ints.h(459): warning:  #47-D: incompatible redefinition of macro "INT_UDMA"  (declared at line 90 of ".\inc\tm4c123gh6pm.h")
+  #define INT_UDMA                INT_CONCAT(INT_UDMA_, INT_DEVICE_CLASS)
+inc/hw_ints.h(460): warning:  #47-D: incompatible redefinition of macro "INT_UDMAERR"  (declared at line 91 of ".\inc\tm4c123gh6pm.h")
+  #define INT_UDMAERR             INT_CONCAT(INT_UDMAERR_, INT_DEVICE_CLASS)
+inc/hw_ints.h(461): warning:  #47-D: incompatible redefinition of macro "INT_USB0"  (declared at line 88 of ".\inc\tm4c123gh6pm.h")
+  #define INT_USB0                INT_CONCAT(INT_USB0_, INT_DEVICE_CLASS)
+inc/hw_ints.h(462): warning:  #47-D: incompatible redefinition of macro "INT_WATCHDOG"  (declared at line 66 of ".\inc\tm4c123gh6pm.h")
+  #define INT_WATCHDOG            INT_CONCAT(INT_WATCHDOG_, INT_DEVICE_CLASS)
+inc/hw_ints.h(463): warning:  #47-D: incompatible redefinition of macro "INT_WTIMER0A"  (declared at line 109 of ".\inc\tm4c123gh6pm.h")
+  #define INT_WTIMER0A            INT_CONCAT(INT_WTIMER0A_, INT_DEVICE_CLASS)
+inc/hw_ints.h(464): warning:  #47-D: incompatible redefinition of macro "INT_WTIMER0B"  (declared at line 110 of ".\inc\tm4c123gh6pm.h")
+  #define INT_WTIMER0B            INT_CONCAT(INT_WTIMER0B_, INT_DEVICE_CLASS)
+inc/hw_ints.h(465): warning:  #47-D: incompatible redefinition of macro "INT_WTIMER1A"  (declared at line 111 of ".\inc\tm4c123gh6pm.h")
+  #define INT_WTIMER1A            INT_CONCAT(INT_WTIMER1A_, INT_DEVICE_CLASS)
+inc/hw_ints.h(466): warning:  #47-D: incompatible redefinition of macro "INT_WTIMER1B"  (declared at line 112 of ".\inc\tm4c123gh6pm.h")
+  #define INT_WTIMER1B            INT_CONCAT(INT_WTIMER1B_, INT_DEVICE_CLASS)
+inc/hw_ints.h(467): warning:  #47-D: incompatible redefinition of macro "INT_WTIMER2A"  (declared at line 113 of ".\inc\tm4c123gh6pm.h")
+  #define INT_WTIMER2A            INT_CONCAT(INT_WTIMER2A_, INT_DEVICE_CLASS)
+inc/hw_ints.h(468): warning:  #47-D: incompatible redefinition of macro "INT_WTIMER2B"  (declared at line 114 of ".\inc\tm4c123gh6pm.h")
+  #define INT_WTIMER2B            INT_CONCAT(INT_WTIMER2B_, INT_DEVICE_CLASS)
+inc/hw_ints.h(469): warning:  #47-D: incompatible redefinition of macro "INT_WTIMER3A"  (declared at line 115 of ".\inc\tm4c123gh6pm.h")
+  #define INT_WTIMER3A            INT_CONCAT(INT_WTIMER3A_, INT_DEVICE_CLASS)
+inc/hw_ints.h(470): warning:  #47-D: incompatible redefinition of macro "INT_WTIMER3B"  (declared at line 116 of ".\inc\tm4c123gh6pm.h")
+  #define INT_WTIMER3B            INT_CONCAT(INT_WTIMER3B_, INT_DEVICE_CLASS)
+inc/hw_ints.h(471): warning:  #47-D: incompatible redefinition of macro "INT_WTIMER4A"  (declared at line 117 of ".\inc\tm4c123gh6pm.h")
+  #define INT_WTIMER4A            INT_CONCAT(INT_WTIMER4A_, INT_DEVICE_CLASS)
+inc/hw_ints.h(472): warning:  #47-D: incompatible redefinition of macro "INT_WTIMER4B"  (declared at line 118 of ".\inc\tm4c123gh6pm.h")
+  #define INT_WTIMER4B            INT_CONCAT(INT_WTIMER4B_, INT_DEVICE_CLASS)
+inc/hw_ints.h(473): warning:  #47-D: incompatible redefinition of macro "INT_WTIMER5A"  (declared at line 119 of ".\inc\tm4c123gh6pm.h")
+  #define INT_WTIMER5A            INT_CONCAT(INT_WTIMER5A_, INT_DEVICE_CLASS)
+inc/hw_ints.h(474): warning:  #47-D: incompatible redefinition of macro "INT_WTIMER5B"  (declared at line 120 of ".\inc\tm4c123gh6pm.h")
+  #define INT_WTIMER5B            INT_CONCAT(INT_WTIMER5B_, INT_DEVICE_CLASS)
+i2c_master.c(168): warning:  #1-D: last line of file ends without a newline
+  		
+i2c_master.c: 80 warnings, 0 errors
+compiling i2c_doc.c...
+linking...
+Program Size: Code=8556 RO-data=1448 RW-data=100 ZI-data=396  
+FromELF: creating hex file...
 After Build - User command #1: fromelf --bin --output .\rvmdk\project.bin .\rvmdk\project.axf
-".\rvmdk\project.axf" - 0 Error(s), 0 Warning(s).
+".\rvmdk\project.axf" - 0 Error(s), 193 Warning(s).
 
 <h2>Software Packages used:</h2>
 
@@ -51,7 +483,7 @@ Package Vendor: Keil
 <h2>Collection of Component Files used:</h2>
 
    * Component: ARM::CMSIS:CORE:5.0.1
-Build Time Elapsed:  00:00:01
+Build Time Elapsed:  00:00:11
 </pre>
 </body>
 </html>
