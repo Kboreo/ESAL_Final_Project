@@ -12163,7 +12163,7 @@ uint32_t I2CReceive(uint32_t slave_addr, uint8_t reg)
     while(I2CMasterBusy(0x40020000));
      
     
-   uint32_t uSpeed2 = I2CMasterDataGet(0x40020000);
+   double uSpeed2 = I2CMasterDataGet(0x40020000);
 	 
 	 return uSpeed2;
 }

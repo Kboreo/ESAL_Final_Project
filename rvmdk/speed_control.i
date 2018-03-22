@@ -20012,19 +20012,7 @@ double ADCReadChan(void);
 void setup_IO();
 void pinReadAndWrite(uint32_t ui32Loop,uint8_t temp);
 #line 57 "project.h"
-#line 1 "i2c.h"
 
-
-
-
-
-
-
-
-
-
-
-#line 58 "project.h"
 #line 1 "i2c_master.h"
 #line 2 "i2c_master.h"
 #line 3 "i2c_master.h"

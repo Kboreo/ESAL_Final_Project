@@ -160,7 +160,7 @@ uint32_t I2CReceive(uint32_t slave_addr, uint8_t reg)
     while(I2CMasterBusy(I2C0_BASE));
      
     //return data pulled from the specified register
-   uint32_t uSpeed2 = I2CMasterDataGet(I2C0_BASE);
+   double uSpeed2 = I2CMasterDataGet(I2C0_BASE);
 	 
 	 return uSpeed2;
 }

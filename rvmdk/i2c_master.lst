@@ -39310,8 +39310,8 @@ N    while(I2CMasterBusy(I2C0_BASE));
 X    while(I2CMasterBusy(0x40020000));
 N     
 N    //return data pulled from the specified register
-N   uint32_t uSpeed2 = I2CMasterDataGet(I2C0_BASE);
-X   uint32_t uSpeed2 = I2CMasterDataGet(0x40020000);
+N   double uSpeed2 = I2CMasterDataGet(I2C0_BASE);
+X   double uSpeed2 = I2CMasterDataGet(0x40020000);
 N	 
 N	 return uSpeed2;
 N}

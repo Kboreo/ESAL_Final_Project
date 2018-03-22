@@ -86,8 +86,6 @@ myGPIO.h(13): warning:  #1295-D: Deprecated declaration setup_IO - give arg type
   void setup_IO();
 myGPIO.h(14): warning:  #1-D: last line of file ends without a newline
   void pinReadAndWrite(uint32_t ui32Loop,uint8_t temp);
-i2c.h(11): warning:  #1-D: last line of file ends without a newline
-  //#include <stdio.h>
 i2c_master.h(11): warning:  #1-D: last line of file ends without a newline
   #include <stdio.h>
 project.c(48): warning:  #223-D: function "FloatSetup" declared implicitly
@@ -108,7 +106,7 @@ project.c(94): warning:  #223-D: function "I2CReceive" declared implicitly
   		speed = I2CReceive(0x3C, 0xFF);
 project.c(95): warning:  #181-D: argument is incompatible with corresponding format string conversion
   		printf("rec is = %i", speed);
-project.c: 21 warnings, 0 errors
+project.c: 20 warnings, 0 errors
 creating preprocessor file for Float_Setup.c...
 creating preprocessor file for Uart_helper.c...
 compiling Float_Setup.c...
@@ -161,13 +159,11 @@ myGPIO.h(13): warning:  #1295-D: Deprecated declaration setup_IO - give arg type
   void setup_IO();
 myGPIO.h(14): warning:  #1-D: last line of file ends without a newline
   void pinReadAndWrite(uint32_t ui32Loop,uint8_t temp);
-i2c.h(11): warning:  #1-D: last line of file ends without a newline
-  //#include <stdio.h>
 i2c_master.h(11): warning:  #1-D: last line of file ends without a newline
   #include <stdio.h>
 Read_Encoder.c(34): warning:  #1-D: last line of file ends without a newline
   	//int direction = QEIDirectionGet(QEI0_BASE);
-Read_Encoder.c: 16 warnings, 0 errors
+Read_Encoder.c: 15 warnings, 0 errors
 creating preprocessor file for Calibrate.c...
 compiling Speed_Control.c...
 Read_Encoder.h(39): warning:  #1-D: last line of file ends without a newline
@@ -196,8 +192,6 @@ myGPIO.h(13): warning:  #1295-D: Deprecated declaration setup_IO - give arg type
   void setup_IO();
 myGPIO.h(14): warning:  #1-D: last line of file ends without a newline
   void pinReadAndWrite(uint32_t ui32Loop,uint8_t temp);
-i2c.h(11): warning:  #1-D: last line of file ends without a newline
-  //#include <stdio.h>
 i2c_master.h(11): warning:  #1-D: last line of file ends without a newline
   #include <stdio.h>
 Read_Encoder.h(39): warning:  #1-D: last line of file ends without a newline
@@ -210,11 +204,11 @@ Speed_Control.c(96): warning:  #223-D: function "stopmotor" declared implicitly
   					stopmotor();	
 Speed_Control.c(32): warning:  #177-D: variable "i"  was declared but never referenced
   	int i = 1;
-Speed_Control.c: 20 warnings, 0 errors
+Speed_Control.c: 19 warnings, 0 errors
 creating preprocessor file for HAL_ADC.c...
 creating preprocessor file for myGPIO.c...
 compiling HAL_ADC.c...
-creating preprocessor file for i2c.c...
+creating preprocessor file for i2c_master.c...
 compiling Calibrate.c...
 Read_Encoder.h(39): warning:  #1-D: last line of file ends without a newline
   double ReadEncoder(void);
@@ -242,8 +236,6 @@ myGPIO.h(13): warning:  #1295-D: Deprecated declaration setup_IO - give arg type
   void setup_IO();
 myGPIO.h(14): warning:  #1-D: last line of file ends without a newline
   void pinReadAndWrite(uint32_t ui32Loop,uint8_t temp);
-i2c.h(11): warning:  #1-D: last line of file ends without a newline
-  //#include <stdio.h>
 i2c_master.h(11): warning:  #1-D: last line of file ends without a newline
   #include <stdio.h>
 Read_Encoder.h(39): warning:  #1-D: last line of file ends without a newline
@@ -256,7 +248,7 @@ Calibrate.h(45): warning:  #1-D: last line of file ends without a newline
   void initialize_aandw(void);
 Calibrate.c(53): warning:  #223-D: function "stopmotor" declared implicitly
   	stopmotor();
-Calibrate.c: 20 warnings, 0 errors
+Calibrate.c: 19 warnings, 0 errors
 compiling myGPIO.c...
 myGPIO.h(13): warning:  #1295-D: Deprecated declaration setup_IO - give arg types
   void setup_IO();
@@ -285,14 +277,6 @@ myGPIO.c(28): warning:  #47-D: incompatible redefinition of macro "SYSCTL_RCGC2_
 myGPIO.c(138): warning:  #1-D: last line of file ends without a newline
   	
 myGPIO.c: 13 warnings, 0 errors
-compiling i2c.c...
-i2c.c(147): warning:  #1-D: last line of file ends without a newline
-  //}
-i2c.c: 1 warning, 0 errors
-creating preprocessor file for i2c_master.c...
-creating preprocessor file for i2c_slave.c...
-compiling i2c_slave.c...
-creating preprocessor file for i2c_doc.c...
 compiling i2c_master.c...
 i2c_master.h(11): warning:  #1-D: last line of file ends without a newline
   #include <stdio.h>
@@ -455,12 +439,11 @@ inc/hw_ints.h(474): warning:  #47-D: incompatible redefinition of macro "INT_WTI
 i2c_master.c(168): warning:  #1-D: last line of file ends without a newline
   		
 i2c_master.c: 80 warnings, 0 errors
-compiling i2c_doc.c...
 linking...
-Program Size: Code=8556 RO-data=1448 RW-data=100 ZI-data=396  
+Program Size: Code=8576 RO-data=1448 RW-data=100 ZI-data=396  
 FromELF: creating hex file...
 After Build - User command #1: fromelf --bin --output .\rvmdk\project.bin .\rvmdk\project.axf
-".\rvmdk\project.axf" - 0 Error(s), 193 Warning(s).
+".\rvmdk\project.axf" - 0 Error(s), 188 Warning(s).
 
 <h2>Software Packages used:</h2>
 
