@@ -20175,10 +20175,10 @@ void I2C0_Master_Init(void)
 
 }
 
-int i2c_send(void)
+int i2c_send(int speed)
 {
     
-
+speed = ReadEncoder();
 			InitConsole();
 			I2C0_Master_Init();
 	
@@ -20213,7 +20213,7 @@ I2CMasterSlaveAddrSet(0x40020000, 0x3c, 0);
 
 
 
-I2CMasterDataPut(0x40020000, 81);
+I2CMasterDataPut(0x40020000, speed);
 
 
 

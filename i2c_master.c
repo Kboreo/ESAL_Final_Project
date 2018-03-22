@@ -73,10 +73,10 @@ void I2C0_Master_Init(void)
 
 }
 
-int i2c_send(void)
+int i2c_send(int speed)
 {
     //SysCtlClockSet(SYSCTL_SYSDIV_1| SYSCTL_USE_OSC| SYSCTL_OSC_MAIN| SYSCTL_XTAL_16MHZ);
-
+speed = ReadEncoder();
 			InitConsole();
 			I2C0_Master_Init();
 	
@@ -111,7 +111,7 @@ I2CMasterSlaveAddrSet(I2C0_BASE, 0x3c, false);
 //
 // Place the character to be sent in the data register
 //
-I2CMasterDataPut(I2C0_BASE, 81);
+I2CMasterDataPut(I2C0_BASE, speed);
 //
 // Initiate send of character from Master to Slave
 //

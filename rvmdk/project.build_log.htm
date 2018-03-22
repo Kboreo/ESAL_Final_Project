@@ -106,10 +106,10 @@ project.c(49): warning:  #223-D: function "setupENCODER" declared implicitly
   	setupENCODER();	 //setup to read motor encoder
 project.c(50): warning:  #223-D: function "setupPWM" declared implicitly
   	setupPWM();	//setup PWM output
-project.c(94): warning:  #223-D: function "i2c_send" declared implicitly
-  		i2c_send();
-project.c(96): warning:  #223-D: function "Speed_Control" declared implicitly
-  		Speed_Control(speed, uSpeed);	
+project.c(71): warning:  #223-D: function "Speed_Control" declared implicitly
+  	Speed_Control(speed, uSpeed);
+project.c(80): warning:  #223-D: function "i2c_send" declared implicitly
+  		i2c_send(speed);
 project.c: 22 warnings, 0 errors
 creating preprocessor file for Float_Setup.c...
 creating preprocessor file for Uart_helper.c...
@@ -281,13 +281,13 @@ Read_Encoder.h(39): warning:  #1-D: last line of file ends without a newline
   double ReadEncoder(void);
 Speed_Control.h(38): warning:  #1-D: last line of file ends without a newline
   void Speed_Control(double Speed, double uSpeed);
-Read_Encoder.h(39): warning:  #1-D: last line of file ends without a newline
+Calibrate.c: 25 warnings, 0 errors
+ #1-D: last line of file ends without a newline
   double ReadEncoder(void);
 Calibrate.h(45): warning:  #1-D: last line of file ends without a newline
   void initialize_aandw(void);
 Calibrate.c(53): warning:  #223-D: function "stopmotor" declared implicitly
   	stopmotor();
-Calibrate.c: 25 warnings, 0 errors
 compiling myGPIO.c...
 myGPIO.h(13): warning:  #1295-D: Deprecated declaration setup_IO - give arg types
   void setup_IO();
@@ -500,10 +500,10 @@ i2c_master.c(181): warning:  #1-D: last line of file ends without a newline
   		
 i2c_master.c: 90 warnings, 0 errors
 linking...
-Program Size: Code=8308 RO-data=1180 RW-data=112 ZI-data=392  
+Program Size: Code=8432 RO-data=1180 RW-data=112 ZI-data=392  
 FromELF: creating hex file...
 After Build - User command #1: fromelf --bin --output .\rvmdk\project.bin .\rvmdk\project.axf
-".\rvmdk\project.axf" - 0 Error(s), 218 Warning(s).
+".\rvmdk\project.axf" - 0 Error(s), 217 Warning(s).
 
 <h2>Software Packages used:</h2>
 
@@ -526,7 +526,7 @@ Package Vendor: Keil
 <h2>Collection of Component Files used:</h2>
 
    * Component: ARM::CMSIS:CORE:5.0.1
-Build Time Elapsed:  00:00:12
+Build Time Elapsed:  00:00:11
 </pre>
 </body>
 </html>

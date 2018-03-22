@@ -67559,49 +67559,41 @@ N
 N
 N
 Ndouble speed; 	//Speed read from encoder
-Ndouble uSpeed;	//Requested speed from the user
+Nint uSpeed;	//Requested speed from the user
 N
 N
 Nint  main(void)
 N{	
 N	SetupHardware();  //Initializes all of the required HardWare for the project.	
 N	
-N	//I2CSend();
 N
-N//Write a function here to get the desired speed
-N
+N	uSpeed = 100;
+W "project.c" 71 2 function "Speed_Control" declared implicitly
+N	Speed_Control(speed, uSpeed);
+N	
 N
 N	while(1)
 N	{
-N	//uSpeed = GetUserSpeed();//set uSpeed equal to the speed you want me to travel
-N	
-N	//uSpeed = I2CGET();
-N//	printf("uSpeed in Project.c = %i \n\n", uSpeed);
-N	
+N		I2CReceive();
 N
-N	
-N	
-N // this will set speed equal to the current speed
-N
-N//	printf("speed read by encoder = %i \n\n", speed);
-N	
-N	//I2CSend(speed); //sends speed, i2c slave
-N	
-N	//*************************
-N	//Write a function here to send "speed" to Levi
 N		speed = ReadEncoder();	
 N		
-W "project.c" 94 3 function "i2c_send" declared implicitly
-N		i2c_send();
+W "project.c" 80 3 function "i2c_send" declared implicitly
+N		i2c_send(speed);
+N		
+N		Speed_Control(speed, uSpeed);	
+N		
+N		uSpeed = I2CReceive();
+N		
+N		printf("uSpeed is = %i\n\n", uSpeed);
 N	
-W "project.c" 96 3 function "Speed_Control" declared implicitly
 N		Speed_Control(speed, uSpeed);	
 N		
 N		speed = ReadEncoder();
 N		
-N		uSpeed = I2CReceive();
+N	
 N		
-N	//	printf("rec is = %i", uSpeed);
+N
 N	}
 N}
 N	

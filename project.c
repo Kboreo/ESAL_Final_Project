@@ -59,45 +59,37 @@ void SetupHardware()
 
 
 double speed; 	//Speed read from encoder
-double uSpeed;	//Requested speed from the user
+int uSpeed;	//Requested speed from the user
 
 
 int  main(void)
 {	
 	SetupHardware();  //Initializes all of the required HardWare for the project.	
 	
-	//I2CSend();
 
-//Write a function here to get the desired speed
-
+	uSpeed = 100;
+	Speed_Control(speed, uSpeed);
+	
 
 	while(1)
 	{
-	//uSpeed = GetUserSpeed();//set uSpeed equal to the speed you want me to travel
-	
-	//uSpeed = I2CGET();
-//	printf("uSpeed in Project.c = %i \n\n", uSpeed);
-	
+		I2CReceive();
 
-	
-	
- // this will set speed equal to the current speed
-
-//	printf("speed read by encoder = %i \n\n", speed);
-	
-	//I2CSend(speed); //sends speed, i2c slave
-	
-	//*************************
-	//Write a function here to send "speed" to Levi
 		speed = ReadEncoder();	
 		
-		i2c_send();
+		i2c_send(speed);
+		
+		Speed_Control(speed, uSpeed);	
+		
+		uSpeed = I2CReceive();
+		
+		printf("uSpeed is = %i\n\n", uSpeed);
 	
 		Speed_Control(speed, uSpeed);	
 		
 		speed = ReadEncoder();
 		
-		uSpeed = I2CReceive();
+	
 		
 
 	}

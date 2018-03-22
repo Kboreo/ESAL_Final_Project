@@ -67889,10 +67889,10 @@ N    // HWREG(I2C0_BASE + I2C_O_FIFOCTL) = 80008000;
 N
 N}
 N
-Nint i2c_send(void)
+Nint i2c_send(int speed)
 N{
 N    //SysCtlClockSet(SYSCTL_SYSDIV_1| SYSCTL_USE_OSC| SYSCTL_OSC_MAIN| SYSCTL_XTAL_16MHZ);
-N
+Nspeed = ReadEncoder();
 N			InitConsole();
 N			I2C0_Master_Init();
 N	
@@ -67931,8 +67931,8 @@ XI2CMasterSlaveAddrSet(0x40020000, 0x3c, 0);
 N//
 N// Place the character to be sent in the data register
 N//
-NI2CMasterDataPut(I2C0_BASE, 81);
-XI2CMasterDataPut(0x40020000, 81);
+NI2CMasterDataPut(I2C0_BASE, speed);
+XI2CMasterDataPut(0x40020000, speed);
 N//
 N// Initiate send of character from Master to Slave
 N//
