@@ -20026,7 +20026,730 @@ void pinReadAndWrite(uint32_t ui32Loop,uint8_t temp);
 #line 11 "i2c_master.h"
 #line 12 "i2c_master.h"
 
+#line 14 "i2c_master.h"
+#line 15 "i2c_master.h"
+#line 16 "i2c_master.h"
+
+#line 18 "i2c_master.h"
+#line 19 "i2c_master.h"
+#line 20 "i2c_master.h"
+#line 21 "i2c_master.h"
+#line 22 "i2c_master.h"
+#line 23 "i2c_master.h"
+#line 24 "i2c_master.h"
+#line 25 "i2c_master.h"
+#line 26 "i2c_master.h"
+#line 27 "i2c_master.h"
+#line 28 "i2c_master.h"
+#line 29 "i2c_master.h"
+#line 30 "i2c_master.h"
+#line 31 "i2c_master.h"
+#line 32 "i2c_master.h"
+#line 33 "i2c_master.h"
+#line 34 "i2c_master.h"
+#line 35 "i2c_master.h"
+#line 36 "i2c_master.h"
+#line 37 "i2c_master.h"
+#line 38 "i2c_master.h"
+#line 39 "i2c_master.h"
+#line 40 "i2c_master.h"
+#line 41 "i2c_master.h"
+#line 42 "i2c_master.h"
+#line 43 "i2c_master.h"
+#line 44 "i2c_master.h"
+#line 45 "i2c_master.h"
+#line 46 "i2c_master.h"
+#line 47 "i2c_master.h"
+#line 48 "i2c_master.h"
+#line 49 "i2c_master.h"
+#line 50 "i2c_master.h"
+#line 51 "i2c_master.h"
+#line 52 "i2c_master.h"
+#line 53 "i2c_master.h"
+#line 54 "i2c_master.h"
+#line 55 "i2c_master.h"
+
+#line 1 "src/Uart_helper.h"
+
+
+
+
+
+
+
+
+
+
+ 
+
+
+#line 15 "src/Uart_helper.h"
+#line 16 "src/Uart_helper.h"
+#line 17 "src/Uart_helper.h"
+#line 18 "src/Uart_helper.h"
+#line 19 "src/Uart_helper.h"
+#line 20 "src/Uart_helper.h"
+#line 21 "src/Uart_helper.h"
+#line 22 "src/Uart_helper.h"
+#line 23 "src/Uart_helper.h"
+
+
+void UartSetup(void);		
+
+
+int fputc(int ch, FILE *f);
+
+
+
+int fgetc(FILE *f);
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+#line 57 "i2c_master.h"
+
+
+#line 60 "i2c_master.h"
+#line 61 "i2c_master.h"
+#line 1 "myPWM.h"
+#line 2 "myPWM.h"
+#line 3 "myPWM.h"
+#line 4 "myPWM.h"
+#line 5 "myPWM.h"
+#line 6 "myPWM.h"
+#line 7 "myPWM.h"
+#line 8 "myPWM.h"
+#line 9 "myPWM.h"
+#line 10 "myPWM.h"
+#line 11 "myPWM.h"
+#line 12 "myPWM.h"
+#line 13 "myPWM.h"
+
+
+#line 62 "i2c_master.h"
+#line 1 "./src/Uart_helper.h"
+
+
+
+
+
+
+
+
+
+
+ 
+
+
+#line 15 "./src/Uart_helper.h"
+#line 16 "./src/Uart_helper.h"
+#line 17 "./src/Uart_helper.h"
+#line 18 "./src/Uart_helper.h"
+#line 19 "./src/Uart_helper.h"
+#line 20 "./src/Uart_helper.h"
+#line 21 "./src/Uart_helper.h"
+#line 22 "./src/Uart_helper.h"
+#line 23 "./src/Uart_helper.h"
+
+
+void UartSetup(void);		
+
+
+int fputc(int ch, FILE *f);
+
+
+
+int fgetc(FILE *f);
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+#line 63 "i2c_master.h"
+
+#line 1 "Read_Encoder.h"
+
+
+
+
+
+
+
+
+
+
+ 
+
+#line 14 "Read_Encoder.h"
+#line 15 "Read_Encoder.h"
+#line 16 "Read_Encoder.h"
+#line 17 "Read_Encoder.h"
+#line 18 "Read_Encoder.h"
+#line 19 "Read_Encoder.h"
+#line 20 "Read_Encoder.h"
+#line 21 "Read_Encoder.h"
+#line 22 "Read_Encoder.h"
+#line 23 "Read_Encoder.h"
+#line 24 "Read_Encoder.h"
+#line 25 "Read_Encoder.h"
+#line 26 "Read_Encoder.h"
+#line 27 "Read_Encoder.h"
+#line 28 "Read_Encoder.h"
+#line 29 "Read_Encoder.h"
+#line 30 "Read_Encoder.h"
+#line 31 "Read_Encoder.h"
+#line 32 "Read_Encoder.h"
+#line 33 "Read_Encoder.h"
+#line 34 "Read_Encoder.h"
+#line 1 ".\\src\\Uart_helper.h"
+
+
+
+
+
+
+
+
+
+
+ 
+
+
+#line 15 ".\\src\\Uart_helper.h"
+#line 16 ".\\src\\Uart_helper.h"
+#line 17 ".\\src\\Uart_helper.h"
+#line 18 ".\\src\\Uart_helper.h"
+#line 19 ".\\src\\Uart_helper.h"
+#line 20 ".\\src\\Uart_helper.h"
+#line 21 ".\\src\\Uart_helper.h"
+#line 22 ".\\src\\Uart_helper.h"
+#line 23 ".\\src\\Uart_helper.h"
+
+
+void UartSetup(void);		
+
+
+int fputc(int ch, FILE *f);
+
+
+
+int fgetc(FILE *f);
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+#line 35 "Read_Encoder.h"
+
+
+
+
+double ReadEncoder(void);
+#line 65 "i2c_master.h"
+#line 1 "Get_Speed.h"
+ 
+
+
+
+
+
+
+
+
+
+ 
+
+ double GetUserSpeed(void);
+#line 66 "i2c_master.h"
+#line 1 "Calibrate.h"
+
+
+
+
+
+
+
+
+
+
+ 
+
+
+#line 15 "Calibrate.h"
+#line 16 "Calibrate.h"
+#line 17 "Calibrate.h"
+#line 18 "Calibrate.h"
+#line 19 "Calibrate.h"
+#line 20 "Calibrate.h"
+#line 21 "Calibrate.h"
+#line 22 "Calibrate.h"
+#line 23 "Calibrate.h"
+#line 24 "Calibrate.h"
+#line 25 "Calibrate.h"
+#line 26 "Calibrate.h"
+#line 27 "Calibrate.h"
+#line 28 "Calibrate.h"
+#line 29 "Calibrate.h"
+#line 30 "Calibrate.h"
+#line 31 "Calibrate.h"
+#line 32 "Calibrate.h"
+#line 33 "Calibrate.h"
+#line 34 "Calibrate.h"
+#line 35 "Calibrate.h"
+#line 1 ".\\src\\Uart_helper.h"
+
+
+
+
+
+
+
+
+
+
+ 
+
+
+#line 15 ".\\src\\Uart_helper.h"
+#line 16 ".\\src\\Uart_helper.h"
+#line 17 ".\\src\\Uart_helper.h"
+#line 18 ".\\src\\Uart_helper.h"
+#line 19 ".\\src\\Uart_helper.h"
+#line 20 ".\\src\\Uart_helper.h"
+#line 21 ".\\src\\Uart_helper.h"
+#line 22 ".\\src\\Uart_helper.h"
+#line 23 ".\\src\\Uart_helper.h"
+
+
+void UartSetup(void);		
+
+
+int fputc(int ch, FILE *f);
+
+
+
+int fgetc(FILE *f);
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+#line 36 "Calibrate.h"
+#line 1 "Read_Encoder.h"
+
+
+
+
+
+
+
+
+
+
+ 
+
+#line 14 "Read_Encoder.h"
+#line 15 "Read_Encoder.h"
+#line 16 "Read_Encoder.h"
+#line 17 "Read_Encoder.h"
+#line 18 "Read_Encoder.h"
+#line 19 "Read_Encoder.h"
+#line 20 "Read_Encoder.h"
+#line 21 "Read_Encoder.h"
+#line 22 "Read_Encoder.h"
+#line 23 "Read_Encoder.h"
+#line 24 "Read_Encoder.h"
+#line 25 "Read_Encoder.h"
+#line 26 "Read_Encoder.h"
+#line 27 "Read_Encoder.h"
+#line 28 "Read_Encoder.h"
+#line 29 "Read_Encoder.h"
+#line 30 "Read_Encoder.h"
+#line 31 "Read_Encoder.h"
+#line 32 "Read_Encoder.h"
+#line 33 "Read_Encoder.h"
+#line 34 "Read_Encoder.h"
+#line 1 ".\\src\\Uart_helper.h"
+
+
+
+
+
+
+
+
+
+
+ 
+
+
+#line 15 ".\\src\\Uart_helper.h"
+#line 16 ".\\src\\Uart_helper.h"
+#line 17 ".\\src\\Uart_helper.h"
+#line 18 ".\\src\\Uart_helper.h"
+#line 19 ".\\src\\Uart_helper.h"
+#line 20 ".\\src\\Uart_helper.h"
+#line 21 ".\\src\\Uart_helper.h"
+#line 22 ".\\src\\Uart_helper.h"
+#line 23 ".\\src\\Uart_helper.h"
+
+
+void UartSetup(void);		
+
+
+int fputc(int ch, FILE *f);
+
+
+
+int fgetc(FILE *f);
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+#line 35 "Read_Encoder.h"
+
+
+
+
+double ReadEncoder(void);
+#line 37 "Calibrate.h"
+
+
+
+#line 41 "Calibrate.h"
+#line 42 "Calibrate.h"
+#line 43 "Calibrate.h"
+#line 44 "Calibrate.h"
+
+void initialize_aandw(void);
+#line 67 "i2c_master.h"
+#line 1 "HAL_ADC.h"
+#line 2 "HAL_ADC.h"
+#line 3 "HAL_ADC.h"
+#line 4 "HAL_ADC.h"
+#line 5 "HAL_ADC.h"
+#line 6 "HAL_ADC.h"
+#line 7 "HAL_ADC.h"
+#line 8 "HAL_ADC.h"
+#line 9 "HAL_ADC.h"
+#line 10 "HAL_ADC.h"
+#line 11 "HAL_ADC.h"
+#line 12 "HAL_ADC.h"
+
+extern uint32_t ADC_Values[13];
+
+void SetupADC(void);
+double ADCReadChan(void);  
+#line 68 "i2c_master.h"
+#line 1 "myGPIO.h"
+#line 2 "myGPIO.h"
+#line 3 "myGPIO.h"
+#line 4 "myGPIO.h"
+#line 5 "myGPIO.h"
+#line 6 "myGPIO.h"
+#line 7 "myGPIO.h"
+#line 8 "myGPIO.h"
+#line 9 "myGPIO.h"
+#line 10 "myGPIO.h"
+#line 11 "myGPIO.h"
+#line 12 "myGPIO.h"
+
+void setup_IO();
+void pinReadAndWrite(uint32_t ui32Loop,uint8_t temp);
+#line 69 "i2c_master.h"
+
 double readI2C0(void);
+
+
+
+int I2CReceive(void);
 #line 59 "project.h"
 
 

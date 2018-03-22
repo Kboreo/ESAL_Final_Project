@@ -91,8 +91,8 @@ int  main(void)
 	//Write a function here to send "speed" to Levi
 		
 		i2c_send_rec();
-		//readI2C0();
-		//printf("rec is = %i", speed);
+		uSpeed = I2CReceive();
+		printf("rec is = %d", uSpeed);
 	}
 }
 	
