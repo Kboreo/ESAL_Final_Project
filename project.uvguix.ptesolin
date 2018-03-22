@@ -3722,7 +3722,7 @@
         <PaneID>0</PaneID>
       </Doc>
       <Doc>
-        <Name>.\i2c_slave.c</Name>
+        <Name>C:\Users\ptesolin\Documents\GitHub\ADC\ESAL_Final_Project\i2c_slave.c</Name>
         <ColumnNumber>2</ColumnNumber>
         <TopLine>1</TopLine>
         <CurrentLine>1</CurrentLine>
@@ -3731,7 +3731,7 @@
         <PaneID>0</PaneID>
       </Doc>
       <Doc>
-        <Name>.\i2c_slave.h</Name>
+        <Name>C:\Users\ptesolin\Documents\GitHub\ADC\ESAL_Final_Project\i2c_slave.h</Name>
         <ColumnNumber>26</ColumnNumber>
         <TopLine>1</TopLine>
         <CurrentLine>17</CurrentLine>
