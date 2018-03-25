@@ -68187,8 +68187,8 @@ W "Read_Encoder.h" 39 26 last line of file ends without a newline
 Ndouble ReadEncoder(void);
 L 37 "Speed_Control.h" 2
 N
-W "Speed_Control.h" 38 49 last line of file ends without a newline
-Nvoid Speed_Control(double Speed, double uSpeed);
+W "Speed_Control.h" 38 46 last line of file ends without a newline
+Nvoid Speed_Control(double Speed, int uSpeed);
 L 19 "Speed_Control.c" 2
 N
 N	double Target_Speed;		//Double that is used for setting the target speed of the system. 
@@ -68200,7 +68200,7 @@ N
 N	
 N//Function used for the speed control.
 N//Inputs: Speed and user requested speed	
-Nvoid Speed_Control(double Speed, double uSpeed)
+Nvoid Speed_Control(double Speed, int uSpeed)
 N	
 N{	
 N	int i = 1;

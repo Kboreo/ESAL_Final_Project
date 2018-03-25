@@ -26,7 +26,7 @@
 	
 //Function used for the speed control.
 //Inputs: Speed and user requested speed	
-void Speed_Control(double Speed, double uSpeed)
+void Speed_Control(double Speed, int uSpeed)
 	
 {	
 	int i = 1;

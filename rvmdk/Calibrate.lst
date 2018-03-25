@@ -68187,8 +68187,8 @@ W "Read_Encoder.h" 39 26 last line of file ends without a newline
 Ndouble ReadEncoder(void);
 L 37 "Speed_Control.h" 2
 N
-W "Speed_Control.h" 38 49 last line of file ends without a newline
-Nvoid Speed_Control(double Speed, double uSpeed);
+W "Speed_Control.h" 38 46 last line of file ends without a newline
+Nvoid Speed_Control(double Speed, int uSpeed);
 L 19 "Calibrate.c" 2
 N#include "Calibrate.h"
 L 1 "Calibrate.h" 1

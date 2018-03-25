@@ -21025,7 +21025,7 @@ int fgetc(FILE *f);
 double ReadEncoder(void);
 #line 37 "Speed_Control.h"
 
-void Speed_Control(double Speed, double uSpeed);
+void Speed_Control(double Speed, int uSpeed);
 #line 19 "Calibrate.c"
 #line 1 "Calibrate.h"
 

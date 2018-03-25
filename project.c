@@ -67,7 +67,7 @@ int  main(void)
 	SetupHardware();  //Initializes all of the required HardWare for the project.	
 	
 
-	uSpeed = 100;
+	uSpeed = 50;
 	Speed_Control(speed, uSpeed);
 	
 
@@ -84,6 +84,7 @@ int  main(void)
 		uSpeed = I2CReceive();
 		
 		printf("uSpeed is = %i\n\n", uSpeed);
+		printf("Speed = %d\n\n", speed);
 	
 		Speed_Control(speed, uSpeed);	
 		

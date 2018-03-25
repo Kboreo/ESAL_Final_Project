@@ -21025,7 +21025,7 @@ int fgetc(FILE *f);
 double ReadEncoder(void);
 #line 37 "Speed_Control.h"
 
-void Speed_Control(double Speed, double uSpeed);
+void Speed_Control(double Speed, int uSpeed);
 #line 19 "Speed_Control.c"
 
 	double Target_Speed;		
@@ -21037,7 +21037,7 @@ void Speed_Control(double Speed, double uSpeed);
 	
 
 
-void Speed_Control(double Speed, double uSpeed)
+void Speed_Control(double Speed, int uSpeed)
 	
 {	
 	int i = 1;

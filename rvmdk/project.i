@@ -20410,23 +20410,24 @@ int  main(void)
 	SetupHardware();  
 	
 
-	uSpeed = 100;
+	uSpeed = 50;
 	Speed_Control(speed, uSpeed);
 	
 
 	while(1)
 	{
-		I2CReceive();
+		
 
 		speed = ReadEncoder();	
 		
-		i2c_send(speed);
+		
 		
 		Speed_Control(speed, uSpeed);	
 		
-		uSpeed = I2CReceive();
+		
 		
 		printf("uSpeed is = %i\n\n", uSpeed);
+		printf("Speed = %d\n\n", speed);
 	
 		Speed_Control(speed, uSpeed);	
 		

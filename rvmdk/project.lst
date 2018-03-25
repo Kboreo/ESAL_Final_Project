@@ -67567,25 +67567,26 @@ N{
 N	SetupHardware();  //Initializes all of the required HardWare for the project.	
 N	
 N
-N	uSpeed = 100;
+N	uSpeed = 50;
 W "project.c" 71 2 function "Speed_Control" declared implicitly
 N	Speed_Control(speed, uSpeed);
 N	
 N
 N	while(1)
 N	{
-N		I2CReceive();
+N		//I2CReceive();
 N
 N		speed = ReadEncoder();	
 N		
-W "project.c" 80 3 function "i2c_send" declared implicitly
-N		i2c_send(speed);
+N		//i2c_send(speed);
 N		
 N		Speed_Control(speed, uSpeed);	
 N		
-N		uSpeed = I2CReceive();
+N		//uSpeed = I2CReceive();
 N		
 N		printf("uSpeed is = %i\n\n", uSpeed);
+W "project.c" 87 28 argument is incompatible with corresponding format string conversion
+N		printf("Speed = %d\n\n", speed);
 N	
 N		Speed_Control(speed, uSpeed);	
 N		
