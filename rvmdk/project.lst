@@ -67574,18 +67574,29 @@ N
 N
 N	while(1)
 N	{
-N		//I2CReceive();
+N		uSpeed = I2CReceive();
+N		
+N		if (uSpeed > 900)
+N			{
+N				uSpeed = 50;
+N			}
 N
 N		speed = ReadEncoder();	
 N		
-N		//i2c_send(speed);
+W "project.c" 85 3 function "i2c_send" declared implicitly
+N		i2c_send(speed);
 N		
 N		Speed_Control(speed, uSpeed);	
 N		
-N		//uSpeed = I2CReceive();
+N		uSpeed = I2CReceive();
+N		
+N		if (uSpeed > 900)
+N			{
+N				uSpeed = 50;
+N			}
 N		
 N		printf("uSpeed is = %i\n\n", uSpeed);
-W "project.c" 87 28 argument is incompatible with corresponding format string conversion
+W "project.c" 97 28 argument is incompatible with corresponding format string conversion
 N		printf("Speed = %d\n\n", speed);
 N	
 N		Speed_Control(speed, uSpeed);	

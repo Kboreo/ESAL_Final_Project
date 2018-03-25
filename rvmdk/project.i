@@ -20416,15 +20416,25 @@ int  main(void)
 
 	while(1)
 	{
+		uSpeed = I2CReceive();
 		
+		if (uSpeed > 900)
+			{
+				uSpeed = 50;
+			}
 
 		speed = ReadEncoder();	
 		
-		
+		i2c_send(speed);
 		
 		Speed_Control(speed, uSpeed);	
 		
+		uSpeed = I2CReceive();
 		
+		if (uSpeed > 900)
+			{
+				uSpeed = 50;
+			}
 		
 		printf("uSpeed is = %i\n\n", uSpeed);
 		printf("Speed = %d\n\n", speed);

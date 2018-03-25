@@ -73,7 +73,12 @@ int  main(void)
 
 	while(1)
 	{
-		I2CReceive();
+		uSpeed = I2CReceive();
+		
+		if (uSpeed > 900)
+			{
+				uSpeed = 50;
+			}
 
 		speed = ReadEncoder();	
 		
@@ -82,6 +87,11 @@ int  main(void)
 		Speed_Control(speed, uSpeed);	
 		
 		uSpeed = I2CReceive();
+		
+		if (uSpeed > 900)
+			{
+				uSpeed = 50;
+			}
 		
 		printf("uSpeed is = %i\n\n", uSpeed);
 		printf("Speed = %d\n\n", speed);
